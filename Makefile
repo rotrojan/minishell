@@ -6,7 +6,7 @@
 #    By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/04/29 18:30:18 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/04/29 21:15:29 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ SRCS_DIR = sources
 OBJS = $(SRCS:%.s=%.o)
 DEPENDENCIES = $(SRCS:%.s=%.d)
 OBJS_DIR = .objs
-INCLUDES_DIR = includes $(LIBS:%=lib%)/includes -lncurses
+INCLUDES_DIR = includes $(LIBS:%=lib%)/includes
 LIBS = ft
 CC = clang
 RM = rm -f
@@ -27,7 +27,7 @@ MKDIR = mkdir -p
 CFLAGS = -Wall -Wextra -Werror -MMD
 
 CXXFLAGS = $(INCLUDES_DIR:%=-I%)
-#LDFLAGS = -L
+LDFLAGS = -lncurses
 
 vpath %.c $(SRCS_DIR)
 vpath %.h $(INCLUDES_DIR)
@@ -40,7 +40,7 @@ all:
 $(NAME): $(OBJS) $(LIBS:%=lib%.a)
 	$(CC) $(LDFLAGS) $(CXXFLAGS) $^ -o $@
 
--include DEPENDENCIES
+-include $(DEPENDENCIES)
 $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
