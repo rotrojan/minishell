@@ -6,43 +6,53 @@
 #    By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/04/29 17:47:55 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/04/29 18:30:18 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
+MAKE = make
 NAME = minishell
 
 SRCS = main.c
-SRCS_DIR = srcs
+SRCS_DIR = sources
 OBJS = $(SRCS:%.s=%.o)
 DEPENDENCIES = $(SRCS:%.s=%.d)
 OBJS_DIR = .objs
-INCLUDES_DIR = includes
+INCLUDES_DIR = includes $(LIBS:%=lib%)/includes -lncurses
 LIBS = ft
 CC = clang
+RM = rm -f
+MKDIR = mkdir -p
 
 CFLAGS = -Wall -Wextra -Werror -MMD
 
-CXXFLAGS = -I includes/ -I libft/includes/ -L libft/ -lft
+CXXFLAGS = $(INCLUDES_DIR:%=-I%)
+#LDFLAGS = -L
 
 vpath %.c $(SRCS_DIR)
 vpath %.h $(INCLUDES_DIR)
+vpath %.a $(LIBS:%=lib%)
 
-all: $(NAME)
+all:
+	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} &)
+	$(MAKE) $(NAME)
 
-$(NAME):
-	$(CC) $(CFLAGS) $(CXXFLAGS) $(OBJS) -o $@
+$(NAME): $(OBJS) $(LIBS:%=lib%.a)
+	$(CC) $(LDFLAGS) $(CXXFLAGS) $^ -o $@
 
 -include DEPENDENCIES
-%.o: %.c
+$(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
+$(OBJS_DIR):
+	$(MKDIR) $(OBJS_DIR)
+
 lib%.a:
-	$(MAKE) -C $(@:%.a:%)
+	$(MAKE) -C $(@:%.a=%)
 
 clean:
 	$(MAKE) clean -C libft
-	$(RM) $(OBJS_DIR)
+	$(RM) -r $(OBJS_DIR)
 
 fclean:
 	$(MAKE) fclean -C libft

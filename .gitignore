@@ -56,3 +56,6 @@ dkms.conf
 
 # Compile_commands.json 
 *.json
+
+# Executables
+minishell
