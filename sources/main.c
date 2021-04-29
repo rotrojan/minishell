@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:20:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/29 22:39:04 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/29 22:52:26 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,9 @@ static void	ft_init_term(void)
 
 int	main(int argc, char **argv, char **env)
 {
-	char	cwd[128];
-	// char	*caps;
-
 	(void)argc;
 	(void)argv;
 	(void)env;
 	ft_init_term();
-	printf("%s$", getcwd(cwd, 128));
 	return (EXIT_SUCCESS);
 }
