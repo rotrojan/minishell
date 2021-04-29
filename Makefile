@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/04/29 22:10:35 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/04/29 23:07:33 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ MKDIR = mkdir -p
 CFLAGS = -Wall -Wextra -Werror -MMD
 
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
-LDFLAGS = -lncurses
+LDFLAGS = -lncurses -lft
 
 vpath %.c $(SRCS_DIR)
 vpath %.h $(INCLUDES_DIR)
