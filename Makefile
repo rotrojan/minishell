@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+         #
+#    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/04/29 21:15:29 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/04/29 21:33:08 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ all:
 	$(MAKE) $(NAME)
 
 $(NAME): $(OBJS) $(LIBS:%=lib%.a)
-	$(CC) $(LDFLAGS) $(CXXFLAGS) $^ -o $@
+	$(CC) $(LDFLAGS) $(CXXFLAGS) $^ -o $@ -lncurses
 
 -include $(DEPENDENCIES)
 $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
