@@ -3,7 +3,7 @@ NAME= 	libft.a
 INT=	ft_atoll.c
 STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
-		gnl.c
+		gnl.c				ft_fputstr.c
 
 SRCS=	$(addprefix integer/, $(INT)) $(addprefix file/, $(FILE))		\
 		$(addprefix string/, $(STR))
