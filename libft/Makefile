@@ -1,12 +1,13 @@
 NAME= 	libft.a
 
 INT=	ft_atoll.c
+SYS=	ft_exit_error.c
 STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 		gnl.c				ft_fputstr.c
 
 SRCS=	$(addprefix integer/, $(INT)) $(addprefix file/, $(FILE))		\
-		$(addprefix string/, $(STR))
+		$(addprefix string/, $(STR)) $(addprefix system/, $(SYS))
 OBJS= $(SRCS:%.c=%.o)
 DEPENDENCIES= $(SRCS:%.c=%.d)
 
