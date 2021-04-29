@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:39:58 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/29 17:16:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/29 18:41:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@
 # include <signal.h>
 # include <dirent.h>
 # include <errno.h>
-# include <termios.h>
+# include <ncurses.h>
+# include <term.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <stdlib.h>
