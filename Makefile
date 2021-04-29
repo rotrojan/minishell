@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/04/29 22:00:41 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/04/29 22:10:35 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ vpath %.a $(LIBS:%=lib%)
 
 all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)
-	@$(MAKE) $(NAME)
+	$(MAKE) $(NAME)
 
 $(NAME): $(OBJS) | $(LIBS:%=lib%.a)
 	$(CC) $(LDFLAGS) $(CXXFLAGS) $^ -o $(NAME)
@@ -48,17 +48,16 @@ $(OBJS_DIR):
 	$(MKDIR) $(OBJS_DIR)
 
 lib%.a:
-	@$(MAKE) -C $(@:%.a=%)
+	$(MAKE) -C $(@:%.a=%)
 
 clean:
 	$(foreach LIB, $(LIBS), $(MAKE) $@ -C lib$(LIB))
 	$(RM) -r $(OBJS_DIR)
 
 fclean: clean
-	@$(MAKE) fclean -C libft
+	$(MAKE) fclean -C libft
 	$(RM) $(NAME) $(foreach LIB, $(LIBS), lib$(LIB)/lib$(LIB).a)
 
 re: fclean all
 
 .PHONY: all clean fclean re
-.SILENT: $(LIBS:%=lib%.a)
