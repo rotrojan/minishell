@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar.c                                       :+:      :+:    :+:   */
+/*   ft_shell.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 17:23:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 21:06:18 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/04/30 21:38:24 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_putchar(int c)
+void	ft_shell(void)
 {
-	write(1, &c, 1);
-	return (c);
+	ft_prompt();
 }

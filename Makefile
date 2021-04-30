@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/04/30 19:26:58 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/04/30 21:40:12 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ CFLAGS = -MMD -Wall -Wextra -Werror
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c $(SRCS_DIR)
+vpath %.c $(SRCS_DIR) $(SRCS_DIR)/system
 vpath %.h $(INCLUDES_DIR)
 vpath %.a $(LIBS:%=lib%)
 

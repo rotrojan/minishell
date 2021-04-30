@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:39:58 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/29 22:09:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/30 21:34:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,7 @@
 # include <string.h>
 
 # include "libft.h"
+# include "struct.h"
+# include "prototype.h"
 
 #endif
