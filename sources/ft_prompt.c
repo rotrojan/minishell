@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 23:29:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/01 00:47:37 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,12 @@ void	ft_prompt(void)
 	i = ft_strlen(prompt.home);
 	tputs(tparm(color_cap, COLOR_GREEN), 1, ft_putchar);
 	tputs(bold_cap, 1, ft_putchar);
-	printf("%s@%s:", getenv("USER"), prompt.hostname);
+	ft_printf("%s@%s:", getenv("USER"), prompt.hostname);
 	tputs(tparm(color_cap, COLOR_BLUE), 1, ft_putchar);
 	if (!ft_strncmp(prompt.home, prompt.pwd, i))
-		printf("~%s", &prompt.pwd[i]);
+		ft_printf("~%s", &prompt.pwd[i]);
 	else
-		printf("%s", prompt.pwd);
-	printf("> ");
+		ft_printf("%s", prompt.pwd);
+	ft_printf("> ");
 	free(prompt.hostname);
 }
