@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/06 17:50:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/27 16:40:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/01 00:36:55 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static void	ft_print_nb(int nb)
 	}
 }
 
-void		ft_putnbr(int nb)
+void	ft_putnbr(int nb)
 {
 	if (nb == 0)
 		ft_putchar('0');

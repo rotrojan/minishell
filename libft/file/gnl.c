@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:28:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 01:48:42 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/01 00:41:55 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,17 @@ int	get_next_line(int fd, char **line)
 	str[0] = '\0';
 	while (c != '\n' && ret != 0)
 	{
-		if ((ret = read(fd, &c, 1)) == -1)
+		ret = read(fd, &c, 1);
+		if (ret == -1)
 			return (-1);
 		else if (c != '\n' && ret != 0)
-			if ((str = ft_append_char(str, c)) == NULL)
-				return (-1);
+			str = ft_append_char(str, c);
+		str = ft_append_char(str, c);
+		if (str == NULL)
+			return (-1);
 	}
 	*line = str;
-	return (ret == 0 ? 0 : 1);
+	if (ret != 0)
+		ret = 1;
+	return (ret);
 }

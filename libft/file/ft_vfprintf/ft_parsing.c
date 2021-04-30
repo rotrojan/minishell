@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:36:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 23:50:48 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/01 00:16:32 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_parse_width(const char *s, t_printf *data, va_list ap)
 		data->width = va_arg(ap, int);
 		if (data->width < 0)
 		{
-			data->width = (data->width < 0 ? data->width * -1 : data->width);
+			data->width *= -1;
 			ft_parse_padding('-', data);
 		}
 		i++;
@@ -60,14 +60,17 @@ int	ft_parse_width(const char *s, t_printf *data, va_list ap)
 	else
 	{
 		nb = ft_atoi(s);
-		data->width = (nb < 0 ? nb * -1 : nb);
+		if (nb < 0)
+			data->width = nb * -1 : nb);
+		else
+			data->width = nb;
 		while (ft_isdigit(s[i]))
 			i++;
 	}
 	return (i);
 }
 
-int		ft_parse_precision(const char *s, t_printf *data, va_list ap)
+int	ft_parse_precision(const char *s, t_printf *data, va_list ap)
 {
 	int	i;
 
