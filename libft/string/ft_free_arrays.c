@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_file.h                                          :+:      :+:    :+:   */
+/*   ft_free_arrays.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 20:06:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 01:48:58 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/04/30 12:07:46 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/04/30 12:09:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FILE_H
-# define FT_FILE_H
+#include "libft.h"
 
-void	ft_putchar(char c);
-int		ft_putstr(char const *s);
-int		ft_fputstr(int fd, char const *s);
-void	ft_putnbr(int nb);
-int		get_next_line(int fd, char **line);
+void	ft_free_arrays(char **arrays)
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (arrays[i])
+		free(arrays[i++]);
+	free(arrays);
+}

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:28:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/29 16:08:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/04/30 01:48:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static char 	*ft_append_char(char *str, char c)
 	char	*str_new;
 
 	i = 0;
-	if ((str_new = malloc(sizeof(char) * (ft_strlen(str) + 2))) == NULL)
+	str_new = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	if (str == NULL)
 		return (NULL);
 	while (str[i])
 	{
@@ -31,7 +32,7 @@ static char 	*ft_append_char(char *str, char c)
 	return (str_new);
 }
 
-int				get_next_line(char **line)
+int	get_next_line(int fd, char **line)
 {
 	char	c;
 	int		ret;
@@ -39,12 +40,13 @@ int				get_next_line(char **line)
 
 	c = '\0';
 	ret = 1;
-	if ((str = malloc(sizeof(char) * 1)) == NULL)
+	str = malloc(sizeof(char) * 1);
+	if (str == NULL)
 		return (-1);
 	str[0] = '\0';
 	while (c != '\n' && ret != 0)
 	{
-		if ((ret = read(0, &c, 1)) == -1)
+		if ((ret = read(fd, &c, 1)) == -1)
 			return (-1);
 		else if (c != '\n' && ret != 0)
 			if ((str = ft_append_char(str, c)) == NULL)

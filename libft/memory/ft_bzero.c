@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_file.h                                          :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 20:06:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 01:48:58 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/08 09:27:51 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/04/30 12:30:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FILE_H
-# define FT_FILE_H
+#include "libft.h"
 
-void	ft_putchar(char c);
-int		ft_putstr(char const *s);
-int		ft_fputstr(int fd, char const *s);
-void	ft_putnbr(int nb);
-int		get_next_line(int fd, char **line);
+void	ft_bzero(void *s, size_t n)
+{
+	unsigned char	*ptr;
+	size_t			i;
 
-#endif
+	ptr = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+}

@@ -1,22 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_file.h                                          :+:      :+:    :+:   */
+/*   ft_memory.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 20:06:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 01:48:58 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/04/30 12:25:40 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/04/30 12:41:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FILE_H
-# define FT_FILE_H
+#ifndef FT_MEMORY_H
+# define FT_MEMORY_H
 
-void	ft_putchar(char c);
-int		ft_putstr(char const *s);
-int		ft_fputstr(int fd, char const *s);
-void	ft_putnbr(int nb);
-int		get_next_line(int fd, char **line);
+# include "libft.h"
+
+void	*ft_calloc(size_t count, size_t size);
+void	ft_bzero(void *s, size_t n);
 
 #endif

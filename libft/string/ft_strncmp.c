@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_file.h                                          :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 20:06:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 01:48:58 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/04/29 23:53:34 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/04/29 23:53:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FILE_H
-# define FT_FILE_H
+#include "libft.h"
 
-void	ft_putchar(char c);
-int		ft_putstr(char const *s);
-int		ft_fputstr(int fd, char const *s);
-void	ft_putnbr(int nb);
-int		get_next_line(int fd, char **line);
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	size_t	i;
 
-#endif
+	i = 0;
+	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
+	{
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
+	}
+	return (0);
+}

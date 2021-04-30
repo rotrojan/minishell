@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/04/29 23:42:37 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/04/30 19:26:58 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ CC = clang
 RM = rm -f
 MKDIR = mkdir -p
 
-CFLAGS = -Wall -Wextra -Werror -MMD
+CFLAGS = -MMD -Wall -Wextra -Werror
 
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses

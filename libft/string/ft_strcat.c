@@ -1,22 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_file.h                                          :+:      :+:    :+:   */
+/*   ft_strcat.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 20:06:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 01:48:58 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/12 21:15:12 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/04/30 12:23:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_FILE_H
-# define FT_FILE_H
+#include "libft.h"
 
-void	ft_putchar(char c);
-int		ft_putstr(char const *s);
-int		ft_fputstr(int fd, char const *s);
-void	ft_putnbr(int nb);
-int		get_next_line(int fd, char **line);
+char	*ft_strcat(char *dest, char *src)
+{
+	int	i;
+	int	j;
 
-#endif
+	j = 0;
+	i = ft_strlen(dest);
+	while (src[j])
+	{
+		dest[i + j] = src[j];
+		j++;
+	}
+	dest[i + j] = '\0';
+	return (dest);
+}
