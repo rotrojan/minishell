@@ -1,12 +1,15 @@
 NAME= 	libft.a
 
-INT=	ft_atoll.c
+INT=	ft_atoll.c			ft_atoi.c			ft_atoui.c				\
+		ft_itoa.c			ft_nbrlen.c			ft_ltoa_base.c			\
+		ft_uitoa.c			ft_uitoa_base.c
 SYS=	ft_exit_error.c
 MEM=	ft_calloc.c			ft_bzero.c
 STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_strncmp.c		ft_split.c			ft_free_arrays.c		\
 		ft_strjoin.c		ft_strcat.c			ft_strcpy.c				\
-		ft_strdup.c
+		ft_strdup.c			ft_strchr.c			ft_isdigit.c			\
+		ft_isspace.c		ft_strdel.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 		ft_printf.c			ft_fprintf.c								\
 		gnl.c				ft_fputstr.c

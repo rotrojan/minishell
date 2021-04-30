@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/01/30 17:36:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 00:16:32 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/01 01:21:16 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	ft_parse_width(const char *s, t_printf *data, va_list ap)
 	{
 		nb = ft_atoi(s);
 		if (nb < 0)
-			data->width = nb * -1 : nb);
+			data->width = nb * -1;
 		else
 			data->width = nb;
 		while (ft_isdigit(s[i]))

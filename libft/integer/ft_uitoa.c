@@ -1,28 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_integer.h                                       :+:      :+:    :+:   */
+/*   ft_uitoa.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 18:42:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 01:42:10 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/22 20:46:15 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/01 01:39:09 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_INTEGER_H
-# define FT_INTEGER_H
+#include "libft.h"
 
-# define INT_MIN -2147483648
-# define INT_MAX 2147483647
+char	*ft_uitoa(unsigned int n)
+{
+	unsigned int	i;
+	char			*strnew;
 
-long long	ft_atoll(const char *str);
-int			ft_atoi(const char *str);
-int			ft_atoui(const char *str);
-char		*ft_itoa(int n);
-int			ft_nbrlen(long n, int base);
-char		*ft_ltoa_base(long n, char const *base);
-char		*ft_uitoa(unsigned int n);
-char		*ft_uitoa_base(unsigned int n, char const *base);
-
-#endif
+	if (n == 0)
+		return (ft_strdup("0"));
+	i = ft_nbrlen(n, 10);
+	strnew = ft_calloc(i + 1, sizeof(char));
+	if (strnew == NULL)
+		return (NULL);
+	strnew[i--] = '\0';
+	while (n > 0)
+	{
+		strnew[i] = (n % 10) + '0';
+		n /= 10;
+		i--;
+	}
+	return (strnew);
+}

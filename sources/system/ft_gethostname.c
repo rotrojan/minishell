@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 21:34:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/01 01:56:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ char	*ft_gethostname(void)
 		get_next_line(fd[0], &hostname);
 		close(fd[0]);
 	}
+	if (pid != 0)
+		wait(&pid);
 	free(bin_path);
+	ft_putstr(hostname);
 	return (hostname);
 }
