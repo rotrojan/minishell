@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 01:47:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/01 02:35:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,23 +16,23 @@ void	ft_prompt(void)
 {
 	int			i;
 	t_prompt	prompt;
-	char		*color_cap;
-	char		*bold_cap;
 
-	color_cap = tgetstr("AF", NULL);
-	bold_cap = tgetstr("md", NULL);
 	prompt.home = getenv("HOME");
 	prompt.pwd = getenv("PWD");
 	prompt.hostname = ft_gethostname();
 	i = ft_strlen(prompt.home);
-	tputs(tparm(color_cap, COLOR_GREEN), 1, ft_putchar);
-	tputs(bold_cap, 1, ft_putchar);
-	ft_printf("%s@%s:", getenv("USER"), prompt.hostname);
-	tputs(tparm(color_cap, COLOR_BLUE), 1, ft_putchar);
+	tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar);
+	tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_GREEN), 1, ft_putchar);
+	ft_printf("%s@%s", getenv("USER"), prompt.hostname);
+	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar);
+	ft_putchar(':');
+	tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar);
+	tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_BLUE), 1, ft_putchar);
 	if (!ft_strncmp(prompt.home, prompt.pwd, i))
 		ft_printf("~%s", &prompt.pwd[i]);
 	else
 		ft_printf("%s", prompt.pwd);
+	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar);
 	ft_printf("> ");
 	free(prompt.hostname);
 }
