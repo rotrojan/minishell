@@ -54,7 +54,8 @@ dkms.conf
 # VSCode
 .vscode/
 
-# Compile_commands.json 
+# Nvim plugins 
+.cache
 *.json
 
 # Executables
