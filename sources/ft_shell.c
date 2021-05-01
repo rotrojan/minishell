@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 21:38:24 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:08:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,14 @@
 
 void	ft_shell(void)
 {
-	ft_prompt();
+	int	c;
+
+	while (1)
+	{
+		ft_prompt();
+		while (read(STDIN_FILENO, &c, 1) > 0)
+		{
+			// ft_printf("%c", c);
+		}
+	}
 }

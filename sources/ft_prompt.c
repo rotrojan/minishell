@@ -6,24 +6,33 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 02:35:13 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/01 14:55:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+t_prompt	ft_get_prompt_infos(void)
+{
+	t_prompt	prompt;
+
+	prompt.home = getenv("HOME");
+	prompt.user = getenv("USER");
+	prompt.pwd = getenv("PWD");
+	prompt.hostname = ft_gethostname();
+	return (prompt);
+}
 
 void	ft_prompt(void)
 {
 	int			i;
 	t_prompt	prompt;
 
-	prompt.home = getenv("HOME");
-	prompt.pwd = getenv("PWD");
-	prompt.hostname = ft_gethostname();
+	prompt = ft_get_prompt_infos();
 	i = ft_strlen(prompt.home);
 	tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar);
 	tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_GREEN), 1, ft_putchar);
-	ft_printf("%s@%s", getenv("USER"), prompt.hostname);
+	ft_printf("%s@%s", prompt.user, prompt.hostname);
 	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar);
 	ft_putchar(':');
 	tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar);

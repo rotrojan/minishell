@@ -6,26 +6,25 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:53:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 23:38:58 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/01 18:54:49 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_types		g_types[N_TYPES] = {
-	{'%', &ft_per}, {'c', &ft_c}, {'s', &ft_s},
-	{'p', &ft_p}, {'d', &ft_d}, {'i', &ft_i},
-	{'u', &ft_u}, {'x', &ft_x}, {'X', &ft_xu}
-};
-
 static void	ft_format_buffer(t_printf data, t_buffer *buffer, va_list ap)
 {
-	int	i;
+	int				i;
+	static t_types	types[N_TYPES] = {
+		{'%', &ft_per}, {'c', &ft_c}, {'s', &ft_s},
+		{'p', &ft_p}, {'d', &ft_d}, {'i', &ft_i},
+		{'u', &ft_u}, {'x', &ft_x}, {'X', &ft_xu}
+	};
 
 	i = 0;
-	while (i <= N_TYPES && data.type != g_types[i].name)
+	while (i <= N_TYPES && data.type != types[i].name)
 		i++;
-	g_types[i].function(ap, data, buffer);
+	types[i].function(ap, data, buffer);
 }
 
 static t_printf	ft_parsing(const char *format, int *i, va_list ap)
