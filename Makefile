@@ -6,15 +6,15 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/02 16:46:37 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/05/02 17:14:15 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 MAKE = make
 NAME = minishell
 
-SRCS = main.c ft_shell.c ft_prompt.c ft_gethostname.c ft_getbinpath.c \
-	w_alloc.c w_free.c exit_error.c get_garbage_lst.c
+SRCS =	main.c ft_shell.c ft_prompt.c ft_gethostname.c ft_getbinpath.c		\
+		w_alloc.c w_free.c exit_error.c get_garbage_lst.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -30,7 +30,7 @@ CFLAGS = -MMD -Wall -Wextra -Werror
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c $(SRCS_DIR) $(addprefix $(SRCS_DIR)/, system, errors)
+vpath %.c $(SRCS_DIR) $(addprefix $(SRCS_DIR)/, system, memory_management)
 vpath %.h $(INCLUDES_DIR)
 vpath %.a $(LIBS:%=lib%)
 
