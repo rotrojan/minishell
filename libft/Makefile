@@ -16,16 +16,19 @@ PRINTF=	ft_vfprintf.c		ft_parsing.c		ft_type_d_i.c			\
 		ft_type_p.c			ft_types_c_s.c		ft_types_u_per.c		\
 		ft_types_x_xu.c		ft_vfprintf_utils.c
 
-SRCS=	$(addprefix integer/, $(INT)) $(addprefix file/, $(FILE))		\
-		$(addprefix string/, $(STR)) $(addprefix memory/, $(MEM))		\
-		$(addprefix file/ft_vfprintf/, $(PRINTF))
-OBJS= $(SRCS:%.c=%.o)
-DEPENDENCIES= $(SRCS:%.c=%.d)
+SRCS=	$(INT) $(FILE) $(STR) $(MEM) $(PRINTF)
+OBJS= $(SRCS:%.c=$(OBJS_DIR)/%.o)
+OBJS_DIR= .objs
+DEPENDENCIES= $(OBJS:%.o=%.d)
 
 CC= clang
+MKDIR= mkdir -p
+RM= rm -f
 
 CFLAGS= -Wall -Wextra -Werror -MMD
 CXXFLAGS= -I includes
+
+vpath %.c integer file file/ft_vfprintf string memory file 
 
 all: $(NAME)
 
@@ -33,14 +36,17 @@ $(NAME): $(OBJS)
 	ar -rcs $(NAME) $(OBJS)
 
 -include $(DEPENDENCIES)
-%.o: %.c
+$(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
+$(OBJS_DIR):
+	$(MKDIR) $(OBJS_DIR)
+
 clean:
-	rm -f $(OBJS)
+	$(RM) -r $(OBJS_DIR)
 
 fclean: clean
-	rm -f $(NAME)
+	$(RM) $(NAME)
 
 re: fclean all
 
