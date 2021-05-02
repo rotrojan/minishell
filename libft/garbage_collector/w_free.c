@@ -1,32 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   w_alloc.c                                          :+:      :+:    :+:   */
+/*   w_free.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/01 16:32:29 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/02 19:50:58 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/02 13:01:22 by rotrojan          #+#    #+#             */
+/*   Updated: 2021/05/03 01:02:11 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libgarbage.h"
+#include "libft.h"
 
-void	*w_alloc(size_t nmemb, size_t size)
+void	w_free(void *garbage_to_free)
 {
 	t_garbage_lst	**garbage_lst;
-	t_garbage_lst	*new;
+	t_garbage_lst	*current;
+	t_garbage_lst	*previous;
 
 	garbage_lst = get_garbage_lst();
-	new = NULL;
-	new = (t_garbage_lst *)malloc(sizeof(t_garbage_lst));
-	if (new == NULL)
-		ft_exit(EXIT_FAILURE, strerror(errno));
-	new->ptr = NULL;
-	new->ptr = malloc(nmemb * size);
-	if (new->ptr == NULL)
-		ft_exit(EXIT_FAILURE, strerror(errno));
-	new->next = *garbage_lst;
-	*garbage_lst = new;
-	return (new->ptr);
+	current = *garbage_lst;
+	previous = NULL;
+	while (current->ptr != garbage_to_free)
+	{
+		previous = current;
+		current = current->next;
+	}
+	free(current->ptr);
+	current->ptr = NULL;
+	if (previous == NULL)
+		*garbage_lst = current->next;
+	else
+		previous->next = current->next;
+	free(current->ptr);
+	current->ptr = NULL;
+	free(current);
+	current = NULL;
 }

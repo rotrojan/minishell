@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:28:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 02:17:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/03 01:08:31 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char 	*ft_append_char(char *str, char c)
 	char	*str_new;
 
 	i = 0;
-	str_new = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	str_new = w_alloc(ft_strlen(str) + 2, sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	while (str[i])
@@ -28,7 +28,7 @@ static char 	*ft_append_char(char *str, char c)
 	}
 	str_new[i] = c;
 	str_new[i + 1] = '\0';
-	free(str);
+	w_free(str);
 	return (str_new);
 }
 
@@ -40,7 +40,7 @@ int	get_next_line(int fd, char **line)
 
 	c = '\0';
 	ret = 1;
-	str = malloc(sizeof(char) * 1);
+	str = w_alloc(1, sizeof(char));
 	if (str == NULL)
 		return (-1);
 	str[0] = '\0';

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 23:25:06 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 12:32:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/03 01:04:53 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(const char *s)
 	int		i;
 	char	*dup;
 
-	dup = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	dup = w_alloc(ft_strlen(s) + 1, sizeof(char));
 	if (dup == NULL)
 		return (NULL);
 	i = 0;

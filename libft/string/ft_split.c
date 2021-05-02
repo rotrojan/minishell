@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 11:48:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 12:03:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/03 01:06:18 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*ft_cut_split(char *str, char c, int *i)
 		*i += 1;
 	while (str[*i + len] != c && str[*i + len])
 		len++;
-	strnew = malloc(sizeof(char) * (len + 1));
+	strnew = w_alloc((len + 1), sizeof(char));
 	if (strnew == NULL)
 		return (NULL);
 	while (j < len)
@@ -70,14 +70,14 @@ static void	ft_noleaks(char **tab, int len)
 	{
 		if (tab[i])
 		{
-			free(tab[i]);
+			w_free(tab[i]);
 			tab[i] = NULL;
 		}
 		i++;
 	}
 	if (tab)
 	{
-		free(tab);
+		w_free(tab);
 		tab = NULL;
 	}
 }
@@ -94,7 +94,7 @@ char	**ft_split(char const *str, char c)
 	if (!str)
 		return (NULL);
 	tab_size = ft_nb_split((char *)str, c);
-	tab = malloc(sizeof(char *) * (tab_size + 1));
+	tab = w_alloc((tab_size + 1), sizeof(char *));
 	if (tab == NULL)
 		return (NULL);
 	while (i < tab_size)

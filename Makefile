@@ -20,7 +20,7 @@ OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
 INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
-LIBS = garbage ft
+LIBS = ft
 CC = clang
 RM = rm -f
 MKDIR = mkdir -p

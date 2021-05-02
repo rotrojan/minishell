@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:39:58 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/02 18:59:40 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/03 01:11:27 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "includes.h"
 # include "libft.h"
-# include "libgarbage.h"
 # include "define.h"
 # include "struct.h"
 # include "prototype.h"
