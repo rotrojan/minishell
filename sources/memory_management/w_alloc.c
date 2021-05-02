@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:32:29 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/02 16:45:09 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/02 17:07:03 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,11 +23,11 @@ void	*w_alloc(size_t nmemb, size_t size)
 	new_garbage = (t_garbage_lst *)malloc(sizeof(t_garbage_lst));
 	if (new_garbage == NULL)
 		ft_exit_error(strerror(errno));
-	new_garbage->garbage_ptr = NULL;
-	new_garbage->garbage_ptr = malloc(nmemb * size);
-	if (new_garbage->garbage_ptr == NULL)
+	new_garbage->ptr = NULL;
+	new_garbage->ptr = malloc(nmemb * size);
+	if (new_garbage->ptr == NULL)
 		exit_error(strerror(errno));
 	new_garbage->next = *garbage_lst;
 	*garbage_lst = new_garbage;
-	return (new_garbage->garbage_ptr);
+	return (new_garbage->ptr);
 }
