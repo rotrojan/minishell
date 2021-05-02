@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:05:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/02 16:33:34 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/02 16:50:58 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 typedef struct s_garbage_lst
 {
-	void					*garbage_ptr;
+	void					*ptr;
 	struct s_garbage_lst	*next;
 }	t_garbage_lst;
 

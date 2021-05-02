@@ -3,7 +3,6 @@ NAME= 	libft.a
 INT=	ft_atoll.c			ft_atoi.c			ft_atoui.c				\
 		ft_itoa.c			ft_nbrlen.c			ft_ltoa_base.c			\
 		ft_uitoa.c			ft_uitoa_base.c
-SYS=	ft_exit_error.c
 MEM=	ft_calloc.c			ft_bzero.c
 STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_strncmp.c		ft_split.c			ft_free_arrays.c		\
@@ -18,8 +17,8 @@ PRINTF=	ft_vfprintf.c		ft_parsing.c		ft_type_d_i.c			\
 		ft_types_x_xu.c		ft_vfprintf_utils.c
 
 SRCS=	$(addprefix integer/, $(INT)) $(addprefix file/, $(FILE))		\
-		$(addprefix string/, $(STR)) $(addprefix system/, $(SYS))		\
-		$(addprefix memory/, $(MEM)) $(addprefix file/ft_vfprintf/, $(PRINTF))
+		$(addprefix string/, $(STR)) $(addprefix memory/, $(MEM))		\
+		$(addprefix file/ft_vfprintf/, $(PRINTF))
 OBJS= $(SRCS:%.c=%.o)
 DEPENDENCIES= $(SRCS:%.c=%.d)
 
