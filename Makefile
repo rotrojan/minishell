@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/02 01:45:40 by bigo             ###   ########.fr        #
+#    Updated: 2021/05/02 15:26:01 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ MAKE = make
 NAME = minishell
 
 SRCS = main.c ft_shell.c ft_prompt.c ft_gethostname.c ft_getbinpath.c \
-	memory_management.c
+	w_alloc.c w_free.c exit_error.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
