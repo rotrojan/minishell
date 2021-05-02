@@ -6,16 +6,19 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:32:29 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/02 15:24:44 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/02 16:45:09 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "memory_management.h"
 #include "minishell.h"
 
-void	*w_alloc(size_t nmemb, size_t size, t_garbage_lst **garbage_lst)
+void	*w_alloc(size_t nmemb, size_t size)
 {
+	t_garbage_lst	**garbage_lst;
 	t_garbage_lst	*new_garbage;
 
+	garbage_lst = get_garbage_lst();
 	new_garbage = NULL;
 	new_garbage = (t_garbage_lst *)malloc(sizeof(t_garbage_lst));
 	if (new_garbage == NULL)
