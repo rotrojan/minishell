@@ -14,14 +14,13 @@
 MAKE = make
 NAME = minishell
 
-SRCS =	main.c ft_shell.c ft_prompt.c ft_gethostname.c ft_getbinpath.c		\
-		w_alloc.c w_free.c exit_error.c get_garbage_lst.c
+SRCS =	main.c ft_shell.c ft_prompt.c ft_gethostname.c ft_getbinpath.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
 INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
-LIBS = ft
+LIBS = ft garbage
 CC = clang
 RM = rm -f
 MKDIR = mkdir -p
@@ -31,7 +30,7 @@ CFLAGS = -MMD -Wall -Wextra -Werror
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c $(SRCS_DIR) $(SRCS_DIR)/system $(SRCS_DIR)/memory_management
+vpath %.c $(SRCS_DIR) $(SRCS_DIR)/system
 vpath %.h $(INCLUDES_DIR)
 vpath %.a $(LIBS:%=lib%)
 
@@ -53,11 +52,10 @@ lib%.a:
 	$(MAKE) -C $(@:%.a=%)
 
 clean:
-	$(foreach LIB, $(LIBS), $(MAKE) $@ -C lib$(LIB))
+	$(foreach LIB, $(LIBS), $(MAKE) $@ -C lib$(LIB);)
 	$(RM) -r $(OBJS_DIR)
 
 fclean: clean
-	$(MAKE) fclean -C libft
 	$(RM) $(NAME) $(foreach LIB, $(LIBS), lib$(LIB)/lib$(LIB).a)
 
 re: fclean all

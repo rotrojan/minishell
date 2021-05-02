@@ -1,18 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   memory_management.h                                :+:      :+:    :+:   */
+/*   libgarbage.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:05:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/02 16:50:58 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/02 19:23:58 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MEMORY_MANAGEMENT_H
-# define MEMORY_MANAGEMENT_H
-# include "minishell.h"
+#ifndef LIBGARBAGE_H
+# define LIBGARBAGE_H
+# include <sys/types.h>
+# include <stdlib.h>
+# include <errno.h>
+# include <unistd.h>
+# include <string.h>
+# include "libft.h"
 
 typedef struct s_garbage_lst
 {
@@ -22,7 +27,7 @@ typedef struct s_garbage_lst
 
 void			*w_alloc(size_t nmemb, size_t size);
 void			w_free(void *garbage_to_free);
-void			exit_error(char *str_error);
+void			exit_error(char *displayed_message, int errnum);
 t_garbage_lst	**get_garbage_lst(void);
 
 #endif
