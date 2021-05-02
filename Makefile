@@ -1,4 +1,5 @@
 # **************************************************************************** #
+#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
@@ -30,7 +31,7 @@ CFLAGS = -MMD -Wall -Wextra -Werror
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c $(SRCS_DIR) $(addprefix $(SRCS_DIR)/, system, memory_management)
+vpath %.c $(SRCS_DIR) $(SRCS_DIR)/system $(SRCS_DIR)/memory_management
 vpath %.h $(INCLUDES_DIR)
 vpath %.a $(LIBS:%=lib%)
 
