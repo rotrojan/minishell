@@ -1,27 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_shell.c                                         :+:      :+:    :+:   */
+/*   getbinpath.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 18:08:47 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/04/30 21:35:21 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/02 18:20:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ft_shell(void)
+char	*getbinpath(char *bin)
 {
-	int	c;
+	int			i;
+	char		**paths;
+	char		*bin_path;
+	struct stat	buf;
 
-	while (1)
+	i = 0;
+	paths = ft_split(getenv("PATH"), ':');
+	while (paths[i])
 	{
-		ft_prompt();
-		while (read(STDIN_FILENO, &c, 1) > 0)
+		bin_path = ft_strjoin(paths[i], bin, "/");
+		if (stat(bin_path, &buf) == 0)
 		{
-			// ft_printf("%c", c);
+			ft_free_arrays(paths);
+			return (bin_path);
 		}
+		free(bin_path);
+		i++;
 	}
+	ft_free_arrays(paths);
+	return (NULL);
 }

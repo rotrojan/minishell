@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exit_error.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 13:01:22 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/02 19:27:09 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/02 19:44:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libgarbage.h"
 
-void	exit_error(char *displayed_message, int errnum)
+void	ft_exit(int errnum, char *message)
 {
 	t_garbage_lst	*current;
 	t_garbage_lst	*next;
@@ -27,9 +27,9 @@ void	exit_error(char *displayed_message, int errnum)
 		current = NULL;
 		current = next;
 	}
-	if (errnum == 0)
-		ft_fprintf(STDOUT_FILENO, "%s\n", displayed_message);
+	if (errnum == EXIT_SUCCESS)
+		ft_fprintf(STDOUT_FILENO, "%s\n", message);
 	else
-		ft_fprintf(STDERR_FILENO, "Error: %s\n", displayed_message);
+		ft_fprintf(STDERR_FILENO, "Error: %s\n", message);
 	exit(errnum);
 }

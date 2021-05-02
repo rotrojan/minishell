@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libgarbage.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:05:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/02 19:23:58 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/02 19:44:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_garbage_lst
 
 void			*w_alloc(size_t nmemb, size_t size);
 void			w_free(void *garbage_to_free);
-void			exit_error(char *displayed_message, int errnum);
+void			ft_exit(int errnum, char *message);
 t_garbage_lst	**get_garbage_lst(void);
 
 #endif

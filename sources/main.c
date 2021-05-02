@@ -6,31 +6,35 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:20:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/02 18:53:58 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/02 19:53:10 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	ft_init_term(void)
+static void	init_term(void)
 {
 	int		ret;
-	char	*term;
+	char	*term_env;
+	// t_term	term;
 
-	term = getenv("TERM");
-	if (term == NULL)
-		exit_error("getenv(): TERM not set in env.\n");
-	ret = tgetent(NULL, term);
+	term_env = getenv("TERM");
+	if (term_env == NULL)
+		ft_exit(EXIT_FAILURE, "getenv(): TERM not set in env.");
+	ret = tgetent(NULL, term_env);
 	if (ret < 1)
-		exit_error("tgetent(): missing or insufficient data for this term\n");
+		ft_exit(EXIT_FAILURE, "tgetent(): missing data for this term");
+	// return (term);
 }
 
 int	main(int argc, char **argv, char **env)
 {
+	// t_term	term;
+
 	(void)argc;
 	(void)argv;
 	(void)env;
-	ft_init_term();
-	ft_shell();
+	init_term();
+	shell();
 	return (EXIT_SUCCESS);
 }

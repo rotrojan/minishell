@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_prompt.c                                        :+:      :+:    :+:   */
+/*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 14:55:13 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/02 19:28:43 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_prompt	ft_get_prompt_infos(void)
+static t_prompt	get_prompt_infos(void)
 {
 	t_prompt	prompt;
 
@@ -23,12 +23,12 @@ t_prompt	ft_get_prompt_infos(void)
 	return (prompt);
 }
 
-void	ft_prompt(void)
+void	prompt(void)
 {
 	int			i;
 	t_prompt	prompt;
 
-	prompt = ft_get_prompt_infos();
+	prompt = get_prompt_infos();
 	i = ft_strlen(prompt.home);
 	tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar);
 	tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_GREEN), 1, ft_putchar);

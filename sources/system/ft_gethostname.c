@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 02:14:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/02 19:50:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static char	*ft_getcat(char *bin_path, char **arg)
+static char	*getcat(char *bin_path, char **arg)
 {
 	int			fd[2];
 	pid_t		pid;
@@ -20,10 +20,10 @@ static char	*ft_getcat(char *bin_path, char **arg)
 
 	hostname = NULL;
 	if (pipe(fd) == ERR)
-		ft_exit_error(strerror(errno));
+		ft_exit(EXIT_FAILURE, strerror(errno));
 	pid = fork();
 	if (pid == ERR)
-		ft_exit_error(strerror(errno));
+		ft_exit(EXIT_FAILURE, strerror(errno));
 	else if (pid == 0)
 	{
 		close(fd[0]);
@@ -47,10 +47,10 @@ char	*ft_gethostname(void)
 	char		*bin_path;
 	static char	*arg[] = {"cat", "/etc/hostname", NULL};
 
-	bin_path = ft_getbinpath(arg[0]);
+	bin_path = getbinpath(arg[0]);
 	if (!bin_path)
-		ft_exit_error("ft_getbinpath(): No path found.\n");
-	hostname = ft_getcat(bin_path, arg);
+		ft_exit(EXIT_FAILURE, "ft_getbinpath(): No path found.");
+	hostname = getcat(bin_path, arg);
 	free(bin_path);
 	return (hostname);
 }

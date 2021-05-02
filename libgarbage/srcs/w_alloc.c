@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   w_alloc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:32:29 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/02 19:25:01 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/02 19:50:58 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ void	*w_alloc(size_t nmemb, size_t size)
 	new = NULL;
 	new = (t_garbage_lst *)malloc(sizeof(t_garbage_lst));
 	if (new == NULL)
-		exit_error(strerror(errno), errno);
+		ft_exit(EXIT_FAILURE, strerror(errno));
 	new->ptr = NULL;
 	new->ptr = malloc(nmemb * size);
 	if (new->ptr == NULL)
-		exit_error(strerror(errno), errno);
+		ft_exit(EXIT_FAILURE, strerror(errno));
 	new->next = *garbage_lst;
 	*garbage_lst = new;
 	return (new->ptr);

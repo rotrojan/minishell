@@ -3,17 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+         #
+#    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/10/13 02:53:19 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/02 19:22:49 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/05/02 19:47:02 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ################################### SOURCES ####################################
 
 SRCS_DIR		=	./srcs/
-SRCS 			=	exit_error.c get_garbage_lst.c w_alloc.c w_free.c
+SRCS 			=	ft_exit.c get_garbage_lst.c w_alloc.c w_free.c
 OBJS			=	${SRCS:%.c=${OBJS_DIR}%.o}
 DEPENDENCIES	=	${OBJS:.o=.d}
 LIBFT			= ../libft/
