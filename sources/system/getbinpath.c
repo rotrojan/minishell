@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:35:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/02 18:20:40 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/03 10:26:43 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*getbinpath(char *bin)
 			ft_free_arrays(paths);
 			return (bin_path);
 		}
-		free(bin_path);
+		w_free(bin_path);
 		i++;
 	}
 	ft_free_arrays(paths);
