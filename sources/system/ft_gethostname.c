@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/02 19:50:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/03 02:27:39 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,6 @@ char	*ft_gethostname(void)
 	if (!bin_path)
 		ft_exit(EXIT_FAILURE, "ft_getbinpath(): No path found.");
 	hostname = getcat(bin_path, arg);
-	free(bin_path);
+	w_free(bin_path);
 	return (hostname);
 }

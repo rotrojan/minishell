@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 13:01:22 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/03 01:02:11 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/03 03:24:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,6 @@ void	w_free(void *garbage_to_free)
 		previous = current;
 		current = current->next;
 	}
-	free(current->ptr);
-	current->ptr = NULL;
 	if (previous == NULL)
 		*garbage_lst = current->next;
 	else

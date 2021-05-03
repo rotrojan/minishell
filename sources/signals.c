@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prototype.h                                        :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 02:19:47 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/03 00:28:39 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/03 02:38:41 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PROTOTYPE_H
-# define PROTOTYPE_H
+#include "minishell.h"
 
-// system
-char	*ft_gethostname(void);
-char	*getbinpath(char *bin);
+static void	sigint_handler(int sig)
+{
+	(void)sig;
+	ft_exit(EXIT_SUCCESS, NULL);
+}
 
-void	prompt(void);
-void	shell(void);
-
-void	handle_signals(void);
-
-#endif
+void	handle_signals(void)
+{
+	signal(SIGINT, &sigint_handler);
+}

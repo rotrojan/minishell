@@ -14,7 +14,7 @@
 MAKE = make
 NAME = minishell
 
-SRCS =	main.c shell.c prompt.c ft_gethostname.c getbinpath.c
+SRCS =	main.c shell.c prompt.c ft_gethostname.c getbinpath.c signals.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 13:01:22 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/03 01:02:30 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/03 02:32:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,15 @@ void	ft_exit(int errnum, char *message)
 	while (current)
 	{
 		next = current->next;
-		free(current->ptr);
+		w_free(current->ptr);
 		current->ptr = NULL;
-		free(current);
+		w_free(current);
 		current = NULL;
 		current = next;
 	}
-	if (errnum == EXIT_SUCCESS)
+	if (errnum == EXIT_SUCCESS && message != NULL)
 		ft_fprintf(STDOUT_FILENO, "%s\n", message);
-	else
+	else if (errnum == EXIT_FAILURE)
 		ft_fprintf(STDERR_FILENO, "Error: %s\n", message);
 	exit(errnum);
 }

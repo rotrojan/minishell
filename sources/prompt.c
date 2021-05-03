@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/02 19:28:43 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/03 02:25:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,5 @@ void	prompt(void)
 		ft_printf("%s", prompt.pwd);
 	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar);
 	ft_printf("> ");
-	free(prompt.hostname);
+	w_free(prompt.hostname);
 }
