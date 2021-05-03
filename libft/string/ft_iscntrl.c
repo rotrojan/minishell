@@ -1,38 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   ft_iscntrl.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 21:07:49 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/03 16:55:33 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/03 16:59:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	shell(void)
+int	ft_iscntrl(int c)
 {
-	int			c;
-	t_token		*tokens;
-	t_cursor	cursor;
-
-	tokens = NULL;
-	cursor.on_token = NULL;
-	while (1)
-	{
-		prompt();
-		while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q')
-		{
-			if (ft_iscntrl(c))
-				ft_printf("%d", c);
-			else
-			{
-				cursor.on_token = insert_token(&tokens, cursor, c);
-				ft_putchar(c);
-			}
-		}
-		printf("%s\n", token_to_str(&tokens));
-	}
+	if ((c >= -1 && c <= 31) || c == 127)
+		return (1);
+	return (0);
 }

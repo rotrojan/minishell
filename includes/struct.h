@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/02 18:19:02 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:51:58 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,38 @@
 
 # include "minishell.h"
 
+typedef struct s_axe
+{
+	int					x;
+	int					y;
+}						t_axe;
+
 typedef struct s_prompt
 {
-	char			*home;
-	char			*user;
-	char			*pwd;
-	char			*hostname;
-}					t_prompt;
+	char				*home;
+	char				*user;
+	char				*pwd;
+	char				*hostname;
+}						t_prompt;
 
 typedef struct s_term
 {
-	struct termios	old;
-	struct termios	current;
-}					t_term;
+	struct termios		old;
+	struct termios		current;
+}						t_term;
+
+typedef struct s_token
+{
+	char				value;
+	enum e_token_type	type;
+	struct s_token		*next;
+	struct s_token		*prev;
+}						t_token;
+
+typedef struct s_cursor
+{
+	t_axe				pos;
+	t_token				*on_token;
+}						t_cursor;
 
 #endif

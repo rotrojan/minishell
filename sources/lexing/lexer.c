@@ -1,38 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell.c                                            :+:      :+:    :+:   */
+/*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 21:07:49 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/03 17:53:07 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/03 17:53:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	shell(void)
-{
-	int			c;
-	t_token		*tokens;
-	t_cursor	cursor;
-
-	tokens = NULL;
-	cursor.on_token = NULL;
-	while (1)
-	{
-		prompt();
-		while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q')
-		{
-			if (ft_iscntrl(c))
-				ft_printf("%d", c);
-			else
-			{
-				cursor.on_token = insert_token(&tokens, cursor, c);
-				ft_putchar(c);
-			}
-		}
-		printf("%s\n", token_to_str(&tokens));
-	}
-}

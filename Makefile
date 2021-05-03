@@ -14,7 +14,9 @@
 MAKE = make
 NAME = minishell
 
-SRCS =	main.c shell.c prompt.c ft_gethostname.c getbinpath.c signals.c
+SRCS =	main.c 				shell.c 				prompt.c 				\
+		ft_gethostname.c 	getbinpath.c 			signals.c				\
+		tokens.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -30,7 +32,7 @@ CFLAGS = -MMD -Wall -Wextra -Werror
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c $(SRCS_DIR) $(SRCS_DIR)/system
+vpath %.c $(SRCS_DIR) $(SRCS_DIR)/system $(SRCS_DIR)/lexing
 vpath %.h $(INCLUDES_DIR)
 vpath %.a $(LIBS:%=lib%)
 

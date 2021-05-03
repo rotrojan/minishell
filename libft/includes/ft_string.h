@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:20:37 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 01:36:17 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/03 16:59:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ char	*ft_strchr(const char *s, int c);
 int		ft_isdigit(int c);
 int		ft_isspace(int c);
 void	ft_strdel(char *s);
+int		ft_iscntrl(int c);
 
 #endif
