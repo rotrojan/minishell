@@ -16,7 +16,7 @@ NAME = minishell
 
 SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_gethostname.c 	getbinpath.c 			signals.c				\
-		tokens.c
+		tokens.c			ft_getpid.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -27,7 +27,7 @@ CC = clang
 RM = rm -f
 MKDIR = mkdir -p
 
-CFLAGS = -MMD -Wall -Wextra -Werror
+CFLAGS = -MMD -Wall -Wextra -Werror -g3
 
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses

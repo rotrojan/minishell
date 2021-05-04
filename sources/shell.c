@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/04 14:36:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/05 00:57:09 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,21 +18,23 @@ void	shell(void)
 	t_token		*tokens;
 	t_cursor	cursor;
 
-	tokens = NULL;
-	cursor.on_token = NULL;
 	while (1)
 	{
+		tokens = create_token(EOL);
+		cursor.on_token = tokens;
 		prompt();
-		while (read(STDIN_FILENO, &c, 1) == 1 && c != 'q')
+		while (read(STDIN_FILENO, &c, 1) == 1 && c != '\n')
 		{
-			if (ft_iscntrl(c))
-				ft_printf("%d", c);
-			else
+			if (!ft_iscntrl(c))
 			{
-				cursor.on_token = insert_token(&tokens, cursor, c);
+				insert_token(&tokens, &cursor, c);
 				ft_putchar(c);
+				print_tokens(tokens);
 			}
+			else
+				ft_printf("%d", c);
 		}
 		print_tokens(tokens);
+		clear_tokens(&tokens);
 	}
 }

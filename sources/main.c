@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:20:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 15:07:15 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/04 19:41:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static t_term	init_term(void)
 	if (!isatty(STDIN_FILENO))
 		ft_exit(EXIT_FAILURE, "isatty(): not a terminal.");
 	tcgetattr(STDIN_FILENO, &term.old);
-	ft_bzero(&term.current, sizeof(term.current));
+	term.current = term.old;
 	term.current.c_lflag &= ~(ICANON | ECHO);
 	term.current.c_cc[VMIN] = 1;
 	term.current.c_cc[VTIME] = 0;
