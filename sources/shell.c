@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 21:07:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/04 14:36:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,6 @@ void	shell(void)
 				ft_putchar(c);
 			}
 		}
-		printf("%s\n", token_to_str(&tokens));
+		print_tokens(tokens);
 	}
 }

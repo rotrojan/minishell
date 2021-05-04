@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 21:03:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/04 14:36:11 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,32 +26,17 @@ t_token	*create_token(int value)
 	return (token);
 }
 
-char	*token_to_str(t_token **tokens)
+void	print_tokens(t_token *tokens)
 {
-	int		i;
-	int		size;
-	char	*str;
 	t_token	*tmp;
 
-	i = 0;
-	size = 0;
-	tmp = *tokens;
+	tmp = tokens;
 	while (tmp)
 	{
-		tmp = tmp->next;
-		size++;
-	}
-	str = w_alloc(size + 1, sizeof(char));
-	if (str == NULL)
-		return (NULL);
-	tmp = *tokens;
-	while (tmp)
-	{
-		str[i++] = tmp->value;
+		ft_putchar(tmp->value);
 		tmp = tmp->next;
 	}
-	str[i] = '\0';
-	return (str);
+	ft_putchar('\n');
 }
 
 t_token	*insert_token(t_token **tokens, t_cursor cursor, int value)
