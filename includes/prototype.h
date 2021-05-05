@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/05 00:57:50 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/05 01:54:29 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ char	*ft_gethostname(void);
 char	*getbinpath(char *bin);
 pid_t	ft_getpid(void);
 
-void	prompt(void);
 void	shell(void);
+void	prompt(void);
+t_token	*input(void);
 
 void	handle_signals(void);
 

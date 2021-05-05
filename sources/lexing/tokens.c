@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/05 00:56:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/05 01:43:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,10 @@ void	insert_token(t_token **tokens, t_cursor *cursor, int value)
 
 	new = create_token(value);
 	new->prev = cursor->on_token->prev;
-	cursor->on_token->prev = new;
+	if (cursor->on_token->prev != NULL)
+		cursor->on_token->prev->next = new;
 	new->next = cursor->on_token;
+	cursor->on_token->prev = new;
 	cursor->pos.y++;
 	tmp = new;
 	while (tmp->prev != NULL)
