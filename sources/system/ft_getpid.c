@@ -20,10 +20,10 @@ static char	*getpgrep(char *bin_path, char **arg)
 
 	pgrep = NULL;
 	if (pipe(fd) == ERR)
-		ft_exit(EXIT_FAILURE, strerror(errno));
+		gc_exit(EXIT_FAILURE, strerror(errno));
 	pid = fork();
 	if (pid == ERR)
-		ft_exit(EXIT_FAILURE, strerror(errno));
+		gc_exit(EXIT_FAILURE, strerror(errno));
 	else if (pid == 0)
 	{
 		close(fd[0]);
@@ -50,9 +50,9 @@ pid_t	ft_getpid(void)
 
 	bin_path = getbinpath(arg[0]);
 	if (!bin_path)
-		ft_exit(EXIT_FAILURE, "ft_getbinpath(): No path found.");
+		gc_exit(EXIT_FAILURE, "ft_getbinpath(): No path found.");
 	pgrep = getpgrep(bin_path, arg);
 	pid = ft_atoi(pgrep);
-	w_free(pgrep);
+	gc_free(pgrep);
 	return (pid);
 }

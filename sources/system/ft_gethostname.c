@@ -20,10 +20,10 @@ static char	*getcat(char *bin_path, char **arg)
 
 	hostname = NULL;
 	if (pipe(fd) == ERR)
-		ft_exit(EXIT_FAILURE, strerror(errno));
+		gc_exit(EXIT_FAILURE, strerror(errno));
 	pid = fork();
 	if (pid == ERR)
-		ft_exit(EXIT_FAILURE, strerror(errno));
+		gc_exit(EXIT_FAILURE, strerror(errno));
 	else if (pid == 0)
 	{
 		close(fd[0]);
@@ -49,8 +49,8 @@ char	*ft_gethostname(void)
 
 	bin_path = getbinpath(arg[0]);
 	if (!bin_path)
-		ft_exit(EXIT_FAILURE, "ft_getbinpath(): No path found.");
+		gc_exit(EXIT_FAILURE, "ft_getbinpath(): No path found.");
 	hostname = getcat(bin_path, arg);
-	w_free(bin_path);
+	gc_free(bin_path);
 	return (hostname);
 }

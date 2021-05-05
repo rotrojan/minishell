@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   gc_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 16:04:32 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 01:06:48 by rotrojan         ###   ########.fr       */
+/*   Created: 2021/05/02 13:01:22 by rotrojan          #+#    #+#             */
+/*   Updated: 2021/05/05 15:10:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libgc.h"
 
-void	*ft_calloc(size_t count, size_t size)
+static void	ft_putstr_fd(int fd, char *str)
 {
-	void	*tmp;
+	int	i;
 
-	tmp = gc_alloc(count, size);
-	if (tmp == NULL)
-		return (NULL);
-	ft_bzero(tmp, count * size);
-	return (tmp);
+	i = 0;
+	while (str[i])
+		i++;
+	write(fd, str, i);
+}
+
+void	gc_exit(int status, char *message)
+{
+	gc_free_all();
+	if (status == EXIT_SUCCESS && message != NULL)
+		ft_putstr_fd(STDOUT_FILENO, message);
+	else if (status == EXIT_FAILURE)
+	{
+		ft_putstr_fd(STDERR_FILENO, "Error: ");
+		ft_putstr_fd(STDERR_FILENO, message);
+	}
+	exit(status);
 }

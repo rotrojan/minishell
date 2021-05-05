@@ -43,5 +43,5 @@ void	prompt(void)
 		ft_printf("%s", prompt.pwd);
 	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar);
 	ft_printf("> ");
-	w_free(prompt.hostname);
+	gc_free(prompt.hostname);
 }

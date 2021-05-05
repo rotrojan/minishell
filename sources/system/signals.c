@@ -15,13 +15,13 @@
 static void	sigint_handler(int sig)
 {
 	(void)sig;
-	ft_exit(EXIT_SUCCESS, NULL);
+	gc_exit(EXIT_SUCCESS, NULL);
 }
 
 static void	sigquit_handler(int sig)
 {
 	(void)sig;
-	ft_exit(EXIT_SUCCESS, NULL);
+	gc_exit(EXIT_SUCCESS, NULL);
 }
 
 void	handle_signals(void)

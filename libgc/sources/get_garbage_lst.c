@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   get_garbage_lst.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/02 16:18:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/03 01:02:23 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/05 15:08:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libgc.h"
 
 t_garbage_lst	**get_garbage_lst(void)
 {

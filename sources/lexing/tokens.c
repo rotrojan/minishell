@@ -16,7 +16,7 @@ t_token	*create_token(int value)
 {
 	t_token	*token;
 
-	token = w_alloc(1, sizeof(token));
+	token = gc_alloc(1, sizeof(token));
 	token->value = value;
 	token->next = NULL;
 	token->prev = NULL;
@@ -49,7 +49,7 @@ void	clear_tokens(t_token **tokens)
 	{
 		prev = tmp;
 		tmp = tmp->next;
-		w_free(prev);
+		gc_free(prev);
 	}
 	*tokens = NULL;
 }

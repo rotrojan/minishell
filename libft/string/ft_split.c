@@ -48,7 +48,7 @@ static char	*ft_cut_split(char *str, char c, int *i)
 		*i += 1;
 	while (str[*i + len] != c && str[*i + len])
 		len++;
-	strnew = w_alloc((len + 1), sizeof(char));
+	strnew = gc_alloc((len + 1), sizeof(char));
 	if (strnew == NULL)
 		return (NULL);
 	while (j < len)
@@ -70,14 +70,14 @@ static void	ft_noleaks(char **tab, int len)
 	{
 		if (tab[i])
 		{
-			w_free(tab[i]);
+			gc_free(tab[i]);
 			tab[i] = NULL;
 		}
 		i++;
 	}
 	if (tab)
 	{
-		w_free(tab);
+		gc_free(tab);
 		tab = NULL;
 	}
 }
@@ -94,7 +94,7 @@ char	**ft_split(char const *str, char c)
 	if (!str)
 		return (NULL);
 	tab_size = ft_nb_split((char *)str, c);
-	tab = w_alloc((tab_size + 1), sizeof(char *));
+	tab = gc_alloc((tab_size + 1), sizeof(char *));
 	if (tab == NULL)
 		return (NULL);
 	while (i < tab_size)

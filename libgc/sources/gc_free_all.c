@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_exit.c                                          :+:      :+:    :+:   */
+/*   gc_free_all.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/02 13:01:22 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/03 15:07:25 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/05 15:04:42 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/05 15:08:32 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libgc.h"
 
-void	ft_exit(int errnum, char *message)
+void	gc_free_all(void)
 {
 	t_garbage_lst	*current;
 	t_garbage_lst	*next;
@@ -21,15 +21,10 @@ void	ft_exit(int errnum, char *message)
 	while (current)
 	{
 		next = current->next;
-		w_free(current->ptr);
+		gc_free(current->ptr);
 		current->ptr = NULL;
-		w_free(current);
+		gc_free(current);
 		current = NULL;
 		current = next;
 	}
-	if (errnum == EXIT_SUCCESS && message != NULL)
-		ft_fprintf(STDOUT_FILENO, "%s\n", message);
-	else if (errnum == EXIT_FAILURE)
-		ft_fprintf(STDERR_FILENO, "Error: %s\n", message);
-	exit(errnum);
 }

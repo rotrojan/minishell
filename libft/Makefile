@@ -15,23 +15,23 @@ FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 PRINTF=	ft_vfprintf.c		ft_parsing.c		ft_type_d_i.c			\
 		ft_type_p.c			ft_types_c_s.c		ft_types_u_per.c		\
 		ft_types_x_xu.c		ft_vfprintf_utils.c
-GARBAGE_COLLECTOR= 			ft_exit.c			get_garbage_lst.c		\
-		w_alloc.c			w_free.c
 
 
-SRCS=	$(INT) $(FILE) $(STR) $(MEM) $(PRINTF) $(GARBAGE_COLLECTOR)
+SRCS=	$(INT) $(FILE) $(STR) $(MEM) $(PRINTF)
 OBJS= $(SRCS:%.c=$(OBJS_DIR)/%.o)
 OBJS_DIR= .objs
 DEPENDENCIES= $(OBJS:%.o=%.d)
+INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
+LIBS = gc
 
 CC= clang
 MKDIR= mkdir -p
 RM= rm -f
 
 CFLAGS= -Wall -Wextra -Werror -MMD
-CXXFLAGS= -I includes
+CXXFLAGS= -I includes $(INCLUDES_DIR:%=-I ../%)
 
-vpath %.c integer file file/ft_vfprintf string memory file garbage_collector 
+vpath %.c integer file file/ft_vfprintf string memory file
 
 all: $(NAME)
 

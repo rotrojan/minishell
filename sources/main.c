@@ -20,12 +20,12 @@ static t_term	init_term(void)
 
 	term_env = getenv("TERM");
 	if (term_env == NULL)
-		ft_exit(EXIT_FAILURE, "getenv(): TERM not set in env.");
+		gc_exit(EXIT_FAILURE, "getenv(): TERM not set in env.");
 	ret = tgetent(NULL, term_env);
 	if (ret < 1)
-		ft_exit(EXIT_FAILURE, "tgetent(): missing data for this term");
+		gc_exit(EXIT_FAILURE, "tgetent(): missing data for this term");
 	if (!isatty(STDIN_FILENO))
-		ft_exit(EXIT_FAILURE, "isatty(): not a terminal.");
+		gc_exit(EXIT_FAILURE, "isatty(): not a terminal.");
 	tcgetattr(STDIN_FILENO, &term.old);
 	term.current = term.old;
 	term.current.c_lflag &= ~(ICANON | ECHO);
@@ -46,6 +46,6 @@ int	main(int argc, char **argv, char **env)
 	handle_signals();
 	shell();
 	tcsetattr(STDIN_FILENO, TCSANOW, &term.old);
-	ft_exit(EXIT_SUCCESS, "");
+	gc_exit(EXIT_SUCCESS, "");
 	return (EXIT_SUCCESS);
 }
