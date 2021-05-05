@@ -16,7 +16,9 @@ NAME = minishell
 
 SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_gethostname.c 	getbinpath.c 			signals.c				\
-		tokens.c			ft_getpid.c				input.c
+		tokens.c			ft_getpid.c				input.c					\
+		exit_shell.c		getterm.c				init_term.c				\
+		pipe_exec.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -32,9 +34,10 @@ CFLAGS = -MMD -Wall -Wextra -Werror
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c $(SRCS_DIR) $(SRCS_DIR)/system $(SRCS_DIR)/lexing $(SRCS_DIR)/shell
-vpath %.h $(INCLUDES_DIR)
-vpath %.a $(LIBS:%=lib%)
+vpath %.c	$(SRCS_DIR)	$(SRCS_DIR)/system	$(SRCS_DIR)/lexing				\
+			$(SRCS_DIR)/shell	$(SRCS_DIR)/terminal
+vpath %.h	$(INCLUDES_DIR)
+vpath %.a	$(LIBS:%=lib%)
 
 all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)

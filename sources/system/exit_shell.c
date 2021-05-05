@@ -1,29 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getpid.c                                        :+:      :+:    :+:   */
+/*   exit_sh.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/04 15:12:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/05 18:15:42 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/05 02:19:45 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/05 16:42:32 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-pid_t	ft_getpid(void)
+void	exit_shell(int status, char *message)
 {
-	pid_t		pid;
-	char		*pgrep;
-	char		*bin_path;
-	static char	*arg[] = {"pgrep", "-n", "minishell", NULL};
+	t_term	*term;
 
-	bin_path = getbinpath(arg[0]);
-	if (!bin_path)
-		exit_shell(EXIT_FAILURE, "ft_getbinpath(): No path found.\n");
-	pgrep = pipe_exec(bin_path, arg);
-	pid = ft_atoi(pgrep);
-	gc_free(pgrep);
-	return (pid);
+	term = getterm();
+	tcsetattr(STDIN_FILENO, TCSANOW, &term->old);
+	gc_exit(status, message);
 }
