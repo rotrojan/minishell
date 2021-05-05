@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:28:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/05 16:06:38 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/05 23:21:51 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,5 @@ int	get_next_line(int fd, char **line)
 		}
 	}
 	*line = str;
-	return (ret == 1);
+	return (ret);
 }

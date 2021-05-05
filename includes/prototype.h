@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/05 18:15:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/05 22:59:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_term	*getterm(void);
 void	shell(void);
 void	prompt(void);
 t_token	*input(void);
+void	init_shell_env(t_env *env);
+t_env	*get_shell_env(void);
 
 //	lexing
 t_token	*create_token(int value);

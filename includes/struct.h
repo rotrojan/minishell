@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 16:51:58 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/05 22:48:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define STRUCT_H
 
 # include "minishell.h"
+
+typedef char **t_env;
 
 typedef struct s_axe
 {

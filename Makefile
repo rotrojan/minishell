@@ -18,18 +18,18 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_gethostname.c 	getbinpath.c 			signals.c				\
 		tokens.c			ft_getpid.c				input.c					\
 		exit_shell.c		getterm.c				init_term.c				\
-		pipe_exec.c
+		pipe_exec.c			shell_env.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
 INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
 LIBS = gc ft
-CC = clang
+CC = gcc
 RM = rm -f
 MKDIR = mkdir -p
 
-CFLAGS = -MMD -Wall -Wextra -Werror
+CFLAGS = -MMD -Wall -Wextra -Werror -g
 
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses

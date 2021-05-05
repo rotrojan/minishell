@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:20:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/05 16:45:50 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/05 23:01:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 int	main(int argc, char **argv, char **env)
 {
-	(void)argc;
-	(void)argv;
-	(void)env;
+	(void)(argc && argv);
+	init_shell_env(&env);
 	init_term();
 	handle_signals();
 	shell();

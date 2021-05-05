@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_free_all.c                                      :+:      :+:    :+:   */
+/*   shell_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/05 15:04:42 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/06 00:36:17 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/05 22:00:52 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/05 22:58:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libgc.h"
+#include "minishell.h"
 
-void	gc_free_all(void)
+t_env	*get_shell_env(void)
 {
-	t_garbage_lst	**garbage;
-	t_garbage_lst	*current;
-	t_garbage_lst	*next;
+	static t_env	shell_env = NULL;
 
-	garbage = get_garbage_lst();
-	current = *garbage;
-	while (current)
-	{
-		next = current->next;
-		free(current->ptr);
-		current->ptr = NULL;
-		free(current);
-		current = next;
-	}
+	return (&shell_env);
+}
+
+void	init_shell_env(t_env *env)
+{
+	t_env	*shell_env;
+
+	shell_env = get_shell_env();
+	if (*shell_env == NULL)
+		*shell_env = *env;
 }
