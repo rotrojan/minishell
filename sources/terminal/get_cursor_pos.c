@@ -6,13 +6,15 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:53:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/06 16:57:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/06 17:13:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static t_axe	read_pos(void)
+/* you must have set the terminal
+to non-canonical and without echo before */
+t_axe	get_cursor_pos(void)
 {
 	int		c;
 	int		sep;
@@ -21,6 +23,7 @@ static t_axe	read_pos(void)
 	pos.x = 0;
 	pos.y = 0;
 	sep = FALSE;
+	ft_fprintf(STDIN_FILENO, "\033[6n");
 	while (read(STDIN_FILENO, &c, 1) > 0)
 	{
 		if (c == 'R')
@@ -35,21 +38,5 @@ static t_axe	read_pos(void)
 				pos.y = pos.y * 10 + (c - '0');
 		}
 	}
-	return (pos);
-}
-
-t_axe	get_cursor_pos(void)
-{
-	t_axe			pos;
-	t_term			*term;
-	struct termios	tmp;
-
-	term = getterm();
-	tmp = term->current;
-	tmp.c_cflag &= ~(CREAD);
-	tcsetattr(STDIN_FILENO, TCSANOW, &tmp);
-	ft_fprintf(STDIN_FILENO, "\033[6n");
-	pos = read_pos();
-	tcsetattr(STDIN_FILENO, TCSANOW, &term->current);
 	return (pos);
 }
