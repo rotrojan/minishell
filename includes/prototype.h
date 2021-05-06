@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/05 22:59:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/06 03:01:29 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ char	*pipe_exec(char *bin_path, char **arg);
 //	terminal
 void	init_term(void);
 t_term	*getterm(void);
+t_axe	get_cursor_pos(void);
 
 //	shell
 void	shell(void);
