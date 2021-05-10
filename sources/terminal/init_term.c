@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:32:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/05 16:47:51 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/08 18:47:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@ void	init_term(void)
 		gc_exit(EXIT_FAILURE, "tgetent(): missing data for this term.\n");
 	if (!isatty(STDIN_FILENO))
 		gc_exit(EXIT_FAILURE, "isatty(): not a terminal.\n");
-	tcgetattr(STDIN_FILENO, &term->old);
-	term->current = term->old;
+	tcgetattr(STDIN_FILENO, &term->saved);
+	term->current = term->saved;
 	term->current.c_lflag &= ~(ICANON | ECHO);
 	term->current.c_cc[VMIN] = 1;
 	term->current.c_cc[VTIME] = 0;
