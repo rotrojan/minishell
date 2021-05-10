@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:53:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/06 17:13:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/10 02:47:43 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_axe	get_cursor_pos(void)
 	int		sep;
 	t_axe	pos;
 
+	c = 0;
 	pos.x = 0;
 	pos.y = 0;
 	sep = FALSE;

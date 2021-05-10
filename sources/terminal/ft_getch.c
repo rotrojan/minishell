@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 22:59:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 02:13:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/10 02:29:51 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int	get_special_key(int c)
 			break ;
 		i++;
 	}
+	if (i == NB_SPECIAL_KEY)
+		return (ERR);
 	return (special_key[i].key);
 }
 
