@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 11:48:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 17:45:40 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:10:03 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,6 @@ static char	*ft_cut_split(char *str, char c, int *i)
 	while (str[*i + len] != c && str[*i + len])
 		len++;
 	strnew = gc_alloc(sizeof(char) * (len + 1));
-	if (strnew == NULL)
-		return (NULL);
 	while (j < len)
 	{
 		strnew[j] = str[*i];
@@ -59,27 +57,6 @@ static char	*ft_cut_split(char *str, char c, int *i)
 	}
 	strnew[j] = '\0';
 	return (strnew);
-}
-
-static void	ft_noleaks(char **tab, int len)
-{
-	int	i;
-
-	i = 0;
-	while (i < len)
-	{
-		if (tab[i])
-		{
-			gc_free(tab[i]);
-			tab[i] = NULL;
-		}
-		i++;
-	}
-	if (tab)
-	{
-		gc_free(tab);
-		tab = NULL;
-	}
 }
 
 char	**ft_split(char const *str, char c)
@@ -95,16 +72,9 @@ char	**ft_split(char const *str, char c)
 		return (NULL);
 	tab_size = ft_nb_split((char *)str, c);
 	tab = gc_alloc(sizeof(char *) * (tab_size + 1));
-	if (tab == NULL)
-		return (NULL);
 	while (i < tab_size)
 	{
 		tab[i] = ft_cut_split((char *)str, c, &offset);
-		if (tab[i] == NULL)
-		{
-			ft_noleaks(tab, i);
-			return (NULL);
-		}
 		i++;
 	}
 	tab[i] = NULL;

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:53:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 02:47:43 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:50:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_axe	get_cursor_pos(void)
 			break ;
 		else if (c == ';')
 			sep = TRUE;
-		else if (c != 27 && c != '[')
+		else if (c != ESC && c != '[')
 		{
 			if (sep == FALSE)
 				pos.x = pos.x * 10 + (c - '0');

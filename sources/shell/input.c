@@ -6,16 +6,18 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 20:41:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:12:29 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	cntrl_key(int c)
+static void	control_key(int c)
 {
 	if (c == CTRL_D)
 		exit_shell(EXIT_SUCCESS, "\n");
+	else if (c == BACKSPACE)
+		ft_printf("backspace");
 }
 
 t_token	*input(void)
@@ -40,7 +42,7 @@ t_token	*input(void)
 				ft_putchar(c);
 			}
 			else
-				cntrl_key(c);
+				control_key(c);
 		}
 	}
 	return (tokens);

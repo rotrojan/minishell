@@ -19,7 +19,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		tokens.c			ft_getpid.c				input.c					\
 		exit_shell.c		getterm.c				init_term.c				\
 		pipe_exec.c			shell_env.c				get_cursor_pos.c		\
-		ft_getch.c
+		ft_getch.c			getos.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -30,7 +30,7 @@ CC = clang
 RM = rm -f
 MKDIR = mkdir -p
 
-CFLAGS = -MMD -Wall -Wextra -Werror -g
+CFLAGS = -MMD -Wall -Wextra -Werror
 
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses

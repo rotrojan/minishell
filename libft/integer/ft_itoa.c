@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 15:13:33 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 17:43:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:08:09 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,6 @@ char	*ft_itoa(int n)
 
 	i = ft_number_len(n);
 	strnew = gc_alloc(sizeof(char) * (i + 1));
-	if (strnew == NULL)
-		return (NULL);
 	strnew[i--] = '\0';
 	if (n == 0)
 		return (ft_strdup("0"));

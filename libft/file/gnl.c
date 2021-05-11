@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:28:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 17:42:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:07:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@ static char 	*ft_append_char(char *str, char c)
 
 	i = 0;
 	str_new = gc_alloc(sizeof(char) * (ft_strlen(str) + 2));
-	if (str == NULL)
-		return (NULL);
 	while (str[i])
 	{
 		str_new[i] = str[i];
@@ -41,8 +39,6 @@ int	get_next_line(int fd, char **line)
 	c = '\0';
 	ret = 1;
 	str = gc_alloc(sizeof(char) * 1);
-	if (str == NULL)
-		return (-1);
 	str[0] = '\0';
 	while (c != '\n' && ret != 0)
 	{
@@ -50,11 +46,7 @@ int	get_next_line(int fd, char **line)
 		if (ret == -1)
 			return (-1);
 		else if (c != '\n' && ret != 0)
-		{
 			str = ft_append_char(str, c);
-			if (str == NULL)
-				return (-1);
-		}
 	}
 	*line = str;
 	return (ret);

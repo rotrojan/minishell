@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 20:46:15 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 17:44:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 21:08:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,6 @@ char	*ft_uitoa(unsigned int n)
 		return (ft_strdup("0"));
 	i = ft_nbrlen(n, 10);
 	strnew = gc_alloc(sizeof(char) * (i + 1));
-	if (strnew == NULL)
-		return (NULL);
 	strnew[i--] = '\0';
 	while (n > 0)
 	{
