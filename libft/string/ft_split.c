@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 11:48:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 01:06:18 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/11 17:45:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*ft_cut_split(char *str, char c, int *i)
 		*i += 1;
 	while (str[*i + len] != c && str[*i + len])
 		len++;
-	strnew = gc_alloc((len + 1), sizeof(char));
+	strnew = gc_alloc(sizeof(char) * (len + 1));
 	if (strnew == NULL)
 		return (NULL);
 	while (j < len)
@@ -94,7 +94,7 @@ char	**ft_split(char const *str, char c)
 	if (!str)
 		return (NULL);
 	tab_size = ft_nb_split((char *)str, c);
-	tab = gc_alloc((tab_size + 1), sizeof(char *));
+	tab = gc_alloc(sizeof(char *) * (tab_size + 1));
 	if (tab == NULL)
 		return (NULL);
 	while (i < tab_size)

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 02:51:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:48:49 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_token	*create_token(int value)
 {
 	t_token	*token;
 
-	token = gc_alloc(1, sizeof(t_token));
+	token = gc_alloc(sizeof(t_token) * 1);
 	token->value = value;
 	token->next = NULL;
 	token->prev = NULL;

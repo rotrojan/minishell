@@ -1,24 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   gc_utils.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/08 16:04:32 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 17:45:00 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/11 16:35:04 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/11 16:51:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "libgc.h"
 
-void	*ft_calloc(size_t count, size_t size)
+void	_gc_memdel(void **ap)
 {
-	void	*tmp;
+	if (ap && *ap)
+	{
+		free(*ap);
+		*ap = NULL;
+	}
+}
 
-	tmp = malloc(count * size);
-	if (tmp == NULL)
-		return (NULL);
-	ft_bzero(tmp, count * size);
-	return (tmp);
+void	_gc_bzero(void *s, size_t n)
+{
+	unsigned char	*ptr;
+	size_t			i;
+
+	ptr = (unsigned char *)s;
+	i = 0;
+	while (i < n)
+	{
+		ptr[i] = 0;
+		i++;
+	}
+}
+
+void	_gc_putstr_fd(int fd, char const *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	write(fd, str, i);
 }

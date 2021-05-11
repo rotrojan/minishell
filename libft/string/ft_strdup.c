@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 23:25:06 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 01:04:53 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/11 17:46:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*ft_strdup(const char *s)
 	int		i;
 	char	*dup;
 
-	dup = gc_alloc(ft_strlen(s) + 1, sizeof(char));
+	dup = gc_alloc(sizeof(char) * (ft_strlen(s) + 1));
 	if (dup == NULL)
 		return (NULL);
 	i = 0;

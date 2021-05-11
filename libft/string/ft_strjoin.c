@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 10:12:14 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 13:34:41 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/11 17:47:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_strjoin(char const *s1, char const *s2, char const *sep)
 		return (NULL);
 	if (s1[0] == '\0' && s2[0] == '\0')
 		return (ft_strdup(""));
-	strnew = ft_calloc(size + 1, sizeof(char));
+	strnew = gc_alloc(sizeof(char) * (size + 1));
 	if (strnew == NULL)
 		return (NULL);
 	ft_strcpy(strnew, (char *)s1);
