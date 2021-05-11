@@ -6,8 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/10 00:20:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 00:20:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/10 17:25:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	move_cursor(t_cursor *cursor, int x, int y)
+{
+	
+}

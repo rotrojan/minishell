@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 22:59:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 02:29:51 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:02:43 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	special_key(void)
 			key = ERR;
 	}
 	else
-		key = KEY_ESC;
+		key = ESC;
 	tcsetattr(STDIN_FILENO, TCSANOW, &term->current);
 	return (key);
 }
@@ -70,7 +70,7 @@ int	ft_getch(void)
 	c = 0;
 	if (read(STDIN_FILENO, &c, 1) <= 0)
 		return (ERR);
-	if (c == KEY_ESC)
+	if (c == ESC)
 		return (special_key());
 	return (c);
 }

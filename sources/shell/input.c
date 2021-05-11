@@ -6,11 +6,17 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 02:04:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/10 20:41:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	cntrl_key(int c)
+{
+	if (c == CTRL_D)
+		exit_shell(EXIT_SUCCESS, "\n");
+}
 
 t_token	*input(void)
 {
@@ -33,6 +39,8 @@ t_token	*input(void)
 				insert_token(&tokens, &cursor, c);
 				ft_putchar(c);
 			}
+			else
+				cntrl_key(c);
 		}
 	}
 	return (tokens);
