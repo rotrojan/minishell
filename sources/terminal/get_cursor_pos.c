@@ -6,17 +6,25 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:53:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 21:50:13 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/12 03:42:17 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static void	atoi_pos(t_axe *pos, int sep, int c)
+{
+	if (sep == FALSE)
+		pos->x = pos->x * 10 + (c - '0');
+	else
+		pos->y = pos->y * 10 + (c - '0');
+}
+
 /* you must have set the terminal
 to non-canonical and without echo before */
 t_axe	get_cursor_pos(void)
 {
-	int		c;
+	char	c;
 	int		sep;
 	t_axe	pos;
 
@@ -32,12 +40,9 @@ t_axe	get_cursor_pos(void)
 		else if (c == ';')
 			sep = TRUE;
 		else if (c != ESC && c != '[')
-		{
-			if (sep == FALSE)
-				pos.x = pos.x * 10 + (c - '0');
-			else
-				pos.y = pos.y * 10 + (c - '0');
-		}
+			atoi_pos(&pos, sep, c);
 	}
+	pos.x--;
+	pos.y--;
 	return (pos);
 }

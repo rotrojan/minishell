@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move_cursor.c                                      :+:      :+:    :+:   */
+/*   ft_putxchar.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/10 00:20:10 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 17:25:04 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/12 03:03:43 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/12 03:09:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-void	move_cursor(t_cursor *cursor, int x, int y)
+int	ft_putxchar(int c, int x)
 {
-	
+	int	i;
+
+	i = 0;
+	while (i < x)
+	{
+		ft_putchar(c);
+		i++;
+	}
+	return (i);
 }

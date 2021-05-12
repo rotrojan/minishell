@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 22:59:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 20:02:43 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/12 17:31:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,12 @@ static int	get_special_key(int c)
 	{'C', KEY_RIGHT}, {'D', KEY_LEFT}, {'H', KEY_HOME}, {'F', KEY_END}};
 
 	i = 0;
+	if (c == '3')
+	{
+		if (read(STDIN_FILENO, &c, 1) < 1)
+			return (ERR);
+		return (DELETE);
+	}
 	while (i < NB_SPECIAL_KEY)
 	{
 		if (c == special_key[i].c)

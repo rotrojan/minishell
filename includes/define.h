@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/10 20:02:29 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/12 17:29:51 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # define NB_SPECIAL_KEY 6
 
 # define ESC 27
+# define DELETE 8
 # define BACKSPACE 127
 # define CTRL_D 4
 
