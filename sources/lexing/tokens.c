@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/12 17:24:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/13 05:02:03 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,36 +24,6 @@ t_token	*create_token(int value)
 	return (token);
 }
 
-void	print_tokens(t_token *tokens)
-{
-	int		i;
-	t_token	*tmp;
-
-	i = 0;
-	tmp = tokens;
-	while (tmp->next != NULL)
-	{
-		ft_putchar(tmp->value);
-		tmp = tmp->next;
-		i++;
-	}
-}
-
-int	tokens_len(t_token *tokens)
-{
-	int		size;
-	t_token	*tmp;
-
-	size = 0;
-	tmp = tokens;
-	while (tmp != NULL)
-	{
-		tmp = tmp->next;
-		size++;
-	}
-	return (size);
-}
-
 void	clear_tokens(t_token **tokens)
 {
 	t_token	*tmp;
@@ -69,9 +39,8 @@ void	clear_tokens(t_token **tokens)
 	*tokens = NULL;
 }
 
-void	insert_token(t_token **tokens, t_cursor *cursor, int value)
+void	insert_token(t_cursor *cursor, int value)
 {
-	t_token	*tmp;
 	t_token	*new;
 
 	new = create_token(value);
@@ -80,10 +49,6 @@ void	insert_token(t_token **tokens, t_cursor *cursor, int value)
 		cursor->on_token->prev->next = new;
 	new->next = cursor->on_token;
 	cursor->on_token->prev = new;
-	tmp = new;
-	while (tmp->prev != NULL)
-		tmp = tmp->prev;
-	*tokens = tmp;
 	cursor->pos.y++;
 	ft_putchar(value);
 }

@@ -1,29 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   ft_list_to_array.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 18:28:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/13 21:56:30 by lucocozz         ###   ########.fr       */
+/*   Created: 2020/02/20 04:15:07 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/13 22:16:41 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
+char	**ft_list_to_array(t_list **alst)
+{
+	int		i;
+	t_list	*lst;
+	t_list	*next;
+	char	**array;
 
-# include "ft_file.h"
-# include "ft_memory.h"
-# include "ft_integer.h"
-# include "ft_string.h"
-# include "ft_vfprintf.h"
-# include "ft_system.h"
-# include "ft_list.h"
-# include "libgc.h"
-
-#endif
+	i = 0;
+	lst = *alst;
+	array = gc_alloc(sizeof(char *) * (ft_list_size(lst) + 1));
+	while (lst)
+	{
+		array[i++] = lst->data;
+		next = lst->next;
+		gc_free(lst);
+		lst = next;
+	}
+	array[i] = NULL;
+	*alst = NULL;
+	return (array);
+}

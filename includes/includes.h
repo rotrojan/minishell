@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:25:36 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 02:26:30 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/13 03:51:32 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,6 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <string.h>
+# include <fcntl.h>
 
 #endif

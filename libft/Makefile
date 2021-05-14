@@ -11,14 +11,17 @@ STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_isspace.c		ft_strdel.c			ft_iscntrl.c			\
 		ft_putxchar.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
-		ft_printf.c			ft_fprintf.c								\
-		gnl.c				ft_fputstr.c
+		ft_printf.c			ft_fprintf.c		readfile.c				\
+		gnl.c				ft_fputstr.c		free_file.c
 PRINTF=	ft_vfprintf.c		ft_parsing.c		ft_type_d_i.c			\
 		ft_type_p.c			ft_types_c_s.c		ft_types_u_per.c		\
 		ft_types_x_xu.c		ft_vfprintf_utils.c
+SYS=	debug.c
+LIST=	ft_create_elem.c	ft_list_clear.c		ft_list_push_back.c		\
+		ft_list_size.c		ft_list_to_array.c
 
 
-SRCS=	$(INT) $(FILE) $(STR) $(MEM) $(PRINTF)
+SRCS=	$(INT) $(FILE) $(STR) $(MEM) $(PRINTF) $(SYS) $(LIST)
 OBJS= $(SRCS:%.c=$(OBJS_DIR)/%.o)
 OBJS_DIR= .objs
 DEPENDENCIES= $(OBJS:%.o=%.d)
@@ -32,7 +35,7 @@ RM= rm -f
 CFLAGS= -Wall -Wextra -Werror -MMD
 CXXFLAGS= -I includes $(INCLUDES_DIR:%=-I ../%)
 
-vpath %.c integer file file/ft_vfprintf string memory file
+vpath %.c integer file file/ft_vfprintf string memory file system list
 
 all: $(NAME)
 

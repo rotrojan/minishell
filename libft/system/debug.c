@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getpid.c                                        :+:      :+:    :+:   */
+/*   debug.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/04 15:12:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/14 01:26:44 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/13 03:42:24 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/13 04:16:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-pid_t	ft_getpid(void)
+void	debug(int tty_id, char *str, ...)
 {
-	t_file		output;
-	pid_t		pid;
-	char		*bin_path;
-	static char	*arg[] = {"pgrep", "-n", "minishell", NULL};
+	int		fd;
+	char	*id;
+	char	*tty;
+	va_list	ap;
 
-	bin_path = getbinpath(arg[0]);
-	if (!bin_path)
-		exit_shell(EXIT_FAILURE, "ft_getbinpath(): No path found.\n");
-	output = pipe_exec(bin_path, arg);
-	if (output == NULL)
-		exit_shell(EXIT_FAILURE, "pipe_exec(): can't get output.\n");
-	pid = ft_atoi(output[0]);
-	free_file(output);
-	return (pid);
+	va_start(ap, str);
+	id = ft_itoa(tty_id);
+	tty = ft_strjoin("/dev/pts/", id, "");
+	gc_free(id);
+	fd = open(tty, O_RDWR);
+	if (fd == -1)
+		ft_fprintf(STDERR_FILENO, "Error: debug(): can't open tty=%s\n", tty);
+	else
+	{
+		ft_fputstr(fd, "\r\n");
+		ft_vfprintf(fd, str, ap);
+		close(fd);
+	}
+	gc_free(tty);
 }

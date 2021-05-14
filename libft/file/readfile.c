@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libft.h                                            :+:      :+:    :+:   */
+/*   readfile.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/05 18:28:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/13 21:56:30 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/13 05:30:40 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/14 03:44:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBFT_H
-# define LIBFT_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <stdlib.h>
-# include <stdarg.h>
+t_file	readfile(int fd)
+{
+	int		ret;
+	char	*line;
+	t_list	*lines_lst;
 
-# include "ft_file.h"
-# include "ft_memory.h"
-# include "ft_integer.h"
-# include "ft_string.h"
-# include "ft_vfprintf.h"
-# include "ft_system.h"
-# include "ft_list.h"
-# include "libgc.h"
-
-#endif
+	ret = 1;
+	line = NULL;
+	lines_lst = NULL;
+	while (ret > 0)
+	{
+		ret = get_next_line(fd, &line);
+		if (ret == -1)
+			return (NULL);
+		if (ret > 0)
+			ft_list_push_back(&lines_lst, (void *)line);
+	}
+	return (ft_list_to_array(&lines_lst));
+}
