@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/13 05:04:46 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/15 20:30:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,12 @@ static void	control_key(t_cursor *cursor, int c)
 		delete_key(cursor);
 }
 
-t_token	*input(void)
+t_inchar	*input(void)
 {
 	int			c;
 	t_cursor	cursor;
 
-	cursor.on_token = create_token(EOL);
+	cursor.on_inchar = create_inchar(EOL);
 	cursor.pos = get_cursor_pos();
 	while (1)
 	{
@@ -41,10 +41,10 @@ t_token	*input(void)
 			if (c == '\n')
 				break ;
 			else if (!ft_iscntrl(c))
-				insert_token(&cursor, c);
+				insert_inchar(&cursor, c);
 			else
 				control_key(&cursor, c);
 		}
 	}
-	return (tokens_head(&cursor));
+	return (inchars_head(&cursor));
 }

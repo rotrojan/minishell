@@ -6,19 +6,19 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 04:54:43 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/13 05:04:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/15 20:33:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_tokens(t_token *tokens)
+void	print_inchars(t_inchar *inchars)
 {
-	int		i;
-	t_token	*tmp;
+	int			i;
+	t_inchar	*tmp;
 
 	i = 0;
-	tmp = tokens;
+	tmp = inchars;
 	while (tmp->next != NULL)
 	{
 		ft_putchar(tmp->value);
@@ -27,13 +27,13 @@ void	print_tokens(t_token *tokens)
 	}
 }
 
-int	tokens_len(t_token *tokens)
+int	inchars_len(t_inchar *inchars)
 {
-	int		size;
-	t_token	*tmp;
+	int			size;
+	t_inchar	*tmp;
 
 	size = 0;
-	tmp = tokens;
+	tmp = inchars;
 	while (tmp != NULL)
 	{
 		tmp = tmp->next;
@@ -42,11 +42,11 @@ int	tokens_len(t_token *tokens)
 	return (size);
 }
 
-t_token	*tokens_head(t_cursor *cursor)
+t_inchar	*inchars_head(t_cursor *cursor)
 {
-	t_token	*head;
+	t_inchar	*head;
 
-	head = cursor->on_token;
+	head = cursor->on_inchar;
 	while (head->prev != NULL)
 		head = head->prev;
 	return (head);

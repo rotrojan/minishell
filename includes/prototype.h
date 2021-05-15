@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/14 01:10:58 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/15 20:30:49 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,17 @@ void			delete_key(t_cursor *cursor);
 //	shell
 void			shell(void);
 void			prompt(void);
-t_token			*input(void);
+t_inchar		*input(void);
 void			init_shell_env(t_env *env);
 t_env			*get_shell_env(void);
+void			put_in_history(t_inchar *inchars);
 
 //	lexing
-t_token			*create_token(int value);
-void			print_tokens(t_token *tokens);
-void			insert_token(t_cursor *cursor, int value);
-void			clear_tokens(t_token **tokens);
-int				tokens_len(t_token *tokens);
-t_token			*tokens_head(t_cursor *cursor);
+t_inchar		*create_inchar(int value);
+void			print_inchars(t_inchar *inchars);
+void			insert_inchar(t_cursor *cursor, int value);
+void			clear_inchars(t_inchar **inchars);
+int				inchars_len(t_inchar *inchars);
+t_inchar		*inchars_head(t_cursor *cursor);
 
 #endif

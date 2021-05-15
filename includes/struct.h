@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/14 01:12:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/15 20:30:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,18 +37,17 @@ typedef struct s_term
 	struct termios		current;
 }						t_term;
 
-typedef struct s_token
+typedef struct s_inchar
 {
 	char				value;
-	enum e_token_type	type;
-	struct s_token		*next;
-	struct s_token		*prev;
-}						t_token;
+	struct s_inchar		*next;
+	struct s_inchar		*prev;
+}						t_inchar;
 
 typedef struct s_cursor
 {
 	t_axe				pos;
-	t_token				*on_token;
+	t_inchar			*on_inchar;
 }						t_cursor;
 
 typedef struct s_special_key

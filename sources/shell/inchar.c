@@ -6,49 +6,48 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/13 05:02:03 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/15 20:38:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*create_token(int value)
+t_inchar	*create_inchar(int value)
 {
-	t_token	*token;
+	t_inchar	*inchar;
 
-	token = gc_alloc(sizeof(t_token) * 1);
-	token->value = value;
-	token->next = NULL;
-	token->prev = NULL;
-	token->type = -1;
-	return (token);
+	inchar = gc_alloc(sizeof(t_inchar) * 1);
+	inchar->value = value;
+	inchar->next = NULL;
+	inchar->prev = NULL;
+	return (inchar);
 }
 
-void	clear_tokens(t_token **tokens)
+void	clear_inchars(t_inchar **inchars)
 {
-	t_token	*tmp;
-	t_token	*prev;
+	t_inchar	*tmp;
+	t_inchar	*prev;
 
-	tmp = *tokens;
+	tmp = *inchars;
 	while (tmp)
 	{
 		prev = tmp;
 		tmp = tmp->next;
 		gc_free(prev);
 	}
-	*tokens = NULL;
+	*inchars = NULL;
 }
 
-void	insert_token(t_cursor *cursor, int value)
+void	insert_inchar(t_cursor *cursor, int value)
 {
-	t_token	*new;
+	t_inchar	*new;
 
-	new = create_token(value);
-	new->prev = cursor->on_token->prev;
-	if (cursor->on_token->prev != NULL)
-		cursor->on_token->prev->next = new;
-	new->next = cursor->on_token;
-	cursor->on_token->prev = new;
+	new = create_inchar(value);
+	new->prev = cursor->on_inchar->prev;
+	if (cursor->on_inchar->prev != NULL)
+		cursor->on_inchar->prev->next = new;
+	new->next = cursor->on_inchar;
+	cursor->on_inchar->prev = new;
 	cursor->pos.y++;
 	ft_putchar(value);
 }
