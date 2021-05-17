@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens_utils.c                                     :+:      :+:    :+:   */
+/*   inchar_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 04:54:43 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/15 20:33:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/16 15:15:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,25 @@ t_inchar	*inchars_head(t_cursor *cursor)
 	while (head->prev != NULL)
 		head = head->prev;
 	return (head);
+}
+
+char	*inchars_to_line(t_inchar **inchars)
+{
+	int			i;
+	int			size;
+	char		*line;
+	t_inchar	*tmp;
+
+	i = 0;
+	tmp = *inchars;
+	size = inchars_len(tmp);
+	line = gc_alloc(sizeof(char) * (size + 1));
+	while (tmp->next != NULL)
+	{
+		line[i++] = tmp->value;
+		tmp = tmp->next;
+	}
+	line[i] = '\0';
+	clear_inchars(inchars);
+	return (line);
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/15 20:30:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/17 18:27:06 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,10 @@ void			backspace_key(t_cursor *cursor);
 void			left_arrow_key(t_cursor *cursor);
 void			right_arrow_key(t_cursor *cursor);
 void			delete_key(t_cursor *cursor);
+void			home_key(t_cursor *cursor);
+void			end_key(t_cursor *cursor);
+void			cursor_move_right(t_cursor *cursor);
+void			cursor_move_left(t_cursor *cursor);
 
 //	shell
 void			shell(void);
@@ -38,14 +42,20 @@ void			prompt(void);
 t_inchar		*input(void);
 void			init_shell_env(t_env *env);
 t_env			*get_shell_env(void);
-void			put_in_history(t_inchar *inchars);
-
-//	lexing
+//	history
+void			put_in_history(char *line);
+t_history		*create_history(char *line);
+void			clear_history(t_history **history);
+void			push_front_history(t_history **history, char *line);
+t_history		**get_history(void);
+t_history		**init_history(void);
+//	inchar
 t_inchar		*create_inchar(int value);
 void			print_inchars(t_inchar *inchars);
 void			insert_inchar(t_cursor *cursor, int value);
 void			clear_inchars(t_inchar **inchars);
 int				inchars_len(t_inchar *inchars);
 t_inchar		*inchars_head(t_cursor *cursor);
+char			*inchars_to_line(t_inchar **inchars);
 
 #endif

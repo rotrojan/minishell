@@ -19,8 +19,9 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		inchar.c			ft_getpid.c				input.c					\
 		exit_shell.c		getterm.c				init_term.c				\
 		pipe_exec.c			shell_env.c				get_cursor_pos.c		\
-		ft_getch.c			getos.c					keys.c					\
-		inchar_utils.c		put_in_history.c
+		ft_getch.c			getos.c					arrow_keys.c			\
+		inchar_utils.c		put_in_history.c		history.c				\
+		cursor_utils.c		special_keys.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -36,9 +37,9 @@ CFLAGS = -MMD -Wall -Wextra -Werror
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c	$(SRCS_DIR)	$(SRCS_DIR)/system	$(SRCS_DIR)/lexing				\
-			$(SRCS_DIR)/shell	$(SRCS_DIR)/terminal						\
-			$(SRCS_DIR)/shell/history
+vpath %.c	$(SRCS_DIR) $(SRCS_DIR)/system $(SRCS_DIR)/lexing				\
+			$(SRCS_DIR)/shell $(SRCS_DIR)/terminal							\
+			$(SRCS_DIR)/shell/history $(SRCS_DIR)/shell/inchar
 vpath %.h	$(INCLUDES_DIR)
 vpath %.a	$(LIBS:%=lib%)
 

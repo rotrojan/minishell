@@ -62,4 +62,4 @@ dkms.conf
 minishell
 
 # data
-.history
+.minish_history

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/12 17:29:51 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/16 17:33:37 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,5 +24,7 @@
 # define COLOR_CAP "AF"
 # define BOLD_CAP "md"
 # define RESET_CAP "me"
+
+# define HISTORY_PATH ".minish_history"
 
 #endif

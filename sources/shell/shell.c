@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/15 20:19:15 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/17 01:23:07 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	shell(void)
 	{
 		prompt();
 		inchars = input();
-		put_in_history(inchars);
+		put_in_history(inchars_to_line(&inchars));
 		ft_putstr("\n\r");
 		clear_inchars(&inchars);
 	}

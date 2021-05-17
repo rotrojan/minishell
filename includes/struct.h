@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/15 20:30:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/16 15:22:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@ typedef struct s_inchar
 	struct s_inchar		*next;
 	struct s_inchar		*prev;
 }						t_inchar;
+
+typedef struct s_history
+{
+	char				*line;
+	struct s_history	*next;
+	struct s_history	*prev;
+}						t_history;
 
 typedef struct s_cursor
 {

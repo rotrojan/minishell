@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tokens.c                                           :+:      :+:    :+:   */
+/*   inchar.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/15 20:38:45 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/17 02:41:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,6 @@ void	insert_inchar(t_cursor *cursor, int value)
 		cursor->on_inchar->prev->next = new;
 	new->next = cursor->on_inchar;
 	cursor->on_inchar->prev = new;
-	cursor->pos.y++;
+	cursor_move_right(cursor);
 	ft_putchar(value);
 }

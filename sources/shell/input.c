@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/15 20:30:57 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/17 18:28:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,10 @@ static void	control_key(t_cursor *cursor, int c)
 		right_arrow_key(cursor);
 	else if (c == DELETE)
 		delete_key(cursor);
+	else if (c == KEY_HOME)
+		home_key(cursor);
+	else if (c == KEY_END)
+		end_key(cursor);
 }
 
 t_inchar	*input(void)
