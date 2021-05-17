@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/17 02:41:50 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/17 20:35:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	clear_inchars(t_inchar **inchars)
 
 void	insert_inchar(t_cursor *cursor, int value)
 {
+	char		*goto_cap;
 	t_inchar	*new;
 
 	new = create_inchar(value);
@@ -48,6 +49,8 @@ void	insert_inchar(t_cursor *cursor, int value)
 		cursor->on_inchar->prev->next = new;
 	new->next = cursor->on_inchar;
 	cursor->on_inchar->prev = new;
+	print_inchars(cursor->on_inchar->prev);
 	cursor_move_right(cursor);
-	ft_putchar(value);
+	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
+	tputs(goto_cap, 1, ft_putchar);
 }
