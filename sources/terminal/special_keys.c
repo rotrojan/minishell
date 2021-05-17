@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:12:05 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/17 18:26:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 01:23:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,15 @@ void	end_key(t_cursor *cursor)
 	}
 	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
 	tputs(goto_cap, 1, ft_putchar);
+}
+
+void	ctrl_l_key(t_cursor *cursor)
+{
+	char	*clear_cap;
+
+	clear_cap = tgetstr("cl", NULL);
+	tputs(clear_cap, 1, ft_putchar);
+	prompt();
+	print_inchars(inchars_head(cursor));
+	cursor->pos = get_cursor_pos();
 }

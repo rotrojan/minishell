@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/17 18:28:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 01:14:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 static void	control_key(t_cursor *cursor, int c)
 {
+	int					i;
+	static const t_key	keys[] = {{BACKSPACE, &backspace_key},
+	{DELETE, &delete_key}, {KEY_LEFT, &left_arrow_key}, {KEY_END, &end_key},
+	{KEY_RIGHT, &right_arrow_key}, {KEY_HOME, &home_key},
+	{CTRL_L, &ctrl_l_key}};
+
+	i = 0;
 	if (c == CTRL_D)
 		exit_shell(EXIT_SUCCESS, "\n");
-	else if (c == BACKSPACE)
-		backspace_key(cursor);
-	else if (c == KEY_LEFT)
-		left_arrow_key(cursor);
-	else if (c == KEY_RIGHT)
-		right_arrow_key(cursor);
-	else if (c == DELETE)
-		delete_key(cursor);
-	else if (c == KEY_HOME)
-		home_key(cursor);
-	else if (c == KEY_END)
-		end_key(cursor);
+	while (i < NB_KEY)
+	{
+		if (c == keys[i].key)
+			keys[i].function(cursor);
+		i++;
+	}
 }
 
 t_inchar	*input(void)
@@ -43,12 +44,11 @@ t_inchar	*input(void)
 		if (c != ERR)
 		{
 			if (c == '\n')
-				break ;
+				return (inchars_head(&cursor));
 			else if (!ft_iscntrl(c))
 				insert_inchar(&cursor, c);
 			else
 				control_key(&cursor, c);
 		}
 	}
-	return (inchars_head(&cursor));
 }

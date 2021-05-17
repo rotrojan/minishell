@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/16 17:33:37 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 01:04:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 
 # define EOL 0
 # define NB_SPECIAL_KEY 6
+# define NB_KEY 7
 
 # define ESC 27
 # define DELETE 8
 # define BACKSPACE 127
 # define CTRL_D 4
+# define CTRL_L 12
 
 # define COLOR_CAP "AF"
 # define BOLD_CAP "md"

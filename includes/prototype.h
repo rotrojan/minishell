@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/17 18:27:06 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 01:06:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void			right_arrow_key(t_cursor *cursor);
 void			delete_key(t_cursor *cursor);
 void			home_key(t_cursor *cursor);
 void			end_key(t_cursor *cursor);
+void			ctrl_l_key(t_cursor *cursor);
 void			cursor_move_right(t_cursor *cursor);
 void			cursor_move_left(t_cursor *cursor);
 

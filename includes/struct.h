@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/16 15:22:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 00:20:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,5 +62,11 @@ typedef struct s_special_key
 	char				c;
 	int					key;
 }						t_special_key;
+
+typedef struct s_key
+{
+	int					key;
+	void				(*function)(t_cursor *);
+}						t_key;
 
 #endif
