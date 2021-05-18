@@ -1,13 +1,12 @@
 # **************************************************************************** #
-#
 #                                                                              #
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
+#    By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2021/04/29 16:53:41 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/02 17:14:15 by lucocozz         ###   ########.fr        #
+#    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
+#    Updated: 2021/05/18 15:23:07 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +30,14 @@ LIBS = gc ft
 CC = clang
 RM = rm -f
 MKDIR = mkdir -p
+DEBUG = off
 
 CFLAGS = -MMD -Wall -Wextra -Werror
-
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
+ifeq ($(DEBUG), on)
+	CXXFLAGS += -g3 -fsanitize=address
+endif
+
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
 vpath %.c	$(SRCS_DIR) $(SRCS_DIR)/system $(SRCS_DIR)/lexing				\
@@ -51,7 +54,7 @@ $(NAME): $(OBJS) | $(LIBS:%=lib%.a)
 	$(CC) $(CXXFLAGS) $^ -o $(NAME) $(LDFLAGS)
 
 -include $(DEPENDENCIES)
-$(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
+$(OBJS_DIR)/%.o: %.c $(OBJS_DIR)/debug$(DEBUG) | $(OBJS_DIR) 
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
@@ -59,6 +62,10 @@ $(OBJS_DIR):
 
 lib%.a:
 	$(MAKE) -C $(@:%.a=%)
+
+$(OBJS_DIR)/debug$(DEBUG): | $(OBJS_DIR)
+	$(RM) $(OBJS_DIR)/debug*
+	touch $@
 
 clean:
 	$(foreach LIB, $(LIBS), $(MAKE) $@ -C lib$(LIB);)
