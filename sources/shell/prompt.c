@@ -21,6 +21,8 @@ static t_prompt	get_prompt_infos(enum e_os_name os_name)
 	prompt.user = getenv("USER");
 	if (os_name == Linux)
 		prompt.hostname = ft_gethostname();
+	else
+		prompt.hostname = NULL;
 	return (prompt);
 }
 
