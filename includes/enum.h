@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 15:13:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 22:14:06 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/18 02:12:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ enum	e_inchar_type
 	Semicolon,
 	Simple_quote,
 	Double_quote,
-	Redirection_left,
-	Redirection_right,
+	Redirect_left,
+	Redirect_right,
 };
 
 enum	e_os_name
