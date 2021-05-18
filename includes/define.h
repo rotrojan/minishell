@@ -13,12 +13,6 @@
 #ifndef DEFINE_H
 # define DEFINE_H
 
-# ifdef __linux__
-
-# elif __APPLE__
-
-# endif
-
 # define EOL 0
 # define NB_SPECIAL_KEY 6
 # define NB_KEY 7

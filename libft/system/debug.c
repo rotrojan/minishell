@@ -21,7 +21,7 @@ void	debug(int tty_id, char *str, ...)
 
 	va_start(ap, str);
 	id = ft_itoa(tty_id);
-	tty = ft_strjoin("/dev/pts/", id, "");
+	tty = ft_strjoin(TTY_PATH, id, "");
 	gc_free(id);
 	fd = open(tty, O_RDWR);
 	if (fd == -1)

@@ -13,6 +13,16 @@
 #ifndef FT_SYSTEM_H
 # define FT_SYSTEM_H
 
+# ifdef __linux__
+
+#  define TTY_PATH "dev/pts/"
+
+# elif __APPLE__
+
+#  define TTY_PATH "/dev/ttys00"
+
+# endif
+
 void	debug(int tty_id, char *str, ...);
 
 #endif
