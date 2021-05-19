@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 04:04:54 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/13 04:06:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 04:15:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # ifdef __linux__
 
-#  define TTY_PATH "dev/pts/"
+#  define TTY_PATH "/dev/pts/"
 
 # elif __APPLE__
 

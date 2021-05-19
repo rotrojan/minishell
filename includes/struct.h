@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/18 00:20:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 00:39:21 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,13 @@ typedef struct s_history
 	struct s_history	*next;
 	struct s_history	*prev;
 }						t_history;
+
+typedef struct s_history_data
+{
+	char				*origine;
+	struct s_history	*data;
+	struct s_history	*tmp_nav;
+}						t_history_data;
 
 typedef struct s_cursor
 {

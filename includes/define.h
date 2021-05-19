@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/18 01:04:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 02:42:10 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # define EOL 0
 # define NB_SPECIAL_KEY 6
-# define NB_KEY 7
+# define NB_KEY 8
 
 # define ESC 27
 # define DELETE 8

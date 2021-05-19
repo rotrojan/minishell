@@ -6,75 +6,74 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 04:26:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/17 01:18:13 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 21:46:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_history	**get_history(void)
+t_history_data	*get_history(void)
 {
-	static t_history	*history = NULL;
+	static t_history_data	history;
 
 	return (&history);
 }
 
-t_history	*create_history(char *line)
+static void	display_history(t_cursor *cursor, t_history_data *history)
 {
-	t_history	*history;
+	char		*goto_cap;
+	t_inchar	*tmp;
 
-	history = gc_alloc(sizeof(t_history) * 1);
-	history->line = line;
-	history->next = NULL;
-	history->prev = NULL;
-	return (history);
-}
-
-void	clear_history(t_history **history)
-{
-	t_history	*tmp;
-	t_history	*prev;
-
-	tmp = *history;
-	while (tmp)
+	tmp = cursor->on_inchar;
+	while (tmp->prev != NULL)
 	{
-		prev = tmp;
-		tmp = tmp->next;
-		gc_free(prev);
+		tmp = tmp->prev;
+		cursor_move_left(cursor);
 	}
-	*history = NULL;
+	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
+	tputs(goto_cap, 1, ft_putchar);
+	ft_putxchar(' ', inchars_len(tmp));
+	tputs(goto_cap, 1, ft_putchar);
+	cursor->on_inchar = line_to_inchars(history->tmp_nav->line);
+	print_inchars(cursor->on_inchar);
+	cursor->on_inchar = inchars_queue(cursor);
+	cursor->pos = get_cursor_pos();
 }
 
-void	push_front_history(t_history **history, char *line)
+void	history_get_up(t_cursor *cursor)
 {
-	t_history	*new;
-	t_history	*tmp;
+	int				len;
+	t_history		*tmp;
+	t_history_data	*history;
 
-	tmp = *history;
-	new = create_history(line);
-	if (tmp != NULL)
-	{
-		new->next = tmp;
-		tmp->prev = new;
-	}
-	*history = new;
-}
-
-t_history	**init_history(void)
-{
-	int			fd;
-	char		*line;
-	t_history	**history;
-
-	line = NULL;
 	history = get_history();
-	fd = open(HISTORY_PATH, O_RDONLY);
-	if (fd > 0)
+	if (history->data == NULL)
+		return ;
+	if (history->origine[0] == '\0')
 	{
-		while (get_next_line(fd, &line) > 0)
-			if (line != NULL)
-				push_front_history(history, line);
+		display_history(cursor, history);
+		if (history->tmp_nav->next != NULL)
+			history->tmp_nav = history->tmp_nav->next;
 	}
-	close(fd);
-	return (history);
+	else
+	{
+		len = ft_strlen(history->origine);
+		tmp = history->tmp_nav;
+		while (tmp != NULL && ft_strncmp(tmp->line, history->origine, len) != 0)
+			tmp = tmp->next;
+		if (tmp != NULL)
+		{
+			history->tmp_nav = tmp;
+			display_history(cursor, history);
+		}
+	}
 }
+
+// void	history_get_down(t_cursor *cursor)
+// {
+// 	t_history_data	*history;
+
+// 	history = get_history();
+// 	if (history->data == NULL)
+// 		return ;
+// }
