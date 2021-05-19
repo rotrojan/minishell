@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/17 20:35:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:14:55 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_inchar	*create_inchar(int value)
 {
 	t_inchar	*inchar;
 
-	inchar = gc_alloc(sizeof(t_inchar) * 1);
+	inchar = gc_malloc(sizeof(t_inchar) * 1);
 	inchar->value = value;
 	inchar->next = NULL;
 	inchar->prev = NULL;

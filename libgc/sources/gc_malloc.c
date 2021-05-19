@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   gc_alloc.c                                         :+:      :+:    :+:   */
+/*   gc_malloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:32:29 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/11 17:27:45 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 13:34:36 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libgc.h"
 
-void	*gc_alloc(size_t size)
+void	*gc_malloc(size_t size)
 {
 	t_garbage_lst	*tmp;
 	t_garbage_lst	*new;

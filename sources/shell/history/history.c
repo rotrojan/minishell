@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 04:26:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/17 01:18:13 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:15:47 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ t_history	*create_history(char *line)
 {
 	t_history	*history;
 
-	history = gc_alloc(sizeof(t_history) * 1);
+	history = gc_malloc(sizeof(t_history) * 1);
 	history->line = line;
 	history->next = NULL;
 	history->prev = NULL;
