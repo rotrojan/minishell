@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 04:12:52 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/20 15:55:03 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,12 @@ t_history_data	*init_history(void)
 	if (fd > 0)
 	{
 		while (get_next_line(fd, &line) > 0)
-			if (line != NULL)
+		{
+			if (line[0] != '\0')
 				push_front_history(&history->data, line);
+			else
+				gc_free(line);
+		}
 		close(fd);
 		history->tmp_nav = NULL;
 	}

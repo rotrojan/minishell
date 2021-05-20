@@ -6,12 +6,18 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 03:32:51 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 00:22:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PROTOTYPE_H
 # define PROTOTYPE_H
+
+//	builtins
+void			env(void);
+void			pwd(void);
+void			ft_exit(void);
+void			cd(const char *path);
 
 //	system
 enum e_os_name	getos(void);
@@ -21,6 +27,11 @@ char			*ft_gethostname(void);
 char			*getbinpath(char *bin);
 void			exit_shell(int status, char *message);
 char			**pipe_exec(char *bin_path, char **arg);
+//		env
+int				ft_inenv(const char *name);
+char			*ft_getenv(const char *name);
+int				ft_unsetenv(const char *name);
+void			ft_setenv(const char *name, const char *value, int overwrite);
 
 //	terminal
 int				ft_getch(void);
@@ -42,7 +53,8 @@ void			shell(void);
 void			prompt(void);
 char			*input(void);
 t_env			*get_shell_env(void);
-void			init_shell_env(t_env *env);
+int				env_len(t_env env);
+void			init_shell_env(t_env env);
 //		history
 t_history_data	*get_history(void);
 void			free_history(void);

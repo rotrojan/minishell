@@ -1,30 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_in_history.c                                   :+:      :+:    :+:   */
+/*   ft_inenv.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/14 15:06:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 23:48:48 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/20 16:04:29 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/20 17:53:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	put_in_history(char *line)
+int	ft_inenv(const char *name)
 {
-	int				fd;
-	t_history_data	*history;
+	int		i;
+	int		len;
+	t_env	*env;
+	t_env	tmp;
 
-	history = get_history();
-	fd = open(HISTORY_PATH, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (fd <= 0)
-		exit_shell(EXIT_FAILURE, "open(): can't open .minish_history file.\n");
-	ft_fprintf(fd, "%s\n", line);
-	push_front_history(&history->data, line);
-	history->tmp_nav = NULL;
-	gc_free(history->input);
-	history->input = ft_strdup("");
-	close(fd);
+	i = 0;
+	len = ft_strlen(name);
+	env = get_shell_env();
+	tmp = *env;
+	while (tmp[i])
+	{
+		if (ft_strncmp(tmp[i], name, len) == 0)
+			return (i);
+		i++;
+	}
+	return (-1);
 }

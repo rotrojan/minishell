@@ -6,8 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/29 15:44:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 00:20:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_exit(void)
+{
+	exit_shell(EXIT_SUCCESS, "\n");
+}

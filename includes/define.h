@@ -6,12 +6,22 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 01:37:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/20 18:26:43 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_H
 # define DEFINE_H
+
+# ifdef __linux__
+
+#  define OS 1
+
+# elif __APPLE__
+
+#  define OS 0
+
+# endif
 
 # define EOL 0
 # define NB_SPECIAL_KEY 6

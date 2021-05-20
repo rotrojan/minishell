@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:32:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/08 18:47:38 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/20 21:05:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ void	init_term(void)
 	t_term	*term;
 
 	term = getterm();
-	term_env = getenv("TERM");
+	term_env = ft_getenv("TERM");
 	if (term_env == NULL)
-		gc_exit(EXIT_FAILURE, "getenv(): TERM not set in env.\n");
+		gc_exit(EXIT_FAILURE, "ft_getenv(): TERM not set in env.\n");
 	ret = tgetent(NULL, term_env);
 	if (ret < 1)
 		gc_exit(EXIT_FAILURE, "tgetent(): missing data for this term.\n");

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:35:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/03 10:26:43 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/20 21:04:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*getbinpath(char *bin)
 	struct stat	buf;
 
 	i = 0;
-	paths = ft_split(getenv("PATH"), ':');
+	paths = ft_split(ft_getenv("PATH"), ':');
 	while (paths[i])
 	{
 		bin_path = ft_strjoin(paths[i], bin, "/");

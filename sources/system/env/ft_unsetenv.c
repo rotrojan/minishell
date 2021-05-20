@@ -1,30 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_in_history.c                                   :+:      :+:    :+:   */
+/*   ft_unsetenv.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/14 15:06:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 23:48:48 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/20 15:58:53 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/20 19:10:12 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	put_in_history(char *line)
+int	ft_unsetenv(const char *name)
 {
-	int				fd;
-	t_history_data	*history;
+	int		i;
+	int		ret;
+	t_env	tmp;
+	t_env	new;
+	t_env	*env;
 
-	history = get_history();
-	fd = open(HISTORY_PATH, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	if (fd <= 0)
-		exit_shell(EXIT_FAILURE, "open(): can't open .minish_history file.\n");
-	ft_fprintf(fd, "%s\n", line);
-	push_front_history(&history->data, line);
-	history->tmp_nav = NULL;
-	gc_free(history->input);
-	history->input = ft_strdup("");
-	close(fd);
+	i = 0;
+	env = get_shell_env();
+	tmp = *env;
+	ret = ft_inenv(name);
+	if (ret == -1)
+		return (0);
+	new = gc_alloc(sizeof(char *) * env_len(*env));
+	while (tmp[i])
+	{
+		if (i == ret)
+			gc_free(tmp[i]);
+		else
+			new[i] = tmp[i];
+		i++;
+	}
+	new[i] = NULL;
+	*env = new;
+	gc_free(tmp);
+	return (1);
 }

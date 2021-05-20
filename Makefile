@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/20 03:33:19 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/05/21 00:46:27 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,12 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		inchar.c			ft_getpid.c				input.c					\
 		exit_shell.c		getterm.c				init_term.c				\
 		pipe_exec.c			shell_env.c				get_cursor_pos.c		\
-		ft_getch.c			getos.c					arrow_keys.c			\
-		inchar_utils.c		put_in_history.c		get_history.c			\
-		cursor_utils.c		special_keys.c			history_utils.c			\
-		history_get_up.c	history_get_down.c
+		ft_getch.c			arrow_keys.c			inchar_utils.c			\
+		put_in_history.c	get_history.c			cursor_utils.c			\
+		special_keys.c		history_utils.c			history_get_up.c		\
+		history_get_down.c	ft_inenv.c				ft_setenv.c				\
+		ft_unsetenv.c		ft_getenv.c				cd.c					\
+		env.c				exit.c					pwd.c
 SRCS_DIR = sources
 OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -43,7 +45,8 @@ LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
 vpath %.c	$(SRCS_DIR) $(SRCS_DIR)/system $(SRCS_DIR)/lexing				\
 			$(SRCS_DIR)/shell $(SRCS_DIR)/terminal							\
-			$(SRCS_DIR)/shell/history $(SRCS_DIR)/shell/inchar
+			$(SRCS_DIR)/shell/history $(SRCS_DIR)/shell/inchar				\
+			$(SRCS_DIR)/system/env	$(SRCS_DIR)/builtins
 vpath %.h	$(INCLUDES_DIR)
 vpath %.a	$(LIBS:%=lib%)
 
