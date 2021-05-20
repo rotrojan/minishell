@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/19 21:11:24 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/20 04:12:52 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	free_history(void)
 	}
 	history->data = NULL;
 	history->tmp_nav = NULL;
-	gc_free(history->origine);
+	gc_free(history->input);
 }
 
 void	push_front_history(t_history **history, char *line)
@@ -66,7 +66,7 @@ t_history_data	*init_history(void)
 	line = NULL;
 	history = get_history();
 	history->data = NULL;
-	history->origine = ft_strdup("");
+	history->input = ft_strdup("");
 	fd = open(HISTORY_PATH, O_RDONLY);
 	if (fd > 0)
 	{
@@ -74,7 +74,28 @@ t_history_data	*init_history(void)
 			if (line != NULL)
 				push_front_history(&history->data, line);
 		close(fd);
-		history->tmp_nav = history->data;
+		history->tmp_nav = NULL;
 	}
 	return (history);
+}
+
+void	display_history(t_cursor *cursor, char *line)
+{
+	char		*goto_cap;
+	t_inchar	*tmp;
+
+	tmp = cursor->on_inchar;
+	while (tmp->prev != NULL)
+	{
+		tmp = tmp->prev;
+		cursor_move_left(cursor);
+	}
+	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
+	tputs(goto_cap, 1, ft_putchar);
+	ft_putxchar(' ', inchars_len(tmp));
+	tputs(goto_cap, 1, ft_putchar);
+	cursor->on_inchar = line_to_inchars(line);
+	print_inchars(cursor->on_inchar);
+	cursor->on_inchar = inchars_queue(cursor);
+	cursor->pos = get_cursor_pos();
 }

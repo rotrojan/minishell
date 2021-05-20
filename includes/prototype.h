@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/19 04:35:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/20 03:32:51 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,8 @@ t_history_data	*init_history(void);
 void			put_in_history(char *line);
 t_history		*create_history(char *line);
 void			history_get_up(t_cursor *cursor);
+void			history_get_down(t_cursor *cursor);
+void			display_history(t_cursor *cursor, char *line);
 void			push_front_history(t_history **history, char *line);
 //		inchar
 t_inchar		*create_inchar(int value);

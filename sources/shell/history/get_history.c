@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   define.h                                           :+:      :+:    :+:   */
+/*   history.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 01:37:55 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/14 04:26:53 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/20 03:32:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef DEFINE_H
-# define DEFINE_H
+#include "minishell.h"
 
-# define EOL 0
-# define NB_SPECIAL_KEY 6
-# define NB_KEY 9
+t_history_data	*get_history(void)
+{
+	static t_history_data	history;
 
-# define ESC 27
-# define DELETE 8
-# define BACKSPACE 127
-# define CTRL_D 4
-# define CTRL_L 12
-
-# define COLOR_CAP "AF"
-# define BOLD_CAP "md"
-# define RESET_CAP "me"
-
-# define HISTORY_PATH ".minish_history"
-
-#endif
+	return (&history);
+}

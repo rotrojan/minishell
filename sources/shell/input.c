@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/19 20:53:53 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/20 01:29:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void	control_key(t_cursor *cursor, int c)
 	static const t_key	keys[] = {{BACKSPACE, &backspace_key},
 	{DELETE, &delete_key}, {KEY_LEFT, &left_arrow_key}, {KEY_END, &end_key},
 	{KEY_RIGHT, &right_arrow_key}, {KEY_HOME, &home_key},
-	{CTRL_L, &ctrl_l_key}, {KEY_UP, &history_get_up}};
+	{CTRL_L, &ctrl_l_key}, {KEY_UP, &history_get_up},
+	{KEY_DOWN, &history_get_down}};
 
 	i = 0;
 	if (c == CTRL_D)

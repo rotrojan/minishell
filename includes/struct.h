@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/19 00:39:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/20 01:20:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ typedef struct s_history
 
 typedef struct s_history_data
 {
-	char				*origine;
+	char				*input;
 	struct s_history	*data;
 	struct s_history	*tmp_nav;
 }						t_history_data;

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:06:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/19 21:12:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/20 01:21:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	put_in_history(char *line)
 	ft_fprintf(fd, "%s\n", line);
 	push_front_history(&history->data, line);
 	history->tmp_nav = history->data;
-	gc_free(history->origine);
-	history->origine = ft_strdup("");
+	gc_free(history->input);
+	history->input = ft_strdup("");
 	close(fd);
 }
