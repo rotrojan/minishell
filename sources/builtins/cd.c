@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:43:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 01:31:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 01:57:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ static char	*parse_path(const char *path)
 		new = ft_strjoin(ft_getenv("HOME"), &path[1], "");
 	else if (path[0] == '.')
 		new = ft_strjoin(ft_getenv("PWD"), &path[1], "");
+	else if (path[0] == '-')
+		new = ft_strdup(ft_getenv("OLDPWD"));
 	else
 		new = ft_strdup(path);
 	return (new);
@@ -29,18 +31,17 @@ void	cd(const char *path)
 {
 	char		*new;
 	char		*old;
-	struct stat	buf;
 
 	new = parse_path(path);
-	if (stat(new, &buf) == 0 && S_ISDIR(buf.st_mode))
+	if (chdir(new) != -1)
 	{
 		old = ft_getenv("PWD");
 		ft_setenv("OLDPWD", old, 1);
 		ft_setenv("PWD", new, 1);
-		if (chdir(new) == -1)
-			ft_printf("cd: can't access: %s\n", path);
+		ft_putstr(new);
+		ft_putchar('\n');
 	}
 	else
-		ft_printf("cd: aucun fichier ou dossier de ce type: %s\n", path);
+		ft_printf("cd: no file or directory of type: %s\n", path);
 	gc_free(new);
 }

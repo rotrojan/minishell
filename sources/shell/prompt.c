@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 21:04:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 01:56:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static t_prompt	get_prompt_infos(void)
 
 	prompt.home = ft_getenv("HOME");
 	prompt.pwd = ft_getenv("PWD");
-	prompt.user = ft_getenv("USER");
+	prompt.user = ft_getenv("USERNAME");
+	if (prompt.user == NULL)
+		prompt.user = ft_getenv("USER");
 	if (OS == Linux)
 		prompt.hostname = ft_gethostname();
 	else
