@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/21 16:39:05 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/05/21 18:27:46 by bigo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		special_keys.c		history_utils.c			history_get_up.c		\
 		history_get_down.c	ft_inenv.c				ft_setenv.c				\
 		ft_unsetenv.c		ft_getenv.c				cd.c					\
-		env.c				exit.c					pwd.c
+		env.c				exit.c					pwd.c					\
+		lexer.c				tok_alnum.c
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
 
@@ -45,8 +46,11 @@ ifeq ($(DEBUG), on)
 endif
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c	$(addprefix $(SRCS_DIR), /. /system /lexing /shell /terminal	\
-			/shell/history /shell/inchar /system/env /builtins)
+vpath %.c	$(addprefix $(SRCS_DIR), /. /terminal			\
+				$(addprefix /system, /. /env)				\
+				$(addprefix /lexing, /. /tokenizers)		\
+				$(addprefix /shell, /. /history /inchar)	\
+				/builtins)
 
 all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)

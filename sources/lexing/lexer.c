@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:09:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/19 14:38:52 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/21 19:49:40 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,8 @@ t_token	*create_token(char *data, t_type type, t_token **tok_lst)
 	t_token	*new_tok;
 	t_token	*current;
 
-	new_tok = gc_malloc(sizeof new_tok);
-	if (new_tok == NULL)
-		return (NULL);
+	new_tok = gc_malloc(sizeof *new_tok);
 	new_tok->data = gc_malloc(sizeof new_tok->data * (ft_strlen(data) + 1));
-	if (new_tok->data == NULL)
-		return (NULL);
 	new_tok->type = type;
 	new_tok->next = NULL;
 	current = *tok_lst;
@@ -32,57 +28,48 @@ t_token	*create_token(char *data, t_type type, t_token **tok_lst)
 	return (new_tok);
 }
 
-void	*set_tokenizer_array[128](void)
+void	set_tokenizer_array(
+t_token *(**tokenizer_array)(t_token**, char*, int *i, t_state))
 {
 	int	i;
 
-	if (tokenizer_array == NULL)
-	{
-		ft_bzero(&tokenizer_array, sizeof tokenizer_array);
-		i = '0';
-		while (i <= '9')
-			tokenizer_array[i] = tok_alnum;
-		i = 'A'
-		while (i <= 'Z')
-			tokenizer_array[i] = tok_alnum;
-		i = 'a'
-		while (i <= 'z')
-			tokenizer_array[i] = tok_alnum;
-		tokenizer_array['$'] = tok_var;
-		tokenizer_array['\''] = tok_squote;
-		tokenizer_array['\"'] = tok_dquote;
-		tokenizer_array['|'] = tok_pipe;
-		tokenizer_array['&'] = tok_amp;
-		tokenizer_array['\\'] = tok_backslash;
-		tokenizer_array[';'] = tok_semic;
-		tokenizer_array['<'] = tok_lesser;
-		tokenizer_array['>'] = tok_greater;
-		tokenizer_array['('] = tok_oparent;
-		tokenizer_array[')'] = tok_cparent;
-	}
+	ft_bzero(tokenizer_array, sizeof *tokenizer_array * 128);
+	i = '0';
+	while (i <= '9')
+		tokenizer_array[i] = &tok_alnum;
+	i = 'A';
+	while (i <= 'Z')
+		tokenizer_array[i] = &tok_alnum;
+	i = 'a';
+	while (i <= 'z')
+		tokenizer_array[i] = &tok_alnum;
+	/* *tokenizer_array['$'] = &tok_var; */
+	/* *tokenizer_array['\''] = &tok_squote; */
+	/* *tokenizer_array['\"'] = &tok_dquote; */
+	/* *tokenizer_array['|'] = &tok_pipe; */
+	/* *tokenizer_array['&'] = &tok_amp; */
+	/* *tokenizer_array['\\'] = &tok_backslash; */
+	/* *tokenizer_array[';'] = &tok_semic; */
+	/* *tokenizer_array['<'] = tok_lesser; */
+	/* *tokenizer_array['>'] = &tok_greater; */
+	/* *tokenizer_array['('] = &tok_oparent; */
+	/* *tokenizer_array[')'] = &tok_cparent; */
 }
 
-void *get_tokenizer_array(char inchar)
+t_token	*lexer_build(char *inchars)
 {
-	static (void*)tokenizer_array[128](char) = NULL;
-
-	if (tokenizer_array == NULL)
-		tokenizer_array = set_tokenizer_array();
-	return (tokenizer_array);;
-}
-
-t_token	*lexer_build(t_inchar *inchars)
-{
-	t_inchar	*current_inchar;
 	t_token	*tok_lst;
-	e_state	state;
+	t_state	state;
+	t_token	*(*tokenizer[128])(t_token**, char*, int*, t_state);
+	int		i;
 
-	current_inchar = inchars;
-	state = STATE_GENERAL;
-	while (current_inchar)
+	i = 0;
+	state = State_general;
+	set_tokenizer_array(tokenizer);
+	while (inchars[i])
 	{
-		get_token(current_inchar)
-		current_inchar = current_inchar->next;
+		tokenizer[(int)inchars[i]](&tok_lst, inchars, &i, state);
+		i++;
 	}
 	return (tok_lst);
 }
