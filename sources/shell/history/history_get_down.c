@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 03:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 15:10:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 17:24:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void	go_prev(t_cursor *cursor, t_history_data *history)
 	if (history->tmp_nav != NULL)
 	{
 		if (history->tmp_nav->prev == NULL)
+		{
+			history->tmp_nav = NULL;
 			display_history(cursor, history->input);
+		}
 		else
 		{
 			if (history->tmp_nav->prev != NULL)
