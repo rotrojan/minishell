@@ -41,7 +41,7 @@ void	init_shell_env(t_env env)
 	shell_env = get_shell_env();
 	if (*shell_env == NULL)
 	{
-		tmp = gc_alloc(sizeof(char *) * (env_len(env) + 1));
+		tmp = gc_malloc(sizeof(char *) * (env_len(env) + 1));
 		while (env[i])
 		{
 			tmp[i] = ft_strdup(env[i]);

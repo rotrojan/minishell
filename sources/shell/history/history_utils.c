@@ -17,7 +17,7 @@ t_history	*create_history(char *line)
 {
 	t_history	*history;
 
-	history = gc_alloc(sizeof(t_history) * 1);
+	history = gc_malloc(sizeof(t_history) * 1);
 	history->line = line;
 	history->next = NULL;
 	history->prev = NULL;

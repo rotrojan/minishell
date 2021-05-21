@@ -28,7 +28,7 @@ int	ft_unsetenv(const char *name)
 	ret = ft_inenv(name);
 	if (ret == -1)
 		return (0);
-	new = gc_alloc(sizeof(char *) * env_len(*env));
+	new = gc_malloc(sizeof(char *) * env_len(*env));
 	while (tmp[i])
 	{
 		if (i == ret)

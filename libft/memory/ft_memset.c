@@ -1,22 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memory.h                                        :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/30 12:25:40 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/19 13:28:39 by rotrojan         ###   ########.fr       */
+/*   Created: 2019/10/13 03:11:10 by rotrojan          #+#    #+#             */
+/*   Updated: 2021/05/19 13:22:45 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_MEMORY_H
-# define FT_MEMORY_H
+#include "libft.h"
 
-# include "libft.h"
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*tmp;
 
-void	*ft_calloc(size_t count, size_t size);
-void	ft_bzero(void *s, size_t n);
-void	*ft_memset(void *s, int c, size_t n);
-
-#endif
+	tmp = (unsigned char*)b;
+	while (len--)
+		*(unsigned char*)tmp++ = c;
+	return (b);
+}
