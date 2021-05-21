@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 03:28:55 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 21:08:17 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:01:39 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*ft_ltoa_base(long n, char const *base)
 		return (ft_strdup(&base[0]));
 	base_len = ft_strlen(base);
 	i = ft_nbrlen(n, base_len);
-	strnew = gc_alloc(sizeof(char) * (i + 1));
+	strnew = gc_malloc(sizeof(char) * (i + 1));
 	strnew[i--] = '\0';
 	while (n > 0)
 	{

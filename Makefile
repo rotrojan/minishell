@@ -6,15 +6,14 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/21 14:11:07 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/05/21 16:39:05 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-MAKE = make
 NAME = minishell
 
 SRCS =	main.c 				shell.c 				prompt.c 				\
-		ft_gethostname.c 	getbinpath.c 			signals.c				\
+		ft_gethostname.c	getbinpath.c 			signals.c				\
 		inchar.c			ft_getpid.c				input.c					\
 		exit_shell.c		getterm.c				init_term.c				\
 		pipe_exec.c			env.c					get_cursor_pos.c		\
@@ -24,12 +23,16 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		history_get_down.c	ft_inenv.c				ft_setenv.c				\
 		ft_unsetenv.c		ft_getenv.c				cd.c					\
 		env.c				exit.c					pwd.c
-SRCS_DIR = sources
-OBJS_DIR = .objs
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
+
+SRCS_DIR = sources
+OBJS_DIR = .objs
 INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
+
 LIBS = gc ft
+
+MAKE = make
 CC = clang
 RM = rm -f
 MKDIR = mkdir -p
@@ -40,15 +43,10 @@ CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
 	CXXFLAGS += -g3 -fsanitize=address
 endif
-
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c	$(SRCS_DIR) $(SRCS_DIR)/system $(SRCS_DIR)/lexing				\
-			$(SRCS_DIR)/shell $(SRCS_DIR)/terminal							\
-			$(SRCS_DIR)/shell/history $(SRCS_DIR)/shell/inchar				\
-			$(SRCS_DIR)/system/env	$(SRCS_DIR)/builtins
-vpath %.h	$(INCLUDES_DIR)
-vpath %.a	$(LIBS:%=lib%)
+vpath %.c	$(addprefix $(SRCS_DIR), /. /system /lexing /shell /terminal	\
+			/shell/history /shell/inchar /system/env /builtins)
 
 all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)

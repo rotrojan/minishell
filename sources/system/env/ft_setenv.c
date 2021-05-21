@@ -18,7 +18,7 @@ static char	**add_in_env(const char *name, const char *value, t_env env)
 	t_env	new;
 
 	i = 0;
-	new = gc_alloc(sizeof(char *) * (env_len(env) + 2));
+	new = gc_malloc(sizeof(char *) * (env_len(env) + 2));
 	while (env[i])
 	{
 		new[i] = env[i];
