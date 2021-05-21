@@ -3,7 +3,7 @@ NAME= 	libft.a
 INT=	ft_atoll.c			ft_atoi.c			ft_atoui.c				\
 		ft_itoa.c			ft_nbrlen.c			ft_ltoa_base.c			\
 		ft_uitoa.c			ft_uitoa_base.c
-MEM=	ft_calloc.c			ft_bzero.c
+MEM=	ft_calloc.c			ft_bzero.c			ft_memset.c
 STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_strncmp.c		ft_split.c			ft_free_arrays.c		\
 		ft_strjoin.c		ft_strcat.c			ft_strcpy.c				\

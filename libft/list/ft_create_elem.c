@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/18 05:16:54 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/13 21:56:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/19 14:12:52 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_list	*ft_create_elem(void *data)
 {
 	t_list	*elem;
 
-	elem = gc_alloc(sizeof(t_list) * 1);
+	elem = gc_malloc(sizeof(t_list) * 1);
 	elem->data = data;
 	elem->next = NULL;
 	return (elem);

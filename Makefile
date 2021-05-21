@@ -6,28 +6,33 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/20 03:33:19 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/05/21 16:26:53 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-MAKE = make
 NAME = minishell
 
 SRCS =	main.c 				shell.c 				prompt.c 				\
-		ft_gethostname.c 	getbinpath.c 			signals.c				\
+		ft_gethostname.c	getbinpath.c 			signals.c				\
 		inchar.c			ft_getpid.c				input.c					\
 		exit_shell.c		getterm.c				init_term.c				\
 		pipe_exec.c			shell_env.c				get_cursor_pos.c		\
 		ft_getch.c			getos.c					arrow_keys.c			\
 		inchar_utils.c		put_in_history.c		get_history.c			\
 		cursor_utils.c		special_keys.c			history_utils.c			\
-		history_get_up.c	history_get_down.c
-SRCS_DIR = sources
-OBJS_DIR = .objs
+		history_get_up.c	history_get_down.c								\
+		inchar_utils.c		put_in_history.c						\
+		cursor_utils.c		special_keys.c			#lexer.c
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
+
+SRCS_DIR = sources
+OBJS_DIR = .objs
 INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
+
 LIBS = gc ft
+
+MAKE = make
 CC = clang
 RM = rm -f
 MKDIR = mkdir -p
@@ -38,14 +43,10 @@ CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
 	CXXFLAGS += -g3 -fsanitize=address
 endif
-
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
-vpath %.c	$(SRCS_DIR) $(SRCS_DIR)/system $(SRCS_DIR)/lexing				\
-			$(SRCS_DIR)/shell $(SRCS_DIR)/terminal							\
-			$(SRCS_DIR)/shell/history $(SRCS_DIR)/shell/inchar
-vpath %.h	$(INCLUDES_DIR)
-vpath %.a	$(LIBS:%=lib%)
+vpath %.c	$(addprefix $(SRCS_DIR), /. /system /lexing /shell /terminal	\
+			/shell/history /shell/inchar)
 
 all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)

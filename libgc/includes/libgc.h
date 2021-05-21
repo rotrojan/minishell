@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:05:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/19 15:15:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 16:22:48 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ typedef struct s_garbage_lst
 	struct s_garbage_lst	*next;
 }							t_garbage_lst;
 
-void			*gc_alloc(size_t size);
+void			*gc_malloc(size_t size);
 void			gc_free(void *garbage_to_free);
 void			gc_free_all(void);
 void			gc_exit(int status, char *message);
