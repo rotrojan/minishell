@@ -6,12 +6,14 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:58:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 19:10:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 14:08:12 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Unset VAR in environment.
+Return 1 if exist, if not return 0. */
 int	ft_unsetenv(const char *name)
 {
 	int		i;

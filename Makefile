@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/21 00:46:27 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/05/21 14:11:07 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_gethostname.c 	getbinpath.c 			signals.c				\
 		inchar.c			ft_getpid.c				input.c					\
 		exit_shell.c		getterm.c				init_term.c				\
-		pipe_exec.c			shell_env.c				get_cursor_pos.c		\
+		pipe_exec.c			env.c					get_cursor_pos.c		\
 		ft_getch.c			arrow_keys.c			inchar_utils.c			\
 		put_in_history.c	get_history.c			cursor_utils.c			\
 		special_keys.c		history_utils.c			history_get_up.c		\

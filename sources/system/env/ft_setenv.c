@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:01:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 01:31:41 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 13:38:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ static char	**add_in_env(const char *name, const char *value, t_env env)
 	return (new);
 }
 
+/* Set VAR if not exist or if overwrite is not null value, else do nothing. */
 void	ft_setenv(const char *name, const char *value, int overwrite)
 {
 	int		i;

@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:12:05 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/18 01:23:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 13:44:11 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Deletes the character in front of the cursor. */
 void	backspace_key(t_cursor *cursor)
 {
 	char		*goto_cap;
@@ -34,6 +35,7 @@ void	backspace_key(t_cursor *cursor)
 	}
 }
 
+/* Deletes the character in back of the cursor. */
 void	delete_key(t_cursor *cursor)
 {
 	char		*goto_cap;
@@ -55,6 +57,7 @@ void	delete_key(t_cursor *cursor)
 	}
 }
 
+/* Move cursor to the start of line. */
 void	home_key(t_cursor *cursor)
 {
 	char		*goto_cap;
@@ -68,6 +71,7 @@ void	home_key(t_cursor *cursor)
 	tputs(goto_cap, 1, ft_putchar);
 }
 
+/* Move cursor to the end of line. */
 void	end_key(t_cursor *cursor)
 {
 	char		*goto_cap;
@@ -81,6 +85,7 @@ void	end_key(t_cursor *cursor)
 	tputs(goto_cap, 1, ft_putchar);
 }
 
+/* Clear the screen. */
 void	ctrl_l_key(t_cursor *cursor)
 {
 	char	*clear_cap;

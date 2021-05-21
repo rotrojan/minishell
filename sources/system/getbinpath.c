@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:35:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 21:04:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 13:59:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Return path of binarie, NULL if not found. */
 char	*getbinpath(char *bin)
 {
 	int			i;

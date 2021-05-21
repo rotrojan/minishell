@@ -1,17 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   shell_env.c                                        :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 22:00:52 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 18:34:37 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 14:21:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Return address of environment. */
 t_env	*get_shell_env(void)
 {
 	static t_env	shell_env = NULL;
@@ -29,6 +30,7 @@ int	env_len(t_env env)
 	return (i);
 }
 
+/* Save environment in accessible memory */
 void	init_shell_env(t_env env)
 {	
 	int		i;

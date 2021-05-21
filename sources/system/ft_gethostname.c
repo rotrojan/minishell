@@ -6,12 +6,14 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/14 03:50:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 14:01:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Return hostname of computer.
+Only work in linux. */
 char	*ft_gethostname(void)
 {
 	t_file		output;

@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 02:43:48 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/17 18:13:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 13:59:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Move cursor to the left in line. */
 void	left_arrow_key(t_cursor *cursor)
 {
 	char			*goto_cap;
@@ -25,6 +26,7 @@ void	left_arrow_key(t_cursor *cursor)
 	}
 }
 
+/* Move cursor to the right in line. */
 void	right_arrow_key(t_cursor *cursor)
 {
 	char			*goto_cap;

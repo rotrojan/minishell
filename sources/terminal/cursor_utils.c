@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 02:32:48 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/17 02:38:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 13:58:26 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Move position of cursor to the right. */
 void	cursor_move_right(t_cursor *cursor)
 {
 	struct winsize	win;
@@ -29,6 +30,7 @@ void	cursor_move_right(t_cursor *cursor)
 		cursor->pos.y++;
 }
 
+/* Move position of cursor to the left. */
 void	cursor_move_left(t_cursor *cursor)
 {
 	struct winsize	win;

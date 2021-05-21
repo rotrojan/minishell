@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 04:54:43 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/19 04:34:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:01:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Self explanatory. */
 void	print_inchars(t_inchar *inchars)
 {
 	int			i;
@@ -27,6 +28,7 @@ void	print_inchars(t_inchar *inchars)
 	}
 }
 
+/* Return size of input line. */
 int	inchars_len(t_inchar *inchars)
 {
 	int			size;
@@ -42,6 +44,7 @@ int	inchars_len(t_inchar *inchars)
 	return (size);
 }
 
+/* Return start address of input line. */
 t_inchar	*inchars_head(t_cursor *cursor)
 {
 	t_inchar	*head;
@@ -52,6 +55,7 @@ t_inchar	*inchars_head(t_cursor *cursor)
 	return (head);
 }
 
+/* Return end address of input line. */
 t_inchar	*inchars_queue(t_cursor *cursor)
 {
 	t_inchar	*queue;
@@ -62,6 +66,7 @@ t_inchar	*inchars_queue(t_cursor *cursor)
 	return (queue);
 }
 
+/* Add char at end of input line. */
 void	push_back_inchars(t_inchar **inchars, int value)
 {
 	t_inchar	*new;

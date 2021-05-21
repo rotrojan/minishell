@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:06:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 23:48:48 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:14:49 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Save line in history data. */
 void	put_in_history(char *line)
 {
 	int				fd;

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 22:59:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/18 01:01:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 13:47:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ static int	special_key(void)
 	return (key);
 }
 
+/* Read one char in input, else return ERR if can't read.
+Can read special char like arrow key.
+You must have set the terminal to non-canonical
+and without echo before. */
 int	ft_getch(void)
 {
 	int	c;

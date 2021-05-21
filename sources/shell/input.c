@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 01:29:57 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:35:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ static void	control_key(t_cursor *cursor, int c)
 	}
 }
 
+/* Read and return input line for shell. */
 char	*input(void)
 {
 	int			c;

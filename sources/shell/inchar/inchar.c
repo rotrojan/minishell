@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 01:23:41 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 14:59:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Self explanatory. */
 t_inchar	*create_inchar(int value)
 {
 	t_inchar	*inchar;
@@ -23,6 +24,7 @@ t_inchar	*create_inchar(int value)
 	return (inchar);
 }
 
+/* Self explanatory. */
 void	free_inchars(t_inchar **inchars)
 {
 	t_inchar	*tmp;
@@ -38,6 +40,7 @@ void	free_inchars(t_inchar **inchars)
 	*inchars = NULL;
 }
 
+/* Insert char in input line. */
 void	insert_inchar(t_cursor *cursor, int value)
 {
 	char			*goto_cap;
@@ -59,6 +62,7 @@ void	insert_inchar(t_cursor *cursor, int value)
 	history->input = inchars_to_line(inchars_head(cursor));
 }
 
+/* Convert string to inchar list. */
 char	*inchars_to_line(t_inchar *inchars)
 {
 	int			i;
@@ -81,6 +85,7 @@ char	*inchars_to_line(t_inchar *inchars)
 	return (line);
 }
 
+/* Convert inchar list to string. */
 t_inchar	*line_to_inchars(char *line)
 {
 	int			i;

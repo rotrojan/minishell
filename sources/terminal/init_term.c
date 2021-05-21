@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:32:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 21:05:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 13:28:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Set terminal in no canonical and without echo mode. */
 void	init_term(void)
 {
 	int		ret;

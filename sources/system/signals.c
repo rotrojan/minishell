@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 00:28:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/13 02:07:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:33:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ static void	sigquit_handler(int sig)
 	exit_shell(EXIT_SUCCESS, "\n");
 }
 
+/* Self explanatory. */
 void	handle_signals(void)
 {
 	signal(SIGINT, &sigint_handler);

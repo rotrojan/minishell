@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 01:56:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 14:31:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ static t_prompt	get_prompt_infos(void)
 	return (prompt);
 }
 
+/* Display prompt in format: user@hostname:pwd> on linux.
+ pwd> on MacOS.*/
 void	prompt(void)
 {
 	int				i;

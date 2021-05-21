@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:53:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/12 03:42:17 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 13:45:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@ static void	atoi_pos(t_axe *pos, int sep, int c)
 		pos->y = pos->y * 10 + (c - '0');
 }
 
-/* you must have set the terminal
-to non-canonical and without echo before */
+/* Return postion of cursor in terminal. 
+You must have set the terminal to non-canonical
+and without echo before. */
 t_axe	get_cursor_pos(void)
 {
 	char	c;

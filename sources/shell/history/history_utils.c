@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 15:55:03 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:34:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Self explanatory. */
 t_history	*create_history(char *line)
 {
 	t_history	*history;
@@ -23,6 +24,7 @@ t_history	*create_history(char *line)
 	return (history);
 }
 
+/* Self explanatory. */
 void	free_history(void)
 {
 	t_history		*tmp;
@@ -42,6 +44,7 @@ void	free_history(void)
 	gc_free(history->input);
 }
 
+/* Self explanatory. */
 void	push_front_history(t_history **history, char *line)
 {
 	t_history	*new;
@@ -57,6 +60,7 @@ void	push_front_history(t_history **history, char *line)
 	*history = new;
 }
 
+/* Read HISTORY_PATH and save it in accessible memory. */
 t_history_data	*init_history(void)
 {
 	int				fd;
@@ -83,6 +87,7 @@ t_history_data	*init_history(void)
 	return (history);
 }
 
+/* Self explanatory. */
 void	display_history(t_cursor *cursor, char *line)
 {
 	char		*goto_cap;

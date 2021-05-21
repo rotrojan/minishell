@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:58:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 04:11:32 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:33:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Return piped output of another program. */
 char	**pipe_exec(char *bin_path, char **arg)
 {
 	int			fd[2];

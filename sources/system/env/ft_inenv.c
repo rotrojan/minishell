@@ -6,12 +6,14 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 16:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 17:53:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 13:36:00 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Return index of VAR in environment,
+return -1 if not found. */
 int	ft_inenv(const char *name)
 {
 	int		i;

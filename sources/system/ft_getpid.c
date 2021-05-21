@@ -6,12 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 15:12:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/14 01:26:44 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 14:00:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+/* Return pid of program. */
 pid_t	ft_getpid(void)
 {
 	t_file		output;

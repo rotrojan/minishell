@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 03:29:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 12:51:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 15:10:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void	search_next(t_cursor *cursor, t_history_data *history)
 	}	
 }
 
+/* Get next line in history. */
 void	history_get_up(t_cursor *cursor)
 {
 	t_history_data	*history;
