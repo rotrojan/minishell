@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 15:12:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 14:00:45 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 18:26:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 /* Return pid of program. */
 pid_t	ft_getpid(void)
 {
-	t_file		output;
-	pid_t		pid;
-	char		*bin_path;
-	static char	*arg[] = {"pgrep", "-n", "minishell", NULL};
+	t_file				output;
+	pid_t				pid;
+	char				*bin_path;
+	static const char	*arg[] = {"pgrep", "-n", "minishell", NULL};
 
 	bin_path = getbinpath(arg[0]);
 	if (!bin_path)

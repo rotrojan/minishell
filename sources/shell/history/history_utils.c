@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 15:34:57 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 18:17:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,9 @@ void	display_history(t_cursor *cursor, char *line)
 	tputs(goto_cap, 1, ft_putchar);
 	cursor->on_inchar = line_to_inchars(line);
 	print_inchars(cursor->on_inchar);
-	cursor->on_inchar = inchars_queue(cursor);
-	cursor->pos = get_cursor_pos();
+	while (cursor->on_inchar->next != NULL)
+	{
+		cursor->on_inchar = cursor->on_inchar->next;
+		cursor_move_right(cursor);
+	}
 }

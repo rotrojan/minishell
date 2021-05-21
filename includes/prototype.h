@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 00:22:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/21 18:27:26 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ enum e_os_name	getos(void);
 pid_t			ft_getpid(void);
 void			handle_signals(void);
 char			*ft_gethostname(void);
-char			*getbinpath(char *bin);
+char			*getbinpath(const char *bin);
 void			exit_shell(int status, char *message);
-char			**pipe_exec(char *bin_path, char **arg);
+char			**pipe_exec(const char *bin_path, const char **arg);
 //		env
 int				ft_inenv(const char *name);
 char			*ft_getenv(const char *name);
