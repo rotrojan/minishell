@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 04:54:43 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 16:34:41 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/24 19:15:26 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	print_inchars(t_inchar *inchars)
 	tmp = inchars;
 	while (tmp->next != NULL)
 	{
-		ft_putchar(tmp->value);
+		ft_putchar_err(tmp->value);
 		tmp = tmp->next;
 		i++;
 	}

@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_putchar_err.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 20:46:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/24 19:14:12 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/10 17:23:39 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/05/24 19:12:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_printf(const char *format, ...)
+int	ft_putchar_err(int c)
 {
-	va_list	ap;
-
-	va_start(ap, format);
-	return (ft_vfprintf(STDOUT_FILENO, format, ap));
+	write(STDERR_FILENO, &c, 1);
+	return (c);
 }

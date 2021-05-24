@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 14:10:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/24 19:30:00 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@ void	shell(void)
 			put_in_history(line);
 		else
 			gc_free(line);
-		ft_putstr("\n\r");
+		ft_fprintf(STDERR_FILENO, "\n\r");
 	}
 }

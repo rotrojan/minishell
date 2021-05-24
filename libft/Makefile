@@ -13,7 +13,8 @@ STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_putxchar.c		ft_isalnum.c		ft_strlcpy.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 		ft_printf.c			ft_fprintf.c		readfile.c				\
-		gnl.c				ft_fputstr.c		free_file.c
+		gnl.c				ft_fputstr.c		free_file.c				\
+		ft_putchar_err.c
 PRINTF=	ft_vfprintf.c		ft_parsing.c		ft_type_d_i.c			\
 		ft_type_p.c			ft_types_c_s.c		ft_types_u_per.c		\
 		ft_types_x_xu.c		ft_vfprintf_utils.c

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 17:23:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/30 21:06:18 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/24 19:12:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,6 @@
 
 int	ft_putchar(int c)
 {
-	write(1, &c, 1);
+	write(STDOUT_FILENO, &c, 1);
 	return (c);
 }

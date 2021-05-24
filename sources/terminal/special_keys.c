@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:12:05 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 13:44:11 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/24 19:26:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	backspace_key(t_cursor *cursor)
 		gc_free(tmp);
 		cursor_move_left(cursor);
 		goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
-		tputs(goto_cap, 1, ft_putchar);
+		tputs(goto_cap, 1, ft_putchar_err);
 		ft_putxchar(' ', inchars_len(cursor->on_inchar));
-		tputs(goto_cap, 1, ft_putchar);
+		tputs(goto_cap, 1, ft_putchar_err);
 		print_inchars(cursor->on_inchar);
-		tputs(goto_cap, 1, ft_putchar);
+		tputs(goto_cap, 1, ft_putchar_err);
 	}
 }
 
@@ -51,9 +51,9 @@ void	delete_key(t_cursor *cursor)
 		cursor->on_inchar = tmp;
 		goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
 		ft_putxchar(' ', inchars_len(cursor->on_inchar));
-		tputs(goto_cap, 1, ft_putchar);
+		tputs(goto_cap, 1, ft_putchar_err);
 		print_inchars(cursor->on_inchar);
-		tputs(goto_cap, 1, ft_putchar);
+		tputs(goto_cap, 1, ft_putchar_err);
 	}
 }
 
@@ -68,7 +68,7 @@ void	home_key(t_cursor *cursor)
 		cursor->on_inchar = cursor->on_inchar->prev;
 	}
 	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
-	tputs(goto_cap, 1, ft_putchar);
+	tputs(goto_cap, 1, ft_putchar_err);
 }
 
 /* Move cursor to the end of line. */
@@ -82,7 +82,7 @@ void	end_key(t_cursor *cursor)
 		cursor->on_inchar = cursor->on_inchar->next;
 	}
 	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
-	tputs(goto_cap, 1, ft_putchar);
+	tputs(goto_cap, 1, ft_putchar_err);
 }
 
 /* Clear the screen. */
@@ -91,8 +91,9 @@ void	ctrl_l_key(t_cursor *cursor)
 	char	*clear_cap;
 
 	clear_cap = tgetstr("cl", NULL);
-	tputs(clear_cap, 1, ft_putchar);
+	tputs(clear_cap, 1, ft_putchar_err);
 	prompt();
 	print_inchars(inchars_head(cursor));
 	cursor->pos = get_cursor_pos();
+	cursor->on_inchar = inchars_queue(cursor);
 }
