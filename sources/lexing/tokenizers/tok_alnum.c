@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 17:27:11 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/23 23:59:40 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/24 16:40:52 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ t_token	*tok_alnum(t_token **tok_lst, char *inchars, int *i, t_state *state)
 		j++;
 	data = gc_malloc(sizeof(*data) * (j + 1));
 	ft_strlcpy(data, &inchars[*i], j + 1);
-	create_token(data, Alnum, tok_lst);
+	tok = create_token(data, Alnum, tok_lst);
 	*i++ += j;
 	return (tok);
 }

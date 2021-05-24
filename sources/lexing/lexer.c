@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:09:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/24 00:12:01 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/24 17:45:52 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ t_token	*create_token(char *data, t_type type, t_token **tok_lst)
 	t_token	*current;
 
 	new_tok = gc_malloc(sizeof(*new_tok));
-	/* new_tok->data = gc_malloc(sizeof new_tok->data * (ft_strlen(data) + 1)); */
 	new_tok->data = data;
 	new_tok->type = type;
 	new_tok->next = NULL;
@@ -51,7 +50,7 @@ t_token *(**tokenizer_array)(t_token**, char*, int*, t_state*))
 		tokenizer_array[i++] = &tok_alnum;
 	/* *tokenizer_array['$'] = &tok_var; */
 	tokenizer_array['\''] = &tok_squote;
-	/* tokenizer_array['\"'] = &tok_dquote; */
+	tokenizer_array['\"'] = &tok_dquote;
 	/* tokenizer_array['|'] = &tok_pipe; */
 	/* tokenizer_array['&'] = &tok_amp; */
 	/* tokenizer_array['\\'] = &tok_backslash; */
@@ -74,9 +73,7 @@ t_token	*lexer_build(char *inchars)
 	set_tokenizer_array(tokenizer);
 	while (inchars[i])
 	{
-		/* printf("first letter : %c\n", inchars[i]); */
 		tokenizer[(int)inchars[i]](&tok_lst, inchars, &i, &state);
-		/* i++; */
 		while (ft_isspace(inchars[i]))
 			i++;
 	}
