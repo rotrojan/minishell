@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:43:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/24 23:44:50 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/25 00:18:16 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,13 @@ void	cd(const char *path)
 {
 	char		*new;
 	char		*old;
+	char		*tmp;
 
-	if (chdir(path) != -1)
+	if (path == NULL)
+		tmp = ft_getenv("HOME");
+	else
+		tmp = (char *)path;
+	if (chdir(tmp) != -1)
 	{
 		new = getcwd(NULL, 0);
 		if (new == NULL)
@@ -25,9 +30,10 @@ void	cd(const char *path)
 		old = ft_getenv("PWD");
 		ft_setenv("OLDPWD", old, 1);
 		ft_setenv("PWD", new, 1);
-		ft_printf("%s\n", new);
+		if (path != NULL)
+			ft_printf("%s\n", new);
 		free(new);
 	}
 	else
-		ft_printf("cd: no file or directory of type: %s\n", path);
+		ft_printf("cd: no file or directory of type: %s\n", tmp);
 }
