@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/21 18:27:46 by bigo             ###   ########.fr        #
+#    Updated: 2021/05/23 23:50:15 by bigo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		history_get_down.c	ft_inenv.c				ft_setenv.c				\
 		ft_unsetenv.c		ft_getenv.c				cd.c					\
 		env.c				exit.c					pwd.c					\
-		lexer.c				tok_alnum.c
+		lexer.c				tok_alnum.c				tok_squote.c
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
 
@@ -39,7 +39,7 @@ RM = rm -f
 MKDIR = mkdir -p
 DEBUG = off
 
-CFLAGS = -MMD -Wall -Wextra -Werror
+CFLAGS = -MMD -Wall -Wextra #-Werror
 CXXFLAGS = $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
 	CXXFLAGS += -g3 -fsanitize=address

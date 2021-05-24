@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:11:30 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/21 18:34:28 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/23 23:45:12 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_token
 t_token	*lexer_build(char *inchars);
 t_token	*create_token(char *data, t_type type, t_token **tok_lst);
 
-t_token	*tok_alnum(t_token **tok_lst, char *inchars, int *i, t_state state);
+t_token	*tok_alnum(t_token **tok_lst, char *inchars, int *i, t_state *state);
+t_token	*tok_squote(t_token **tok_lst, char *inchars, int *i, t_state *state);
 
 #endif
