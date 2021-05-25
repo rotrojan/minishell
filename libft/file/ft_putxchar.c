@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/12 03:03:43 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/12 03:09:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/24 19:17:36 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_putxchar(int c, int x)
 	i = 0;
 	while (i < x)
 	{
-		ft_putchar(c);
+		ft_putchar_err(c);
 		i++;
 	}
 	return (i);

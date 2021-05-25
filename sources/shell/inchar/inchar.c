@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 16:34:23 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/24 19:15:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	insert_inchar(t_cursor *cursor, int value)
 	print_inchars(cursor->on_inchar->prev);
 	cursor_move_right(cursor);
 	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
-	tputs(goto_cap, 1, ft_putchar);
+	tputs(goto_cap, 1, ft_putchar_err);
 	gc_free(history->input);
 	history->input = inchars_to_line(inchars_head(cursor));
 }
