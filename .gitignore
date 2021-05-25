@@ -57,16 +57,14 @@ dkms.conf
 # Nvim plugins 
 .cache
 *.json
-*.vim
-
-# Objs directory
-.objs/
 
 # Executables
 minishell
 
-# data
+# Data
 .minish_history
- 
- # miscellaneous
- todo
+
+# Others
+*.vim
+.objs/
+todo
