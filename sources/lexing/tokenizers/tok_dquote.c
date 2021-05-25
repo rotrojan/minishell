@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tok_squotes.c                                      :+:      :+:    :+:   */
+/*   tok_dquote.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/23 19:07:05 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/23 23:59:49 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/25 12:38:06 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-t_token	*tok_squote(t_token **tok_lst, char *inchars, int *i, t_state *state)
+t_token	*tok_dquote(t_token **tok_lst, char *inchars, int *i, t_state *state)
 {
 	t_token	*tok;
 	char	*data;

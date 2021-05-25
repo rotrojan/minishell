@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:11:30 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/23 23:45:12 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/25 12:48:21 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,7 @@ t_token	*create_token(char *data, t_type type, t_token **tok_lst);
 
 t_token	*tok_alnum(t_token **tok_lst, char *inchars, int *i, t_state *state);
 t_token	*tok_squote(t_token **tok_lst, char *inchars, int *i, t_state *state);
+
+int	is_sep(char c);
 
 #endif
