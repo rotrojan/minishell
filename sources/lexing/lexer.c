@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:09:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/24 17:45:52 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/05/25 17:43:32 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ t_token *(**tokenizer_array)(t_token**, char*, int*, t_state*))
 	i = 'a';
 	while (i <= 'z')
 		tokenizer_array[i++] = &tok_alnum;
-	/* *tokenizer_array['$'] = &tok_var; */
+	tokenizer_array['$'] = &tok_var;
 	tokenizer_array['\''] = &tok_squote;
 	tokenizer_array['\"'] = &tok_dquote;
 	/* tokenizer_array['|'] = &tok_pipe; */
