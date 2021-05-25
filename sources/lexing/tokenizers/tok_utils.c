@@ -1,21 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   tok_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 20:46:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/24 19:14:12 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/05/25 12:46:23 by rotroja          #+#    #+#             */
+/*   Updated: 2021/05/25 12:47:56 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_printf(const char *format, ...)
+int	is_sep(char c)
 {
-	va_list	ap;
-
-	va_start(ap, format);
-	return (ft_vfprintf(STDOUT_FILENO, format, ap));
+	if (ft_isspace(c) || c == '<' || c == '>' || c == '|' || c == ';'
+		|| c == '$' || c == '\'' || c == '\"' || c == '\0')
+		return (1);
+	return (0);
 }

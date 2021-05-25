@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 14:31:15 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/24 23:47:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ void	prompt(void)
 	i = ft_strlen(prompt.home);
 	if (OS == Linux)
 	{
-		tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar);
-		tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_GREEN), 1, ft_putchar);
-		ft_printf("%s@%s", prompt.user, prompt.hostname);
-		tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar);
-		ft_putchar(':');
+		tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar_err);
+		tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_GREEN), 1, ft_putchar_err);
+		ft_fprintf(STDERR_FILENO, "%s@%s", prompt.user, prompt.hostname);
+		tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar_err);
+		ft_putchar_err(':');
 	}
-	tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar);
-	tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_BLUE), 1, ft_putchar);
+	tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar_err);
+	tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_BLUE), 1, ft_putchar_err);
 	if (!ft_strncmp(prompt.home, prompt.pwd, i))
-		ft_printf("~%s", &prompt.pwd[i]);
+		ft_fprintf(STDERR_FILENO, "~%s", &prompt.pwd[i]);
 	else
-		ft_printf("%s", prompt.pwd);
-	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar);
-	ft_printf("> ");
+		ft_fprintf(STDERR_FILENO, "%s", prompt.pwd);
+	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar_err);
+	ft_fprintf(STDERR_FILENO, "> ");
 	gc_free(prompt.hostname);
 }

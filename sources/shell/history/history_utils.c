@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 18:17:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/05/24 19:20:24 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,9 +100,9 @@ void	display_history(t_cursor *cursor, char *line)
 		cursor_move_left(cursor);
 	}
 	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
-	tputs(goto_cap, 1, ft_putchar);
+	tputs(goto_cap, 1, ft_putchar_err);
 	ft_putxchar(' ', inchars_len(tmp));
-	tputs(goto_cap, 1, ft_putchar);
+	tputs(goto_cap, 1, ft_putchar_err);
 	cursor->on_inchar = line_to_inchars(line);
 	print_inchars(cursor->on_inchar);
 	while (cursor->on_inchar->next != NULL)
