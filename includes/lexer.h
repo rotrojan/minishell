@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:11:30 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/30 19:45:50 by bigo             ###   ########.fr       */
+/*   Updated: 2021/05/30 19:58:46 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,6 +181,8 @@ typedef enum e_state
 
 t_token	*tok_alnum(t_token **tok_lst, char *inchars, int *i, t_state *state);
 t_token	*tok_squote(t_token **tok_lst, char *inchars, int *i, t_state *state);
+t_token	*tok_dquote(t_token **tok_lst, char *inchars, int *i, t_state *state);
+t_token	*tok_var(t_token **tok_lst, char *inchars, int *i, t_state *state);
 
 int		is_sep(char c);
 */
