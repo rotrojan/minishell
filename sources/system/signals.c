@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 00:28:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 15:33:02 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/18 04:40:29 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static void	sigint_handler(int sig)
 {
 	(void)sig;
-	exit_shell(EXIT_SUCCESS, "\n");
+	ft_fprintf(STDERR_FILENO, "\n\r");
+	shell();
 }
 
 static void	sigquit_handler(int sig)
 {
 	(void)sig;
-	exit_shell(EXIT_SUCCESS, "\n");
 }
 
 /* Self explanatory. */
