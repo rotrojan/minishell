@@ -6,98 +6,80 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/30 19:45:29 by bigo             ###   ########.fr       */
+/*   Updated: 2021/07/18 20:28:06 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static	int	word_rules(char c)
+static enum e_chr_rules	word_rules(enum e_chr_type chr_type)
 {
-	static int	word_rules[] = {
-		[Error_chr] = 0,
-		[Alpha_chr] = 1,
-		[Digit_chr] = 1,
-		[Print_chr] = 1,
-		[Space_chr] = 0,
-		[Squote_chr] = 2,
-		[Dquote_chr] = 2,
-		[Dol_chr] = 2,
-		[Less_chr] = 0,
-		[Great_chr] = 0,
-		[And_chr] = 0,
-		[Esc_chr] = 2,
-		[Semic_chr] = 0,
-		[Pipe_chr] = 0
+	static enum e_chr_rules	word_rules[] = {
+		[Error_chr] = Not_accepted,
+		[Alpha_chr] = Accepted,
+		[Digit_chr] = Accepted,
+		[Print_chr] = Accepted,
+		[Space_chr] = Not_accepted,
+		[Squote_chr] = Accepted,
+		[Dquote_chr] = Accepted,
+		[Dol_chr] = Accepted,
+		[Less_chr] = Not_accepted,
+		[Great_chr] = Not_accepted,
+		[And_chr] = Not_accepted,
+		[Esc_chr] = Accepted,
+		[Semic_chr] = Not_accepted,
+		[Pipe_chr] = Not_accepted
 	};
 
-	return (word_rules[get_chr_type(c)]);
+	return (word_rules[chr_type]);
 }
 
-static char	*str_quote(const char *inchars, int *i)
+static enum e_chr_rules	is_valid(char c, enum e_state *state)
 {
-	int				j;
-	char			*str;
-	static	char	*(*quote_func[])(const char*, int*) = {
-		[0] = &squote_func,
-		[1] = &dquote_func,
-		[2] = &escape_func,
-		/* [3] = $dollar_func */
-	};
-	static char		quotes[] = {
-		[0] = '\'',
-		[1] = '\"',
-		[2] = '\\',
-		[3] = '$',
-	};
+	enum e_chr_type	chr_type;
 
-	j = 0;
-	while (j < NB_QUOTE_CHR)
+	chr_type = get_chr_type(c);
+	if (*state == State_general)
 	{
-		if (inchars[*i] == quotes[j])
-			str = quote_func[j](inchars, i);
-		j++;
+		if (chr_type == Squote_chr)
+			*state = State_insquote;
+		else if (chr_type == Dquote_chr)
+			*state = State_indquote;
+		else if (chr_type == Esc_chr)
+			*state = State_escaped;
 	}
-	return (str);
-}
-
-static void	get_quote(const char *inchars, int *i, char **data, int *j)
-{
-	char	*quote;
-	int		is_escaped;
-
-	is_escaped = 0;
-	if (inchars[*i] == '\\')
-		is_escaped = 1;
-	*data = join_chars(*data, inchars + *i, *j);
-	*i += *j;
-	*j = 0;
-	quote = str_quote(inchars, i);
-	if (is_escaped == 1)
-		*data = join_chars(*data, quote, 1);
 	else
-		*data = join_chars(*data, quote, ft_strlen(quote));
-	gc_free(quote);
+	{
+		if (*state == State_escaped)
+			*state = State_general;
+		if (*state == State_insquote)
+			if (chr_type == Squote_chr)
+				*state = State_general;
+		if (*state == State_indquote)
+			if (chr_type == Dquote_chr)
+				*state = State_general;
+		return (Accepted);
+	}
+	return (word_rules(chr_type));
 }
 
 t_token	*tok_word(char *inchars, int *i)
 {
-	char	*data;
-	int		j;
-	int		ret;
+	char				*data;
+	int					j;
+	enum e_chr_rules	ret;
+	enum e_state		state;
 
 	j = 0;
-	ret = word_rules(inchars[*i]);
+	/* ret = word_rules(inchars[*i]); */
 	data = gc_malloc(sizeof(*data) * 1);
 	*data = '\0';
-	ret = word_rules(inchars[*i]);
-	while (ret != 0)
+	state = State_general;
+	ret = is_valid(inchars[*i], &state);
+	while (ret == Accepted)
 	{
-		if (ret == 2)
-			get_quote(inchars, i, &data, &j);
-		else
-			++j;
-		ret = word_rules(inchars[*i + j]);
+		++j;
+		ret = is_valid(inchars[*i + j], &state);
 	}
 	data = join_chars(data, inchars + *i, j);
 	*i += j;

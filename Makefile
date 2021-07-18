@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/05/30 19:58:14 by bigo             ###   ########.fr        #
+#    Updated: 2021/07/18 20:24:04 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,10 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_unsetenv.c		ft_getenv.c				cd.c					\
 		env.c				exit.c					pwd.c					\
 		lexer.c				tok_separators.c		tok_word.c				\
-		tok_utils.c			quote_functions.c
+		error_management.c	build_ast.c				tok_utils.c				\
+		free_ast.c			parse_simple_cmd.c
+		#quote_funtions.c
+
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
 
@@ -50,7 +53,7 @@ LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env)				\
 				$(addprefix /shell, /. /history /inchar)	\
-				/. /terminal /lexer /builtins)
+				/. /terminal /lexer /parser /builtins)
 
 all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)

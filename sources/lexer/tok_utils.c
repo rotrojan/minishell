@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:46:23 by rotroja          #+#    #+#             */
-/*   Updated: 2021/05/30 19:29:09 by bigo             ###   ########.fr       */
+/*   Updated: 2021/07/18 20:32:14 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ void	clear_tokens(t_token **tok_lst)
 	t_token	*prev;
 	t_token	*current;
 
+	if (*tok_lst == NULL)
+		return ;
 	current = *tok_lst;
 	while (current)
 	{
@@ -43,7 +45,7 @@ void	clear_tokens(t_token **tok_lst)
 	*tok_lst = NULL;
 }
 
-t_token	*create_token(char *data, t_tok_type type)
+t_token	*create_token(char *data, enum e_tok_type type)
 {
 	t_token	*new_tok;
 
@@ -66,7 +68,7 @@ enum e_chr_type	get_chr_type(char c)
 		[28] = Error_chr, [29] = Error_chr, [30] = Error_chr, [31] = Error_chr,
 		[' '] = Space_chr, ['!'] = Print_chr, ['\"'] = Dquote_chr,
 		['#'] = Print_chr, ['$'] = Dol_chr, ['%'] = Print_chr, ['&'] = And_chr,
-		['\''] = Esc_chr, ['('] = Print_chr, [')'] = Print_chr,
+		['\''] = Squote_chr, ['('] = Print_chr, [')'] = Print_chr,
 		['*'] = Print_chr, ['+'] = Print_chr, [','] = Print_chr,
 		['-'] = Print_chr, ['.'] = Print_chr, ['/'] = Print_chr,
 		['0' ...'9'] = Digit_chr, [':'] = Print_chr, [';'] = Semic_chr,

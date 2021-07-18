@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/30 19:25:09 by bigo             ###   ########.fr       */
+/*   Updated: 2021/07/18 20:04:57 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,26 @@ void	print_tokens(t_token **tok_lst)
 	while (current)
 	{
 		if (current->type == Word_tok)
-			printf("%s -> ", current->data);
-		else
-		{
-			if (current->type == Tok_error)
-				printf("Tok_error -> ");
-			else if (current->type == Pipe_tok)
-				printf("Pipe_tok -> ");
-			else if (current->type == Or_tok)
-				printf("Or_tok -> ");
-			else if (current->type == And_tok)
-				printf("And_tok -> ");
-			else if (current->type == Semic_tok)
-				printf("Semic_tok -> ");
-			else if (current->type == Lesser_tok)
-				printf("Lesser_tok -> ");
-			else if (current->type == Greater_tok)
-				printf("Greater_tok -> ");
-			else if (current->type == Dgreater_tok)
-				printf("Dgreater_tok -> ");
-		}
+			printf("Word_tok ");
+		else if (current->type == Pipe_tok)
+			printf("Pipe_tok ");
+		else if (current->type == Or_tok)
+			printf("Or_tok ");
+		else if (current->type == Amp_tok)
+			printf("Amp_tok ");
+		else if (current->type == And_tok)
+			printf("And_tok ");
+		else if (current->type == Semic_tok)
+			printf("Semic_tok ");
+		else if (current->type == Lesser_tok)
+			printf("Lesser_tok ");
+		else if (current->type == Dlesser_tok)
+			printf("Dlesser_tok ");
+		else if (current->type == Greater_tok)
+			printf("Greater_tok ");
+		else if (current->type == Dgreater_tok)
+			printf("Dgreater_tok ");
+		printf("(%s) -> ", current->data);
 		current = current->next;
 	}
 	printf("%p\n", current);
@@ -52,8 +52,10 @@ void	shell(void)
 {
 	char	*line;
 	t_token	*tok_lst;
+	t_node	*ast;
 
 	tok_lst = NULL;
+	ast = NULL;
 	while (1)
 	{
 		prompt();
@@ -62,8 +64,11 @@ void	shell(void)
 		{
 			put_in_history(line);
 			build_tok_lst(line, &tok_lst);
-			print_tokens(&tok_lst);
-			clear_tokens(&tok_lst);
+			/* print_tokens(&tok_lst); */
+			/* printf("yolo\n"); */
+			build_ast(&tok_lst, &ast);
+			clear_ast(&ast);
+			/* clear_tokens(&tok_lst); */
 		}
 		else
 			gc_free(line);
