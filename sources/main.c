@@ -6,15 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:20:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/18 18:18:50 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/20 16:10:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	free_leaks(void) __attribute__((destructor));
-
-static void	free_leaks(void)
+static void	free_leaks(void) __attribute__((destructor))
 {
 	gc_free_all();
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/18 19:20:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/20 16:05:21 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,7 @@ char	*input(void)
 			if (c == '\n')
 			{
 				line = inchars_to_line(inchars_head(&cursor));
-				if (line[0] == '\0')
-					return (line);
+				return (line);
 			}
 			else if (!ft_iscntrl(c))
 				insert_inchar(&cursor, c);
