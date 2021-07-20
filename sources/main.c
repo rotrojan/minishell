@@ -6,11 +6,18 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:20:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/25 00:18:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/20 16:15:53 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	free_leaks(void) __attribute__((destructor));
+
+static void	free_leaks(void)
+{
+	gc_free_all();
+}
 
 /* Init and launch all process. */
 int	main(int argc, char **argv, char **env)

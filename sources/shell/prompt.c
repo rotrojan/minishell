@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/24 23:47:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/18 18:55:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,22 @@
 
 static t_prompt	get_prompt_infos(void)
 {
-	t_prompt	prompt;
+	static int		init = FALSE;
+	static t_prompt	prompt;
 
-	prompt.home = ft_getenv("HOME");
+	if (init == FALSE)
+	{
+		prompt.home = ft_getenv("HOME");
+		prompt.user = ft_getenv("USERNAME");
+		if (prompt.user == NULL)
+			prompt.user = ft_getenv("USER");
+		if (OS == Linux)
+			prompt.hostname = ft_gethostname();
+		else
+			prompt.hostname = NULL;
+		init = TRUE;
+	}
 	prompt.pwd = ft_getenv("PWD");
-	prompt.user = ft_getenv("USERNAME");
-	if (prompt.user == NULL)
-		prompt.user = ft_getenv("USER");
-	if (OS == Linux)
-		prompt.hostname = ft_gethostname();
-	else
-		prompt.hostname = NULL;
 	return (prompt);
 }
 
@@ -53,5 +58,4 @@ void	prompt(void)
 		ft_fprintf(STDERR_FILENO, "%s", prompt.pwd);
 	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar_err);
 	ft_fprintf(STDERR_FILENO, "> ");
-	gc_free(prompt.hostname);
 }
