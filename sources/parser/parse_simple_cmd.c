@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/18 20:12:41 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/20 19:39:37 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ t_bool	is_redirection(enum e_tok_type type)
 	return (False);
 }
 
-t_bool	is_leaf(enum e_tok_type type)
+static t_bool	is_leaf(enum e_tok_type type)
 {
-	if (is_redirection(type) == True)
-		return (True);
-	if (type == Word_tok)
-		return (True);
-	return (False);
+	return (is_redirection(type) == True || type == Word_tok);
 }
+
+static t_bool	is_separator()
 
 void	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 {
@@ -43,11 +41,11 @@ void	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 	ft_bzero(new_redirection, sizeof(*new_redirection));
 	if ((*tok_lst)->type == Dgreater_tok)
 		new_redirection->type = Append_output_redir;
-	if ((*tok_lst)->type == Greater_tok)
+	else if ((*tok_lst)->type == Greater_tok)
 		new_redirection->type = Output_redir;
-	if ((*tok_lst)->type == Lesser_tok)
+	else if ((*tok_lst)->type == Lesser_tok)
 		new_redirection->type = Input_redir;
-	if ((*tok_lst)->type == Dlesser_tok)
+	else if ((*tok_lst)->type == Dlesser_tok)
 		new_redirection->type = Heredoc_redir;
 	eat_token(tok_lst);
 	new_redirection->stream = ft_strdup((*tok_lst)->data);
@@ -96,3 +94,11 @@ t_node	*parse_simple_cmd(t_token **tok_lst)
 		= from_lst_to_array(tok_lst, simple_cmd->content.simple_cmd.argc);
 	return (simple_cmd);
 }
+
+/* t_node	*parse_pipe(t_token *tok_lst) */
+/* { */
+	/* t_node	*pipe_node; */
+
+	/* pipe_node = gc_malloc(sizeof(*pipe_node)); */
+	/* pipe = pipe */
+/* } */
