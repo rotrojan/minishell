@@ -6,11 +6,12 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 15:04:42 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/11 17:27:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/18 18:19:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libgc.h"
+#include <stdio.h>
 
 void	gc_free_all(void)
 {
