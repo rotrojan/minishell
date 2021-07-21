@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/20 19:15:00 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/22 01:04:11 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,13 @@ void	clear_ast(t_node **ast);
 ** parse_simple_cmd.c
 */
 
-void	eat_token(t_token **tok_lst);
-/* t_bool	is_leaf(enum e_tok_type type); */
 void	add_redirection(t_token **tok_lst, t_node *simple_cmd);
 char	**from_lst_to_array(t_token **tok_lst, int argc);
 t_node	*parse_simple_cmd(t_token **tok_lst);
+
+t_bool	is_leaf(enum e_tok_type type);
+t_bool	is_redirection(enum e_tok_type type);
+t_bool	is_separator(enum e_tok_type type);
+t_bool	is_pipe(enum e_tok_type type);
 
 #endif

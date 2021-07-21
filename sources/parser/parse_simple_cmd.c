@@ -6,31 +6,11 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/20 19:39:37 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/22 00:20:29 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-t_bool	is_redirection(enum e_tok_type type)
-{
-	if (type == Lesser_tok)
-		return (True);
-	if (type == Dlesser_tok)
-		return (True);
-	if (type == Greater_tok)
-		return (True);
-	if (type == Dgreater_tok)
-		return (True);
-	return (False);
-}
-
-static t_bool	is_leaf(enum e_tok_type type)
-{
-	return (is_redirection(type) == True || type == Word_tok);
-}
-
-static t_bool	is_separator()
 
 void	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 {
@@ -95,10 +75,10 @@ t_node	*parse_simple_cmd(t_token **tok_lst)
 	return (simple_cmd);
 }
 
-/* t_node	*parse_pipe(t_token *tok_lst) */
-/* { */
-	/* t_node	*pipe_node; */
+t_node	*parse_pipe(t_token *tok_lst)
+{
+	t_node	*pipe_node;
 
-	/* pipe_node = gc_malloc(sizeof(*pipe_node)); */
-	/* pipe = pipe */
-/* } */
+	pipe_node = gc_malloc(sizeof(*pipe_node));
+	pipe = pipe
+}

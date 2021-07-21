@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/20 19:13:31 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/22 00:08:52 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,17 +37,6 @@ void	print_array(char **av)
 		fflush(stdout);
 	}
 }
-
-/* t_node	*create_node(t_node_type node_type) */
-/* { */
-	/* t_node	*new_node; */
-
-	/* new_node = NULL; */
-	/* new_node = gc_malloc(sizeof(*new_node)); */
-	/* ft_bzero(new_node, sizeof(*new_node)); */
-	/* new_node->type = node_type */
-	/* return (new_node); */
-/* } */
 
 void	build_ast(t_token **tok_lst, t_node **ast)
 {

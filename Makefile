@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/07/18 20:24:04 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/07/22 00:19:32 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		env.c				exit.c					pwd.c					\
 		lexer.c				tok_separators.c		tok_word.c				\
 		error_management.c	build_ast.c				tok_utils.c				\
-		free_ast.c			parse_simple_cmd.c
+		free_ast.c			parse_simple_cmd.c		token_identifiers.c
 		#quote_funtions.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
@@ -43,8 +43,7 @@ RM = rm -f
 MKDIR = mkdir -p
 DEBUG = off
 
-CFLAGS = -MMD -Wall -Wextra #-Werror
-CXXFLAGS = $(INCLUDES_DIR:%=-I %)
+CFLAGS = -MMD -Wall -Wextra -Werror $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
 	CXXFLAGS += -g3 -fsanitize=address
 endif
@@ -59,7 +58,8 @@ all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)
 	$(MAKE) $(NAME)
 
-$(NAME): $(OBJS) | $(LIBS:%=lib%.a)
+$(NAME): $(OBJS) $(LIBS:%=lib%.a)
+	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)
 	$(CC) $(CXXFLAGS) $^ -o $(NAME) $(LDFLAGS)
 
 -include $(DEPENDENCIES)
@@ -67,7 +67,7 @@ $(OBJS_DIR)/%.o: %.c $(OBJS_DIR)/debug$(DEBUG) | $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
-	$(MKDIR) $(OBJS_DIR)
+	$(MKDIR) $@
 
 lib%.a:
 	$(MAKE) -C $(@:%.a=%)
