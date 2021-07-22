@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/20 16:05:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/20 19:15:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,7 @@ static void	control_key(t_cursor *cursor, int c)
 	}
 }
 
-/* Read and return input line for shell. */
-char	*input(void)
+static void child(int *fd)
 {
 	int			c;
 	char		*line;
@@ -41,6 +40,7 @@ char	*input(void)
 
 	cursor.on_inchar = create_inchar(EOL);
 	cursor.pos = get_cursor_pos();
+	close(fd[0]);
 	while (1)
 	{
 		c = ft_getch();
@@ -49,7 +49,10 @@ char	*input(void)
 			if (c == '\n')
 			{
 				line = inchars_to_line(inchars_head(&cursor));
-				return (line);
+				write(fd[1], line, ft_strlen(line));
+				gc_free(line);
+				close(fd[1]);
+				break ;
 			}
 			else if (!ft_iscntrl(c))
 				insert_inchar(&cursor, c);
@@ -57,4 +60,37 @@ char	*input(void)
 				control_key(&cursor, c);
 		}
 	}
+}
+
+static char	*parent(int *fd)
+{
+	char	*line;
+
+	line = NULL;
+	handle_signals();
+	close(fd[1]);
+	get_next_line(fd[0], &line);
+	close(fd[0]);
+	return (line);
+}
+
+/* Read and return input line for shell. */
+char	*input(void)
+{
+	char	*line;
+	int		fd[2];
+	pid_t	pid;
+
+	line = NULL;
+	if (pipe(fd) == ERR)
+		exit_shell(EXIT_FAILURE, strerror(errno));
+	pid = fork();
+	if (pid == ERR)
+		exit_shell(EXIT_FAILURE, strerror(errno));
+	else if (pid == 0)
+		child(fd);
+	else
+		line = parent(fd);
+	waitpid(pid, NULL, 0);
+	return (line);
 }
