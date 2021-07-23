@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/22 22:49:07 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/23 18:36:16 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ t_bool	build_ast(t_token **tok_lst, t_node **ast)
 
 	while (*tok_lst != NULL)
 	{
-		if (is_separator((*tok_lst)->type) == True)
-			ret = parse_separator(tok_lst, ast);
+		if (is_logical_operator((*tok_lst)->type) == True)
+			ret = parse_logical_operator(tok_lst, ast);
 		else if (is_pipe((*tok_lst)->type) == True)
 			ret = parse_pipe(tok_lst, ast);
 		else if (is_leaf((*tok_lst)->type) == True)

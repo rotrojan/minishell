@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 00:11:18 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/22 17:28:42 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/23 18:35:38 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ t_bool	is_leaf(enum e_tok_type type)
 	return (is_redirection(type) == True || type == Word_tok);
 }
 
-t_bool	is_separator(enum e_tok_type type)
+t_bool	is_logical_operator(enum e_tok_type type)
 {
-	return (type == Or_tok || type == And_tok || type == Or_tok);
+	return (type == And_tok || type == Or_tok);
 }
 
 t_bool	is_pipe(enum e_tok_type type)
