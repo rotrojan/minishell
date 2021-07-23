@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:11:30 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/18 20:15:51 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/22 17:57:12 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_escaped_chrs
 {
 	char	chr;
 	char	escaped_chr;
-}				t_escaped_chrs;
+}	t_escaped_chrs;
 
 typedef struct s_token
 {

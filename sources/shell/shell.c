@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/20 16:25:12 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/22 22:51:08 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,80 @@ void	print_tokens(t_token **tok_lst)
 	printf("%p\n", current);
 }
 
+void	print_ast(t_node *ast)
+{
+	int	i;
+	t_redirection	*current;
+
+	if (ast->type == Simple_cmd)
+	{
+		i = 0;
+		/* printf("\nCOMMAND"); */
+		fflush(stdout);
+		while (ast->content.simple_cmd.argv[i])
+		{
+			printf("\n%s", ast->content.simple_cmd.argv[i++]);
+			fflush(stdout);
+		}
+		current = ast->content.simple_cmd.redirection;
+		if (current != NULL)
+		{
+			printf("\n== redirections ==");
+			fflush(stdout);
+		}
+		while (current != NULL)
+		{
+			if (current->type == Heredoc_redir)
+			{
+				printf("\nHereDoc\n%s", current->stream);
+				fflush(stdout);
+			}
+			else if (current->type == Output_redir)
+			{
+				printf("\nOutput redirection\n%s", current->stream);
+				fflush(stdout);
+			}
+			else if (current->type == Input_redir)
+			{
+				printf("\nInput redirection\n%s", current->stream);
+				fflush(stdout);
+			}
+			else if (current->type == Append_output_redir)
+			{
+				printf("\nAppend Output redirection\n%s", current->stream);
+				fflush(stdout);
+			}
+
+			current = current->next;
+		}
+	}
+	else
+	{
+		print_ast(ast->content.child.left);
+		if (ast->type == Pipe_node)
+		{
+			printf("\nPIPE");
+			fflush(stdout);
+		}
+		else if (ast->type == And_node)
+		{
+			printf("\nAND");
+			fflush(stdout);
+		}
+		else if (ast->type == Semic_node)
+		{
+			printf("\nSEMI COLON");
+			fflush(stdout);
+		}
+		else if (ast->type == Or_node)
+		{
+			printf("\nOR");
+			fflush(stdout);
+		}
+		print_ast(ast->content.child.right);
+	}
+}
+
 /* Core of program */
 void	shell(void)
 {
@@ -64,11 +138,14 @@ void	shell(void)
 		{
 			put_in_history(line);
 			build_tok_lst(line, &tok_lst);
-			/* print_tokens(&tok_lst); */
-			/* printf("yolo\n"); */
-			build_ast(&tok_lst, &ast);
-			clear_ast(&ast);
-			/* clear_tokens(&tok_lst); */
+			if (build_ast(&tok_lst, &ast) == False)
+			{
+				display_error(UNEXPECTED_TOKEN, &tok_lst);
+				clear_ast(&ast);
+			}
+			else
+				print_ast(ast);
+			clear_tokens(&tok_lst);
 		}
 		else
 			gc_free(line);

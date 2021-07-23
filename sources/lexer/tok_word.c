@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/18 20:28:06 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/22 22:50:11 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ t_token	*tok_word(char *inchars, int *i)
 	enum e_state		state;
 
 	j = 0;
-	/* ret = word_rules(inchars[*i]); */
 	data = gc_malloc(sizeof(*data) * 1);
 	*data = '\0';
 	state = State_general;

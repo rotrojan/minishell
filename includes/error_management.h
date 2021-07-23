@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 20:03:53 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/20 17:39:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/22 20:00:32 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ enum e_error
 	UNEXPECTED_TOKEN
 };
 
-void	display_error(enum e_error error, t_node **ast, t_token **tok_lst);
+void	display_error(enum e_error error, t_token **tok_lst);
 
 #endif

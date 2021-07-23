@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/22 00:08:52 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/22 22:49:07 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,26 +26,20 @@ void	eat_token(t_token **tok_lst)
 	tmp = NULL;
 }
 
-void	print_array(char **av)
+t_bool	build_ast(t_token **tok_lst, t_node **ast)
 {
-	int	i;
+	t_bool	ret;
 
-	i = 0;
-	while (av[i])
-	{
-		printf("\n%s", av[i++]);
-		fflush(stdout);
-	}
-}
-
-void	build_ast(t_token **tok_lst, t_node **ast)
-{
 	while (*tok_lst != NULL)
 	{
-		*ast = parse_simple_cmd(tok_lst);
-		if (*ast == NULL)
-			return (display_error(UNEXPECTED_TOKEN, ast, tok_lst));
-		if (*ast && (*ast)->type == Simple_cmd)
-			print_array((*ast)->content.simple_cmd.argv);
+		if (is_separator((*tok_lst)->type) == True)
+			ret = parse_separator(tok_lst, ast);
+		else if (is_pipe((*tok_lst)->type) == True)
+			ret = parse_pipe(tok_lst, ast);
+		else if (is_leaf((*tok_lst)->type) == True)
+			ret = parse_simple_cmd(tok_lst, ast);
+		if (ret == False)
+			return (False);
 	}
+	return (True);
 }
