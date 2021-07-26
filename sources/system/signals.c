@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 00:28:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/20 16:52:11 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/24 19:13:26 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ static void	sigquit_handler(int sig)
 /* Self explanatory. */
 void	handle_signals(void)
 {
-	signal(SIGINT, &sigint_handler);
-	signal(SIGQUIT, &sigquit_handler);
+	struct sigaction	sigint;
+	struct sigaction	sigquit;
+
+	sigint.sa_handler = &sigint_handler;
+	sigaction(SIGINT, &sigint, 0);
+	sigquit.sa_handler = &sigquit_handler;
+	sigaction(SIGQUIT, &sigquit, 0);
 }

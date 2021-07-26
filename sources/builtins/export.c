@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 02:31:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/24 22:41:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,4 @@
 
 void	export(const char *name, const char *value)
 {
-
 }

@@ -6,11 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:28:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/19 14:10:54 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/24 22:40:36 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
+#include <errno.h>
 
 static char 	*ft_append_char(char *str, char c)
 {

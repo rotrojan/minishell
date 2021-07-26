@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/20 19:15:38 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/24 22:59:32 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	control_key(t_cursor *cursor, int c)
 	}
 }
 
-static void child(int *fd)
+static void	child(int *fd)
 {
 	int			c;
 	char		*line;
@@ -62,6 +62,8 @@ static void child(int *fd)
 	}
 }
 
+// define output input pipe fd
+
 static char	*parent(int *fd)
 {
 	char	*line;
@@ -74,12 +76,24 @@ static char	*parent(int *fd)
 	return (line);
 }
 
+static void	catch_signals(char **line, int status)
+{
+	if (WIFEXITED(status))
+		exit_shell(EXIT_SUCCESS, NULL);
+	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
+	{
+		if (*line == NULL)
+			*line = ft_strdup("");
+	}
+}
+
 /* Read and return input line for shell. */
 char	*input(void)
 {
 	char	*line;
 	int		fd[2];
 	pid_t	pid;
+	int		status;
 
 	line = NULL;
 	if (pipe(fd) == ERR)
@@ -91,6 +105,7 @@ char	*input(void)
 		child(fd);
 	else
 		line = parent(fd);
-	waitpid(pid, NULL, 0);
+	waitpid(pid, &status, 0);
+	catch_signals(&line, status);
 	return (line);
 }
