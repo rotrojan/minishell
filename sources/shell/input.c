@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/24 22:59:32 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/26 19:14:37 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,18 +73,8 @@ static char	*parent(int *fd)
 	close(fd[1]);
 	get_next_line(fd[0], &line);
 	close(fd[0]);
+	debug(3, "line=%s", line);
 	return (line);
-}
-
-static void	catch_signals(char **line, int status)
-{
-	if (WIFEXITED(status))
-		exit_shell(EXIT_SUCCESS, NULL);
-	if (WIFSIGNALED(status) && WTERMSIG(status) == SIGINT)
-	{
-		if (*line == NULL)
-			*line = ft_strdup("");
-	}
 }
 
 /* Read and return input line for shell. */
@@ -106,6 +96,7 @@ char	*input(void)
 	else
 		line = parent(fd);
 	waitpid(pid, &status, 0);
-	catch_signals(&line, status);
+	if (WIFEXITED(status))
+		exit_shell(EXIT_SUCCESS, NULL);
 	return (line);
 }
