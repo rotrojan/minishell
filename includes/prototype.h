@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/20 16:52:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/27 18:17:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ int				inchars_len(t_inchar *inchars);
 t_inchar		*inchars_head(t_cursor *cursor);
 t_inchar		*inchars_queue(t_cursor *cursor);
 void			print_inchars(t_inchar *inchars);
-void			free_inchars(t_inchar **inchars);
+void			free_inchars(t_inchar *inchars);
 char			*inchars_to_line(t_inchar *inchars);
 void			insert_inchar(t_cursor *cursor, int value);
 void			push_back_inchars(t_inchar **inchars, int value);
