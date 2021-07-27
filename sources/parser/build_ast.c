@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   build_ast.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/23 18:36:16 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/28 00:07:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,20 +26,20 @@ void	eat_token(t_token **tok_lst)
 	tmp = NULL;
 }
 
-t_bool	build_ast(t_token **tok_lst, t_node **ast)
+bool	build_ast(t_token **tok_lst, t_node **ast)
 {
-	t_bool	ret;
+	bool	ret;
 
 	while (*tok_lst != NULL)
 	{
-		if (is_logical_operator((*tok_lst)->type) == True)
+		if (is_logical_operator((*tok_lst)->type) == TRUE)
 			ret = parse_logical_operator(tok_lst, ast);
-		else if (is_pipe((*tok_lst)->type) == True)
+		else if (is_pipe((*tok_lst)->type) == TRUE)
 			ret = parse_pipe(tok_lst, ast);
-		else if (is_leaf((*tok_lst)->type) == True)
+		else if (is_leaf((*tok_lst)->type) == TRUE)
 			ret = parse_simple_cmd(tok_lst, ast);
-		if (ret == False)
-			return (False);
+		if (ret == FALSE)
+			return (FALSE);
 	}
-	return (True);
+	return (TRUE);
 }

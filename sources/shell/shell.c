@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/28 00:02:18 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/28 00:07:17 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ void	shell(void)
 		{
 			put_in_history(line);
 			build_tok_lst(line, &tok_lst);
-			if (build_ast(&tok_lst, &ast) == False)
+			if (build_ast(&tok_lst, &ast) == FALSE)
 			{
 				display_error(UNEXPECTED_TOKEN, &tok_lst);
 				clear_ast(&ast);
