@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/22 22:50:11 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/31 20:07:02 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,21 +14,19 @@
 
 static enum e_chr_rules	word_rules(enum e_chr_type chr_type)
 {
-	static enum e_chr_rules	word_rules[] = {
-		[Error_chr] = Not_accepted,
-		[Alpha_chr] = Accepted,
-		[Digit_chr] = Accepted,
-		[Print_chr] = Accepted,
+	enum e_chr_rules const	word_rules[] = {
+		[Null_chr] = Not_accepted,
+		[Any_chr] = Accepted,
 		[Space_chr] = Not_accepted,
 		[Squote_chr] = Accepted,
 		[Dquote_chr] = Accepted,
-		[Dol_chr] = Accepted,
 		[Less_chr] = Not_accepted,
 		[Great_chr] = Not_accepted,
 		[And_chr] = Not_accepted,
-		[Esc_chr] = Accepted,
 		[Semic_chr] = Not_accepted,
-		[Pipe_chr] = Not_accepted
+		[Pipe_chr] = Not_accepted,
+		[Oparenth_chr] = Not_accepted,
+		[Cparenth_chr] = Not_accepted
 	};
 
 	return (word_rules[chr_type]);
@@ -45,13 +43,9 @@ static enum e_chr_rules	is_valid(char c, enum e_state *state)
 			*state = State_insquote;
 		else if (chr_type == Dquote_chr)
 			*state = State_indquote;
-		else if (chr_type == Esc_chr)
-			*state = State_escaped;
 	}
 	else
 	{
-		if (*state == State_escaped)
-			*state = State_general;
 		if (*state == State_insquote)
 			if (chr_type == Squote_chr)
 				*state = State_general;

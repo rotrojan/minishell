@@ -6,30 +6,31 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:11:30 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/22 17:57:12 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/31 20:07:34 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LEXER_H
 # define LEXER_H
 # include "minishell.h"
+# define SIZE_OF_ONE_CHAR_STR 2
+# define SIZE_OF_TWO_CHAR_STR 3
 
 enum e_chr_type
 {
-	Error_chr,
-	Alpha_chr,
-	Digit_chr,
-	Print_chr,
+	Any_chr,
+	Null_chr,
 	Space_chr,
 	Squote_chr,
 	Dquote_chr,
-	Dol_chr,
 	Less_chr,
 	Great_chr,
 	And_chr,
-	Esc_chr,
 	Semic_chr,
 	Pipe_chr,
+	Oparenth_chr,
+	Cparenth_chr,
+	NB_CHR_TYPE
 };
 
 enum e_tok_type
@@ -43,14 +44,15 @@ enum e_tok_type
 	Dlesser_tok,
 	Greater_tok,
 	Dgreater_tok,
-	Amp_tok
+	Amp_tok,
+	Oparenth_tok,
+	Cparenth_tok
 };
 
 enum e_chr_rules
 {
 	Not_accepted,
 	Accepted,
-	Accepted_to_expand
 };
 
 typedef struct s_escaped_chrs
@@ -91,6 +93,12 @@ t_token			*tok_word(char *inchars, int *i);
 t_token			*tok_semic(char *inchars, int *i);
 t_token			*tok_and(char *inchars, int *i);
 t_token			*tok_pipe(char *inchars, int *i);
+t_token			*tok_parenth(char *inchars, int *i);
+
+/*
+** tok_redirections.c
+*/
+
 t_token			*tok_lesser(char *inchars, int *i);
 t_token			*tok_greater(char *inchars, int *i);
 

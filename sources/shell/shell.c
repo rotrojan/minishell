@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/22 22:51:08 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/31 20:32:28 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void	print_tokens(t_token **tok_lst)
 			printf("Greater_tok ");
 		else if (current->type == Dgreater_tok)
 			printf("Dgreater_tok ");
+		else if (current->type == Oparenth_tok)
+			printf("Oparenth_tok ");
+		else if (current->type == Cparenth_tok)
+			printf("Cparenth_tok ");
 		printf("(%s) -> ", current->data);
 		current = current->next;
 	}
@@ -121,6 +125,32 @@ void	print_ast(t_node *ast)
 	}
 }
 
+void test()
+{
+	char *str[] = {
+		"Any_chr",
+		"Null_chr",
+		"Space_chr",
+		"Squote_chr",
+		"Dquote_chr",
+		"Less_chr",
+		"Great_chr",
+		"And_chr",
+		"Semic_chr",
+		"Pipe_chr",
+		"Oparenth_chr",
+		"Cparenth_chr"
+	};
+
+	unsigned char c = 0;
+	while (c <= 127)
+	{
+		printf("%c = %s\n", c, str[get_chr_type(c)]);
+		c++;
+	}
+
+}
+
 /* Core of program */
 void	shell(void)
 {
@@ -138,13 +168,17 @@ void	shell(void)
 		{
 			put_in_history(line);
 			build_tok_lst(line, &tok_lst);
+			print_tokens(&tok_lst);
 			if (build_ast(&tok_lst, &ast) == False)
 			{
-				display_error(UNEXPECTED_TOKEN, &tok_lst);
+				if (tok_lst->type == Amp_tok)
+					display_error(Amp_token, &tok_lst);
+				else
+					display_error(Unexpected_token, &tok_lst);
 				clear_ast(&ast);
 			}
-			else
-				print_ast(ast);
+			/* else */
+				/* print_ast(ast); */
 			clear_tokens(&tok_lst);
 		}
 		else
