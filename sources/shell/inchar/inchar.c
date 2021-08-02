@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/18 19:20:04 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/02 15:04:49 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,19 +25,16 @@ t_inchar	*create_inchar(int value)
 }
 
 /* Self explanatory. */
-void	free_inchars(t_inchar **inchars)
+void	free_inchars(t_inchar *inchars)
 {
-	t_inchar	*tmp;
 	t_inchar	*prev;
 
-	tmp = *inchars;
-	while (tmp)
+	while (inchars)
 	{
-		prev = tmp;
-		tmp = tmp->next;
+		prev = inchars;
+		inchars = inchars->next;
 		gc_free(prev);
 	}
-	*inchars = NULL;
 }
 
 /* Insert char in input line. */

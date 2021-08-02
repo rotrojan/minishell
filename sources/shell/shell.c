@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/31 20:32:28 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/02 16:10:34 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void	shell(void)
 			put_in_history(line);
 			build_tok_lst(line, &tok_lst);
 			print_tokens(&tok_lst);
-			if (build_ast(&tok_lst, &ast) == False)
+			if (build_ast(&tok_lst, &ast) == FALSE)
 			{
 				if (tok_lst->type == Amp_tok)
 					display_error(Amp_token, &tok_lst);

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:12:05 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/24 19:26:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/02 15:07:00 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,13 @@
 /* Deletes the character in front of the cursor. */
 void	backspace_key(t_cursor *cursor)
 {
-	char		*goto_cap;
-	t_inchar	*tmp;
+	char			*goto_cap;
+	t_inchar		*tmp;
+	t_history_data	*history;
 
 	if (cursor->on_inchar->prev != NULL)
 	{
+		history = get_history();
 		tmp = cursor->on_inchar->prev;
 		if (tmp->prev != NULL)
 			tmp->prev->next = cursor->on_inchar;
@@ -32,17 +34,21 @@ void	backspace_key(t_cursor *cursor)
 		tputs(goto_cap, 1, ft_putchar_err);
 		print_inchars(cursor->on_inchar);
 		tputs(goto_cap, 1, ft_putchar_err);
+		gc_free(history->input);
+		history->input = inchars_to_line(inchars_head(cursor));
 	}
 }
 
 /* Deletes the character in back of the cursor. */
 void	delete_key(t_cursor *cursor)
 {
-	char		*goto_cap;
-	t_inchar	*tmp;
+	char			*goto_cap;
+	t_inchar		*tmp;
+	t_history_data	*history;
 
 	if (cursor->on_inchar->value != EOL)
 	{
+		history = get_history();
 		tmp = cursor->on_inchar->next;
 		if (cursor->on_inchar->prev != NULL)
 			cursor->on_inchar->prev->next = tmp;
@@ -54,6 +60,8 @@ void	delete_key(t_cursor *cursor)
 		tputs(goto_cap, 1, ft_putchar_err);
 		print_inchars(cursor->on_inchar);
 		tputs(goto_cap, 1, ft_putchar_err);
+		gc_free(history->input);
+		history->input = inchars_to_line(inchars_head(cursor));
 	}
 }
 

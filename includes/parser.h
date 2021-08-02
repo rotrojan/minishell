@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/23 18:34:32 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/07/28 00:06:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ typedef struct s_node
 ** build_ast.c
 */
 
-t_bool	build_ast(t_token **tok_lst, t_node **ast);
+bool	build_ast(t_token **tok_lst, t_node **ast);
 void	eat_token(t_token **tok_lst);
 
 /*
@@ -79,17 +79,17 @@ void	clear_ast(t_node **ast);
 ** parse_functions.c
 */
 
-t_bool	parse_simple_cmd(t_token **tok_lst, t_node **ast);
-t_bool	parse_pipe(t_token **tok_lst, t_node **ast);
-t_bool	parse_logical_operator(t_token **tok_lst, t_node **ast);
+bool	parse_simple_cmd(t_token **tok_lst, t_node **ast);
+bool	parse_pipe(t_token **tok_lst, t_node **ast);
+bool	parse_logical_operator(t_token **tok_lst, t_node **ast);
 
 /*
 ** token_identifiers.c
 */
 
-t_bool	is_leaf(enum e_tok_type type);
-t_bool	is_redirection(enum e_tok_type type);
-t_bool	is_logical_operator(enum e_tok_type type);
-t_bool	is_pipe(enum e_tok_type type);
+bool	is_leaf(enum e_tok_type type);
+bool	is_redirection(enum e_tok_type type);
+bool	is_logical_operator(enum e_tok_type type);
+bool	is_pipe(enum e_tok_type type);
 
 #endif

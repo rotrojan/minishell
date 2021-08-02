@@ -6,12 +6,14 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/20 18:26:43 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/07/23 18:42:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DEFINE_H
 # define DEFINE_H
+
+# define _XOPEN_SOURCE 700
 
 # ifdef __linux__
 
@@ -30,6 +32,7 @@
 # define ESC 27
 # define DELETE 8
 # define BACKSPACE 127
+# define CTRL_C 2
 # define CTRL_D 4
 # define CTRL_L 12
 
