@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/31 20:07:02 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/03 22:50:32 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static enum e_chr_rules	word_rules(enum e_chr_type chr_type)
 	return (word_rules[chr_type]);
 }
 
-static enum e_chr_rules	is_valid(char c, enum e_state *state)
+static enum e_chr_rules	is_valid(char c, enum e_state *state, t_error *error)
 {
 	enum e_chr_type	chr_type;
 
@@ -47,17 +47,31 @@ static enum e_chr_rules	is_valid(char c, enum e_state *state)
 	else
 	{
 		if (*state == State_insquote)
+		{
 			if (chr_type == Squote_chr)
 				*state = State_general;
+			else if (chr_type == Null_chr)
+			{
+				*error = Unexpected_eof;
+				return (Not_accepted);
+			}
+		}
 		if (*state == State_indquote)
+		{
 			if (chr_type == Dquote_chr)
 				*state = State_general;
+			else if (chr_type == Null_chr)
+			{
+				*error = Unexpected_eof;
+				return (Not_accepted);
+			}
+		}
 		return (Accepted);
 	}
 	return (word_rules(chr_type));
 }
 
-t_token	*tok_word(char *inchars, int *i)
+t_token	*tok_word(char *inchars, int *i, t_error *error)
 {
 	char				*data;
 	int					j;
@@ -68,11 +82,16 @@ t_token	*tok_word(char *inchars, int *i)
 	data = gc_malloc(sizeof(*data) * 1);
 	*data = '\0';
 	state = State_general;
-	ret = is_valid(inchars[*i], &state);
+	ret = is_valid(inchars[*i], &state, error);
 	while (ret == Accepted)
 	{
 		++j;
-		ret = is_valid(inchars[*i + j], &state);
+		ret = is_valid(inchars[*i + j], &state, error);
+	}
+	if (*error != No_error)
+	{
+		gc_free(data);
+		return (NULL);
 	}
 	data = join_chars(data, inchars + *i, j);
 	*i += j;

@@ -6,17 +6,18 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:17:35 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/31 20:43:01 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/03 19:34:54 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*tok_parenth(char *inchars, int *i)
+t_token	*tok_parenth(char *inchars, int *i, t_error *error)
 {
 	char			*data;
 	enum e_tok_type	type;
 
+	(void)error;
 	if (inchars[*i] == '(')
 		type = Oparenth_tok;
 	else
@@ -27,10 +28,11 @@ t_token	*tok_parenth(char *inchars, int *i)
 	return (create_token(data, type));
 }
 
-t_token	*tok_semic(char *inchars, int *i)
+t_token	*tok_semic(char *inchars, int *i, t_error *error)
 {
 	char	*data;
 
+	(void)error;
 	(void)inchars;
 	data = gc_malloc(sizeof(*data) * SIZE_OF_ONE_CHAR_STR);
 	ft_strlcpy(data, ";", SIZE_OF_ONE_CHAR_STR);
@@ -38,7 +40,7 @@ t_token	*tok_semic(char *inchars, int *i)
 	return (create_token(data, Semic_tok));
 }
 
-t_token	*tok_and(char *inchars, int *i)
+t_token	*tok_and(char *inchars, int *i, t_error *error)
 {
 	enum e_tok_type	type;
 	char			*data;
@@ -52,18 +54,18 @@ t_token	*tok_and(char *inchars, int *i)
 	}
 	else
 	{
-		data = gc_malloc(sizeof(*data) * SIZE_OF_ONE_CHAR_STR);
-		ft_strlcpy(data, "&", SIZE_OF_ONE_CHAR_STR);
-		type = Amp_tok;
+		*error = Amp_token;
+		return (NULL);
 	}
 	return (create_token(data, type));
 }
 
-t_token	*tok_pipe(char *inchars, int *i)
+t_token	*tok_pipe(char *inchars, int *i, t_error *error)
 {
 	enum e_tok_type	type;
 	char			*data;
 
+	(void)error;
 	if (get_chr_type(inchars[++(*i)]) == Pipe_chr)
 	{
 		data = gc_malloc(sizeof(*data) * SIZE_OF_TWO_CHAR_STR);

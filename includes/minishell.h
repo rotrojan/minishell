@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:39:58 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/28 00:03:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/03 19:24:54 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 # include "libft.h"
 # include "libgc.h"
 # include "enum.h"
+# include "lexer.h"
+# include "error_management.h"
 # include "struct.h"
 # include "prototype.h"
-# include "lexer.h"
 # include "parser.h"
-# include "error_management.h"
 
 #endif

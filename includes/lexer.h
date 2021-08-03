@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:11:30 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/31 20:07:34 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/03 19:31:38 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ typedef struct s_token
 	struct s_token	*next;
 }	t_token;
 
-void			build_tok_lst(char *inchars, t_token **tok_lst);
+bool	build_tok_lst(char *inchars, t_token **tok_lst, t_error *error);
 
 /*
 ** tok_utils.c
@@ -84,30 +84,29 @@ char			*join_chars(char *str, const char *chrs, int nb_chrs);
 ** tok_word.c
 */
 
-t_token			*tok_word(char *inchars, int *i);
+t_token			*tok_word(char *inchars, int *i, t_error *error);
 
 /*
 ** tok_separators.c
 */
 
-t_token			*tok_semic(char *inchars, int *i);
-t_token			*tok_and(char *inchars, int *i);
-t_token			*tok_pipe(char *inchars, int *i);
-t_token			*tok_parenth(char *inchars, int *i);
+t_token			*tok_semic(char *inchars, int *i, t_error *error);
+t_token			*tok_and(char *inchars, int *i, t_error *error);
+t_token			*tok_pipe(char *inchars, int *i, t_error *error);
+t_token			*tok_parenth(char *inchars, int *i, t_error *error);
 
 /*
 ** tok_redirections.c
 */
 
-t_token			*tok_lesser(char *inchars, int *i);
-t_token			*tok_greater(char *inchars, int *i);
+t_token			*tok_lesser(char *inchars, int *i, t_error *error);
+t_token			*tok_greater(char *inchars, int *i, t_error *error);
 
 enum e_state
 {
 	State_general,
 	State_insquote,
 	State_indquote,
-	State_escaped
 };
 
 #endif

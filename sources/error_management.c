@@ -6,24 +6,26 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 20:00:08 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/31 20:40:42 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/03 22:54:27 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	display_error(enum e_error error, t_token **tok_lst)
+void	display_error(t_error error, t_token **tok_lst)
 {
-	char const	*error_msg[] = {
+	char const	*error_msg[NB_ERRORS] = {
 		NULL,
 		CMD_NOT_FOUND_STR,
 		BAD_SUBSTITUTION_STR,
 		UNEXPECTED_TOKEN_STR,
 		UNEXPECTED_EOF_STR,
-		AMP_TOKEN_STR
+		AMP_TOKEN_STR,
 	};
 
-	if (error == Unexpected_token)
+	if (error == Unexpected_eof)
+		ft_fprintf(STDERR_FILENO, error_msg[error], "\nminishell:");
+	else
 	{
 		if (*tok_lst)
 			ft_fprintf(STDERR_FILENO, error_msg[error],
@@ -32,7 +34,4 @@ void	display_error(enum e_error error, t_token **tok_lst)
 			ft_fprintf(STDERR_FILENO, error_msg[error],
 				"\nminishell:", "newline");
 	}
-	else if (error == Unexpected_eof)
-		ft_fprintf(STDERR_FILENO, error_msg[error],
-			"\nminishell:", "unexpected end of file");
 }

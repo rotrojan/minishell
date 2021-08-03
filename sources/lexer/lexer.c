@@ -6,15 +6,15 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:09:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/31 19:52:35 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/03 19:31:57 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*get_next_token(char *inchars, int *i)
+t_token	*get_next_token(char *inchars, int *i, t_error *error)
 {
-	t_token	*(*tokenizer[NB_CHR_TYPE])(char*, int*);
+	t_token	*(*tokenizer[NB_CHR_TYPE])(char*, int*, t_error*);
 
 	tokenizer[Null_chr] = NULL;
 	tokenizer[Any_chr] = &tok_word;
@@ -28,10 +28,10 @@ t_token	*get_next_token(char *inchars, int *i)
 	tokenizer[Pipe_chr] = &tok_pipe;
 	tokenizer[Oparenth_chr] = &tok_parenth;
 	tokenizer[Cparenth_chr] = &tok_parenth;
-	return (tokenizer[get_chr_type(inchars[*i])](inchars, i));
+	return (tokenizer[get_chr_type(inchars[*i])](inchars, i, error));
 }
 
-void	build_tok_lst(char *inchars, t_token **tok_lst)
+bool	build_tok_lst(char *inchars, t_token **tok_lst, t_error *error)
 {
 	int		i;
 	t_token	*new_tok;
@@ -41,7 +41,10 @@ void	build_tok_lst(char *inchars, t_token **tok_lst)
 	{
 		while (ft_isspace(inchars[i]))
 			++i;
-		new_tok = get_next_token(inchars, &i);
+		new_tok = get_next_token(inchars, &i, error);
+		if (*error != No_error)
+			return (FALSE);
 		add_token(new_tok, tok_lst);
 	}
+	return (TRUE);
 }
