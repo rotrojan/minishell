@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/27 23:59:30 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/04 02:36:43 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,30 +36,40 @@ static char	*get_line(t_cursor *cursor)
 {
 	char	*line;
 
-	if (errno == EINTR)
-	{
-		errno = 0;
-		handle_signals();
-		line = ft_strdup("");
-	}
-	else
-		line = inchars_to_line(inchars_head(cursor));
+	line = inchars_to_line(inchars_head(cursor));
 	free_inchars(inchars_head(cursor));
 	return (line);
+}
+
+static int	catch_signals(void)
+{
+	int	*sig;
+	int	tmp;
+
+	handle_signals();
+	sig = get_signal_on();
+	tmp = *sig;
+	*sig = 0;
+	ft_fflush(STDIN_FILENO);
+	return (tmp);
 }
 
 /* Read and return input line for shell. */
 char	*input(void)
 {
 	int			c;
+	int			sig;
 	t_cursor	cursor;
 
 	cursor.on_inchar = create_inchar(EOL);
 	cursor.pos = get_cursor_pos();
 	while (1)
 	{
-		if (errno == EINTR)
-			return (get_line(&cursor));
+		sig = catch_signals();
+		if (sig == SIGINT)
+			return (ft_strdup(""));
+		else if (sig == SIGWINCH)
+			cursor.pos = get_cursor_pos();
 		c = ft_getch();
 		if (c != ERR)
 		{
