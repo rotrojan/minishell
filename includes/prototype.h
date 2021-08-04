@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/27 18:17:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/04 02:24:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,11 @@ void			cd(const char *path);
 
 //	system
 enum e_os_name	getos(void);
+void			set_timeout(t_term *term, int timeout);
+int				ft_fflush(int fd);
 pid_t			ft_getpid(void);
 void			handle_signals(void);
+int				*get_signal_on(void);
 char			*ft_gethostname(void);
 char			*getbinpath(const char *bin);
 void			exit_shell(int status, char *message);

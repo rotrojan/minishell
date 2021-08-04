@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/07/31 20:06:22 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/08/04 02:41:50 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,8 +26,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		lexer.c				tok_separators.c		tok_word.c				\
 		error_management.c	build_ast.c				tok_utils.c				\
 		tok_redirections.c	free_ast.c				parse_simple_cmd.c		\
-		token_identifiers.c	parse_separators.c
-		#quote_funtions.c
+		token_identifiers.c	parse_separators.c		ft_fflush.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
@@ -39,7 +38,7 @@ INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
 LIBS = gc ft
 
 MAKE = make
-CC = clang
+CC = gcc
 RM = rm -f
 MKDIR = mkdir -p
 DEBUG = off
@@ -48,7 +47,7 @@ CFLAGS = -MMD -Wall -Wextra -Werror $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
 	CXXFLAGS += -g3 -fsanitize=address
 endif
-LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
+LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses --enable-sigwinch
 
 vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env)				\

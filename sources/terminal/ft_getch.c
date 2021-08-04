@@ -6,21 +6,11 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 22:59:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/27 17:57:11 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/04 02:26:53 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	set_timeout(t_term *term, int timeout)
-{
-	struct termios	tmp;
-
-	tmp = term->current;
-	tmp.c_cc[VMIN] = 0;
-	tmp.c_cc[VTIME] = timeout;
-	tcsetattr(STDIN_FILENO, TCSANOW, &tmp);
-}
 
 static int	get_special_key(int c)
 {
@@ -48,9 +38,9 @@ static int	get_special_key(int c)
 
 static int	special_key(void)
 {
-	int							c;
-	int							key;
-	t_term						*term;
+	int		c;
+	int		key;
+	t_term	*term;
 
 	c = 0;
 	key = 0;
