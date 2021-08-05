@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/03 23:00:41 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/05 03:26:30 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,13 +182,17 @@ void	shell(void)
 						display_error(Unexpected_token, &tok_lst);
 					clear_ast(&ast);
 				}
-				else
-					print_ast(ast);
+				/* else */
+					/* print_ast(ast); */
 			}
 			clear_tokens(&tok_lst);
+			exec_ast(ast);
+			clear_ast(&ast);
 		}
 		else
+		{
+			ft_fprintf(STDERR_FILENO, "\n\r");
 			gc_free(line);
-		ft_fprintf(STDERR_FILENO, "\n\r");
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:58:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/22 18:44:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/05 03:02:02 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,20 @@
 
 static void	child(int *fd, const char *bin_path, const char **arg)
 {
-	close(fd[0]);
-	dup2(fd[1], STDOUT_FILENO);
+	close(fd[Output]);
+	dup2(fd[Input], STDOUT_FILENO);
 	execve(bin_path, (char *const *)arg, NULL);
-	dup2(STDOUT_FILENO, fd[1]);
-	close(fd[1]);
+	dup2(STDOUT_FILENO, fd[Input]);
+	close(fd[Input]);
 }
 
 static t_file	parent(int *fd)
 {
 	t_file	output;
 
-	close(fd[1]);
-	output = readfile(fd[0]);
-	close(fd[0]);
+	close(fd[Input]);
+	output = readfile(fd[Output]);
+	close(fd[Output]);
 	return (output);
 }
 
@@ -44,7 +44,7 @@ char	**pipe_exec(const char *bin_path, const char **arg)
 	pid = fork();
 	if (pid == ERR)
 		exit_shell(EXIT_FAILURE, strerror(errno));
-	else if (pid == 0)
+	else if (pid == Child)
 		child(fd, bin_path, arg);
 	else
 		output = parent(fd);
