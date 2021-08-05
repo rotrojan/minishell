@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/03 22:50:32 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/04 19:53:32 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,40 +32,30 @@ static enum e_chr_rules	word_rules(enum e_chr_type chr_type)
 	return (word_rules[chr_type]);
 }
 
-static enum e_chr_rules	is_valid(char c, enum e_state *state, t_error *error)
+static enum e_chr_rules	is_valid(
+	char c, bool *is_in_squotes, bool *is_in_dquotes, t_error *error)
 {
 	enum e_chr_type	chr_type;
 
 	chr_type = get_chr_type(c);
-	if (*state == State_general)
+	if (*is_in_squotes == FALSE && *is_in_dquotes == FALSE)
 	{
 		if (chr_type == Squote_chr)
-			*state = State_insquote;
+			*is_in_squotes = TRUE;
 		else if (chr_type == Dquote_chr)
-			*state = State_indquote;
+			*is_in_dquotes = TRUE;
 	}
 	else
 	{
-		if (*state == State_insquote)
+		if (chr_type == Null_chr)
 		{
-			if (chr_type == Squote_chr)
-				*state = State_general;
-			else if (chr_type == Null_chr)
-			{
-				*error = Unexpected_eof;
-				return (Not_accepted);
-			}
+			*error = Unexpected_eof;
+			return (Not_accepted);
 		}
-		if (*state == State_indquote)
-		{
-			if (chr_type == Dquote_chr)
-				*state = State_general;
-			else if (chr_type == Null_chr)
-			{
-				*error = Unexpected_eof;
-				return (Not_accepted);
-			}
-		}
+		if (chr_type == Squote_chr && *is_in_squotes == TRUE)
+			*is_in_squotes = FALSE;
+		else if (chr_type == Dquote_chr && *is_in_dquotes == TRUE)
+			*is_in_dquotes = FALSE;
 		return (Accepted);
 	}
 	return (word_rules(chr_type));
@@ -75,19 +65,17 @@ t_token	*tok_word(char *inchars, int *i, t_error *error)
 {
 	char				*data;
 	int					j;
-	enum e_chr_rules	ret;
-	enum e_state		state;
+	bool				is_in_squotes;
+	bool				is_in_dquotes;
 
 	j = 0;
+	is_in_squotes = FALSE;
+	is_in_dquotes = FALSE;
 	data = gc_malloc(sizeof(*data) * 1);
 	*data = '\0';
-	state = State_general;
-	ret = is_valid(inchars[*i], &state, error);
-	while (ret == Accepted)
-	{
+	while (is_valid(inchars[*i + j], &is_in_squotes, &is_in_dquotes, error)
+		== Accepted)
 		++j;
-		ret = is_valid(inchars[*i + j], &state, error);
-	}
 	if (*error != No_error)
 	{
 		gc_free(data);

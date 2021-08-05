@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:46:23 by rotroja          #+#    #+#             */
-/*   Updated: 2021/07/31 18:42:48 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/04 19:55:48 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_token	*create_token(char *data, enum e_tok_type type)
 
 enum e_chr_type	get_chr_type(char c)
 {
-	enum e_chr_type const chr_type[128] = {
+	enum e_chr_type const	chr_type[128] = {
 		Any_chr,
 		['\t' ...'\r'] = Space_chr,
 		[' '] = Space_chr,
@@ -78,7 +78,7 @@ enum e_chr_type	get_chr_type(char c)
 	return (chr_type[(int)c]);
 }
 
-char	*join_chars(char *str, const char *chrs, int nb_chrs)
+char	*join_chars(char *str, char const *chrs, int nb_chrs)
 {
 	char	*strnew;
 	int		str_size;

@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:11:30 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/03 19:31:38 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/04 19:54:51 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void			clear_tokens(t_token **tok_lst);
 void			add_token(t_token *new_tok, t_token **tok_lst);
 t_token			*create_token(char *data, enum e_tok_type type);
 enum e_chr_type	get_chr_type(char c);
-char			*join_chars(char *str, const char *chrs, int nb_chrs);
+char			*join_chars(char *str, char const *chrs, int nb_chrs);
 
 /*
 ** tok_word.c
@@ -101,12 +101,5 @@ t_token			*tok_parenth(char *inchars, int *i, t_error *error);
 
 t_token			*tok_lesser(char *inchars, int *i, t_error *error);
 t_token			*tok_greater(char *inchars, int *i, t_error *error);
-
-enum e_state
-{
-	State_general,
-	State_insquote,
-	State_indquote,
-};
 
 #endif
