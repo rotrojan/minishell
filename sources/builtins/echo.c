@@ -6,8 +6,14 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:43:13 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/29 15:43:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/06 02:20:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_echo(int argc, char **argv, char **env)
+{
+	(void)(argc && argv && env);
+	return (0);
+}

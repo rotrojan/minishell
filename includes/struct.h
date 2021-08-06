@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/18 18:53:09 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/06 01:40:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include "minishell.h"
 
-typedef char **t_env;
+typedef char	**t_env;
 
 typedef struct s_axe
 {
@@ -75,5 +75,11 @@ typedef struct s_key
 	int					key;
 	void				(*function)(t_cursor *);
 }						t_key;
+
+typedef struct s_builtins
+{
+	char				*name;
+	int					(*function)(int, char **, char **);
+}						t_builtins;
 
 #endif
