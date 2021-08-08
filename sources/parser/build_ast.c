@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/08 22:17:55 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/08 22:39:54 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,12 @@ bool	build_ast(t_token **tok_lst, t_node **ast)
 {
 	bool		ret;
 
-	while (*tok_lst != NULL && (*tok_lst)->type != Cparenth_tok)
+	while (*tok_lst != NULL)
 	{
 		if ((*tok_lst)->type == Amp_tok)
 			return (FALSE);
-		else if ((*tok_lst)->type == Oparenth_tok)
+		else if ((*tok_lst)->type == Oparenth_tok
+			|| (*tok_lst)->type == Cparenth_tok)
 			ret = parse_parenthesis(tok_lst, ast);
 		else if (is_leaf((*tok_lst)->type) == FALSE)
 			ret = parse_logical_operator(tok_lst, ast);

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/08 22:12:24 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/08 23:18:35 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,8 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 	ft_bzero(simple_cmd, sizeof(*simple_cmd));
 	simple_cmd->type = Simple_cmd;
 	simple_cmd->content.simple_cmd.argc = get_argc(*tok_lst);
-	if (from_lst_to_array(tok_lst, simple_cmd) == FALSE)
+	if (from_lst_to_array(tok_lst, simple_cmd) == FALSE
+		|| (*tok_lst != NULL && (*tok_lst)->type == Oparenth_tok))
 	{
 		gc_free(simple_cmd);
 		return (FALSE);
