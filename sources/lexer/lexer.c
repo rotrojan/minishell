@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:09:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/03 19:31:57 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/08 17:17:36 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,16 @@ bool	build_tok_lst(char *inchars, t_token **tok_lst, t_error *error)
 	t_token	*new_tok;
 
 	i = 0;
+	while (ft_isspace(inchars[i]))
+		++i;
 	while (inchars[i])
 	{
-		while (ft_isspace(inchars[i]))
-			++i;
 		new_tok = get_next_token(inchars, &i, error);
 		if (*error != No_error)
 			return (FALSE);
 		add_token(new_tok, tok_lst);
+		while (ft_isspace(inchars[i]))
+			++i;
 	}
 	return (TRUE);
 }

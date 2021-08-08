@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/05 03:26:30 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/08 18:21:05 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	print_tokens(t_token **tok_lst)
 	printf("%p\n", current);
 }
 
-void	print_ast(t_node *ast)
+void	print_ast(t_node *ast, int depth)
 {
 	int	i;
 	t_redirection	*current;
@@ -63,7 +63,7 @@ void	print_ast(t_node *ast)
 		fflush(stdout);
 		while (ast->content.simple_cmd.argv[i])
 		{
-			printf("\n%s", ast->content.simple_cmd.argv[i++]);
+			printf("\ndepth = %d, %s", depth, ast->content.simple_cmd.argv[i++]);
 			fflush(stdout);
 		}
 		current = ast->content.simple_cmd.redirection;
@@ -100,28 +100,28 @@ void	print_ast(t_node *ast)
 	}
 	else
 	{
-		print_ast(ast->content.child.left);
+		print_ast(ast->content.child.left, depth + 1);
 		if (ast->type == Pipe_node)
 		{
-			printf("\nPIPE");
+			printf("\ndepth = %d, PIPE", depth);
 			fflush(stdout);
 		}
 		else if (ast->type == And_node)
 		{
-			printf("\nAND");
+			printf("\ndepth = %d, AND", depth);
 			fflush(stdout);
 		}
 		else if (ast->type == Semic_node)
 		{
-			printf("\nSEMI COLON");
+			printf("\ndepth = %d, SEMI COLON", depth);
 			fflush(stdout);
 		}
 		else if (ast->type == Or_node)
 		{
-			printf("\nOR");
+			printf("\ndepth = %d, OR", depth);
 			fflush(stdout);
 		}
-		print_ast(ast->content.child.right);
+		print_ast(ast->content.child.right, depth + 1);
 	}
 }
 
@@ -176,17 +176,23 @@ void	shell(void)
 				/* print_tokens(&tok_lst); */
 				if (build_ast(&tok_lst, &ast) == FALSE)
 				{
-					if (tok_lst->type == Amp_tok)
+					/* printf("yolomagl\n"); */
+					if (tok_lst == NULL)
+						display_error(Unexpected_eof, &tok_lst);
+					else if (tok_lst->type == Amp_tok)
 						display_error(Amp_token, &tok_lst);
 					else
 						display_error(Unexpected_token, &tok_lst);
 					clear_ast(&ast);
 				}
-				/* else */
-					/* print_ast(ast); */
+				else
+				{
+					print_ast(ast, 0);
+					printf("\n");
+				}
 			}
 			clear_tokens(&tok_lst);
-			exec_ast(ast);
+			/* exec_ast(ast); */
 			clear_ast(&ast);
 		}
 		else

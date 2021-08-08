@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/28 00:07:30 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/08 18:09:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,9 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 {
 	t_node	*simple_cmd;
 
-	if (is_logical_operator((*tok_lst)->type) == TRUE
-		|| is_pipe((*tok_lst)->type) == TRUE)
+	if ((*tok_lst)->type == Oparenth_tok)
+		return (parse_parenthesis(tok_lst, ast));
+	if (is_leaf((*tok_lst)->type) == FALSE)
 		return (FALSE);
 	simple_cmd = NULL;
 	simple_cmd = gc_malloc(sizeof(*simple_cmd));

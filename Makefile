@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/08/05 03:00:16 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/08/08 17:50:05 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		lexer.c				tok_separators.c		tok_word.c				\
 		error_management.c	build_ast.c				tok_utils.c				\
 		tok_redirections.c	free_ast.c				parse_simple_cmd.c		\
-		token_identifiers.c	parse_separators.c		ft_fflush.c				\
+		token_identifiers.c	parse_separator.c		ft_fflush.c				\
 		exec_ast.c			exec_simple_cmd.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)

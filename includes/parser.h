@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/28 00:06:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/08 18:08:45 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,8 @@ void	clear_ast(t_node **ast);
 */
 
 bool	parse_simple_cmd(t_token **tok_lst, t_node **ast);
-bool	parse_pipe(t_token **tok_lst, t_node **ast);
-bool	parse_logical_operator(t_token **tok_lst, t_node **ast);
+bool	parse_separator(t_token **tok_lst, t_node **ast);
+bool	parse_parenthesis(t_token **tok_lst, t_node **ast);
 
 /*
 ** token_identifiers.c
@@ -89,7 +89,5 @@ bool	parse_logical_operator(t_token **tok_lst, t_node **ast);
 
 bool	is_leaf(enum e_tok_type type);
 bool	is_redirection(enum e_tok_type type);
-bool	is_logical_operator(enum e_tok_type type);
-bool	is_pipe(enum e_tok_type type);
 
 #endif

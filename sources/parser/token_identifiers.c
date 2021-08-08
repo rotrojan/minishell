@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/22 00:11:18 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/28 00:07:30 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/08 17:55:41 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,4 @@ bool	is_redirection(enum e_tok_type type)
 bool	is_leaf(enum e_tok_type type)
 {
 	return (is_redirection(type) == TRUE || type == Word_tok);
-}
-
-bool	is_logical_operator(enum e_tok_type type)
-{
-	return (type == And_tok || type == Or_tok);
-}
-
-bool	is_pipe(enum e_tok_type type)
-{
-	return (type == Pipe_tok);
 }
