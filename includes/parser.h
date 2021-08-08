@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/08 18:08:45 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/08 22:18:09 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,9 @@ void	clear_ast(t_node **ast);
 */
 
 bool	parse_simple_cmd(t_token **tok_lst, t_node **ast);
-bool	parse_separator(t_token **tok_lst, t_node **ast);
+bool	parse_logical_operator(t_token **tok_lst, t_node **ast);
 bool	parse_parenthesis(t_token **tok_lst, t_node **ast);
+bool	parse_pipeline(t_token **tok_lst, t_node **ast);
 
 /*
 ** token_identifiers.c
