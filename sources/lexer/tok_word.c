@@ -6,11 +6,36 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/04 19:53:32 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/09 21:00:56 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Returns from the inchars string the maloced data string which will be added
+** to the token link.
+*/
+
+static char	*join_chars(char *str, char const *chrs, int nb_chrs)
+{
+	char	*strnew;
+	int		str_size;
+
+	strnew = NULL;
+	str_size = ft_strlen(str);
+	strnew = gc_malloc(sizeof(*strnew) * (str_size + nb_chrs + 1));
+	ft_strlcpy(strnew, str, str_size + 1);
+	ft_strlcpy(strnew + str_size, chrs, nb_chrs + 1);
+	gc_free(str);
+	return (strnew);
+}
+
+/*
+** List the rules of acceptance of a character in a word token without taking in
+** account the presence of quotes (which will be verified by the is_valid()
+** function.
+*/
 
 static enum e_chr_rules	word_rules(enum e_chr_type chr_type)
 {
@@ -31,6 +56,14 @@ static enum e_chr_rules	word_rules(enum e_chr_type chr_type)
 
 	return (word_rules[chr_type]);
 }
+
+/*
+** Check for the validity of the characters in inchars with the word_rules()
+** function according to the quoting state (between two single quotes or two
+** double quotes, all the characters are accepted). If the end of the inchars
+** string is reached and one of the quote state is still equal to TRUE, error is
+** set to Unexpected_eof and FALSE is returned. Otherwise, TRUE is returned.
+*/
 
 static enum e_chr_rules	is_valid(
 	char c, bool *is_in_squotes, bool *is_in_dquotes, t_error *error)
@@ -60,6 +93,16 @@ static enum e_chr_rules	is_valid(
 	}
 	return (word_rules(chr_type));
 }
+
+/*
+** Starting from the beginning of the token in the inchars string, the validity
+** of the characters is checked by the is_valid() function. If the character is
+** not valid, the end of the token is reached, and the join_chars() functions
+** will add the word identifier to the data field of the token link.
+** The states is_in_squotes and is_in_dquotes are declared here but are modified
+** in is_valid() because these states must be persistent from one call to
+** is_valid() to an other.
+*/
 
 t_token	*tok_word(char *inchars, int *i, t_error *error)
 {

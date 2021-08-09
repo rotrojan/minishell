@@ -6,11 +6,16 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 15:56:04 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/07/18 20:20:08 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/09 21:10:15 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Free the redirections linked list in the simple command leaf in the AST using
+** gc_free from the libgc.
+*/
 
 static void	free_redirections(t_redirection **redirection_lst)
 {
@@ -29,6 +34,10 @@ static void	free_redirections(t_redirection **redirection_lst)
 		gc_free(prev);
 	}
 }
+
+/*
+** Free the simple command leaf in the AST using gc_free from the libgc.
+*/
 
 static void	free_simple_cmd(t_node **simple_cmd)
 {
@@ -51,6 +60,10 @@ static void	free_simple_cmd(t_node **simple_cmd)
 	*simple_cmd = NULL;
 }
 
+/*
+** Free the AST using gc_free from the libgc.
+*/
+
 void	clear_ast(t_node **ast)
 {
 	if (*ast == NULL)
@@ -61,5 +74,7 @@ void	clear_ast(t_node **ast)
 	{
 		clear_ast(&((*ast)->content.child.left));
 		clear_ast(&((*ast)->content.child.right));
+		gc_free(*ast);
+		*ast = NULL;
 	}
 }

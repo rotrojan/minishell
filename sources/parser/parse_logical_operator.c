@@ -6,11 +6,18 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 18:39:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/09 00:35:06 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/09 22:00:38 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** To parse a logical operator, the corresponding node is created, the AST is
+** transfered to the left child of the node, and the parse_pipeline() function
+** is called to add the following command to the right child of the node. The
+** AST is the set ot point to the node.
+*/
 
 bool	parse_logical_operator(t_token **tok_lst, t_node **ast)
 {

@@ -6,12 +6,17 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/09 00:36:45 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/09 20:50:41 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSER_H
 # define PARSER_H
+
+/*
+** All the possible types of nodes that can be found in the AST. Here, leaves
+** are also considered as nodes.
+*/
 
 enum e_node_type
 {
@@ -22,6 +27,10 @@ enum e_node_type
 	Semic_node
 };
 
+/*
+** All the possible types of redirections that can be found in a simple command.
+*/
+
 enum e_redirection_type
 {
 	Input_redir,
@@ -30,12 +39,23 @@ enum e_redirection_type
 	Append_output_redir
 };
 
+/*
+** A redirection is composed of a redirection type, a stream to redirect the
+** input from / output to, and a pointer to the next redirection.
+*/
+
 typedef struct s_redirection
 {
 	char						*stream;
 	enum e_redirection_type		type;
 	struct s_redirection		*next;
 }	t_redirection;
+
+/*
+** A simple command (aka, the leaves of the tree) is composed of an number of
+** arguments argc, an array of strings of arguments argv and a linked list of
+** redirections.
+*/
 
 typedef struct s_simple_cmd
 {
@@ -44,17 +64,31 @@ typedef struct s_simple_cmd
 	t_redirection	*redirection;
 }	t_simple_cmd;
 
+/*
+** A node in the AST always have to children: right and left.
+*/
+
 typedef struct s_child
 {
 	struct s_node	*left;
 	struct s_node	*right;
 }	t_child;
 
+/*
+** If the member of the AST is a leaf, it contains a simple command. Otherwise,
+** if it is a node, it has two children.
+*/
+
 typedef union u_node_content
 {
 	struct s_simple_cmd	simple_cmd;
 	struct s_child		child;
 }	t_node_content;
+
+/*
+** A member of the AST contains a node_type and a content wich can be a simple
+** command or children.
+*/
 
 typedef struct s_node
 {

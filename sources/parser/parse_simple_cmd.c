@@ -6,12 +6,17 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/08 23:18:35 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/09 21:56:47 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #define REDIR_TOK_TYPE_OFFSET 5
+
+/*
+** Malloc and add the redirection to the redirection linked list of the simple
+** command.
+*/
 
 static bool	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 {
@@ -35,6 +40,13 @@ static bool	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 	simple_cmd->content.simple_cmd.redirection = new_redirection;
 	return (TRUE);
 }
+
+/*
+** The from_lst_to_array() function will malloc and fill the argv array of
+** strings containing the arguments of the command. If a redirection is
+** encountered, it will be handled by the add_redirection() function. The tokens
+** of the tok_lst linked list are eaten progressivly along the process.
+*/
 
 static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
 {
@@ -61,6 +73,12 @@ static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
 	return (TRUE);
 }
 
+/*
+** The get_argc() function returns the number of arguments of the simple command
+** by iterating on the tok_lst token linked list while the tokens are not
+** separators. Redirection tokens are not taken in the count.
+*/
+
 static unsigned int	get_argc(t_token *tok_lst)
 {
 	unsigned int	argc;
@@ -79,6 +97,15 @@ static unsigned int	get_argc(t_token *tok_lst)
 	}
 	return (argc);
 }
+
+/*
+** Parsing a simple command is done the following way:
+** - if the token is not a leaf, it is a syntax error: FALSE is returned;
+** - the simple_command node is maloced;
+** - the number of arguments of the command is obtained with get_argc();
+** - from_lst_to_array() fills the argv array and the redirection linked list of
+** the simple command leaf.
+*/
 
 bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 {

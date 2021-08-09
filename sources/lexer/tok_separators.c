@@ -6,11 +6,15 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:17:35 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/03 19:34:54 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/09 20:02:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Tokenize the Oparenth_tok and the Cparenth_tok tokens.
+*/
 
 t_token	*tok_parenth(char *inchars, int *i, t_error *error)
 {
@@ -28,6 +32,10 @@ t_token	*tok_parenth(char *inchars, int *i, t_error *error)
 	return (create_token(data, type));
 }
 
+/*
+** Tokenize the Semic_tok tokens.
+*/
+
 t_token	*tok_semic(char *inchars, int *i, t_error *error)
 {
 	char	*data;
@@ -39,6 +47,12 @@ t_token	*tok_semic(char *inchars, int *i, t_error *error)
 	++(*i);
 	return (create_token(data, Semic_tok));
 }
+
+/*
+** Tokenize the And_tok and the Amp_tok tokens. Since the Amp_tok token is not
+** handled by minishell, if this token is found, NULL is returned and the error
+** variable is set to Amp_token.
+*/
 
 t_token	*tok_and(char *inchars, int *i, t_error *error)
 {
@@ -59,6 +73,10 @@ t_token	*tok_and(char *inchars, int *i, t_error *error)
 	}
 	return (create_token(data, type));
 }
+
+/*
+** Tokenize the Pipe_tok and the Or_tok tokens.
+*/
 
 t_token	*tok_pipe(char *inchars, int *i, t_error *error)
 {

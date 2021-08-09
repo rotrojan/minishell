@@ -6,11 +6,15 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/25 12:46:23 by rotroja          #+#    #+#             */
-/*   Updated: 2021/08/04 19:55:48 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/09 21:02:28 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Add the new_tok token to the tok_lst token linked list.
+*/
 
 void	add_token(t_token *new_tok, t_token **tok_lst)
 {
@@ -26,6 +30,11 @@ void	add_token(t_token *new_tok, t_token **tok_lst)
 		current->next = new_tok;
 	}
 }
+
+/*
+** Free the tok_lst token linked list using the gc_free function
+** provided by the libgc.
+*/
 
 void	clear_tokens(t_token **tok_lst)
 {
@@ -45,6 +54,10 @@ void	clear_tokens(t_token **tok_lst)
 	*tok_lst = NULL;
 }
 
+/*
+** Create a token link of type type with the malloced data data.
+*/
+
 t_token	*create_token(char *data, enum e_tok_type type)
 {
 	t_token	*new_tok;
@@ -55,6 +68,11 @@ t_token	*create_token(char *data, enum e_tok_type type)
 	new_tok->next = NULL;
 	return (new_tok);
 }
+
+/*
+** Returns the char type chr_type of char c, in order to call the proper
+** tokenizer during the lexing phase.
+*/
 
 enum e_chr_type	get_chr_type(char c)
 {
@@ -76,18 +94,4 @@ enum e_chr_type	get_chr_type(char c)
 	if (c == '\0')
 		return (Null_chr);
 	return (chr_type[(int)c]);
-}
-
-char	*join_chars(char *str, char const *chrs, int nb_chrs)
-{
-	char	*strnew;
-	int		str_size;
-
-	strnew = NULL;
-	str_size = ft_strlen(str);
-	strnew = gc_malloc(sizeof(*strnew) * (str_size + nb_chrs + 1));
-	ft_strlcpy(strnew, str, str_size + 1);
-	ft_strlcpy(strnew + str_size, chrs, nb_chrs + 1);
-	gc_free(str);
-	return (strnew);
 }

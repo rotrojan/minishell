@@ -6,11 +6,15 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/31 19:59:11 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/03 19:57:12 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/09 20:03:11 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Tokenize the Lesser_tok and the Dlesser_tok tokens.
+*/
 
 t_token	*tok_lesser(char *inchars, int *i, t_error *error)
 {
@@ -33,6 +37,10 @@ t_token	*tok_lesser(char *inchars, int *i, t_error *error)
 	}
 	return (create_token(data, type));
 }
+
+/*
+** Tokenize the Greater_tok and the Dgreater_tok tokens.
+*/
 
 t_token	*tok_greater(char *inchars, int *i, t_error *error)
 {
