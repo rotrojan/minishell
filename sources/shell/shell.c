@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/08 18:21:05 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/12 17:39:10 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,9 +174,8 @@ void	shell(void)
 			else
 			{
 				/* print_tokens(&tok_lst); */
-				if (build_ast(&tok_lst, &ast) == FALSE)
+				if (build_ast(&tok_lst, &ast) == FALSE || tok_lst != NULL)
 				{
-					/* printf("yolomagl\n"); */
 					if (tok_lst == NULL)
 						display_error(Unexpected_eof, &tok_lst);
 					else if (tok_lst->type == Amp_tok)
@@ -187,6 +186,7 @@ void	shell(void)
 				}
 				else
 				{
+					/* printf("\n%p\n", ast); */
 					print_ast(ast, 0);
 					printf("\n");
 				}

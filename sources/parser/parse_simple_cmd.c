@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/09 21:56:47 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/12 18:53:12 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
 ** The get_argc() function returns the number of arguments of the simple command
 ** by iterating on the tok_lst token linked list while the tokens are not
 ** separators. Redirection tokens are not taken in the count.
+** On success, TRUE is returned.
 */
 
 static unsigned int	get_argc(t_token *tok_lst)
@@ -111,6 +112,8 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 {
 	t_node	*simple_cmd;
 
+	if ((*tok_lst)->type == Oparenth_tok)
+		return (parse_parenthesis(tok_lst, ast));
 	if (is_leaf((*tok_lst)->type) == FALSE)
 		return (FALSE);
 	simple_cmd = NULL;

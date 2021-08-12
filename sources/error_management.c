@@ -6,11 +6,17 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 20:00:08 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/03 22:54:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/12 19:00:13 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Display the proper error message depending on the error variable given as
+** parameter and on the next coming token where the syntac error has been
+** raised.
+*/
 
 void	display_error(t_error error, t_token **tok_lst)
 {
