@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/23 18:42:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/12 18:04:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define ESC 27
 # define DELETE 8
 # define BACKSPACE 127
-# define CTRL_C 2
+# define CTRL_C 126
 # define CTRL_D 4
 # define CTRL_L 12
 
@@ -41,5 +41,7 @@
 # define RESET_CAP "me"
 
 # define HISTORY_PATH ".minish_history"
+
+# define EXIT_STOP 2
 
 #endif

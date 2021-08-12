@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/04 02:24:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/06 02:28:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,13 @@
 # define PROTOTYPE_H
 
 //	builtins
-void			env(void);
-void			pwd(void);
-void			ft_exit(void);
-void			cd(const char *path);
+int				run_builtin(int argc, char **argv, char **env);
+int				ft_env(int argc, char **argv, char **env);
+int				ft_echo(int argc, char **argv, char **env);
+int				pwd(int argc, char **argv, char **env);
+int				ft_exit(int argc, char **argv, char **env);
+int				cd(int argc, char **argv, char **env);
+int				unset(int argc, char **argv, char **env);
 
 //	system
 enum e_os_name	getos(void);

@@ -6,193 +6,53 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/12 17:39:10 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/12 20:04:27 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/* Function made for testing purposes. */
-void	print_tokens(t_token **tok_lst)
+static t_node	*lexer_parser(char *line)
 {
-	t_token	*current;
+	t_token	*tok_lst;
+	t_node	*ast;
+	t_error	error;
 
-	current = *tok_lst;
-	printf("\n");
-	while (current)
-	{
-		if (current->type == Word_tok)
-			printf("Word_tok ");
-		else if (current->type == Pipe_tok)
-			printf("Pipe_tok ");
-		else if (current->type == Or_tok)
-			printf("Or_tok ");
-		else if (current->type == Amp_tok)
-			printf("Amp_tok ");
-		else if (current->type == And_tok)
-			printf("And_tok ");
-		else if (current->type == Semic_tok)
-			printf("Semic_tok ");
-		else if (current->type == Lesser_tok)
-			printf("Lesser_tok ");
-		else if (current->type == Dlesser_tok)
-			printf("Dlesser_tok ");
-		else if (current->type == Greater_tok)
-			printf("Greater_tok ");
-		else if (current->type == Dgreater_tok)
-			printf("Dgreater_tok ");
-		else if (current->type == Oparenth_tok)
-			printf("Oparenth_tok ");
-		else if (current->type == Cparenth_tok)
-			printf("Cparenth_tok ");
-		printf("(%s) -> ", current->data);
-		current = current->next;
-	}
-	printf("%p\n", current);
-}
-
-void	print_ast(t_node *ast, int depth)
-{
-	int	i;
-	t_redirection	*current;
-
-	if (ast->type == Simple_cmd)
-	{
-		i = 0;
-		/* printf("\nCOMMAND"); */
-		fflush(stdout);
-		while (ast->content.simple_cmd.argv[i])
-		{
-			printf("\ndepth = %d, %s", depth, ast->content.simple_cmd.argv[i++]);
-			fflush(stdout);
-		}
-		current = ast->content.simple_cmd.redirection;
-		if (current != NULL)
-		{
-			printf("\n== redirections ==");
-			fflush(stdout);
-		}
-		while (current != NULL)
-		{
-			if (current->type == Heredoc_redir)
-			{
-				printf("\nHereDoc\n%s", current->stream);
-				fflush(stdout);
-			}
-			else if (current->type == Output_redir)
-			{
-				printf("\nOutput redirection\n%s", current->stream);
-				fflush(stdout);
-			}
-			else if (current->type == Input_redir)
-			{
-				printf("\nInput redirection\n%s", current->stream);
-				fflush(stdout);
-			}
-			else if (current->type == Append_output_redir)
-			{
-				printf("\nAppend Output redirection\n%s", current->stream);
-				fflush(stdout);
-			}
-
-			current = current->next;
-		}
-	}
+	tok_lst = NULL;
+	error = No_error;
+	if (build_tok_lst(line, &tok_lst, &error) == FALSE)
+		display_error(error, &tok_lst);
 	else
 	{
-		print_ast(ast->content.child.left, depth + 1);
-		if (ast->type == Pipe_node)
+		if (build_ast(&tok_lst, &ast) == FALSE)
 		{
-			printf("\ndepth = %d, PIPE", depth);
-			fflush(stdout);
+			if (tok_lst->type == Amp_tok)
+				display_error(Amp_token, &tok_lst);
+			else
+				display_error(Unexpected_token, &tok_lst);
+			clear_ast(&ast);
 		}
-		else if (ast->type == And_node)
-		{
-			printf("\ndepth = %d, AND", depth);
-			fflush(stdout);
-		}
-		else if (ast->type == Semic_node)
-		{
-			printf("\ndepth = %d, SEMI COLON", depth);
-			fflush(stdout);
-		}
-		else if (ast->type == Or_node)
-		{
-			printf("\ndepth = %d, OR", depth);
-			fflush(stdout);
-		}
-		print_ast(ast->content.child.right, depth + 1);
 	}
-}
-
-void test()
-{
-	char *str[] = {
-		"Any_chr",
-		"Null_chr",
-		"Space_chr",
-		"Squote_chr",
-		"Dquote_chr",
-		"Less_chr",
-		"Great_chr",
-		"And_chr",
-		"Semic_chr",
-		"Pipe_chr",
-		"Oparenth_chr",
-		"Cparenth_chr"
-	};
-
-	unsigned char c = 0;
-	while (c <= 127)
-	{
-		printf("%c = %s\n", c, str[get_chr_type(c)]);
-		c++;
-	}
-
+	clear_tokens(&tok_lst);
+	return (ast);
 }
 
 /* Core of program */
 void	shell(void)
 {
 	char			*line;
-	t_token			*tok_lst;
 	t_node			*ast;
-	enum e_error	error;
 
-	tok_lst = NULL;
 	ast = NULL;
 	while (1)
 	{
-		error = No_error;
 		prompt();
 		line = input();
 		if (line[0] != '\0')
 		{
 			put_in_history(line);
-			if (build_tok_lst(line, &tok_lst, &error) == FALSE)
-				display_error(error, &tok_lst);
-			else
-			{
-				/* print_tokens(&tok_lst); */
-				if (build_ast(&tok_lst, &ast) == FALSE || tok_lst != NULL)
-				{
-					if (tok_lst == NULL)
-						display_error(Unexpected_eof, &tok_lst);
-					else if (tok_lst->type == Amp_tok)
-						display_error(Amp_token, &tok_lst);
-					else
-						display_error(Unexpected_token, &tok_lst);
-					clear_ast(&ast);
-				}
-				else
-				{
-					/* printf("\n%p\n", ast); */
-					print_ast(ast, 0);
-					printf("\n");
-				}
-			}
-			clear_tokens(&tok_lst);
-			/* exec_ast(ast); */
+			ast = lexer_parser(line);
+			exec_ast(ast);
 			clear_ast(&ast);
 		}
 		else

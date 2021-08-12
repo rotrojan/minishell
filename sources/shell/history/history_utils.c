@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/24 19:20:24 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/10 20:23:58 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ t_history_data	*init_history(void)
 
 	line = NULL;
 	history = get_history();
-	history->data = NULL;
 	history->input = ft_strdup("");
 	fd = open(HISTORY_PATH, O_RDONLY);
 	if (fd > 0)
@@ -80,9 +79,9 @@ t_history_data	*init_history(void)
 				push_front_history(&history->data, line);
 			else
 				gc_free(line);
+			line = NULL;
 		}
 		close(fd);
-		history->tmp_nav = NULL;
 	}
 	return (history);
 }

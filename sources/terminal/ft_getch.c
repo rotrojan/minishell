@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 22:59:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/04 02:26:53 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/12 17:31:32 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ int	ft_getch(void)
 	c = 0;
 	if (read(STDIN_FILENO, &c, 1) <= 0)
 		return (ERR);
+	if (c == CTRL_D)
+		exit_shell(EXIT_SUCCESS, "\nexit\n");
 	if (c == ESC)
 		return (special_key());
 	return (c);

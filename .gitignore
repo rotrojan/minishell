@@ -72,3 +72,4 @@ minishell
 #Miscelenaous
 todo
 .nfs*
+test_functions.c
