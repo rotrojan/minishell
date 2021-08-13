@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/08/12 19:55:10 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/08/13 15:58:13 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,7 @@ INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
 LIBS = gc ft
 
 MAKE = make
-CC = gcc
+CC = clang
 RM = rm -f
 MKDIR = mkdir -p
 DEBUG = off
@@ -50,7 +50,7 @@ CFLAGS = -MMD -Wall -Wextra -Werror $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
 	CXXFLAGS += -g3 -fsanitize=address
 endif
-LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses --enable-sigwinch
+LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses #--enable-sigwinch
 
 vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env)				\

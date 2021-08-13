@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/12 18:04:15 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/13 15:59:59 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 
 # endif
 
+# define SIGWINCH 28
 # define EOL 0
 # define NB_SPECIAL_KEY 6
 # define NB_KEY 9

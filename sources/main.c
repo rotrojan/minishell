@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:20:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/27 21:58:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/13 16:24:50 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ int	main(int argc, char **argv, char **env)
 	handle_signals();
 	init_history();
 	shell();
-	exit_shell(EXIT_SUCCESS, "\n");
-	return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
