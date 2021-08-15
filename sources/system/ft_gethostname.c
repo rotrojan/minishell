@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 18:26:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/15 15:15:11 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 Only work in linux. */
 char	*ft_gethostname(void)
 {
-	t_file				output;
-	char				*bin_path;
-	char				*hostname;
-	static const char	*arg[] = {"cat", "/etc/hostname", NULL};
+	t_file		output;
+	char		*bin_path;
+	char		*hostname;
+	char const	*arg[] = {"cat", "/etc/hostname", NULL};
 
 	bin_path = getbinpath(arg[0]);
 	if (!bin_path)

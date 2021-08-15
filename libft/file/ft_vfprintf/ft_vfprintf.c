@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/31 16:53:30 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/01 19:01:58 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/15 15:16:56 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	ft_format_buffer(t_printf data, t_buffer *buffer, va_list ap)
 {
-	int						i;
-	static const t_types	types[N_TYPES] = {
+	int				i;
+	t_types const	types[N_TYPES] = {
 		{'%', &ft_per}, {'c', &ft_c}, {'s', &ft_s},
 		{'p', &ft_p}, {'d', &ft_d}, {'i', &ft_i},
 		{'u', &ft_u}, {'x', &ft_x}, {'X', &ft_xu}
