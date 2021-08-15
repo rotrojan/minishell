@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 01:35:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 16:17:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/15 18:49:21 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	run_builtin(int argc, char **argv)
 		{.name = "env", .function = &ft_env},
 		{.name = "exit", .function = &ft_exit},
 		{.name = "pwd", .function = &pwd},
+		{.name = "export", .function = &export},
 		{.name = "unset", .function = &unset},
 		{.name = NULL}
 	};
