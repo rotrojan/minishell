@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:20:37 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 19:51:05 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/15 18:31:56 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define FT_STRING_H
 
 int		ft_strlen(const char *s);
+size_t	ft_strnlen(char const *s, size_t maxlen);
 int		ft_isnumber(char *s);
 int		ft_strcmp(const char *s1, const char *s2);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
@@ -24,6 +25,7 @@ char	*ft_strjoin(char const *s1, char const *s2, char const *sep);
 char	*ft_strcat(char *dest, char *src);
 char	*ft_strcpy(char *dest, char *src);
 char	*ft_strdup(const char *s);
+char	*ft_strndup(const char *s1, size_t n);
 char	*ft_strchr(const char *s, int c);
 int		ft_isdigit(int c);
 int		ft_isspace(int c);

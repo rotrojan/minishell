@@ -10,7 +10,8 @@ STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_strjoin.c		ft_strcat.c			ft_strcpy.c				\
 		ft_strdup.c			ft_strchr.c			ft_isdigit.c			\
 		ft_isspace.c		ft_strdel.c			ft_iscntrl.c			\
-		ft_putxchar.c		ft_isalnum.c		ft_strlcpy.c
+		ft_putxchar.c		ft_isalnum.c		ft_strlcpy.c			\
+		ft_strndup.c		ft_strnlen.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 		ft_printf.c			ft_fprintf.c		readfile.c				\
 		gnl.c				ft_fputstr.c		free_file.c				\
