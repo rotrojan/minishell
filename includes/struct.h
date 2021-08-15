@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/12 19:56:04 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/15 16:16:39 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct s_key
 typedef struct s_builtins
 {
 	char				*name;
-	int					(*function)(int, char **, char **);
+	int					(*function)(int, char **);
 }						t_builtins;
 
 #endif

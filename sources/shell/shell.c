@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/13 15:47:17 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/15 16:17:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_node	*lexer_parser(char *line)
 	t_node	*ast;
 	t_error	error;
 
+	ast = NULL;
 	tok_lst = NULL;
 	ast = NULL;
 	error = No_error;

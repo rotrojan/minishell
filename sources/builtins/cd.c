@@ -6,19 +6,19 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:43:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/06 02:15:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/15 16:03:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cd(int argc, char **argv, char **env)
+int	cd(int argc, char **argv)
 {
 	char		*new;
 	char		*old;
 	char		*tmp;
 
-	(void)(argc && env);
+	(void)argc;
 	if (argv[1] == NULL)
 		tmp = ft_getenv("HOME");
 	else

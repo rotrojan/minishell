@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 01:35:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/13 15:07:14 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/15 16:17:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	run_builtin(int argc, char **argv, char **env)
+int	run_builtin(int argc, char **argv)
 {
 	int					i;
 	t_builtins const	builtins[] = {
@@ -30,5 +30,5 @@ int	run_builtin(int argc, char **argv, char **env)
 		i++;
 	if (builtins[i].name == NULL)
 		return (-1);
-	return (builtins[i].function(argc, argv, env));
+	return (builtins[i].function(argc, argv));
 }
