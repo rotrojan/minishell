@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 22:59:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/12 17:31:32 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/15 15:07:56 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static int	get_special_key(int c)
 {
-	int							i;
-	static const t_special_key	special_key[] = {{'A', KEY_UP}, {'B', KEY_DOWN},
+	int					i;
+	t_special_key const	special_key[] = {{'A', KEY_UP}, {'B', KEY_DOWN},
 	{'C', KEY_RIGHT}, {'D', KEY_LEFT}, {'H', KEY_HOME}, {'F', KEY_END}};
 
 	i = 0;
