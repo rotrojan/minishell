@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/12 18:04:15 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/13 18:40:12 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 
 # endif
 
+# define SIGWINCH 28
+
 # define EOL 0
 # define NB_SPECIAL_KEY 6
 # define NB_KEY 9
@@ -32,7 +34,7 @@
 # define ESC 27
 # define DELETE 8
 # define BACKSPACE 127
-# define CTRL_C 126
+# define CTRL_C 2
 # define CTRL_D 4
 # define CTRL_L 12
 

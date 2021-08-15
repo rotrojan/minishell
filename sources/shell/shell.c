@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/10 20:33:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/13 18:25:53 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ static t_node	*create_ast(char *line)
 	t_node	*ast;
 	t_error	error;
 
+	ast = NULL;
 	tok_lst = NULL;
 	error = No_error;
 	if (build_tok_lst(line, &tok_lst, &error) == FALSE)
