@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 16:16:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/16 18:23:32 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define EOL 0
 # define NB_SPECIAL_KEY 6
 # define NB_KEY 9
+# define PATH_MAX 256
 
 # define ESC 27
 # define DELETE 8
@@ -38,7 +39,15 @@
 # define CTRL_D 4
 # define CTRL_L 12
 
-# define COLOR_CAP "AF"
+# define KNRM  "\x1B[0m"
+# define KRED  "\x1B[31m"
+# define KGRN  "\x1B[32m"
+# define KYEL  "\x1B[33m"
+# define KBLU  "\x1B[34m"
+# define KMAG  "\x1B[35m"
+# define KCYN  "\x1B[36m"
+# define KWHT  "\x1B[37m"
+
 # define BOLD_CAP "md"
 # define RESET_CAP "me"
 

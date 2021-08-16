@@ -1,24 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/29 15:39:19 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/16 17:34:27 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/08 12:30:57 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/08/15 21:31:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	pwd(int argc, char **argv)
+char	*ft_strstr(const char *big, const char *little)
 {
-	char	path[PATH_MAX];
+	size_t	i;
+	size_t	j;
 
-	(void)(argc && argv);
-	getcwd(path, PATH_MAX);
-	ft_putstr(path);
-	ft_putchar('\n');
+	if (little[0] == '\0')
+		return ((char *)big);
+	j = 0;
+	while (big[j] != '\0')
+	{
+		if (big[j] == little[0])
+		{
+			i = 1;
+			while (little[i] != '\0' && big[j + i] == little[i])
+				++i;
+			if (little[i] == '\0')
+				return ((char *)&big[j]);
+		}
+		j++;
+	}
 	return (0);
 }

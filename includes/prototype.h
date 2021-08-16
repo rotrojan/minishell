@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 16:05:51 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/15 21:28:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ char			*ft_gethostname(void);
 char			*getbinpath(const char *bin);
 void			exit_shell(int status, char *message);
 char			**pipe_exec(const char *bin_path, const char **arg);
+char			*ft_realpath(char const *path);
+char			*extract_path(char const *pathfile);
+
 //		env
 int				ft_inenv(const char *name);
 char			*ft_getenv(const char *name);

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 16:16:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/16 17:28:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_prompt
 {
 	char				*home;
 	char				*user;
-	char				*pwd;
+	char				pwd[PATH_MAX];
 	char				*hostname;
 }						t_prompt;
 

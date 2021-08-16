@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 16:10:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/16 18:23:49 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static t_prompt	get_prompt_infos(void)
 			prompt.hostname = NULL;
 		init = TRUE;
 	}
-	prompt.pwd = ft_getenv("PWD");
+	getcwd(prompt.pwd, PATH_MAX);
 	return (prompt);
 }
 
@@ -45,17 +45,16 @@ void	prompt(void)
 	if (OS == Linux)
 	{
 		tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar_err);
-		tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_GREEN), 1, ft_putchar_err);
-		ft_fprintf(STDERR_FILENO, "%s@%s", prompt.user, prompt.hostname);
+		ft_fprintf(STDERR_FILENO, "%s%s@%s%s", KGRN, prompt.user,
+			prompt.hostname, KNRM);
 		tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar_err);
 		ft_putchar_err(':');
 	}
 	tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar_err);
-	tputs(tparm(tgetstr(COLOR_CAP, NULL), COLOR_BLUE), 1, ft_putchar_err);
 	if (!ft_strncmp(prompt.home, prompt.pwd, i))
-		ft_fprintf(STDERR_FILENO, "~%s", &prompt.pwd[i]);
+		ft_fprintf(STDERR_FILENO, "%s~%s%s", KBLU, &prompt.pwd[i], KNRM);
 	else
-		ft_fprintf(STDERR_FILENO, "%s", prompt.pwd);
+		ft_fprintf(STDERR_FILENO, "%s%s%s", KBLU, prompt.pwd, KNRM);
 	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar_err);
 	ft_fprintf(STDERR_FILENO, "> ");
 }
