@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 22:00:52 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 14:21:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/15 20:01:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ int	env_len(t_env env)
 void	init_shell_env(t_env env)
 {	
 	int		i;
+	char	*shlvl;
 	t_env	tmp;
 	t_env	*shell_env;
 
@@ -50,4 +51,7 @@ void	init_shell_env(t_env env)
 		tmp[i] = NULL;
 		*shell_env = tmp;
 	}
+	shlvl = ft_itoa(ft_atoi(ft_getenv("SHLVL")) + 1);
+	ft_setenv("SHLVL", shlvl, 1);
+	gc_free(shlvl);
 }
