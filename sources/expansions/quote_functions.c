@@ -6,13 +6,13 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 19:31:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/30 19:47:00 by bigo             ###   ########.fr       */
+/*   Updated: 2021/08/15 21:10:29 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*escape_func(const char *inchars, int *i)
+char	*escape_func(char *data)
 {
 	char					*c;
 	int						j;
@@ -41,14 +41,61 @@ char	*escape_func(const char *inchars, int *i)
 	return (c);
 }
 
-char	*squote_func(const char *inchars, int *i)
+static unsigned int	get_len_inside_dquotes(char const *data, int *i)
 {
-	int		j;
-	char	*str;
+	unsigned int	len;
+	unsigned int	*len_expanded_var;
 
-	j = 0;
-	str = NULL;
+	len = 0;
 	++(*i);
+	while (data[*i] != '"')
+	{
+		if ()
+		++(*i);
+	}
+	++(*i);
+	return (len);
+}
+
+static unsigned int	get_len_inside_squotes(char const *data, int *i)
+{
+	unsigned int	len;
+
+	len = 0;
+	++(*i);
+	while (data[*i + len] != ''')
+		++len;
+	(*i) += len + 1;
+	return (len);
+}
+
+static unsigned int	get_len_expanded_str(char const *str_to_expand)
+{
+	unsigned int	i;
+	unsigned int	len;
+	bool			is_in_dquotes;
+
+	i = 0;
+	len = 0;
+	is_in_dquotes = FALSE;
+	while (str_to_expand[i] != NULL)
+	{
+		if (str_to_expand[i] != '"')
+			is_in_dquotes == TRUE;
+		if (str_to_expand[i] != '''
+			&& str_to_expand != '"'
+			&& str_to_expand !='$')
+			++len;
+		else if (str_to_expand[i] == $)
+			len += ft_strlen(ft_getenv);
+	}
+}
+
+char	*squote_func(char *data)
+{
+	int		i;
+	char	*expanded_str;
+
 	while (inchars[*i + j] != '\'')
 		++j;
 	str = gc_malloc(sizeof(*str) * (j + 1));
@@ -57,7 +104,7 @@ char	*squote_func(const char *inchars, int *i)
 	return (str);
 }
 
-char	*dquote_func(const char *inchars, int *i)
+char	*dquote_func(const char *inchars)
 {
 	int		j;
 	char	*str;
