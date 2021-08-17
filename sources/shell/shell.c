@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 16:17:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/16 21:14:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,17 @@ static t_node	*lexer_parser(char *line)
 /* Core of program */
 void	shell(void)
 {
-	char			*line;
-	t_node			*ast;
+	char	*line;
+	t_node	*ast;
+	t_term	*term;
 
 	ast = NULL;
 	while (1)
 	{
+		term = set_termios();
 		prompt();
 		line = input();
+		tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
 		if (line[0] != '\0')
 		{
 			put_in_history(line);

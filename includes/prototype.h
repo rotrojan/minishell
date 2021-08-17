@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/16 18:33:13 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/16 21:12:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ void			ft_setenv(const char *name, const char *value, int overwrite);
 int				ft_getch(void);
 t_term			*getterm(void);
 void			init_term(void);
+t_term			*set_termios(void);
 t_axe			get_cursor_pos(void);
 void			end_key(t_cursor *cursor);
 void			home_key(t_cursor *cursor);

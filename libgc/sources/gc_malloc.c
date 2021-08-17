@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 16:32:29 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/05/19 13:34:36 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/17 18:07:41 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ void	*gc_malloc(size_t size)
 	new = NULL;
 	garbage_lst = get_garbage_lst();
 	tmp = *garbage_lst;
-	new = malloc(sizeof(t_garbage_lst));
+	new = malloc(sizeof(t_garbage_lst) * 1);
 	if (new == NULL)
 		gc_exit(EXIT_FAILURE, "malloc(): failed to allocate memory.\n");
-	_gc_bzero(new, sizeof(t_garbage_lst));
+	_gc_bzero(new, sizeof(t_garbage_lst) * 1);
 	new->ptr = malloc(size);
 	if (new->ptr == NULL)
 	{
