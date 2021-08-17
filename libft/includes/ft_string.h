@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:20:37 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 18:31:56 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/15 21:31:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int		ft_isalnum(int c);
 void	ft_strdel(char *s);
 int		ft_iscntrl(int c);
 int		ft_putxchar(int c, int x);
+char	*ft_strstr(const char *big, const char *little);
 
 #endif
