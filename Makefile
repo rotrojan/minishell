@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/08/16 18:32:57 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/08/16 21:14:04 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_fflush.c			parse_pipeline.c		exec_ast.c				\
 		exec_simple_cmd.c	ft_env.c				echo.c					\
 		unset.c				run_builtin.c			path.c					\
-		export.c
+		export.c			set_termios.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
