@@ -63,7 +63,7 @@ dkms.conf
 minishell
 
 # Data
-.minish_history
+.minishell_history
 
 # Others
 *.vim

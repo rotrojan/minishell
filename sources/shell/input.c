@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 16:20:48 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/08/17 20:33:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static int	catch_signals(void)
 	tmp = *sig;
 	*sig = 0;
 	ft_fflush(STDIN_FILENO);
+	if (tmp == SIGINT)
+		ft_putstr("^C");
 	return (tmp);
 }
 

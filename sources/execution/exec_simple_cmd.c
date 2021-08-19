@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/16 21:15:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/19 19:44:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ static void	child(t_simple_cmd command)
 {
 	if (run_binarie(command.argv) == -1)
 	{
-		ft_fprintf(STDERR_FILENO, "minishell: command not found: %s\n",
-			command.argv[0]);
+		ft_fprintf(STDERR_FILENO, "%s : command not found\n", command.argv[0]);
 		exit(EXIT_FAILURE);
 	}
 	exit(EXIT_SUCCESS);

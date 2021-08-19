@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/16 18:23:32 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/08/17 20:36:39 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@
 # define BOLD_CAP "md"
 # define RESET_CAP "me"
 
-# define HISTORY_PATH ".minish_history"
+# define HISTORY_PATH ".minishell_history"
 
 # define EXIT_STOP 2
 
