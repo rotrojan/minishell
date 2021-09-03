@@ -11,20 +11,21 @@ STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_strdup.c			ft_strchr.c			ft_isdigit.c			\
 		ft_isspace.c		ft_strdel.c			ft_iscntrl.c			\
 		ft_putxchar.c		ft_isalnum.c		ft_strlcpy.c			\
-		ft_strndup.c		ft_strnlen.c		ft_strstr.c
+		ft_strndup.c		ft_strnlen.c		ft_strstr.c				\
+		ft_strncpy.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 		ft_printf.c			ft_fprintf.c		readfile.c				\
-		gnl.c				ft_fputstr.c		free_file.c				\
-		ft_putchar_err.c
-PRINTF=	ft_vfprintf.c		ft_parsing.c		ft_type_d_i.c			\
-		ft_type_p.c			ft_types_c_s.c		ft_types_u_per.c		\
-		ft_types_x_xu.c		ft_vfprintf_utils.c
+		gnl.c				ft_putstr_fd.c		free_file.c				\
+		ft_putchar_err.c	ft_vfprintf.c
+FORMAT= vformat.c			format.c			convert_percent.c		\
+		convert_c.c			convert_s.c			convert_d.c				\
+		convert_i.c			convert_x.c			convert_X.c
 SYS=	debug.c
 LIST=	ft_create_elem.c	ft_list_clear.c		ft_list_push_back.c		\
 		ft_list_size.c		ft_list_to_array.c
 
 
-SRCS=	$(INT) $(FILE) $(STR) $(MEM) $(PRINTF) $(SYS) $(LIST)
+SRCS=	$(INT) $(FILE) $(STR) $(MEM) $(SYS) $(LIST) $(FORMAT)
 OBJS= $(SRCS:%.c=$(OBJS_DIR)/%.o)
 OBJS_DIR= .objs
 DEPENDENCIES= $(OBJS:%.o=%.d)
@@ -38,7 +39,7 @@ RM= rm -f
 CFLAGS= -Wall -Wextra -Werror -MMD
 CXXFLAGS= -I includes $(INCLUDES_DIR:%=-I ../%)
 
-vpath %.c integer file file/ft_vfprintf string memory file system list
+vpath %.c integer file string memory file system list string/format string/format/convert_types
 
 all: $(NAME)
 

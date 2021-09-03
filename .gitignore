@@ -64,6 +64,7 @@ minishell
 
 # Data
 .minishell_history
+.minish_history
 
 # Others
 *.vim

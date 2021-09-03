@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   convert_X.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 03:42:24 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/03 16:09:39 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/02 20:24:59 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/03 15:56:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	debug(int tty_id, char *str, ...)
+void	convert_X(t_fbuffer *format, va_list ap)
 {
-	int		fd;
-	char	*id;
-	char	*tty;
-	va_list	ap;
+	int		len;
+	int		value;
+	char	*str;
 
-	va_start(ap, str);
-	id = ft_itoa(tty_id);
-	tty = ft_strjoin(TTY_PATH, id, "");
-	gc_free(id);
-	fd = open(tty, O_RDWR);
-	if (fd == -1)
-		ft_fprintf(STDERR_FILENO, "Error: debug(): can't open tty=%s\n", tty);
-	else
-	{
-		ft_putstr_fd(fd, "\r\n");
-		ft_vfprintf(fd, str, ap);
-		close(fd);
-	}
-	gc_free(tty);
+	value = va_arg(ap, int);
+	str = ft_ltoa_base(value, BASE_16U);
+	len = ft_strlen(str);
+	ft_strncpy(&format->buffer[format->i], str, len);
+	format->i += len;
+	gc_free(str);
 }

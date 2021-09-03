@@ -1,36 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   format.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 03:42:24 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/03 16:09:39 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/02 15:52:45 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/02 21:00:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	debug(int tty_id, char *str, ...)
+char	*format(char const *string, ...)
 {
-	int		fd;
-	char	*id;
-	char	*tty;
 	va_list	ap;
 
-	va_start(ap, str);
-	id = ft_itoa(tty_id);
-	tty = ft_strjoin(TTY_PATH, id, "");
-	gc_free(id);
-	fd = open(tty, O_RDWR);
-	if (fd == -1)
-		ft_fprintf(STDERR_FILENO, "Error: debug(): can't open tty=%s\n", tty);
-	else
-	{
-		ft_putstr_fd(fd, "\r\n");
-		ft_vfprintf(fd, str, ap);
-		close(fd);
-	}
-	gc_free(tty);
+	va_start(ap, string);
+	return (vformat(string, ap));
 }
