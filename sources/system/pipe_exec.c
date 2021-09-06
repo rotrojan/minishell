@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:58:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/05 03:02:02 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/04 17:18:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**pipe_exec(const char *bin_path, const char **arg)
 	pid = fork();
 	if (pid == ERR)
 		exit_shell(EXIT_FAILURE, strerror(errno));
-	else if (pid == Child)
+	else if (pid == 0)
 		child(fd, bin_path, arg);
 	else
 		output = parent(fd);
