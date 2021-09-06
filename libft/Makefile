@@ -12,7 +12,7 @@ STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_isspace.c		ft_strdel.c			ft_iscntrl.c			\
 		ft_putxchar.c		ft_isalnum.c		ft_strlcpy.c			\
 		ft_strndup.c		ft_strnlen.c		ft_strstr.c				\
-		ft_strncpy.c
+		ft_strncpy.c		ft_isalpha.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 		ft_printf.c			ft_fprintf.c		readfile.c				\
 		gnl.c				ft_putstr_fd.c		free_file.c				\
