@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_fputstr.c                                       :+:      :+:    :+:   */
+/*   ft_strncpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/10 17:23:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/04/29 22:48:14 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/03 02:42:26 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/03 02:43:00 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-int	ft_fputstr(int fd, char const *s)
+char	*ft_strncpy(char *dest, char *src, int size)
 {
-	int	len;
+	int	i;
 
-	len = ft_strlen(s);
-	if (s)
-		write(fd, s, len);
-	return (len);
+	i = 0;
+	while (src[i] && i < size)
+	{
+		dest[i] = src[i];
+		i++;
+	}
+	dest[i] = '\0';
+	return (dest);
 }

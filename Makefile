@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/08/16 21:14:04 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/08/17 19:12:24 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = minishell
 
 SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_gethostname.c	getbinpath.c 			signals.c				\
-		inchar.c			ft_getpid.c				input.c					\
+		inchar.c			set_termios.c			input.c					\
 		exit_shell.c		getterm.c				init_term.c				\
 		pipe_exec.c			env.c					get_cursor_pos.c		\
 		ft_getch.c			arrow_keys.c			inchar_utils.c			\
@@ -30,7 +30,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_fflush.c			parse_pipeline.c		exec_ast.c				\
 		exec_simple_cmd.c	ft_env.c				echo.c					\
 		unset.c				run_builtin.c			path.c					\
-		export.c			set_termios.c
+		export.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)

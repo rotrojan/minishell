@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   ft_vfprintf.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 03:42:24 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/03 16:09:39 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/03 16:10:53 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/03 16:11:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	debug(int tty_id, char *str, ...)
+int	ft_vfprintf(int fd, const char *format, va_list ap)
 {
-	int		fd;
-	char	*id;
-	char	*tty;
-	va_list	ap;
+	int		len;
+	char	*str;
 
-	va_start(ap, str);
-	id = ft_itoa(tty_id);
-	tty = ft_strjoin(TTY_PATH, id, "");
-	gc_free(id);
-	fd = open(tty, O_RDWR);
-	if (fd == -1)
-		ft_fprintf(STDERR_FILENO, "Error: debug(): can't open tty=%s\n", tty);
-	else
-	{
-		ft_putstr_fd(fd, "\r\n");
-		ft_vfprintf(fd, str, ap);
-		close(fd);
-	}
-	gc_free(tty);
+	str = vformat(format, ap);
+	len = ft_putstr_fd(fd, str);
+	gc_free(str);
+	return (len);
 }

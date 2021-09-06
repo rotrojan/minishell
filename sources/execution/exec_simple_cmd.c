@@ -6,11 +6,29 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/16 21:15:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/03 22:33:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*get_real_filepath(char const *filepath)
+{
+	char	*path;
+	char	*real_path;
+	char	*bin_path;
+
+	path = extract_path(filepath);
+	if (path == NULL)
+		return (NULL);
+	real_path = ft_realpath(path);
+	if (real_path == NULL)
+		return (NULL);
+	bin_path = ft_strjoin(real_path, &filepath[ft_strlen(path)], "");
+	gc_free(path);
+	free(real_path);
+	return (bin_path);
+}
 
 static int	run_binarie(char **argv)
 {
@@ -18,7 +36,14 @@ static int	run_binarie(char **argv)
 	t_env	*env;
 
 	env = get_shell_env();
-	bin_path = getbinpath(argv[0]);
+	if (ft_strstr(argv[0], "./") != NULL)
+	{
+		bin_path = get_real_filepath(argv[0]);
+		if (bin_path == NULL)
+			return (-1);
+	}
+	else
+		bin_path = getbinpath(argv[0]);
 	if (bin_path == NULL)
 		return (-1);
 	if (execve(bin_path, argv, *env) == -1)
@@ -44,20 +69,14 @@ static void	child(t_simple_cmd command)
 static void	parent(void)
 {
 	int		status;
-	int		*sig;
 
+	signal(SIGINT, SIG_IGN);
 	wait(&status);
-	if (WIFSIGNALED(status))
-		debug(2, "signaled");
+	if (WIFSIGNALED(status) && WTERMSIG(status) == CTRL_C)
+		ft_putchar('\n');
 	if (WIFEXITED(status))
 	{
-		sig = get_signal_on();
-		if (*sig == CTRL_C)
-		{
-			*sig = 0;
-			ft_putchar('\n');
-		}
-		else if (WEXITSTATUS(status) == EXIT_STOP)
+		if (WEXITSTATUS(status) == EXIT_STOP)
 			exit_shell(EXIT_SUCCESS, NULL);
 	}
 }

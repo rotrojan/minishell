@@ -1,36 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug.c                                            :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/13 03:42:24 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/03 16:09:39 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/10 17:23:59 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/03 16:01:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	debug(int tty_id, char *str, ...)
+int	ft_putstr_fd(int fd, char const *s)
 {
-	int		fd;
-	char	*id;
-	char	*tty;
-	va_list	ap;
+	int	len;
 
-	va_start(ap, str);
-	id = ft_itoa(tty_id);
-	tty = ft_strjoin(TTY_PATH, id, "");
-	gc_free(id);
-	fd = open(tty, O_RDWR);
-	if (fd == -1)
-		ft_fprintf(STDERR_FILENO, "Error: debug(): can't open tty=%s\n", tty);
-	else
-	{
-		ft_putstr_fd(fd, "\r\n");
-		ft_vfprintf(fd, str, ap);
-		close(fd);
-	}
-	gc_free(tty);
+	len = ft_strlen(s);
+	if (s)
+		write(fd, s, len);
+	return (len);
 }
