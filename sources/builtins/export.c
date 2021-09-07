@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 21:21:17 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/07 22:18:54 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static char	*get_var_name(char	*arg)
 	{
 		if (ft_isalnum(arg[i]) == 0)
 		{
-			gc_free(var_name);
+			gc_free((void **)&var_name);
 			return (NULL);
 		}
 		else
@@ -69,7 +69,7 @@ static char	*get_var_name(char	*arg)
 	var_name[i] = '\0';
 	if (arg[i] == '+' && arg[i + 1] != '=')
 	{
-		gc_free(var_name);
+		gc_free((void **)&var_name);
 		/* var_name = NULL; */
 	}
 	return (var_name);
@@ -90,7 +90,7 @@ int	export(int argc, char **argv)
 		var_name = get_var_name(argv[i]);
 		if (var_name == NULL)
 		{
-			ft_fprintf(STDOUT_FILENO,
+			ft_dprintf(STDOUT_FILENO,
 				"minishell: export: `%s': not a valid identifier\n", argv[i]);
 			return (EXIT_FAILURE);
 		}
@@ -103,7 +103,7 @@ int	export(int argc, char **argv)
 			var_value = &(argv[i][++j]);
 		ft_setenv(var_name, var_value, 1);
 		if (var_name != NULL)
-			gc_free(var_name);
+			gc_free((void **)&var_name);
 		++i;
 	}
 	return (EXIT_SUCCESS);

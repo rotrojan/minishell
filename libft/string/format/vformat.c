@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 15:53:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/03 02:36:36 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/07 22:08:54 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ static int	match_type(char	type, va_list ap, t_fbuffer *format)
 		{.type = 's', .function = &convert_s},
 		{.type = 'd', .function = &convert_d},
 		{.type = 'i', .function = &convert_i},
-		{.type = 'x', .function = &convert_x},
-		{.type = 'X', .function = &convert_X},
+		{.type = 'x', .function = &convert_xl},
+		{.type = 'X', .function = &convert_xu},
 		{.type = 0}
 	};
 

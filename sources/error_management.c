@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_management.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 20:00:08 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/12 19:00:13 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/07 21:04:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,14 @@ void	display_error(t_error error, t_token **tok_lst)
 	};
 
 	if (error == Unexpected_eof)
-		ft_fprintf(STDERR_FILENO, error_msg[error], "\nminishell:");
+		ft_dprintf(STDERR_FILENO, error_msg[error], "\nminishell:");
 	else
 	{
 		if (*tok_lst)
-			ft_fprintf(STDERR_FILENO, error_msg[error],
+			ft_dprintf(STDERR_FILENO, error_msg[error],
 				"\nminishell:", (*tok_lst)->data);
 		else
-			ft_fprintf(STDERR_FILENO, error_msg[error],
+			ft_dprintf(STDERR_FILENO, error_msg[error],
 				"\nminishell:", "newline");
 	}
 }

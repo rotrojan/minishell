@@ -1,38 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_to_array.c                                 :+:      :+:    :+:   */
+/*   convert_xl.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/20 04:15:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/06 19:16:25 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/02 20:24:49 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/03 15:56:06 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_list_to_array(t_list **alst)
+void	convert_xl(t_fbuffer *format, va_list ap)
 {
-	int		i;
-	t_list	*lst;
-	t_list	*next;
-	char	**array;
+	int		len;
+	int		value;
+	char	*str;
 
-	i = 0;
-	lst = *alst;
-	if (lst == NULL)
-		debug(3, "ah ?");
-	array = gc_malloc(sizeof(char *) * (ft_list_size(lst) + 1));
-	while (lst)
-	{
-		array[i] = lst->data;
-		next = lst->next;
-		gc_free((void **)&lst);
-		lst = next;
-		i++;
-	}
-	array[i] = NULL;
-	*alst = NULL;
-	return (array);
+	value = va_arg(ap, int);
+	str = ft_ltoa_base(value, BASE_16L);
+	len = ft_strlen(str);
+	ft_strncpy(&format->buffer[format->i], str, len);
+	format->i += len;
+	gc_free((void **)&str);
 }

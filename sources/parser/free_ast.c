@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 15:56:04 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/09 21:10:15 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/07 21:37:02 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,10 @@ static void	free_redirections(t_redirection **redirection_lst)
 	current = *redirection_lst;
 	while (current != NULL)
 	{
-		gc_free(current->stream);
-		current->stream = NULL;
+		gc_free((void **)&current->stream);
 		prev = current;
 		current = current->next;
-		gc_free(prev);
+		gc_free((void **)&prev);
 	}
 }
 
@@ -49,15 +48,12 @@ static void	free_simple_cmd(t_node **simple_cmd)
 	i = 0;
 	while ((*simple_cmd)->content.simple_cmd.argv[i] != NULL)
 	{
-		gc_free((*simple_cmd)->content.simple_cmd.argv[i]);
-		(*simple_cmd)->content.simple_cmd.argv[i] = NULL;
+		gc_free((void **)&(*simple_cmd)->content.simple_cmd.argv[i]);
 		++i;
 	}
-	gc_free((*simple_cmd)->content.simple_cmd.argv);
-	(*simple_cmd)->content.simple_cmd.argv = NULL;
+	gc_free((void **)&(*simple_cmd)->content.simple_cmd.argv);
 	free_redirections(&((*simple_cmd)->content.simple_cmd.redirection));
-	gc_free(*simple_cmd);
-	*simple_cmd = NULL;
+	gc_free((void **)&*simple_cmd);
 }
 
 /*
@@ -74,7 +70,6 @@ void	clear_ast(t_node **ast)
 	{
 		clear_ast(&((*ast)->content.child.left));
 		clear_ast(&((*ast)->content.child.right));
-		gc_free(*ast);
-		*ast = NULL;
+		gc_free((void **)&*ast);
 	}
 }

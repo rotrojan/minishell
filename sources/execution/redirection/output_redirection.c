@@ -1,18 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_file.c                                        :+:      :+:    :+:   */
+/*   output_redirection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/14 01:17:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/14 01:18:48 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/07 21:19:26 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/07 21:29:36 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	free_file(t_file file)
+int	output_redirection(t_redirection *redirection)
 {
-	ft_free_arrays(file);
+	int	fd;
+
+	fd = open(redirection->stream, O_WRONLY | O_CREAT,
+			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
+	if (fd == -1)
+	{
+		ft_dprintf(STDOUT_FILENO, "minishell: %s: No such file or directory\n",
+			redirection->stream);
+		return (-1);
+	}
+	dup2(fd, STDOUT_FILENO);
+	return (0);
 }

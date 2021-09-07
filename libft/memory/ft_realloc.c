@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_to_array.c                                 :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/20 04:15:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/06 19:16:25 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/12 18:52:26 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/07 17:01:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_list_to_array(t_list **alst)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	int		i;
-	t_list	*lst;
-	t_list	*next;
-	char	**array;
+	char	*new;
 
-	i = 0;
-	lst = *alst;
-	if (lst == NULL)
-		debug(3, "ah ?");
-	array = gc_malloc(sizeof(char *) * (ft_list_size(lst) + 1));
-	while (lst)
+	if (size == 0 && ptr != NULL)
 	{
-		array[i] = lst->data;
-		next = lst->next;
-		gc_free((void **)&lst);
-		lst = next;
-		i++;
+		new = gc_malloc(sizeof(char) * 1);
+		gc_free((void **)&ptr);
+		return (new);
 	}
-	array[i] = NULL;
-	*alst = NULL;
-	return (array);
+	new = gc_malloc(size);
+	if (ptr != NULL)
+	{
+		ft_memcpy(new, ptr, size);
+		gc_free((void **)&ptr);
+	}
+	return (new);
 }

@@ -124,7 +124,7 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 	if (from_lst_to_array(tok_lst, simple_cmd) == FALSE
 		|| (*tok_lst != NULL && (*tok_lst)->type == Oparenth_tok))
 	{
-		gc_free(simple_cmd);
+		gc_free((void **)&simple_cmd);
 		return (FALSE);
 	}
 	*ast = simple_cmd;

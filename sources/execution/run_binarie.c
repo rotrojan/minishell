@@ -1,20 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_ast.c                                         :+:      :+:    :+:   */
+/*   run_binarie.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 01:54:35 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/06 19:39:23 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/06 17:01:28 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/06 17:04:41 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_ast(t_node *ast)
+int	run_binarie(char **argv)
 {
-	ft_putstr_fd("\n\r", STDERR_FILENO);
-	if (ast->type == Simple_cmd)
-		exec_simple_cmd(ast->content.simple_cmd);
+	char	*bin_path;
+	t_env	*env;
+
+	env = get_shell_env();
+	if (ft_strstr(argv[0], "./") != NULL)
+	{
+		bin_path = get_real_filepath(argv[0]);
+		if (bin_path == NULL)
+			return (-1);
+	}
+	else
+		bin_path = getbinpath(argv[0]);
+	if (bin_path == NULL)
+		return (-1);
+	if (execve(bin_path, argv, *env) == -1)
+	{
+		gc_free((void **)&bin_path);
+		return (-1);
+	}
+	gc_free((void **)&bin_path);
+	return (0);
 }

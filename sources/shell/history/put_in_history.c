@@ -36,6 +36,6 @@ void	put_in_history(char *line)
 	else if (ft_strcmp(line, history->data->line) != 0)
 		add_in_history(history, line);
 	history->tmp_nav = NULL;
-	gc_free(history->input);
+	gc_free((void **)&history->input);
 	history->input = ft_strdup("");
 }

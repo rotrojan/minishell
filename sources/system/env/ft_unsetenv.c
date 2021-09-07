@@ -30,7 +30,7 @@ int	ft_unsetenv(const char *name)
 	while ((*env)[i])
 	{
 		if (i == ret)
-			gc_free((*env)[i]);
+			gc_free((void **)&(*env)[i]);
 		else if (i >= ret)
 			new[i - 1] = (*env)[i];
 		else
@@ -38,7 +38,7 @@ int	ft_unsetenv(const char *name)
 		i++;
 	}
 	new[i - 1] = NULL;
-	gc_free(*env);
+	gc_free((void **)&*env);
 	*env = new;
 	return (1);
 }

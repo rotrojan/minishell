@@ -30,7 +30,7 @@ char	*getbinpath(const char *bin)
 			ft_free_arrays(paths);
 			return (bin_path);
 		}
-		gc_free(bin_path);
+		gc_free((void **)&bin_path);
 		i++;
 	}
 	ft_free_arrays(paths);

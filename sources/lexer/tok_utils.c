@@ -46,10 +46,10 @@ void	clear_tokens(t_token **tok_lst)
 	current = *tok_lst;
 	while (current)
 	{
-		gc_free(current->data);
+		gc_free((void **)&current->data);
 		prev = current;
 		current = current->next;
-		gc_free(prev);
+		gc_free((void **)&prev);
 	}
 	*tok_lst = NULL;
 }

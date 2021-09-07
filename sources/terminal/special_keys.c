@@ -26,7 +26,7 @@ void	backspace_key(t_cursor *cursor)
 		if (tmp->prev != NULL)
 			tmp->prev->next = cursor->on_inchar;
 		cursor->on_inchar->prev = tmp->prev;
-		gc_free(tmp);
+		gc_free((void **)&tmp);
 		cursor_move_left(cursor);
 		goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
 		tputs(goto_cap, 1, ft_putchar_err);
@@ -34,7 +34,7 @@ void	backspace_key(t_cursor *cursor)
 		tputs(goto_cap, 1, ft_putchar_err);
 		print_inchars(cursor->on_inchar);
 		tputs(goto_cap, 1, ft_putchar_err);
-		gc_free(history->input);
+		gc_free((void **)&history->input);
 		history->input = inchars_to_line(inchars_head(cursor));
 	}
 }
@@ -53,14 +53,14 @@ void	delete_key(t_cursor *cursor)
 		if (cursor->on_inchar->prev != NULL)
 			cursor->on_inchar->prev->next = tmp;
 		tmp->prev = cursor->on_inchar->prev;
-		gc_free(cursor->on_inchar);
+		gc_free((void **)&cursor->on_inchar);
 		cursor->on_inchar = tmp;
 		goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
 		ft_putxchar(' ', inchars_len(cursor->on_inchar));
 		tputs(goto_cap, 1, ft_putchar_err);
 		print_inchars(cursor->on_inchar);
 		tputs(goto_cap, 1, ft_putchar_err);
-		gc_free(history->input);
+		gc_free((void **)&history->input);
 		history->input = inchars_to_line(inchars_head(cursor));
 	}
 }

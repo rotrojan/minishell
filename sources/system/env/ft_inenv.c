@@ -31,11 +31,11 @@ int	ft_inenv(const char *name)
 	{
 		if (ft_strncmp(tmp[i], var, len) == 0)
 		{
-			gc_free(var);
+			gc_free((void **)&var);
 			return (i);
 		}
 		i++;
 	}
-	gc_free(var);
+	gc_free((void **)&var);
 	return (-1);
 }

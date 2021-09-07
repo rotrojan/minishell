@@ -23,5 +23,5 @@ void	convert_i(t_fbuffer *format, va_list ap)
 	len = ft_strlen(str);
 	ft_strncpy(&format->buffer[format->i], str, len);
 	format->i += len;
-	gc_free(str);
+	gc_free((void **)&str);
 }

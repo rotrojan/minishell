@@ -3,7 +3,7 @@ NAME= 	libft.a
 INT=	ft_atoll.c			ft_atoi.c			ft_atoui.c				\
 		ft_itoa.c			ft_nbrlen.c			ft_ltoa_base.c			\
 		ft_uitoa.c			ft_uitoa_base.c
-MEM=	ft_calloc.c			ft_bzero.c			ft_memset.c				\
+MEM=	ft_realloc.c		ft_bzero.c			ft_memset.c				\
 		ft_memcpy.c
 STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_strncmp.c		ft_split.c			ft_free_arrays.c		\
@@ -14,12 +14,12 @@ STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_strndup.c		ft_strnlen.c		ft_strstr.c				\
 		ft_strncpy.c		ft_isalpha.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
-		ft_printf.c			ft_fprintf.c		readfile.c				\
-		gnl.c				ft_putstr_fd.c		free_file.c				\
-		ft_putchar_err.c	ft_vfprintf.c
+		ft_printf.c			ft_dprintf.c		readfile.c				\
+		gnl.c				ft_putstr_fd.c		ft_putchar_fd.c			\
+		ft_putchar_err.c	ft_vdprintf.c
 FORMAT= vformat.c			format.c			convert_percent.c		\
 		convert_c.c			convert_s.c			convert_d.c				\
-		convert_i.c			convert_x.c			convert_X.c
+		convert_i.c			convert_xl.c		convert_xu.c
 SYS=	debug.c
 LIST=	ft_create_elem.c	ft_list_clear.c		ft_list_push_back.c		\
 		ft_list_size.c		ft_list_to_array.c

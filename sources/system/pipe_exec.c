@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 16:58:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/04 17:18:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/07 17:16:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	child(int *fd, const char *bin_path, const char **arg)
 	close(fd[Input]);
 }
 
-static t_file	parent(int *fd)
+static char	*parent(int *fd)
 {
-	t_file	output;
+	char	*output;
 
 	close(fd[Input]);
 	output = readfile(fd[Output]);
@@ -32,11 +32,11 @@ static t_file	parent(int *fd)
 }
 
 /* Return piped output of another program. */
-char	**pipe_exec(const char *bin_path, const char **arg)
+char	*pipe_exec(const char *bin_path, const char **arg)
 {
-	int			fd[2];
-	pid_t		pid;
-	t_file		output;
+	int		fd[2];
+	pid_t	pid;
+	char	*output;
 
 	output = NULL;
 	if (pipe(fd) == ERR)

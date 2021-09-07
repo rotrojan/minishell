@@ -18,9 +18,9 @@ void	ft_list_clear(t_list *begin_list)
 
 	while (begin_list)
 	{
-		gc_free(begin_list->data);
+		gc_free((void **)&begin_list->data);
 		prev = begin_list;
 		begin_list = begin_list->next;
-		gc_free(prev);
+		gc_free((void **)&prev);
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 16:03:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/03 15:56:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/07 22:06:58 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void		convert_c(t_fbuffer *format, va_list ap);
 void		convert_s(t_fbuffer *format, va_list ap);
 void		convert_d(t_fbuffer *format, va_list ap);
 void		convert_i(t_fbuffer *format, va_list ap);
-void		convert_x(t_fbuffer *format, va_list ap);
-void		convert_X(t_fbuffer *format, va_list ap);
+void		convert_xl(t_fbuffer *format, va_list ap);
+void		convert_xu(t_fbuffer *format, va_list ap);
 
 #endif

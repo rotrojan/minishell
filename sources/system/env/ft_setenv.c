@@ -41,12 +41,12 @@ void	ft_setenv(const char *name, const char *value, int overwrite)
 	i = ft_inenv(name);
 	if (i >= 0 && overwrite != 0)
 	{
-		gc_free(tmp[i]);
+		gc_free((void **)&tmp[i]);
 		tmp[i] = ft_strjoin(name, value, "=");
 	}
 	else
 	{
 		*env = add_in_env(name, value, tmp);
-		gc_free(tmp);
+		gc_free((void **)&tmp);
 	}
 }

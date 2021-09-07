@@ -1,27 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   convert_X.c                                        :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/09/02 20:24:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/03 15:56:22 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/06 19:36:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	convert_X(t_fbuffer *format, va_list ap)
+void	heredoc(const char *delimiter)
 {
-	int		len;
-	int		value;
-	char	*str;
+	char	*line;
+	char	*doc;
+	char	*tmp;
 
-	value = va_arg(ap, int);
-	str = ft_ltoa_base(value, BASE_16U);
-	len = ft_strlen(str);
-	ft_strncpy(&format->buffer[format->i], str, len);
-	format->i += len;
-	gc_free(str);
+	doc = NULL;
+	line = NULL;
+	while (1)
+	{
+		ft_putstr("> ");
+		line = input();
+		if (ft_strcmp(line, delimiter) == 0)
+			break ;
+		if (*line == '\0')
+		{
+			tmp = doc;
+			doc = ft_strjoin(tmp, line, "\n");
+			gc_free((void **)&tmp);
+		}
+		gc_free((void **)&line);
+	}
+	ft_putstr_fd(doc, STDIN_FILENO);
 }
