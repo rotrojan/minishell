@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/16 21:12:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/07 17:19:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,10 @@ int				*get_signal_on(void);
 char			*ft_gethostname(void);
 char			*getbinpath(const char *bin);
 void			exit_shell(int status, char *message);
-char			**pipe_exec(const char *bin_path, const char **arg);
+char			*pipe_exec(const char *bin_path, const char **arg);
 char			*ft_realpath(char const *path);
 char			*extract_path(char const *pathfile);
+char			*get_real_filepath(char const *filepath);
 
 //		env
 int				ft_inenv(const char *name);
@@ -66,6 +67,7 @@ char			*input(void);
 t_env			*get_shell_env(void);
 int				env_len(t_env env);
 void			init_shell_env(t_env env);
+void			heredoc(const char *delimiter);
 //		history
 t_history_data	*get_history(void);
 void			free_history(void);
@@ -87,5 +89,4 @@ void			free_inchars(t_inchar *inchars);
 char			*inchars_to_line(t_inchar *inchars);
 void			insert_inchar(t_cursor *cursor, int value);
 void			push_back_inchars(t_inchar **inchars, int value);
-
 #endif

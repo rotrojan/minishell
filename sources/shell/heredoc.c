@@ -1,18 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_file.c                                        :+:      :+:    :+:   */
+/*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/14 01:17:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/14 01:18:48 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/06 19:36:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-void	free_file(t_file file)
+void	heredoc(const char *delimiter)
 {
-	ft_free_arrays(file);
+	char	*line;
+	char	*doc;
+	char	*tmp;
+
+	doc = NULL;
+	line = NULL;
+	while (1)
+	{
+		ft_putstr("> ");
+		line = input();
+		if (ft_strcmp(line, delimiter) == 0)
+			break ;
+		if (*line == '\0')
+		{
+			tmp = doc;
+			doc = ft_strjoin(tmp, line, "\n");
+			gc_free(tmp);
+		}
+		gc_free(line);
+	}
+	ft_putstr_fd(doc, STDIN_FILENO);
 }

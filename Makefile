@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/08/17 19:12:24 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/09/07 21:31:26 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_fflush.c			parse_pipeline.c		exec_ast.c				\
 		exec_simple_cmd.c	ft_env.c				echo.c					\
 		unset.c				run_builtin.c			path.c					\
-		export.c
+		export.c			heredoc.c				run_binarie.c			\
+		redirection.c		input_redirection.c		output_redirection.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
@@ -56,7 +57,8 @@ LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses #--enable-sigwinch
 vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env)				\
 				$(addprefix /shell, /. /history /inchar)	\
-				/. /terminal /lexer /parser /builtins /execution)
+				$(addprefix /execution, /. /redirection)	\
+				/. /terminal /lexer /parser /builtins)
 vpath %.a $(LIBS:%=lib%)
 
 all:

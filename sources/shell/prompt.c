@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/16 18:23:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/07 21:04:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ void	prompt(void)
 	if (OS == Linux)
 	{
 		tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar_err);
-		ft_fprintf(STDERR_FILENO, "%s%s@%s%s", KGRN, prompt.user,
+		ft_dprintf(STDERR_FILENO, "%s%s@%s%s", KGRN, prompt.user,
 			prompt.hostname, KNRM);
 		tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar_err);
 		ft_putchar_err(':');
 	}
 	tputs(tgetstr(BOLD_CAP, NULL), 1, ft_putchar_err);
 	if (!ft_strncmp(prompt.home, prompt.pwd, i))
-		ft_fprintf(STDERR_FILENO, "%s~%s%s", KBLU, &prompt.pwd[i], KNRM);
+		ft_dprintf(STDERR_FILENO, "%s~%s%s", KBLU, &prompt.pwd[i], KNRM);
 	else
-		ft_fprintf(STDERR_FILENO, "%s%s%s", KBLU, prompt.pwd, KNRM);
+		ft_dprintf(STDERR_FILENO, "%s%s%s", KBLU, prompt.pwd, KNRM);
 	tputs(tgetstr(RESET_CAP, NULL), 1, ft_putchar_err);
-	ft_fprintf(STDERR_FILENO, "> ");
+	ft_dprintf(STDERR_FILENO, "> ");
 }

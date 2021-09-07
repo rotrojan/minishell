@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*   ft_realloc.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/07 20:46:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/06 19:37:38 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/11/12 18:52:26 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/07 17:01:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_printf(const char *format, ...)
+void	*ft_realloc(void *ptr, size_t size)
 {
-	int		len;
-	char	*str;
-	va_list	ap;
+	char	*new;
 
-	va_start(ap, format);
-	str = vformat(format, ap);
-	len = ft_putstr_fd(str, STDOUT_FILENO);
-	gc_free(str);
-	return (len);
+	if (size == 0 && ptr != NULL)
+	{
+		new = gc_malloc(sizeof(char) * 1);
+		gc_free(ptr);
+		return (new);
+	}
+	new = gc_malloc(size);
+	if (ptr != NULL)
+	{
+		ft_memcpy(new, ptr, size);
+		gc_free(ptr);
+	}
+	return (new);
 }

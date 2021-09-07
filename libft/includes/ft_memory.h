@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 12:25:40 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 19:22:02 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/07 17:12:17 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 
 # include "libft.h"
 
-void	*ft_calloc(size_t count, size_t size);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memset(void *s, int c, size_t n);
 void	*ft_memcpy(void *dst, void const *src, size_t n);
+void	*ft_realloc(void *ptr, size_t size);
 
 #endif
