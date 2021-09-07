@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 20:22:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/07 21:21:17 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,24 @@ static int	display_env(void)
 {
 	int		i;
 	t_env	*env;
+	int		index_equalsign;
 
 	i = 0;
 	env = get_shell_env();
 	while ((*env)[i])
 	{
 		ft_putstr("export ");
-		ft_putstr((*env)[i]);
-		ft_putchar('\n');
+		index_equalsign = ft_strchr((*env)[i], '=') - (*env)[i];
+		write(STDOUT_FILENO, (*env)[i], index_equalsign);
+		if ((*env)[i][index_equalsign + 1] != '\0')
+			ft_printf("=\"%s\"\n", (*env)[i] + index_equalsign + 1);
+		else
+			ft_putchar('\n');
 		i++;
 	}
 	return (0);
 }
+
 static int	get_len_var_name(char *arg)
 {
 	int	len;
@@ -62,7 +68,10 @@ static char	*get_var_name(char	*arg)
 	}
 	var_name[i] = '\0';
 	if (arg[i] == '+' && arg[i + 1] != '=')
+	{
 		gc_free(var_name);
+		/* var_name = NULL; */
+	}
 	return (var_name);
 }
 
@@ -93,7 +102,8 @@ int	export(int argc, char **argv)
 		else
 			var_value = &(argv[i][++j]);
 		ft_setenv(var_name, var_value, 1);
-		gc_free(var_name);
+		if (var_name != NULL)
+			gc_free(var_name);
 		++i;
 	}
 	return (EXIT_SUCCESS);
