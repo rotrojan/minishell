@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/12 18:03:41 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/07 21:37:29 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,7 @@ void	eat_token(t_token **tok_lst)
 		return ;
 	*tok_lst = (*tok_lst)->next;
 	gc_free(tmp->data);
-	tmp->data = NULL;
 	gc_free(tmp);
-	tmp = NULL;
 }
 
 /*
