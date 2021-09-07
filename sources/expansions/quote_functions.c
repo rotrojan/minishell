@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 19:31:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/15 21:10:29 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/07 20:45:21 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,3 +126,5 @@ char	*dquote_func(const char *inchars)
 	(*i) += ++j;
 	return (str);
 }
+
+
