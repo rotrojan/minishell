@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 16:04:24 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/07 23:45:36 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,11 @@ int	ft_env(int argc, char **argv)
 	env = get_shell_env();
 	while ((*env)[i])
 	{
-		ft_putstr((*env)[i]);
-		ft_putchar('\n');
+		if (ft_strchr((*env)[i], '=') != NULL)
+		{
+			ft_putstr((*env)[i]);
+			ft_putchar('\n');
+		}
 		i++;
 	}
 	return (0);

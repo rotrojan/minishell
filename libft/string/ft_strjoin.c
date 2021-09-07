@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 10:12:14 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/19 14:12:00 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/07 22:32:45 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,15 @@ char	*ft_strjoin(char const *s1, char const *s2, char const *sep)
 
 	i = 0;
 	j = 0;
+	if (!s1)
+	{
+		if (!s2)
+			return (NULL);
+		return (ft_strdup(s2));
+	}
+	if (!s2)
+		return (ft_strdup(s1));
 	size = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(sep);
-	if (!s1 || !s2)
-		return (NULL);
 	if (s1[0] == '\0' && s2[0] == '\0')
 		return (ft_strdup(""));
 	strnew = gc_malloc(sizeof(char) * (size + 1));
