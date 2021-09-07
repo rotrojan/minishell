@@ -21,6 +21,6 @@ int	ft_printf(const char *format, ...)
 	va_start(ap, format);
 	str = vformat(format, ap);
 	len = ft_putstr_fd(str, STDOUT_FILENO);
-	gc_free(str);
+	gc_free((void **)&str);
 	return (len);
 }

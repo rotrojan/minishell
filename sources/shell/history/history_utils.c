@@ -37,11 +37,11 @@ void	free_history(void)
 	{
 		prev = tmp;
 		tmp = tmp->next;
-		gc_free(prev);
+		gc_free((void **)&prev);
 	}
 	history->data = NULL;
 	history->tmp_nav = NULL;
-	gc_free(history->input);
+	gc_free((void **)&history->input);
 }
 
 /* Self explanatory. */
@@ -78,7 +78,7 @@ t_history_data	*init_history(void)
 			if (line[0] != '\0')
 				push_front_history(&history->data, line);
 			else
-				gc_free(line);
+				gc_free((void **)&line);
 			line = NULL;
 		}
 		close(fd);

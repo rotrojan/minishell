@@ -19,6 +19,6 @@ int	ft_vdprintf(int fd, const char *format, va_list ap)
 
 	str = vformat(format, ap);
 	len = ft_putstr_fd(str, fd);
-	gc_free(str);
+	gc_free((void **)&str);
 	return (len);
 }

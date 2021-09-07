@@ -33,7 +33,7 @@ void	free_inchars(t_inchar *inchars)
 	{
 		prev = inchars;
 		inchars = inchars->next;
-		gc_free(prev);
+		gc_free((void **)&prev);
 	}
 }
 
@@ -55,7 +55,7 @@ void	insert_inchar(t_cursor *cursor, int value)
 	cursor_move_right(cursor);
 	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
 	tputs(goto_cap, 1, ft_putchar_err);
-	gc_free(history->input);
+	gc_free((void **)&history->input);
 	history->input = inchars_to_line(inchars_head(cursor));
 }
 

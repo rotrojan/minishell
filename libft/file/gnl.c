@@ -28,7 +28,7 @@ static char	*ft_append_char(char *str, char c)
 	}
 	str_new[i] = c;
 	str_new[i + 1] = '\0';
-	gc_free(str);
+	gc_free((void **)&str);
 	return (str_new);
 }
 

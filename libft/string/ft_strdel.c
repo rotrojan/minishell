@@ -15,5 +15,5 @@
 void	ft_strdel(char *s)
 {
 	if (s)
-		gc_free(s);
+		gc_free((void **)&s);
 }

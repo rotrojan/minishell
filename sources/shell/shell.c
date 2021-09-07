@@ -63,7 +63,7 @@ void	shell(void)
 		else
 		{
 			ft_dprintf(STDERR_FILENO, "\n\r");
-			gc_free(line);
+			gc_free((void **)&line);
 		}
 	}
 }

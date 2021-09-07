@@ -19,7 +19,7 @@ FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 		ft_putchar_err.c	ft_vdprintf.c
 FORMAT= vformat.c			format.c			convert_percent.c		\
 		convert_c.c			convert_s.c			convert_d.c				\
-		convert_i.c			convert_x.c			convert_X.c
+		convert_i.c			convert_xl.c		convert_xu.c
 SYS=	debug.c
 LIST=	ft_create_elem.c	ft_list_clear.c		ft_list_push_back.c		\
 		ft_list_size.c		ft_list_to_array.c

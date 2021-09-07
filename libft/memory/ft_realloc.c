@@ -19,14 +19,14 @@ void	*ft_realloc(void *ptr, size_t size)
 	if (size == 0 && ptr != NULL)
 	{
 		new = gc_malloc(sizeof(char) * 1);
-		gc_free(ptr);
+		gc_free((void **)&ptr);
 		return (new);
 	}
 	new = gc_malloc(size);
 	if (ptr != NULL)
 	{
 		ft_memcpy(new, ptr, size);
-		gc_free(ptr);
+		gc_free((void **)&ptr);
 	}
 	return (new);
 }

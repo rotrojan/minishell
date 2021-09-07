@@ -56,7 +56,7 @@ char	*get_real_filepath(char const *filepath)
 	if (real_path == NULL)
 		return (NULL);
 	bin_path = ft_strjoin(real_path, &filepath[ft_strlen(path)], "");
-	gc_free(path);
+	gc_free((void **)&path);
 	free(real_path);
 	return (bin_path);
 }

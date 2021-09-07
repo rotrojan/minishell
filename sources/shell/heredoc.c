@@ -30,9 +30,9 @@ void	heredoc(const char *delimiter)
 		{
 			tmp = doc;
 			doc = ft_strjoin(tmp, line, "\n");
-			gc_free(tmp);
+			gc_free((void **)&tmp);
 		}
-		gc_free(line);
+		gc_free((void **)&line);
 	}
 	ft_putstr_fd(doc, STDIN_FILENO);
 }

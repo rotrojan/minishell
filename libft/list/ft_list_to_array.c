@@ -28,7 +28,7 @@ char	**ft_list_to_array(t_list **alst)
 	{
 		array[i] = lst->data;
 		next = lst->next;
-		gc_free(lst);
+		gc_free((void **)&lst);
 		lst = next;
 		i++;
 	}

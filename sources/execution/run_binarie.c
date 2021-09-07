@@ -30,9 +30,9 @@ int	run_binarie(char **argv)
 		return (-1);
 	if (execve(bin_path, argv, *env) == -1)
 	{
-		gc_free(bin_path);
+		gc_free((void **)&bin_path);
 		return (-1);
 	}
-	gc_free(bin_path);
+	gc_free((void **)&bin_path);
 	return (0);
 }

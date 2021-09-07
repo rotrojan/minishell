@@ -53,5 +53,5 @@ void	init_shell_env(t_env env)
 	}
 	shlvl = ft_itoa(ft_atoi(ft_getenv("SHLVL")) + 1);
 	ft_setenv("SHLVL", shlvl, 1);
-	gc_free(shlvl);
+	gc_free((void **)&shlvl);
 }

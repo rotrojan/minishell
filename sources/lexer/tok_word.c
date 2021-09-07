@@ -102,7 +102,7 @@ t_token	*tok_word(char *inchars, int *i, t_error *error)
 		++j;
 	if (*error != No_error)
 	{
-		gc_free(data);
+		gc_free((void **)&data);
 		return (NULL);
 	}
 	data = ft_strndup(inchars + *i, j);

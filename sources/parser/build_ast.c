@@ -27,8 +27,8 @@ void	eat_token(t_token **tok_lst)
 	if (*tok_lst == NULL)
 		return ;
 	*tok_lst = (*tok_lst)->next;
-	gc_free(tmp->data);
-	gc_free(tmp);
+	gc_free((void **)&tmp->data);
+	gc_free((void **)&tmp);
 }
 
 /*

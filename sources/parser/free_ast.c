@@ -27,10 +27,10 @@ static void	free_redirections(t_redirection **redirection_lst)
 	current = *redirection_lst;
 	while (current != NULL)
 	{
-		gc_free(current->stream);
+		gc_free((void **)&current->stream);
 		prev = current;
 		current = current->next;
-		gc_free(prev);
+		gc_free((void **)&prev);
 	}
 }
 
@@ -48,12 +48,12 @@ static void	free_simple_cmd(t_node **simple_cmd)
 	i = 0;
 	while ((*simple_cmd)->content.simple_cmd.argv[i] != NULL)
 	{
-		gc_free((*simple_cmd)->content.simple_cmd.argv[i]);
+		gc_free((void **)&(*simple_cmd)->content.simple_cmd.argv[i]);
 		++i;
 	}
-	gc_free((*simple_cmd)->content.simple_cmd.argv);
+	gc_free((void **)&(*simple_cmd)->content.simple_cmd.argv);
 	free_redirections(&((*simple_cmd)->content.simple_cmd.redirection));
-	gc_free(*simple_cmd);
+	gc_free((void **)&*simple_cmd);
 }
 
 /*
@@ -70,6 +70,6 @@ void	clear_ast(t_node **ast)
 	{
 		clear_ast(&((*ast)->content.child.left));
 		clear_ast(&((*ast)->content.child.right));
-		gc_free(*ast);
+		gc_free((void **)&*ast);
 	}
 }

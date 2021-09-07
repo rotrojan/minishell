@@ -22,7 +22,7 @@ void	debug(int tty_id, char *str, ...)
 	va_start(ap, str);
 	id = ft_itoa(tty_id);
 	tty = ft_strjoin(TTY_PATH, id, "");
-	gc_free(id);
+	gc_free((void **)&id);
 	fd = open(tty, O_RDWR);
 	if (fd == -1)
 		ft_dprintf(STDERR_FILENO, "Error: debug(): can't open tty=%s\n", tty);
@@ -32,5 +32,5 @@ void	debug(int tty_id, char *str, ...)
 		ft_vdprintf(fd, str, ap);
 		close(fd);
 	}
-	gc_free(tty);
+	gc_free((void **)&tty);
 }

@@ -18,6 +18,6 @@ void	ft_free_arrays(char **arrays)
 
 	i = 0;
 	while (arrays[i])
-		gc_free(arrays[i++]);
-	gc_free(arrays);
+		gc_free((void **)&arrays[i++]);
+	gc_free((void **)&arrays);
 }

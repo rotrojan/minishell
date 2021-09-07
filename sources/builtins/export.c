@@ -30,7 +30,7 @@ int	export(int argc, char **argv)
 			return (ft_env(argc, argv));
 		var_name = ft_strndup(argv[i], j);
 		ft_setenv(var_name, &argv[i][++j], 1);
-		gc_free(var_name);
+		gc_free((void **)&var_name);
 		++i;
 	}
 	return (0);
