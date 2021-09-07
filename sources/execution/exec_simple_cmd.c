@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/03 22:33:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/04 17:18:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	exec_simple_cmd(t_simple_cmd simple_cmd)
 		pid = fork();
 		if (pid == ERR)
 			exit_shell(EXIT_FAILURE, strerror(errno));
-		else if (pid == Child)
+		else if (pid == 0)
 			child(simple_cmd);
 		else
 			parent();
