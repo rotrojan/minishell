@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/07 21:37:29 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,23 +40,23 @@ void	eat_token(t_token **tok_lst)
 ** parenthesis is encountered (this is because build_ast() is recursively called
 ** by the parse_parenthsis() function, see parse_parenthesis.c for further
 ** informations.
-** On success, build_ast() return TRUE, otherwise, FALSE is returned.
+** On success, build_ast() return true, otherwise, false is returned.
 */
 
 bool	build_ast(t_token **tok_lst, t_node **ast)
 {
 	bool		ret;
 
-	ret = TRUE;
+	ret = true;
 	while (*tok_lst != NULL && (*tok_lst)->type != Cparenth_tok)
 	{
-		if (is_leaf((*tok_lst)->type) == FALSE
+		if (is_leaf((*tok_lst)->type) == false
 			&& (*tok_lst)->type != Oparenth_tok)
 			ret = parse_logical_operator(tok_lst, ast);
 		else
 			ret = parse_pipeline(tok_lst, ast);
-		if (ret == FALSE)
-			return (FALSE);
+		if (ret == false)
+			return (false);
 	}
-	return (TRUE);
+	return (true);
 }

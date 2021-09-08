@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_parenthesis.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:31:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/12 18:09:38 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,10 @@
 bool	parse_parenthesis(t_token **tok_lst, t_node **ast)
 {
 	eat_token(tok_lst);
-	if (build_ast(tok_lst, ast) == FALSE)
-		return (FALSE);
+	if (build_ast(tok_lst, ast) == false)
+		return (false);
 	if (*tok_lst == NULL || (*tok_lst)->type != Cparenth_tok)
-		return (FALSE);
+		return (false);
 	eat_token(tok_lst);
-	return (TRUE);
+	return (true);
 }

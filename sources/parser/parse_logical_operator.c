@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 18:39:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/10 19:32:31 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ bool	parse_logical_operator(t_token **tok_lst, t_node **ast)
 	t_node	*separator_node;
 
 	if (*ast == NULL)
-		return (FALSE);
+		return (false);
 	separator_node = NULL;
 	separator_node = gc_malloc(sizeof(*separator_node));
 	ft_bzero(separator_node, sizeof(*separator_node));

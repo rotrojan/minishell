@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:09:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/09 21:01:56 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static t_token	*get_next_token(char *inchars, int *i, t_error *error)
 ** - get_next_token() returns the next token;
 ** - this token is added to the linked list by add_token();
 ** - the next white spaces are skipped.
-** The lexer() function returns TRUE on succes. Otherwise, FALSE is returned and
+** The lexer() function returns true on succes. Otherwise, false is returned and
 ** the error variable is set accordingly by get_next_token().
 */
 
@@ -61,10 +61,10 @@ bool	build_tok_lst(char *inchars, t_token **tok_lst, t_error *error)
 	{
 		new_tok = get_next_token(inchars, &i, error);
 		if (*error != No_error)
-			return (FALSE);
+			return (false);
 		add_token(new_tok, tok_lst);
 		while (ft_isspace(inchars[i]))
 			++i;
 	}
-	return (TRUE);
+	return (true);
 }

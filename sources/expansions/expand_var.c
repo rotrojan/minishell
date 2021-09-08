@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand_var.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 19:22:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/08 18:12:34 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,15 @@ void	expand_vars(char **arg)
 	int		i;
 	char	*var_name;
 
-	in_squotes = FALSE;
-	in_dquotes = FALSE;
+	in_squotes = false;
+	in_dquotes = false;
 	i = 0;
 	while (*arg[i] != '\0')
 	{
-		if (*arg[i] == '\'' && in_squotes == FALSE && in_dquotes == FALSE)
-			in_squotes = (in_squotes == FALSE);
-		else if (*arg[i] == '"' && in_squotes == FALSE && in_dquotes == FALSE)
-			in_dquotes = (in_dquotes == FALSE);
+		if (*arg[i] == '\'' && in_squotes == false && in_dquotes == false)
+			in_squotes = (in_squotes == false);
+		else if (*arg[i] == '"' && in_squotes == false && in_dquotes == false)
+			in_dquotes = (in_dquotes == false);
 		if (*arg[i] == '$')
 		{
 			var_name = get_var_name(*arg, &i);

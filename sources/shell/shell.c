@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 18:13:02 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,11 @@ static t_node	*lexer_parser(char *line)
 	tok_lst = NULL;
 	ast = NULL;
 	error = No_error;
-	if (build_tok_lst(line, &tok_lst, &error) == FALSE)
+	if (build_tok_lst(line, &tok_lst, &error) == false)
 		display_error(error, &tok_lst);
 	else
 	{
-		if (build_ast(&tok_lst, &ast) == FALSE)
+		if (build_ast(&tok_lst, &ast) == false)
 		{
 			if (tok_lst->type == Amp_tok)
 				display_error(Amp_token, &tok_lst);

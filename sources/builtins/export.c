@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 19:00:10 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 21:19:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	get_len_var_name(char *arg)
 
 	len = 0;
 	while (arg[len] != '+' && arg[len] != '=' && arg[len] != '\0')
-			++len;
+		++len;
 	return (len);
 }
 
@@ -75,30 +75,31 @@ static char	*get_var_name(char	*arg)
 	return (var_name);
 }
 
-void	add_to_env(char *argv, char *var_name)
+void	add_to_env(char *export, char *var_name)
 {
 	char	*ptr;
+	bool	overwrite;
+	char	*env_value;
 	char	*var_value;
-	char	*ret_getenv;
-	int		overwrite;
 
+	overwrite = true;
+	var_value = NULL;
+	ptr = ft_strchr(export, '=');
+	if (ptr == NULL)
 		var_value = NULL;
-		overwrite = 1;
-		ptr = ft_strchr(argv, '=');
-		if (ptr == NULL)
-			var_value = NULL;
+	else
+	{
+		env_value = ft_getenv(var_name);
+		if (ptr[+1] == '\0' && (env_value != NULL && env_value[-1] == '='))
+			overwrite = false;
+		if (ptr[-1] == '+')
+			var_value = ft_strjoin(env_value, ptr + 1, "");
 		else
-			var_value = ++ptr;
-		ret_getenv = ft_getenv(var_name);
-		if (ptr != NULL && *(ptr - 2) == '+')
-			var_value = ft_strjoin(ret_getenv, var_value, "");
-		if (var_value != NULL && *var_value == '\0' && *(ptr - 1) != '=')
-			overwrite = 0;
-		/* if (!(*var_value != '\0' && ret_getenv != NULL && *ret_getenv == '\0')) */
-		printf("%s\n", var_value);
-		if (!(ft_inenv(var_name) >= 0 && var_value != NULL))
-		ft_setenv(var_name, var_value, overwrite);
-		gc_free((void **)&var_name);
+			var_value = ft_strdup(ptr + 1);
+	}
+	if (overwrite == true)
+		ft_setenv(var_name, var_value, 1);
+	gc_free((void **)&var_value);
 }
 
 int	export(int argc, char **argv)
@@ -120,6 +121,7 @@ int	export(int argc, char **argv)
 			return (EXIT_FAILURE);
 		}
 		add_to_env(argv[i], var_name);
+		gc_free((void **)&var_name);
 		++i;
 	}
 	return (EXIT_SUCCESS);

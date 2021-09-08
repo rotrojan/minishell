@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:01:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 18:21:34 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 21:25:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_setenv(const char *name, const char *value, int overwrite)
 		else
 			tmp[i] = ft_strjoin(name, value, "=");
 	}
-	else if (i < 0)
+	else
 	{
 		*env = add_in_env(name, value, tmp);
 		gc_free((void **)&tmp);

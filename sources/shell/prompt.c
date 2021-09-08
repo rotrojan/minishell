@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 21:04:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 static t_prompt	get_prompt_infos(void)
 {
-	static int		init = FALSE;
+	static int		init = false;
 	static t_prompt	prompt;
 
-	if (init == FALSE)
+	if (init == false)
 	{
 		prompt.home = ft_getenv("HOME");
 		prompt.user = ft_getenv("USERNAME");
@@ -27,7 +27,7 @@ static t_prompt	get_prompt_infos(void)
 			prompt.hostname = ft_gethostname();
 		else
 			prompt.hostname = NULL;
-		init = TRUE;
+		init = true;
 	}
 	getcwd(prompt.pwd, PATH_MAX);
 	return (prompt);

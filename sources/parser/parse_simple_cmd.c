@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/12 18:53:12 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static bool	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 	if ((*tok_lst)->next == NULL)
 	{
 		eat_token(tok_lst);
-		return (FALSE);
+		return (false);
 	}
 	new_redirection = NULL;
 	new_redirection = gc_malloc(sizeof(*new_redirection));
@@ -34,11 +34,11 @@ static bool	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 		= (enum e_redirection_type)(*tok_lst)->type - REDIR_TOK_TYPE_OFFSET;
 	eat_token(tok_lst);
 	if ((*tok_lst)->type != Word_tok)
-		return (FALSE);
+		return (false);
 	new_redirection->stream = ft_strdup((*tok_lst)->data);
 	new_redirection->next = simple_cmd->content.simple_cmd.redirection;
 	simple_cmd->content.simple_cmd.redirection = new_redirection;
-	return (TRUE);
+	return (true);
 }
 
 /*
@@ -57,27 +57,27 @@ static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
 			* (simple_cmd->content.simple_cmd.argc + 1));
 	ft_bzero(simple_cmd->content.simple_cmd.argv,
 		sizeof(simple_cmd->content.simple_cmd.argv));
-	while (*tok_lst != NULL && is_leaf((*tok_lst)->type) == TRUE)
+	while (*tok_lst != NULL && is_leaf((*tok_lst)->type) == true)
 	{
 		if ((*tok_lst)->type == Word_tok)
 			simple_cmd->content.simple_cmd.argv[i++]
 				= ft_strdup((*tok_lst)->data);
-		else if (is_redirection((*tok_lst)->type) == TRUE)
+		else if (is_redirection((*tok_lst)->type) == true)
 		{
-			if (add_redirection(tok_lst, simple_cmd) == FALSE)
-				return (FALSE);
+			if (add_redirection(tok_lst, simple_cmd) == false)
+				return (false);
 		}
 		eat_token(tok_lst);
 	}
 	simple_cmd->content.simple_cmd.argv[i] = NULL;
-	return (TRUE);
+	return (true);
 }
 
 /*
 ** The get_argc() function returns the number of arguments of the simple command
 ** by iterating on the tok_lst token linked list while the tokens are not
 ** separators. Redirection tokens are not taken in the count.
-** On success, TRUE is returned.
+** On success, true is returned.
 */
 
 static unsigned int	get_argc(t_token *tok_lst)
@@ -87,11 +87,11 @@ static unsigned int	get_argc(t_token *tok_lst)
 
 	argc = 0;
 	current = tok_lst;
-	while (current != NULL && is_leaf(current->type) == TRUE)
+	while (current != NULL && is_leaf(current->type) == true)
 	{
 		if (current->type == Word_tok)
 			++argc;
-		else if (is_redirection(current->type) == TRUE)
+		else if (is_redirection(current->type) == true)
 			if (current->next != NULL)
 				current = current->next;
 		current = current->next;
@@ -101,7 +101,7 @@ static unsigned int	get_argc(t_token *tok_lst)
 
 /*
 ** Parsing a simple command is done the following way:
-** - if the token is not a leaf, it is a syntax error: FALSE is returned;
+** - if the token is not a leaf, it is a syntax error: false is returned;
 ** - the simple_command node is maloced;
 ** - the number of arguments of the command is obtained with get_argc();
 ** - from_lst_to_array() fills the argv array and the redirection linked list of
@@ -114,19 +114,19 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 
 	if ((*tok_lst)->type == Oparenth_tok)
 		return (parse_parenthesis(tok_lst, ast));
-	if (is_leaf((*tok_lst)->type) == FALSE)
-		return (FALSE);
+	if (is_leaf((*tok_lst)->type) == false)
+		return (false);
 	simple_cmd = NULL;
 	simple_cmd = gc_malloc(sizeof(*simple_cmd));
 	ft_bzero(simple_cmd, sizeof(*simple_cmd));
 	simple_cmd->type = Simple_cmd;
 	simple_cmd->content.simple_cmd.argc = get_argc(*tok_lst);
-	if (from_lst_to_array(tok_lst, simple_cmd) == FALSE
+	if (from_lst_to_array(tok_lst, simple_cmd) == false
 		|| (*tok_lst != NULL && (*tok_lst)->type == Oparenth_tok))
 	{
 		gc_free((void **)&simple_cmd);
-		return (FALSE);
+		return (false);
 	}
 	*ast = simple_cmd;
-	return (TRUE);
+	return (true);
 }

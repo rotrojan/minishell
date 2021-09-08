@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   quote_functions.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 19:31:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/07 20:45:21 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,11 +77,11 @@ static unsigned int	get_len_expanded_str(char const *str_to_expand)
 
 	i = 0;
 	len = 0;
-	is_in_dquotes = FALSE;
+	is_in_dquotes = false;
 	while (str_to_expand[i] != NULL)
 	{
 		if (str_to_expand[i] != '"')
-			is_in_dquotes == TRUE;
+			is_in_dquotes == true;
 		if (str_to_expand[i] != '''
 			&& str_to_expand != '"'
 			&& str_to_expand !='$')

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tok_word.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/15 18:39:43 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ static enum e_chr_rules	word_rules(enum e_chr_type chr_type)
 ** Check for the validity of the characters in inchars with the word_rules()
 ** function according to the quoting state (between two single quotes or two
 ** double quotes, all the characters are accepted). If the end of the inchars
-** string is reached and one of the quote state is still equal to TRUE, error is
-** set to Unexpected_eof and FALSE is returned. Otherwise, TRUE is returned.
+** string is reached and one of the quote state is still equal to true, error is
+** set to Unexpected_eof and false is returned. Otherwise, true is returned.
 */
 
 static enum e_chr_rules	is_valid(
@@ -52,12 +52,12 @@ static enum e_chr_rules	is_valid(
 	enum e_chr_type	chr_type;
 
 	chr_type = get_chr_type(c);
-	if (*is_in_squotes == FALSE && *is_in_dquotes == FALSE)
+	if (*is_in_squotes == false && *is_in_dquotes == false)
 	{
 		if (chr_type == Squote_chr)
-			*is_in_squotes = TRUE;
+			*is_in_squotes = true;
 		else if (chr_type == Dquote_chr)
-			*is_in_dquotes = TRUE;
+			*is_in_dquotes = true;
 	}
 	else
 	{
@@ -66,10 +66,10 @@ static enum e_chr_rules	is_valid(
 			*error = Unexpected_eof;
 			return (Not_accepted);
 		}
-		if (chr_type == Squote_chr && *is_in_squotes == TRUE)
-			*is_in_squotes = FALSE;
-		else if (chr_type == Dquote_chr && *is_in_dquotes == TRUE)
-			*is_in_dquotes = FALSE;
+		if (chr_type == Squote_chr && *is_in_squotes == true)
+			*is_in_squotes = false;
+		else if (chr_type == Dquote_chr && *is_in_dquotes == true)
+			*is_in_dquotes = false;
 		return (Accepted);
 	}
 	return (word_rules(chr_type));
@@ -93,8 +93,8 @@ t_token	*tok_word(char *inchars, int *i, t_error *error)
 	bool				is_in_dquotes;
 
 	j = 0;
-	is_in_squotes = FALSE;
-	is_in_dquotes = FALSE;
+	is_in_squotes = false;
+	is_in_dquotes = false;
 	data = gc_malloc(sizeof(*data) * 1);
 	*data = '\0';
 	while (is_valid(inchars[*i + j], &is_in_squotes, &is_in_dquotes, error)
