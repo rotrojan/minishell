@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/08 18:22:30 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/08 21:34:00 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,13 +22,13 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		special_keys.c		history_utils.c			history_get_up.c		\
 		history_get_down.c	ft_inenv.c				ft_setenv.c				\
 		ft_unsetenv.c		ft_getenv.c				cd.c					\
-		env.c				exit.c					pwd.c					\
+		env_utils.c				exit.c					pwd.c					\
 		lexer.c				tok_separators.c		tok_word.c				\
 		error_management.c	build_ast.c				tok_utils.c				\
 		tok_redirections.c	free_ast.c				parse_simple_cmd.c		\
 		token_identifiers.c	parse_parenthesis.c		parse_logical_operator.c\
 		ft_fflush.c			parse_pipeline.c		exec_ast.c				\
-		exec_simple_cmd.c	ft_env.c				echo.c					\
+		exec_simple_cmd.c	env.c				echo.c					\
 		unset.c				run_builtin.c			path.c					\
 		export.c			heredoc.c				run_binarie.c			\
 		redirection.c		input_redirection.c		output_redirection.c	\

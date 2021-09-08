@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 21:19:40 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/08 22:42:01 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ static int	display_env(void)
 			else
 				ft_putchar('\n');
 		}
+		else
+			ft_printf("%s\n", (*env)[i]);
 		i++;
 	}
 	return (0);
@@ -85,13 +87,15 @@ void	add_to_env(char *export, char *var_name)
 	overwrite = true;
 	var_value = NULL;
 	ptr = ft_strchr(export, '=');
+	env_value = ft_getenv(var_name);
 	if (ptr == NULL)
+	{
 		var_value = NULL;
+		if (env_value != NULL && env_value[-1] == '=')
+			overwrite = false;
+	}
 	else
 	{
-		env_value = ft_getenv(var_name);
-		if (ptr[+1] == '\0' && (env_value != NULL && env_value[-1] == '='))
-			overwrite = false;
 		if (ptr[-1] == '+')
 			var_value = ft_strjoin(env_value, ptr + 1, "");
 		else
