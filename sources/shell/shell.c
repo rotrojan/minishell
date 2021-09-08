@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 21:04:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/08 18:13:02 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,11 @@ void	shell(void)
 		{
 			put_in_history(line);
 			ast = lexer_parser(line);
-			exec_ast(ast);
-			clear_ast(&ast);
+			if (ast != NULL)
+			{
+				exec_ast(ast);
+				clear_ast(&ast);
+			}
 		}
 		else
 		{

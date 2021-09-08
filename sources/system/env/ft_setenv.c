@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 15:01:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 23:32:15 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 18:21:34 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ static char	**add_in_env(const char *name, const char *value, t_env env)
 		new[i] = env[i];
 		i++;
 	}
-	new[i++] = ft_strjoin(name, value, "=");
+	if (value == NULL)
+		new[i++] = ft_strjoin(name, value, "");
+	else
+		new[i++] = ft_strjoin(name, value, "=");
 	new[i] = NULL;
 	return (new);
 }

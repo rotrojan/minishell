@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 10:12:14 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 22:32:45 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 18:52:32 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,10 @@ char	*ft_strjoin(char const *s1, char const *s2, char const *sep)
 	{
 		if (!s2)
 			return (NULL);
-		return (ft_strdup(s2));
+		return (ft_strjoin(sep, s2, ""));
 	}
 	if (!s2)
-		return (ft_strdup(s1));
+		return (ft_strjoin(s1, sep, ""));
 	size = ft_strlen(s1) + ft_strlen(s2) + ft_strlen(sep);
 	if (s1[0] == '\0' && s2[0] == '\0')
 		return (ft_strdup(""));
