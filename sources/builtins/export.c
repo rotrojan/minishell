@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 23:52:25 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 19:00:10 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,23 +75,43 @@ static char	*get_var_name(char	*arg)
 	return (var_name);
 }
 
-int	export(int argc, char **argv)
+void	add_to_env(char *argv, char *var_name)
 {
-	int		i;
-	int		j;
-	char	*var_name;
+	char	*ptr;
 	char	*var_value;
 	char	*ret_getenv;
 	int		overwrite;
+
+		var_value = NULL;
+		overwrite = 1;
+		ptr = ft_strchr(argv, '=');
+		if (ptr == NULL)
+			var_value = NULL;
+		else
+			var_value = ++ptr;
+		ret_getenv = ft_getenv(var_name);
+		if (ptr != NULL && *(ptr - 2) == '+')
+			var_value = ft_strjoin(ret_getenv, var_value, "");
+		if (var_value != NULL && *var_value == '\0' && *(ptr - 1) != '=')
+			overwrite = 0;
+		/* if (!(*var_value != '\0' && ret_getenv != NULL && *ret_getenv == '\0')) */
+		printf("%s\n", var_value);
+		if (!(ft_inenv(var_name) >= 0 && var_value != NULL))
+		ft_setenv(var_name, var_value, overwrite);
+		gc_free((void **)&var_name);
+}
+
+int	export(int argc, char **argv)
+{
+	int		i;
+	char	*var_name;
 
 	if (argc <= 1)
 		return (display_env());
 	i = 1;
 	while (argv[i] != NULL)
 	{
-		overwrite = 1;
 		var_name = NULL;
-		var_value = NULL;
 		var_name = get_var_name(argv[i]);
 		if (var_name == NULL)
 		{
@@ -99,23 +119,7 @@ int	export(int argc, char **argv)
 				"minishell: export: `%s': not a valid identifier\n", argv[i]);
 			return (EXIT_FAILURE);
 		}
-		j = 0;
-		while (argv[i][j] != '=' && argv[i][j] != '\0')
-			j++;
-		if (argv[i][j] == '\0')
-			var_value = NULL;
-		else if (argv[i][j] == '=')
-			var_value = "";
-		else
-			var_value = &(argv[i][++j]);
-		ret_getenv = ft_getenv(var_name);
-		if (argv[i][j - 2] == '+')
-			var_value = ft_strjoin(ret_getenv, var_value, "");
-		if (*var_value == '\0' && argv[i][j - 1] != '=')
-			overwrite = 0;
-		/* if (!(*var_value != '\0' && ret_getenv != NULL && *ret_getenv == '\0')) */
-		ft_setenv(var_name, var_value, overwrite);
-		gc_free((void **)&var_name);
+		add_to_env(argv[i], var_name);
 		++i;
 	}
 	return (EXIT_SUCCESS);

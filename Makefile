@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/07 21:31:26 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/09/08 18:22:30 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,8 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		exec_simple_cmd.c	ft_env.c				echo.c					\
 		unset.c				run_builtin.c			path.c					\
 		export.c			heredoc.c				run_binarie.c			\
-		redirection.c		input_redirection.c		output_redirection.c
+		redirection.c		input_redirection.c		output_redirection.c	\
+		expand_var.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
@@ -50,7 +51,7 @@ DEBUG = off
 
 CFLAGS = -MMD -Wall -Wextra -Werror $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
-	CXXFLAGS += -g3 -fsanitize=address
+	CXXFLAGS += -g3# -fsanitize=address
 endif
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses #--enable-sigwinch
 
@@ -58,7 +59,7 @@ vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env)				\
 				$(addprefix /shell, /. /history /inchar)	\
 				$(addprefix /execution, /. /redirection)	\
-				/. /terminal /lexer /parser /builtins)
+				/. /terminal /lexer /parser /builtins /expansions)
 vpath %.a $(LIBS:%=lib%)
 
 all:
