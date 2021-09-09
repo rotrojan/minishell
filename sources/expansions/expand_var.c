@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 19:22:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/09 18:34:26 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,69 +28,82 @@ static int	get_len_var_name(char *arg)
 	int	len;
 
 	len = 0;
-	ft_printf("yolo\n");
 	while (ft_isalnum(arg[len]) != 0 && arg[len] != '\0')
 		++len;
 	return (len);
 }
 
-static char	*get_var_name(char *arg, int *i)
+static char	*get_var_name(char *arg, int i)
 {
 	int		j;
 	char	*var_name;
 
-	i = 0;
 	j = 0;
-	printf("%s\n", &arg[*i]);
-	if (ft_isalpha(arg[*i]) == 0)
+	++i;
+	if (ft_isalpha(arg[i]) == 0)
 		return (NULL);
-	int len = get_len_var_name(arg);
-	printf("len = %d\n", len);
-	var_name = gc_malloc(sizeof(*var_name) * (get_len_var_name(arg) + 1));
-	while (ft_isalnum(arg[*i]) != 0 && arg[*i] != '\0')
+	var_name = gc_malloc(sizeof(*var_name) * (get_len_var_name(arg + i) + 1));
+	/* ft_bzero(&var_name, sizeof(var_name)); */
+	while (ft_isalnum(arg[i]) != 0 && arg[i] != '\0')
 	{
-		if (ft_isalnum(arg[*i]) == 0)
-		{
-			gc_free((void **)&var_name);
-			return (NULL);
-		}
-		else
-			var_name[j++] = arg[*i];
+		var_name[j] = arg[i];
 		++i;
+		++j;
 	}
-	var_name[*i] = '\0';
-	if (arg[*i] == '+' && arg[*i + 1] != '=')
-		gc_free((void **)&var_name);
+	var_name[j] = '\0';
 	return (var_name);
+}
+
+char	*fill_new_arg(char **arg, int len_var_name, int i, char *var_value)
+{
+	int	j;
+	int	k;
+	int	len_var_value;
+	char	*new_arg;
+
+	j = 0;
+	len_var_value = ft_strlen(var_value);
+	new_arg = gc_malloc(sizeof(*new_arg) *
+		(ft_strlen(*arg) - len_var_name + len_var_value));
+	while (j < i)
+	{
+		new_arg[j] = *arg[j];
+		++j;
+	}
+	k = 0;
+	while (var_value[k])
+	{
+		new_arg[j++] = var_value[k++];
+	}
+	i = i + len_var_name + 1;
+	while (new_arg[j] != '\0')
+		new_arg[j++] = (*arg)[i++];
+	gc_free((void **)arg);
+	return (new_arg);
 }
 
 void	expand_vars(char **arg)
 {
-	bool	in_squotes;
-	bool	in_dquotes;
 	int		i;
 	char	*var_name;
+	char	*var_value;
 
-	in_squotes = false;
-	in_dquotes = false;
 	i = 0;
-	while (*arg[i] != '\0')
+	while ((*arg)[i] != '\0')
 	{
-		if (*arg[i] == '\'' && in_squotes == false && in_dquotes == false)
-			in_squotes = (in_squotes == false);
-		else if (*arg[i] == '"' && in_squotes == false && in_dquotes == false)
-			in_dquotes = (in_dquotes == false);
 		if (*arg[i] == '$')
 		{
-			var_name = get_var_name(*arg, &i);
-			printf("%s\n", var_name);
+			var_name = get_var_name((*arg) + i, i);
+			var_value = ft_getenv(var_name);
+			*arg = fill_new_arg(arg, ft_strlen(var_name), i, var_value);
+			i += ft_strlen(var_value);
 		}
 		else
 			++i;
 	}
 	gc_free((void **)arg);
 	*arg = ft_getenv(var_name);
-	gc_free((void **)var_name);
+	gc_free((void **)&var_name);
 }
 
 void	perform_expansions(t_simple_cmd *cmd)
