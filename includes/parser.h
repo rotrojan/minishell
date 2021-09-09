@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/09 20:50:41 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/08 03:49:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ enum e_redirection_type
 	Input_redir,
 	Heredoc_redir,
 	Output_redir,
-	Append_output_redir
+	Append_output_redir,
+	No_redir
 };
 
 /*
