@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 19:22:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/09 20:27:22 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/09 20:52:59 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ char	*fill_new_arg(char **arg, int len_var_name, int i, char *var_value)
 
 	j = 0;
 	len_var_value = ft_strlen(var_value);
-	new_arg = gc_malloc(sizeof(*new_arg) *
-		(ft_strlen(*arg) - len_var_name + len_var_value));
+	new_arg = gc_malloc(sizeof(*new_arg)
+			* (ft_strlen(*arg) - len_var_name + len_var_value));
 	while (j < i)
 	{
 		new_arg[j] = (*arg)[j];
@@ -79,11 +79,16 @@ void	expand_vars(char **arg)
 	{
 		if (*(*arg + i) == '$')
 		{
-			var_name = get_var_name(*arg, i);
-			var_value = ft_getenv(var_name);
-			*arg = fill_new_arg(arg, ft_strlen(var_name), i, var_value);
-			i += ft_strlen(var_value);
-			gc_free((void **)&var_name);
+			if (*(*arg + i + 1) == '\0' || ft_isalnum(*(*arg + i + 1)) == 0)
+				*arg = fill_new_arg(arg, 0, i++, "$");
+			else
+			{
+				var_name = get_var_name(*arg, i);
+				var_value = ft_getenv(var_name);
+				*arg = fill_new_arg(arg, ft_strlen(var_name), i, var_value);
+				i += ft_strlen(var_value);
+				gc_free((void **)&var_name);
+			}
 		}
 		else
 			++i;
