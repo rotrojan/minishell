@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/09 21:08:41 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	shell(void)
 				exec_ast(ast);
 				clear_ast(&ast);
 			}
+			else
+				ft_dprintf(STDERR_FILENO, "\n\r");
 		}
 		else
 		{
