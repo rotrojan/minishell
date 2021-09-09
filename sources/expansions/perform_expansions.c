@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/09 22:05:00 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:28:10 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	perform_expansions(t_simple_cmd *cmd)
 	t_redirection	*redir_lst;
 
 	argv = cmd->argv;
-	redir_lst = cmd->redirection;
 	i = 0;
 	while (argv[i] != NULL)
 	{
@@ -28,9 +27,18 @@ void	perform_expansions(t_simple_cmd *cmd)
 		/* remove_quotes() */
 		++i;
 	}
+	redir_lst = cmd->input_redir;
 	while (redir_lst != NULL)
 	{
 		expand_vars(&(redir_lst->stream));
 		redir_lst = redir_lst->next;
+		/* remove_quotes() */
+	}
+	redir_lst = cmd->output_redir;
+	while (redir_lst != NULL)
+	{
+		expand_vars(&(redir_lst->stream));
+		redir_lst = redir_lst->next;
+		/* remove_quotes() */
 	}
 }

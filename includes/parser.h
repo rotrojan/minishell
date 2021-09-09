@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/08 03:49:18 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:21:25 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ typedef struct s_simple_cmd
 {
 	int				argc;
 	char			**argv;
-	t_redirection	*redirection;
+	t_redirection	*input_redir;
+	t_redirection	*output_redir;
 }	t_simple_cmd;
 
 /*

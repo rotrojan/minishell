@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 15:56:04 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/07 21:37:02 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:21:57 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ static void	free_simple_cmd(t_node **simple_cmd)
 		++i;
 	}
 	gc_free((void **)&(*simple_cmd)->content.simple_cmd.argv);
-	free_redirections(&((*simple_cmd)->content.simple_cmd.redirection));
+	free_redirections(&((*simple_cmd)->content.simple_cmd.input_redir));
+	free_redirections(&((*simple_cmd)->content.simple_cmd.output_redir));
 	gc_free((void **)&*simple_cmd);
 }
 

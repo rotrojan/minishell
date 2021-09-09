@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:19:26 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 03:59:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:36:40 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,13 @@
 static int	open_file(t_redirection *redirection)
 {
 	int	fd;
+	int	flag; 
 
-	fd = open(redirection->stream, O_WRONLY | O_CREAT,
+	if (redirection->type == Output_redir)
+		flag = O_TRUNC;
+	else
+		flag = O_APPEND;
+	fd = open(redirection->stream, O_WRONLY | O_CREAT | flag,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == -1)
 	{

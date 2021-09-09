@@ -6,20 +6,22 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/06 19:36:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:47:17 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	heredoc(const char *delimiter)
+char	*heredoc(const char *delimiter)
 {
 	char	*line;
 	char	*doc;
 	char	*tmp;
+	t_term	*term;
 
 	doc = NULL;
 	line = NULL;
+	term = set_termios();
 	while (1)
 	{
 		ft_putstr("> ");
@@ -34,5 +36,6 @@ void	heredoc(const char *delimiter)
 		}
 		gc_free((void **)&line);
 	}
-	ft_putstr_fd(doc, STDIN_FILENO);
+		tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+	return (doc);
 }

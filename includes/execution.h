@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/07 21:30:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:44:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,5 +21,6 @@ int		run_binarie(char **argv);
 int		redirection(t_simple_cmd command);
 int		input_redirection(t_redirection *redirection);
 int		output_redirection(t_redirection *redirection);
+char	*heredoc(const char *delimiter);
 
 #endif

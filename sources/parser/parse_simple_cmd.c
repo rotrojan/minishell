@@ -6,12 +6,41 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/10 00:13:40 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 #define REDIR_TOK_TYPE_OFFSET 5
+
+/*
+** Because of the way redirections are handled during execution, input
+** redirections are added in the order they appear and output redirections are
+** added in reverse order.
+*/
+
+static void	add_to_lst(t_redirection *new_redirection, t_node *simple_cmd)
+{
+	t_redirection	*current;
+
+	if (new_redirection->type == Input_redir
+		|| new_redirection->type == Heredoc_redir)
+	{
+		current = simple_cmd->content.simple_cmd.input_redir;
+		while (current != NULL)
+		{
+			if (current->next == NULL)
+				break ;
+			current = current->next;
+		}
+		current = new_redirection;
+	}
+	else
+	{
+		new_redirection->next = simple_cmd->content.simple_cmd.output_redir;
+		simple_cmd->content.simple_cmd.output_redir = new_redirection;
+	}
+}
 
 /*
 ** Malloc and add the redirection to the redirection linked list of the simple
@@ -36,8 +65,7 @@ static bool	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 	if ((*tok_lst)->type != Word_tok)
 		return (false);
 	new_redirection->stream = ft_strdup((*tok_lst)->data);
-	new_redirection->next = simple_cmd->content.simple_cmd.redirection;
-	simple_cmd->content.simple_cmd.redirection = new_redirection;
+	add_to_lst(new_redirection, simple_cmd);
 	return (true);
 }
 
