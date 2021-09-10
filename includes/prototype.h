@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 17:19:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/10 21:58:57 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int				ft_exit(int argc, char **argv);
 int				cd(int argc, char **argv);
 int				unset(int argc, char **argv);
 int				export(int argc, char **argv);
+int				display_env(void);
 
 //	system
 enum e_os_name	getos(void);

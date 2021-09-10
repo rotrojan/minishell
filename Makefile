@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/09 22:01:30 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/10 22:01:50 by bigo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,11 +28,12 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		tok_redirections.c	free_ast.c				parse_simple_cmd.c		\
 		token_identifiers.c	parse_parenthesis.c		parse_logical_operator.c\
 		ft_fflush.c			parse_pipeline.c		exec_ast.c				\
-		exec_simple_cmd.c	env.c				echo.c					\
+		exec_simple_cmd.c	env.c					echo.c					\
 		unset.c				run_builtin.c			path.c					\
 		export.c			heredoc.c				run_binarie.c			\
 		redirection.c		input_redirection.c		output_redirection.c	\
-		expand_vars.c		perform_expansions.c
+		expand_vars.c		perform_expansions.c	quote_functions.c		\
+													export_display_env.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
