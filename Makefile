@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/10 22:01:50 by bigo             ###   ########.fr        #
+#    Updated: 2021/09/11 18:26:02 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,8 +32,8 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		unset.c				run_builtin.c			path.c					\
 		export.c			heredoc.c				run_binarie.c			\
 		redirection.c		input_redirection.c		output_redirection.c	\
-		expand_vars.c		perform_expansions.c	quote_functions.c		\
-													export_display_env.c
+		remove_quotes.c		perform_expansions.c	expand_single_var.c	\
+		heredoc.c			realloc_argv.c			export_display_env.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
@@ -50,9 +50,9 @@ RM = rm -f
 MKDIR = mkdir -p
 DEBUG = off
 
-CFLAGS = -MMD -Wall -Wextra -Werror $(INCLUDES_DIR:%=-I %)
+CFLAGS = -MMD -Wall -Wextra $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
-	CXXFLAGS += -g3# -fsanitize=address
+	CXXFLAGS += -g3#-fsanitize=address
 endif
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses #--enable-sigwinch
 

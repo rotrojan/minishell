@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   expand_vars.c                                      :+:      :+:    :+:   */
+/*   expand_single_var.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 19:22:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/09 22:04:49 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/11 16:07:31 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static char	*get_var_name(char *arg, int i)
 	return (var_name);
 }
 
-static char	*fill_new_arg(char **arg, int len_var_name, int i, char *var_value)
+char	*fill_new_arg(char **arg, int len_var_name, int i, char *var_value)
 {
 	int		j;
 	int		k;
@@ -68,39 +68,21 @@ static char	*fill_new_arg(char **arg, int len_var_name, int i, char *var_value)
 	return (new_arg);
 }
 
-static void	expand_single_var(char **arg, int i)
+void	expand_single_var(
+		t_simple_cmd *cmd, int *i, int *j, bool in_dquotes)
 {
 	char	*var_name;
 	char	*var_value;
 
-	var_name = get_var_name(*arg, i);
+	var_name = get_var_name(cmd->argv[*i], *j);
 	var_value = ft_getenv(var_name);
-	*arg = fill_new_arg(arg, ft_strlen(var_name), i, var_value);
-	i += ft_strlen(var_value);
+	if (var_value == NULL)
+		var_value = "";
+	cmd->argv[*i]
+		= fill_new_arg(&cmd->argv[*i], ft_strlen(var_name), *j, var_value);
+	if (in_dquotes == false)
+		realloc_argv(cmd, i, j, var_value);
+	else
+		*j += ft_strlen(var_value);
 	gc_free((void **)&var_name);
-}
-
-void	expand_vars(char **arg)
-{
-	int		i;
-	bool	is_insquotes;
-
-	i = 0;
-	is_insquotes = false;
-	while (*(*arg + i) != '\0')
-	{
-		if (*(*arg + i) == '$' && is_insquotes == false)
-		{
-			if (*(*arg + i + 1) == '\0' || ft_isalnum(*(*arg + i + 1)) == 0)
-				*arg = fill_new_arg(arg, 0, i++, "$");
-			else
-				expand_single_var(arg, i);
-		}
-		else
-		{
-			if (*(*arg + i) == '\'')
-				is_insquotes = (is_insquotes == false);
-			++i;
-		}
-	}
 }
