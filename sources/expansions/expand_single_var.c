@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 19:22:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/12 20:31:55 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/12 22:56:34 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	expand_single_var(
 	var_value = ft_getenv(var_name);
 	if (var_value == NULL)
 		var_value = "";
-	if (in_dquotes == false && var_value != NULL && *var_value != '\0' && has_space(var_value) == true)
+	if (in_dquotes == false && var_value != NULL && *var_value != '\0'
+		&& has_space(var_value) == true)
 	{
 		realloc_argv(cmd, i, j, var_value);
 	}
