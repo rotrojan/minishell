@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 19:22:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/11 16:07:31 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/12 16:30:29 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,11 +78,13 @@ void	expand_single_var(
 	var_value = ft_getenv(var_name);
 	if (var_value == NULL)
 		var_value = "";
-	cmd->argv[*i]
-		= fill_new_arg(&cmd->argv[*i], ft_strlen(var_name), *j, var_value);
-	if (in_dquotes == false)
+	if (in_dquotes == false && var_value != NULL && *var_value != '\0')
 		realloc_argv(cmd, i, j, var_value);
 	else
+	{
+		cmd->argv[*i]
+			= fill_new_arg(&cmd->argv[*i], ft_strlen(var_name), *j, var_value);
 		*j += ft_strlen(var_value);
+	}
 	gc_free((void **)&var_name);
 }

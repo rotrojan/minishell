@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/11 18:44:37 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/12 14:03:48 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,14 @@ static void	expand_vars(t_simple_cmd *cmd, int *i)
 
 void	perform_expansions(t_simple_cmd *cmd)
 {
-	char			**argv;
 	int				i;
 	t_redirection	*redir_lst;
 
-	argv = cmd->argv;
 	redir_lst = cmd->redirection;
 	i = 0;
-	while (argv[i] != NULL)
+	while (cmd->argv[i] != NULL)
 	{
-		if (ft_strchr(argv[i], '$') != NULL)
+		if (ft_strchr(cmd->argv[i], '$') != NULL)
 			expand_vars(cmd, &i);
 		/* remove_quotes() */
 		/* else */
