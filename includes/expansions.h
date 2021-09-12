@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/11 19:43:01 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/12 20:31:00 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	perform_expansions(t_simple_cmd *cmd);
 */
 
 void	expand_single_var(
-		t_simple_cmd *cmd, int *i, int *j, bool in_dquotes);
+		t_simple_cmd *cmd, int i, int *j, bool in_dquotes);
 char	*fill_new_arg(char **arg, int len_var_name, int i, char *var_value);
 
 /*
@@ -52,6 +52,13 @@ char	*remove_quotes(char *str);
 */
 
 void	realloc_argv(
-		t_simple_cmd *cmd, int *i, int *j, char *var_value);
+		t_simple_cmd *cmd, int const i, int *j, char *var_value);
 
+
+
+
+
+
+
+bool	has_space(char *str);
 #endif

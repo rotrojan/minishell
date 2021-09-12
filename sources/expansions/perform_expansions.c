@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/12 14:03:48 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/12 19:37:14 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	change_quote_state(char quote, bool *in_squotes, bool *in_dquotes)
 {
-	if (quote == '\'' && *in_dquotes == true)
+	if (quote == '\'' && *in_dquotes == false)
 		*in_squotes = (*in_squotes == false);
-	else if (quote == '"' && *in_squotes == true)
+	else if (quote == '"' && *in_squotes == false)
 		*in_dquotes = (*in_dquotes == false);
 }
 
-static void	expand_vars(t_simple_cmd *cmd, int *i)
+static void	expand_vars(t_simple_cmd *cmd, int const i)
 {
 	int		j;
 	bool	in_squotes;
@@ -29,19 +29,19 @@ static void	expand_vars(t_simple_cmd *cmd, int *i)
 	j = 0;
 	in_squotes = false;
 	in_dquotes = false;
-	while (cmd->argv[*i][j] != '\0')
+	while (cmd->argv[i] != NULL && cmd->argv[i][j] != '\0')
 	{
-		if (cmd->argv[*i][j] == '$' && in_squotes == false)
+		if (cmd->argv[i][j] == '$' && in_squotes == false)
 		{
-			if (cmd->argv[*i][j + 1] == '\0'
-					|| ft_isalnum(cmd->argv[*i][j + 1]) == 0)
-				cmd->argv[*i] = fill_new_arg(&cmd->argv[*i], 0, j++, "$");
+			if (cmd->argv[i][j + 1] == '\0'
+					|| ft_isalnum(cmd->argv[i][j + 1]) == 0)
+				cmd->argv[i] = fill_new_arg(&cmd->argv[i], 0, j++, "$");
 			else
 				expand_single_var(cmd, i, &j, in_dquotes);
 		}
 		else
 		{
-			change_quote_state(cmd->argv[*i][j], &in_squotes, &in_dquotes);
+			change_quote_state(cmd->argv[i][j], &in_squotes, &in_dquotes);
 			++j;
 		}
 	}
@@ -57,9 +57,8 @@ void	perform_expansions(t_simple_cmd *cmd)
 	while (cmd->argv[i] != NULL)
 	{
 		if (ft_strchr(cmd->argv[i], '$') != NULL)
-			expand_vars(cmd, &i);
+			expand_vars(cmd, i);
 		/* remove_quotes() */
-		/* else */
 		++i;
 	}
 	while (redir_lst != NULL)
