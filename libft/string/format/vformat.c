@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/02 15:53:46 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 22:08:54 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/10 21:30:44 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	match_type(char	type, va_list ap, t_fbuffer *format)
+static int	match_type(char type, va_list ap, t_fbuffer *format)
 {
 	int					i;
 	t_fconvert const	convert[] = {

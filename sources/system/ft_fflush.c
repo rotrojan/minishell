@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/04 02:21:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/04 02:32:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/13 04:39:36 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ void	set_timeout(t_term *term, int timeout)
 
 int	ft_fflush(int fd)
 {
-	char	c;
 	int		ret;
+	char	buff[SIZE_10B];
 	t_term	*term;
 
 	ret = 1;
@@ -33,9 +33,9 @@ int	ft_fflush(int fd)
 	set_timeout(term, 0);
 	while (ret)
 	{
-		ret = read(fd, &c, 1);
+		ret = read(fd, buff, SIZE_10B);
 		if (ret < 0)
-			return (EOF);
+			return (-1);
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &term->current);
 	return (0);
