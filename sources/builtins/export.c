@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/10 21:59:38 by bigo             ###   ########.fr       */
+/*   Updated: 2021/09/13 20:05:07 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,14 +53,11 @@ static char	*get_var_name(char	*arg)
 static char	*get_var_value(char *str, char *env_value)
 {
 	char	*var_value;
-	char	*without_quotes;
 
-	without_quotes = remove_quotes(str);
 	if (str[-2] == '+')
-		var_value = ft_strjoin(env_value, without_quotes, "");
+		var_value = ft_strjoin(env_value, str, "");
 	else
-		var_value = ft_strdup(without_quotes);
-	gc_free((void **)&without_quotes);
+		var_value = ft_strdup(str);
 	return (var_value);
 }
 
@@ -82,7 +79,9 @@ static void	add_to_env(char *export, char *var_name)
 			overwrite = false;
 	}
 	else
+	{
 		var_value = get_var_value(ptr + 1, env_value);
+	}
 	if (overwrite == true)
 		ft_setenv(var_name, var_value, 1);
 	gc_free((void **)&var_value);
@@ -93,6 +92,7 @@ int	export(int argc, char **argv)
 	int		i;
 	char	*var_name;
 
+	i = 0;
 	if (argc <= 1)
 		return (display_env());
 	i = 1;
