@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/10 22:01:50 by bigo             ###   ########.fr        #
+#    Updated: 2021/09/12 22:19:25 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,9 +52,9 @@ DEBUG = off
 
 CFLAGS = -MMD -Wall -Wextra -Werror $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
-	CXXFLAGS += -g3# -fsanitize=address
+	CXXFLAGS += -g3 -fsanitize=address
 endif
-LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses #--enable-sigwinch
+LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
 vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env)				\

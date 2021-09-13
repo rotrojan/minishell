@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 17:01:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/06 17:04:41 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/13 03:30:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@ int	run_binarie(char **argv)
 		if (bin_path == NULL)
 			return (-1);
 	}
+	else if (ft_strchr(argv[0], '/') != NULL)
+		bin_path = ft_strdup(argv[0]);
 	else
 		bin_path = getbinpath(argv[0]);
 	if (bin_path == NULL)

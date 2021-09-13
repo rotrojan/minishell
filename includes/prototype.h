@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/10 21:58:57 by bigo             ###   ########.fr       */
+/*   Updated: 2021/09/13 19:08:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void			ft_setenv(const char *name, const char *value, int overwrite);
 //	terminal
 int				ft_getch(void);
 t_term			*getterm(void);
-void			init_term(void);
+bool			init_term(void);
 t_term			*set_termios(void);
 t_axe			get_cursor_pos(void);
 void			end_key(t_cursor *cursor);
@@ -58,11 +58,11 @@ void			ctrl_l_key(t_cursor *cursor);
 void			backspace_key(t_cursor *cursor);
 void			left_arrow_key(t_cursor *cursor);
 void			right_arrow_key(t_cursor *cursor);
-void			cursor_move_left(t_cursor *cursor);
-void			cursor_move_right(t_cursor *cursor);
+int				cursor_move_left(t_cursor *cursor);
+int				cursor_move_right(t_cursor *cursor);
 
 //	shell
-void			shell(void);
+void			shell(bool inline_mode);
 void			prompt(void);
 char			*input(void);
 t_env			*get_shell_env(void);

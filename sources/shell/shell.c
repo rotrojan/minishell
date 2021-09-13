@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/09 21:08:41 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/13 20:39:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static t_node	*lexer_parser(char *line)
 }
 
 /* Core of program */
-void	shell(void)
+void	shell(bool inline_mode)
 {
 	char	*line;
 	t_node	*ast;
@@ -49,17 +49,22 @@ void	shell(void)
 	ast = NULL;
 	while (1)
 	{
-		term = set_termios();
-		prompt();
-		line = input();
-		tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+		if (inline_mode == true)
+			get_next_line(STDIN_FILENO, &line);
+		else
+		{
+			term = set_termios();
+			prompt();
+			line = input();
+			tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+		}
 		if (line[0] != '\0')
 		{
 			put_in_history(line);
 			ast = lexer_parser(line);
 			if (ast != NULL)
 			{
-				exec_ast(ast);
+				exec_ast(ast, inline_mode);
 				clear_ast(&ast);
 			}
 			else
@@ -70,5 +75,7 @@ void	shell(void)
 			ft_dprintf(STDERR_FILENO, "\n\r");
 			gc_free((void **)&line);
 		}
+		if (inline_mode == true)
+			exit_shell(EXIT_SUCCESS, NULL);
 	}
 }

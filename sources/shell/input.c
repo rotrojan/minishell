@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/17 20:33:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/13 05:44:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ static char	*get_line(t_cursor *cursor)
 
 	line = inchars_to_line(inchars_head(cursor));
 	free_inchars(inchars_head(cursor));
+	if (ft_striter(line, &ft_isspace) == 1)
+	{
+		gc_free((void **)&line);
+		return (ft_strdup(""));
+	}
 	return (line);
 }
 
@@ -56,12 +61,19 @@ static int	catch_signals(void)
 	return (tmp);
 }
 
+/*	"cr" = put cursor at the beginning of the line
+	"cd" = clear screen from the cursor to the end	*/
+static void	update_screen(t_cursor *cursor)
+{
+	cursor->pos = get_cursor_pos();
+}
+
 /* Read and return input line for shell. */
 char	*input(void)
 {
-	int			c;
-	int			sig;
-	t_cursor	cursor;
+	int				c;
+	int				sig;
+	t_cursor		cursor;
 
 	cursor.on_inchar = create_inchar(EOL);
 	cursor.pos = get_cursor_pos();
@@ -71,7 +83,7 @@ char	*input(void)
 		if (sig == SIGINT)
 			return (ft_strdup(""));
 		else if (sig == SIGWINCH)
-			cursor.pos = get_cursor_pos();
+			update_screen(&cursor);
 		c = ft_getch();
 		if (c != ERR)
 		{

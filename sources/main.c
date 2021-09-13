@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:20:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/19 18:50:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/13 19:09:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ static void	free_leaks(void)
 /* Init and launch all process. */
 int	main(int argc, char **argv, char **env)
 {
+	bool	inline_mode;
+
 	(void)(argc && argv);
 	init_shell_env(env);
-	init_term();
+	inline_mode = init_term();
 	handle_signals();
 	init_history();
-	shell();
+	shell(inline_mode);
 	return (EXIT_FAILURE);
 }

@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execution.h                                        :+:      :+:    :+:   */
+/*   ft_striter.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/13 20:39:54 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/12 17:25:04 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/12 17:32:16 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef EXECUTION_H
-# define EXECUTION_H
+#include "libft.h"
 
-//	execution
-void	exec_ast(t_node *ast, bool inline_mode);
-void	exec_simple_cmd(t_simple_cmd simple_cmd);
-int		run_binarie(char **argv);
-//		redirection
-int		redirection(t_simple_cmd command);
-int		input_redirection(t_redirection *redirection);
-int		output_redirection(t_redirection *redirection);
+int	ft_striter(char *str, int (*function)(int))
+{
+	int	i;
 
-#endif
+	i = 0;
+	while (str[i] != '\0')
+		if (function(str[i++]) == 0)
+			return (0);
+	return (1);
+}
