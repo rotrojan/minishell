@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 19:31:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/11 16:01:50 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/13 20:06:15 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ static int	get_len_without_quotes(char *str)
 	len = 0;
 	while (str[i] != '\0')
 	{
-		if (in_dquotes == false && str[i] == '\'')
-			in_squotes = (in_squotes == false);
-		else if (in_squotes == false && str[i] == '"')
-			in_dquotes = (in_dquotes == false);
+		if ((str[i] == '\'' && in_dquotes == false)
+			|| (str[i] == '"' && in_squotes == false))
+			change_quote_state(str[i], &in_squotes, &in_dquotes);
 		else
 			++len;
 		++i;
@@ -52,13 +51,21 @@ char	*remove_quotes(char *str)
 			* (get_len_without_quotes(str) + 1));
 	while (str[i] != '\0')
 	{
-		if (in_dquotes == false && str[i] == '\'')
-			in_squotes = (in_squotes == false);
-		else if (in_squotes == false && str[i] == '"')
-			in_dquotes = (in_dquotes == false);
+		if ((str[i] == '\'' && in_dquotes == false)
+			|| (str[i] == '"' && in_squotes == false))
+			change_quote_state(str[i], &in_squotes, &in_dquotes);
 		else
 			without_quotes[j++] = str[i];
 		++i;
 	}
 	return (without_quotes);
+}
+
+void	remove_quotes_from_arg(char **arg)
+{
+	char			*tmp;
+
+	tmp = remove_quotes(*arg);
+	gc_free((void **)arg);
+	*arg = tmp;
 }

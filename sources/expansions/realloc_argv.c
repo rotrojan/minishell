@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 15:36:37 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/12 22:51:44 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/13 14:58:06 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,25 @@ static void	handle_last_join(
 		new_argv[utils->i_new++] = ft_strdup(after_var);
 }
 
+static void	add_quotes(char	**splitted_var)
+{
+	char	*tmp;
+	int		len_arg;
+
+	while (*splitted_var != NULL)
+	{
+		len_arg = ft_strlen(*splitted_var);
+		tmp = gc_malloc(sizeof(*tmp) * (len_arg + 3));
+		tmp[0] = '"';
+		ft_strncpy(tmp + 1, *splitted_var, len_arg);
+		tmp[len_arg + 1] = '"';
+		tmp[len_arg + 2] = '\0';
+		gc_free((void **)&(*splitted_var));
+		*splitted_var = tmp;
+		++splitted_var;
+	}
+}
+
 void	realloc_argv(
 		t_simple_cmd *cmd, int const i, int *j, char *var_value)
 {
@@ -76,6 +95,7 @@ void	realloc_argv(
 	char			**splitted_var;
 
 	splitted_var = ft_split(var_value, ' ');
+	add_quotes(splitted_var);
 	init_expand_utils(cmd->argv, splitted_var, var_value, &utils);
 	utils.index_dollar = *j;
 	new_argv = gc_malloc(sizeof(*new_argv) * (utils.len_new_argv + 1));

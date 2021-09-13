@@ -6,19 +6,11 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/12 19:37:14 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/13 20:01:33 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static void	change_quote_state(char quote, bool *in_squotes, bool *in_dquotes)
-{
-	if (quote == '\'' && *in_dquotes == false)
-		*in_squotes = (*in_squotes == false);
-	else if (quote == '"' && *in_squotes == false)
-		*in_dquotes = (*in_dquotes == false);
-}
 
 static void	expand_vars(t_simple_cmd *cmd, int const i)
 {
@@ -58,7 +50,7 @@ void	perform_expansions(t_simple_cmd *cmd)
 	{
 		if (ft_strchr(cmd->argv[i], '$') != NULL)
 			expand_vars(cmd, i);
-		/* remove_quotes() */
+		remove_quotes_from_arg(&cmd->argv[i]);
 		++i;
 	}
 	while (redir_lst != NULL)
