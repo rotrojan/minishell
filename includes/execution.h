@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/13 23:15:15 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/14 14:13:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 //	execution
 void	exec_ast(t_node *ast, bool inline_mode);
 void	exec_simple_cmd(t_simple_cmd simple_cmd);
-int		run_binarie(char **argv);
+int		run_binary(char **argv);
 //		redirection
 int		redirection(t_simple_cmd command);
 int		input_redirection(t_redirection *redirection);
