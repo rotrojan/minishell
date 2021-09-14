@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:29:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 21:29:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/10 00:09:28 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,18 @@
 
 int	input_redirection(t_redirection *redirection)
 {
-	int	fd;
+	int		fd;
+	char	*doc;
 
+	while (redirection->next != NULL)
+	{
+		if (redirection->type == Heredoc_redir)
+		{
+			doc = heredoc(redirection->stream);
+			gc_free((void **)&doc);
+		}
+		redirection = redirection->next;
+	}
 	fd = open(redirection->stream, O_RDONLY);
 	if (fd == -1)
 	{

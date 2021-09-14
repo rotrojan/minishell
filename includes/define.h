@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/13 04:06:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/13 23:15:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,15 +31,15 @@
 
 # define EOL 0
 # define NB_SPECIAL_KEY 6
-# define NB_KEY 9
 # define PATH_MAX 256
 
-# define ESC 27
-# define DELETE 8
-# define BACKSPACE 127
 # define CTRL_C 2
 # define CTRL_D 4
+# define DELETE 8
+# define TAB 9
 # define CTRL_L 12
+# define ESC 27
+# define BACKSPACE 127
 
 # define KNRM  "\x1B[0m"
 # define KRED  "\x1B[31m"

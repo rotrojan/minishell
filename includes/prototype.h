@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/13 19:08:38 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/13 23:15:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char			*input(void);
 t_env			*get_shell_env(void);
 int				env_len(t_env env);
 void			init_shell_env(t_env env);
-void			heredoc(const char *delimiter);
 //		history
 t_history_data	*get_history(void);
 void			free_history(void);

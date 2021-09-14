@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:39:58 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 16:32:32 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/09 22:10:41 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include "enum.h"
 # include "lexer.h"
 # include "error_management.h"
+# include "parser.h"
 # include "struct.h"
 # include "prototype.h"
 # include "parser.h"

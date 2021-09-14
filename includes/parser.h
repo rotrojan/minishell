@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/11 12:28:29 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/13 23:15:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ enum e_redirection_type
 	Input_redir,
 	Heredoc_redir,
 	Output_redir,
-	Append_output_redir
+	Append_output_redir,
+	No_redir
 };
 
 /*
@@ -61,7 +62,8 @@ typedef struct s_simple_cmd
 {
 	int				argc;
 	char			**argv;
-	t_redirection	*redirection;
+	t_redirection	*input_redir;
+	t_redirection	*output_redir;
 }	t_simple_cmd;
 
 /*

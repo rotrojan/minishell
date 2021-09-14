@@ -6,17 +6,22 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:19:26 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/07 21:29:36 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/09 23:36:40 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	output_redirection(t_redirection *redirection)
+static int	open_file(t_redirection *redirection)
 {
 	int	fd;
+	int	flag; 
 
-	fd = open(redirection->stream, O_WRONLY | O_CREAT,
+	if (redirection->type == Output_redir)
+		flag = O_TRUNC;
+	else
+		flag = O_APPEND;
+	fd = open(redirection->stream, O_WRONLY | O_CREAT | flag,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
 	if (fd == -1)
 	{
@@ -24,6 +29,29 @@ int	output_redirection(t_redirection *redirection)
 			redirection->stream);
 		return (-1);
 	}
+	return (fd);
+}
+
+int	output_redirection(t_redirection *redirection)
+{
+	int	fd;
+	int	tmp;
+
+	fd = open_file(redirection);
+	if (fd == -1)
+		return (-1);
 	dup2(fd, STDOUT_FILENO);
+	redirection = redirection->next;
+	while (redirection != NULL)
+	{
+		if (redirection->type == Output_redir)
+		{
+			tmp = open_file(redirection);
+			if (tmp == -1)
+				return (-1);
+			close(tmp);
+		}
+		redirection = redirection->next;
+	}
 	return (0);
 }

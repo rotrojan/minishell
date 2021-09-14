@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/13 05:44:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/13 23:15:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,23 @@
 static void	control_key(t_cursor *cursor, int c)
 {
 	int			i;
-	t_key const	keys[] = {{BACKSPACE, &backspace_key},
-	{DELETE, &delete_key}, {KEY_LEFT, &left_arrow_key}, {KEY_END, &end_key},
-	{KEY_RIGHT, &right_arrow_key}, {KEY_HOME, &home_key},
-	{CTRL_L, &ctrl_l_key}, {KEY_UP, &history_get_up},
-	{KEY_DOWN, &history_get_down}};
+	t_key const	keys[] = {
+		{.key = BACKSPACE, .function = &backspace_key},
+		{.key = DELETE, .function = &delete_key},
+		{.key = KEY_LEFT, .function = &left_arrow_key},
+		{.key = KEY_END, .function = &end_key},
+		{.key = KEY_RIGHT, .function = &right_arrow_key},
+		{.key = KEY_HOME, .function = &home_key},
+		{.key = CTRL_L, .function = &ctrl_l_key},
+		{.key = KEY_UP, .function = &history_get_up},
+		{.key = KEY_DOWN, .function = &history_get_down},
+		{.key = -1}
+	};
 
 	i = 0;
 	if (c == CTRL_D)
 		exit_shell(EXIT_SUCCESS, "\n");
-	while (i < NB_KEY)
+	while (keys[i].key > 0)
 	{
 		if (c == keys[i].key)
 			keys[i].function(cursor);

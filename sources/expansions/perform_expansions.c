@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   perform_expansions.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/13 20:01:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/13 23:14:52 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	perform_expansions(t_simple_cmd *cmd)
 	int				i;
 	t_redirection	*redir_lst;
 
-	redir_lst = cmd->redirection;
 	i = 0;
 	while (cmd->argv[i] != NULL)
 	{
@@ -53,9 +52,18 @@ void	perform_expansions(t_simple_cmd *cmd)
 		remove_quotes_from_arg(&cmd->argv[i]);
 		++i;
 	}
+	redir_lst = cmd->input_redir;
 	while (redir_lst != NULL)
 	{
 		/* expand_vars(&(redir_lst->stream)); */
 		redir_lst = redir_lst->next;
+		/* remove_quotes() */
+	}
+	redir_lst = cmd->output_redir;
+	while (redir_lst != NULL)
+	{
+		expand_vars(&(redir_lst->stream));
+		redir_lst = redir_lst->next;
+		/* remove_quotes() */
 	}
 }
