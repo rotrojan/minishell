@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   run_binarie.c                                      :+:      :+:    :+:   */
+/*   run_binary.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 17:01:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/13 03:30:13 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/14 13:23:16 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	run_binarie(char **argv)
+int	run_binary(char **argv)
 {
 	char	*bin_path;
 	t_env	*env;

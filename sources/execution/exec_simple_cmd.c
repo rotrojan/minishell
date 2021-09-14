@@ -14,7 +14,7 @@
 
 static void	child(t_simple_cmd command)
 {
-	if (run_binarie(command.argv) == -1)
+	if (run_binary(command.argv) == -1)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: command not found: %s\n",
 			command.argv[0]);
