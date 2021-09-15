@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 00:28:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/03 19:49:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/15 05:40:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ static void	sigwinch_handler(int sig)
 
 	signal_on = get_signal_on();
 	*signal_on = sig;
+	ft_dsleep(10);
+	ft_fflush(STDIN_FILENO);
 }
 
 /* Self explanatory. */

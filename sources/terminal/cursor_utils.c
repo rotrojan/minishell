@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 02:32:48 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/13 04:24:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/15 04:59:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,9 @@
 int	cursor_move_right(t_cursor *cursor)
 {
 	struct winsize	win;
+	int				inc;
 
+	inc = 0;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
 	if (cursor->pos.y == win.ws_col - 1)
 	{
@@ -24,6 +26,7 @@ int	cursor_move_right(t_cursor *cursor)
 		{
 			cursor->pos.x++;
 			cursor->pos.y = 0;
+			inc = 1;
 		}
 		else
 		{
@@ -33,24 +36,27 @@ int	cursor_move_right(t_cursor *cursor)
 	}
 	else
 		cursor->pos.y++;
-	return (0);
+	return (inc);
 }
 
 /* Move position of cursor to the left. */
 int	cursor_move_left(t_cursor *cursor)
 {
+	int				dec;
 	struct winsize	win;
 
+	dec = 0;
 	ioctl(STDOUT_FILENO, TIOCGWINSZ, &win);
 	if (cursor->pos.y == 0)
 	{
-		if (cursor->pos.x != 0)
+		if (cursor->pos.x > 0)
 		{
 			cursor->pos.x--;
 			cursor->pos.y = win.ws_col - 1;
+			dec = 1;
 		}
 	}
 	else
 		cursor->pos.y--;
-	return (0);
+	return (dec);
 }

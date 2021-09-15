@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:12:05 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/12 21:38:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/15 05:39:18 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ void	backspace_key(t_cursor *cursor)
 		goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
 		tputs(goto_cap, 1, ft_putchar_err);
 		tputs(tgetstr("cd", NULL), 1, ft_putchar_err);
-		tputs(goto_cap, 1, ft_putchar_err);
 		print_inchars(cursor->on_inchar);
 		tputs(goto_cap, 1, ft_putchar_err);
 		gc_free((void **)&history->input);
@@ -57,7 +56,6 @@ void	delete_key(t_cursor *cursor)
 		cursor->on_inchar = tmp;
 		goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
 		tputs(tgetstr("cd", NULL), 1, ft_putchar_err);
-		tputs(goto_cap, 1, ft_putchar_err);
 		print_inchars(cursor->on_inchar);
 		tputs(goto_cap, 1, ft_putchar_err);
 		gc_free((void **)&history->input);

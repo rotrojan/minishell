@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:53:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/12 21:36:09 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/14 23:51:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ t_axe	get_cursor_pos(void)
 	c = 0;
 	sep = false;
 	pos = (t_axe){.x = 0, .y = 0};
-	ft_putstr("\033[6n");
+	ft_fflush(STDIN_FILENO);
+	ft_putstr_fd("\033[6n", STDIN_FILENO);
 	while (read(STDIN_FILENO, &c, 1) > 0)
 	{
 		if (c == 'R')
