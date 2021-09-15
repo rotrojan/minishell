@@ -1,38 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_list_to_array.c                                 :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2020/02/20 04:15:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/15 04:26:06 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/08 16:04:32 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/07 16:53:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	**ft_list_to_array(t_list **alst)
+void	*ft_calloc(size_t size)
 {
-	int		i;
-	t_list	*lst;
-	t_list	*next;
-	char	**array;
+	void	*tmp;
 
-	i = 0;
-	lst = *alst;
-	if (lst == NULL)
+	tmp = malloc(size);
+	if (tmp == NULL)
 		return (NULL);
-	array = gc_malloc(sizeof(char *) * (ft_list_size(lst) + 1));
-	while (lst)
-	{
-		array[i] = lst->data;
-		next = lst->next;
-		gc_free((void **)&lst);
-		lst = next;
-		i++;
-	}
-	array[i] = NULL;
-	*alst = NULL;
-	return (array);
+	ft_bzero(tmp, size);
+	return (tmp);
 }

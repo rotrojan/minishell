@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/13 04:06:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/14 18:54:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 #  define OS 0
 
 # endif
-
-# define _DEFAULT_SOURCE 500
 
 # define SIGWINCH 28
 
