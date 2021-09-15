@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/14 14:56:13 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/15 22:10:41 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,9 @@ static void	add_to_lst(t_redirection *new_redirection, t_node *simple_cmd)
 		|| new_redirection->type == Heredoc_redir)
 	{
 		current = simple_cmd->content.simple_cmd.input_redir;
-		while (current->next != NULL)
-			current = current->next;
+		if (current != NULL)
+			while (current->next != NULL)
+				current = current->next;
 		current->next = new_redirection;
 	}
 	else
