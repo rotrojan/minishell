@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/09 23:47:17 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/15 21:53:17 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ char	*heredoc(const char *delimiter)
 		}
 		gc_free((void **)&line);
 	}
-		tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+	tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
 	return (doc);
 }

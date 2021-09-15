@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:29:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/10 00:09:28 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/15 22:13:29 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,22 @@ int	input_redirection(t_redirection *redirection)
 		}
 		redirection = redirection->next;
 	}
-	fd = open(redirection->stream, O_RDONLY);
-	if (fd == -1)
+	if (redirection->type == Heredoc_redir)
 	{
-		ft_dprintf(STDOUT_FILENO, "minishell: %s: No such file or directory\n",
-			redirection->stream);
-		return (-1);
+		doc = heredoc(redirection->stream);
+		ft_putstr_fd(doc, STDIN_FILENO);
+		gc_free((void **)&doc);
 	}
-	dup2(fd, STDIN_FILENO);
+	else
+	{
+		fd = open(redirection->stream, O_RDONLY);
+		if (fd == -1)
+		{
+			ft_dprintf(STDOUT_FILENO, "minishell: %s: No such file or directory\n",
+				redirection->stream);
+			return (-1);
+		}
+		dup2(fd, STDIN_FILENO);
+	}
 	return (0);
 }
