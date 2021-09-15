@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/13 18:41:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/15 19:36:49 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,22 +28,16 @@ typedef struct expand_utils
 	int		index_dollar;
 }	t_expand_utils;
 
-typedef struct s_flags
-{
-}	t_flags;
-
 /*
 ** perform_expansions.c
 */
 
-void	perform_expansions(t_simple_cmd *cmd);
+bool	perform_expansions(t_simple_cmd *cmd);
 
 /*
-** expand_single_var.c
+** fill_new_arg.c
 */
 
-void	expand_single_var(
-			t_simple_cmd *cmd, int i, int *j, bool in_dquotes);
 char	*fill_new_arg(char **arg, int len_var_name, int i, char *var_value);
 
 /*
@@ -57,17 +51,33 @@ void	remove_quotes_from_arg(char **arg);
 ** realloc_argv.c
 */
 
-void	realloc_argv(
-			t_simple_cmd *cmd, int const i, int *j, char *var_value);
+void	realloc_argv(t_simple_cmd *cmd, int const i, int *j, char *var_value);
 
 /*
 ** expansions_utils.c
 */
 
 void	change_quote_state(char quote, bool *in_squotes, bool *in_dquotes);
+char	*get_after_var(char *str, int index_dollar);
+int		get_len_var_name(char *arg);
+char	*get_var_name(char *arg, int i);
+
+/*
+** utils.c
+*/
+
 void	free_array(char ***array);
 int		get_len_array(char	**array);
-char	*get_after_var(char *str, int index_dollar);
 bool	has_space(char *str);
 
+
+/*
+** expand_vars.c
+*/
+
+bool	expand_single_var_in_stream(char **arg, int *i, bool in_dquotes);
+bool	expand_vars_in_stream(char **arg);
+void	expand_single_var(
+		t_simple_cmd *cmd, int const i, int *j, bool in_dquotes);
+void	expand_vars(t_simple_cmd *cmd, int const i);
 #endif

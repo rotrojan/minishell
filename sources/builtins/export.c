@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/13 20:05:07 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/15 18:48:13 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	get_len_var_name(char *arg)
+int	export_get_len_var_name(char *arg)
 {
 	int	len;
 
@@ -22,7 +22,7 @@ static int	get_len_var_name(char *arg)
 	return (len);
 }
 
-static char	*get_var_name(char	*arg)
+static char	*export_get_var_name(char	*arg)
 {
 	int		i;
 	int		j;
@@ -99,7 +99,7 @@ int	export(int argc, char **argv)
 	while (argv[i] != NULL)
 	{
 		var_name = NULL;
-		var_name = get_var_name(argv[i]);
+		var_name = export_get_var_name(argv[i]);
 		if (var_name == NULL)
 		{
 			ft_dprintf(STDOUT_FILENO,

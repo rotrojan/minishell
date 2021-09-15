@@ -6,43 +6,38 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/13 23:14:52 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/15 19:54:33 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	expand_vars(t_simple_cmd *cmd, int const i)
+static bool	handle_redirections(t_simple_cmd *cmd)
 {
-	int		j;
-	bool	in_squotes;
-	bool	in_dquotes;
+	t_redirection	*redir_lst;
 
-	j = 0;
-	in_squotes = false;
-	in_dquotes = false;
-	while (cmd->argv[i] != NULL && cmd->argv[i][j] != '\0')
+	redir_lst = cmd->input_redir;
+	while (redir_lst != NULL)
 	{
-		if (cmd->argv[i][j] == '$' && in_squotes == false)
-		{
-			if (cmd->argv[i][j + 1] == '\0'
-					|| ft_isalnum(cmd->argv[i][j + 1]) == 0)
-				cmd->argv[i] = fill_new_arg(&cmd->argv[i], 0, j++, "$");
-			else
-				expand_single_var(cmd, i, &j, in_dquotes);
-		}
-		else
-		{
-			change_quote_state(cmd->argv[i][j], &in_squotes, &in_dquotes);
-			++j;
-		}
+		if (expand_vars_in_stream(&redir_lst->stream) == false)
+			return (false);
+		remove_quotes_from_arg(&redir_lst->stream);
+		redir_lst = redir_lst->next;
 	}
+	redir_lst = cmd->output_redir;
+	while (redir_lst != NULL)
+	{
+		if (expand_vars_in_stream(&redir_lst->stream) == false)
+			return (false);
+		remove_quotes_from_arg(&redir_lst->stream);
+		redir_lst = redir_lst->next;
+	}
+	return (true);
 }
 
-void	perform_expansions(t_simple_cmd *cmd)
+bool	perform_expansions(t_simple_cmd *cmd)
 {
-	int				i;
-	t_redirection	*redir_lst;
+	int	i;
 
 	i = 0;
 	while (cmd->argv[i] != NULL)
@@ -52,18 +47,5 @@ void	perform_expansions(t_simple_cmd *cmd)
 		remove_quotes_from_arg(&cmd->argv[i]);
 		++i;
 	}
-	redir_lst = cmd->input_redir;
-	while (redir_lst != NULL)
-	{
-		/* expand_vars(&(redir_lst->stream)); */
-		redir_lst = redir_lst->next;
-		/* remove_quotes() */
-	}
-	redir_lst = cmd->output_redir;
-	while (redir_lst != NULL)
-	{
-		expand_vars(&(redir_lst->stream));
-		redir_lst = redir_lst->next;
-		/* remove_quotes() */
-	}
+	return (handle_redirections(cmd));
 }
