@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/15 21:49:16 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/09/16 03:32:40 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,8 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		redirection.c		input_redirection.c		output_redirection.c	\
 		remove_quotes.c		perform_expansions.c	expand_single_var.c		\
 		heredoc.c			realloc_argv.c			export_display_env.c	\
-		expansions_utils.c	set_timeout.c			ft_dsleep.c
+		expansions_utils.c	set_timeout.c			ft_dsleep.c				\
+		init_history.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)

@@ -6,11 +6,24 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:08:01 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/15 21:57:22 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/16 04:42:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	close_redirections(t_redirection *redirection)
+{
+	while (redirection != NULL)
+	{
+		if (redirection->isopen == true)
+		{
+			close(redirection->fd);
+			redirection->isopen = false;
+		}
+		redirection = redirection->next;
+	}
+}
 
 int	redirection(t_simple_cmd command)
 {

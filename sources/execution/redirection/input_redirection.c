@@ -6,15 +6,44 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:29:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/15 22:13:29 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/16 05:39:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	input_redirection(t_redirection *redirection)
+static void	heredoc_redirection(t_redirection *redirection)
 {
-	int		fd;
+	char	*doc;
+
+	reset_history_data();
+	doc = heredoc(redirection->stream);
+	redirection->fd = open("./", __O_TMPFILE | O_RDWR, 0644);
+	if (redirection->fd == -1)
+		exit_shell(EXIT_FAILURE, "Error: heredoc(): can't create tmp file");
+	redirection->isopen = true;
+	ft_putchar_err('\n');
+	ft_putstr_fd(doc, redirection->fd);
+	dup2(redirection->fd, STDIN_FILENO);
+	gc_free((void **)&doc);
+}
+
+static int	simple_redirection(t_redirection *redirection)
+{
+	redirection->fd = open(redirection->stream, O_RDONLY);
+	if (redirection->fd == -1)
+	{
+		ft_dprintf(STDOUT_FILENO, "minishell: %s: No such file or directory\n",
+			redirection->stream);
+		return (-1);
+	}
+	redirection->isopen = true;
+	dup2(redirection->fd, STDIN_FILENO);
+	return (0);
+}
+
+static t_redirection	*foreward_input(t_redirection *redirection)
+{
 	char	*doc;
 
 	while (redirection->next != NULL)
@@ -26,22 +55,16 @@ int	input_redirection(t_redirection *redirection)
 		}
 		redirection = redirection->next;
 	}
+	return (redirection);
+}
+
+int	input_redirection(t_redirection *redirection)
+{
+	redirection = foreward_input(redirection);
 	if (redirection->type == Heredoc_redir)
-	{
-		doc = heredoc(redirection->stream);
-		ft_putstr_fd(doc, STDIN_FILENO);
-		gc_free((void **)&doc);
-	}
+		heredoc_redirection(redirection);
 	else
-	{
-		fd = open(redirection->stream, O_RDONLY);
-		if (fd == -1)
-		{
-			ft_dprintf(STDOUT_FILENO, "minishell: %s: No such file or directory\n",
-				redirection->stream);
+		if (simple_redirection(redirection) == -1)
 			return (-1);
-		}
-		dup2(fd, STDIN_FILENO);
-	}
 	return (0);
 }

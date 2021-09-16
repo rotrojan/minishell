@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/14 19:58:48 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/16 03:29:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,32 +58,6 @@ void	push_front_history(t_history **history, char *line)
 		tmp->prev = new;
 	}
 	*history = new;
-}
-
-/* Read HISTORY_PATH and save it in accessible memory. */
-t_history_data	*init_history(void)
-{
-	int				fd;
-	char			*line;
-	t_history_data	*history;
-
-	line = NULL;
-	history = get_history();
-	history->input = ft_strdup("");
-	fd = open(HISTORY_PATH, O_RDONLY);
-	if (fd > 0)
-	{
-		while (get_next_line(fd, &line) > 0)
-		{
-			if (line[0] != '\0')
-				push_front_history(&history->data, line);
-			else
-				gc_free((void **)&line);
-			line = NULL;
-		}
-		close(fd);
-	}
-	return (history);
 }
 
 /* Self explanatory. */
