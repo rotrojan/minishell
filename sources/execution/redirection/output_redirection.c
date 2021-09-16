@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:19:26 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/16 04:37:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/16 19:28:38 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	open_file(t_redirection *redirection)
 		flag = O_APPEND;
 	redirection->fd = open(redirection->stream, O_WRONLY | O_CREAT | flag,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	if (redirection->fd == -1)
+	if (redirection->fd < 0)
 	{
 		ft_dprintf(STDOUT_FILENO, "minishell: %s: No such file or directory\n",
 			redirection->stream);

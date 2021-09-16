@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:29:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/16 05:39:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/16 20:00:03 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,13 @@ static void	heredoc_redirection(t_redirection *redirection)
 
 	reset_history_data();
 	doc = heredoc(redirection->stream);
-	redirection->fd = open("./", __O_TMPFILE | O_RDWR, 0644);
-	if (redirection->fd == -1)
+	redirection->fd = open(HEREDOC_PATH, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	if (redirection->fd < 0)
 		exit_shell(EXIT_FAILURE, "Error: heredoc(): can't create tmp file");
-	redirection->isopen = true;
-	ft_putchar_err('\n');
 	ft_putstr_fd(doc, redirection->fd);
+	close(redirection->fd);
+	redirection->fd = open(HEREDOC_PATH, O_RDONLY);
+	redirection->isopen = true;
 	dup2(redirection->fd, STDIN_FILENO);
 	gc_free((void **)&doc);
 }
@@ -31,7 +32,7 @@ static void	heredoc_redirection(t_redirection *redirection)
 static int	simple_redirection(t_redirection *redirection)
 {
 	redirection->fd = open(redirection->stream, O_RDONLY);
-	if (redirection->fd == -1)
+	if (redirection->fd < 0)
 	{
 		ft_dprintf(STDOUT_FILENO, "minishell: %s: No such file or directory\n",
 			redirection->stream);
