@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/16 20:07:18 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/17 15:32:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static void	append_input(char **doc, char *line)
 
 	tmp = *doc;
 	if (tmp == NULL)
-		*doc = ft_strjoin(line, "\n", "");
+		*doc = ft_strdup(line);
 	else
 		*doc = ft_strjoin(tmp, line, "\n");
 	gc_free((void **)&tmp);
@@ -47,7 +47,6 @@ char	*heredoc(const char *delimiter)
 	}
 	tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
 	ft_putchar('\n');
-	if (doc == NULL)
-		doc = ft_strdup("");
+	append_input(&doc, NULL);
 	return (doc);
 }
