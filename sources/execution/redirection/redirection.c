@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:08:01 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/16 04:42:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/19 02:30:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	close_redirections(t_redirection *redirection)
 		{
 			close(redirection->fd);
 			redirection->isopen = false;
+			if (redirection->type == Heredoc_redir && redirection->next == NULL)
+				unlink(HEREDOC_PATH);
 		}
 		redirection = redirection->next;
 	}

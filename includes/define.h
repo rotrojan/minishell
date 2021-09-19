@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/16 19:58:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/19 02:25:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # define RESET_CAP "me"
 
 # define HISTORY_PATH ".minishell_history"
-# define HEREDOC_PATH ".heredoc"
+# define HEREDOC_PATH "/tmp/.heredoc"
 
 # define EXIT_STOP 2
 

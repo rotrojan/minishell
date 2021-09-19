@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:29:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/16 20:00:03 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/19 02:28:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ static void	heredoc_redirection(t_redirection *redirection)
 {
 	char	*doc;
 
-	reset_history_data();
 	doc = heredoc(redirection->stream);
 	redirection->fd = open(HEREDOC_PATH, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	if (redirection->fd < 0)

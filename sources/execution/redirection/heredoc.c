@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/17 15:32:50 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/19 02:29:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*heredoc(const char *delimiter)
 	doc = NULL;
 	line = NULL;
 	term = set_termios();
+	reset_history_data();
 	while (1)
 	{
 		ft_putstr("> ");
