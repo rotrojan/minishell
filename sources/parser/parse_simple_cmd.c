@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/20 23:09:11 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/20 23:42:43 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ static bool	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 		return (false);
 	new_redirection->stream = ft_strdup((*tok_lst)->data);
 	new_redirection->isopen = false;
+	new_redirection->has_quotes
+		= (ft_strchr(new_redirection->stream, '"') != NULL);
 	add_to_lst(new_redirection, simple_cmd);
 	return (true);
 }

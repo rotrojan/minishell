@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/15 23:27:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/20 23:38:37 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,11 @@ enum e_redirection_type
 
 typedef struct s_redirection
 {
-	int							fd;
-	bool						isopen;
 	char						*stream;
 	enum e_redirection_type		type;
+	int							fd;
+	bool						isopen;
+	bool						has_quotes;
 	struct s_redirection		*next;
 }	t_redirection;
 

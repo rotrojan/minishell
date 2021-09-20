@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:29:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/20 18:09:25 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/20 23:52:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,17 @@
 static void	heredoc_redirection(t_redirection *redirection)
 {
 	char	*doc;
+	int		fd[2];
 
 	doc = heredoc(redirection->stream);
-	redirection->fd = open(HEREDOC_PATH, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	if (redirection->fd < 0)
-		exit_shell(EXIT_FAILURE, "Error: heredoc(): can't create tmp file");
-	ft_putstr_fd(doc, redirection->fd);
-	close(redirection->fd);
-	redirection->fd = open(HEREDOC_PATH, O_RDONLY);
-	redirection->isopen = true;
-	dup2(redirection->fd, STDIN_FILENO);
+	if (redirection->has_quotes == false)
+		expand_vars_in_stream(&doc);
+	if (pipe(fd) == ERR)
+		exit_shell(EXIT_FAILURE, strerror(errno));
+	ft_putstr_fd(doc, fd[Input]);
+	dup2(fd[Output], STDIN_FILENO);
+	close(fd[Input]);
+	close(fd[Output]);
 	gc_free((void **)&doc);
 }
 
