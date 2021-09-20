@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/17 19:13:53 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:41:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,6 @@ char	*ft_gethostname(void)
 		exit_shell(EXIT_FAILURE, strerror(errno));
 	if (get_next_line(fd, &hostname) == -1)
 		exit_shell(EXIT_FAILURE, "get_next_line(): read error.");
+	close(fd);
 	return (hostname);
 }

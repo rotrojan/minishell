@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:29:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/19 02:28:02 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/20 18:09:25 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ int	input_redirection(t_redirection *redirection)
 	redirection = foreward_input(redirection);
 	if (redirection->type == Heredoc_redir)
 		heredoc_redirection(redirection);
-	else
-		if (simple_redirection(redirection) == -1)
-			return (-1);
+	else if (simple_redirection(redirection) == -1)
+		return (-1);
 	return (0);
 }

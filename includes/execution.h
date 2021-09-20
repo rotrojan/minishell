@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/16 04:43:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/20 17:59:31 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,11 @@ void	close_redirections(t_redirection *redirection);
 int		input_redirection(t_redirection *redirection);
 int		output_redirection(t_redirection *redirection);
 char	*heredoc(const char *delimiter);
+
+/*
+** exec_pipe.c
+*/
+
+void	exec_pipe(t_node *ast);
 
 #endif
