@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/15 19:30:31 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/20 23:09:11 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,14 @@ static void	add_to_lst(t_redirection *new_redirection, t_node *simple_cmd)
 		|| new_redirection->type == Heredoc_redir)
 	{
 		current = simple_cmd->content.simple_cmd.input_redir;
-		while (current->next != NULL)
-			current = current->next;
-		current->next = new_redirection;
+		if (current != NULL)
+		{
+			while (current->next != NULL)
+				current = current->next;
+			current->next = new_redirection;
+		}
+		else
+			simple_cmd->content.simple_cmd.input_redir = new_redirection;
 	}
 	else
 	{
@@ -61,6 +66,7 @@ static bool	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 	if ((*tok_lst)->type != Word_tok)
 		return (false);
 	new_redirection->stream = ft_strdup((*tok_lst)->data);
+	new_redirection->isopen = false;
 	add_to_lst(new_redirection, simple_cmd);
 	return (true);
 }

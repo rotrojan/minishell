@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/20 04:15:07 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/06 19:16:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/15 04:26:06 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	**ft_list_to_array(t_list **alst)
 	i = 0;
 	lst = *alst;
 	if (lst == NULL)
-		debug(3, "ah ?");
+		return (NULL);
 	array = gc_malloc(sizeof(char *) * (ft_list_size(lst) + 1));
 	while (lst)
 	{

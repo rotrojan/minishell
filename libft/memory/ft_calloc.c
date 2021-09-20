@@ -1,30 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_gethostname.c                                   :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/30 21:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/20 20:41:18 by rotrojan         ###   ########.fr       */
+/*   Created: 2019/10/08 16:04:32 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/07 16:53:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-/* Return hostname of computer.
-Only work in linux. */
-char	*ft_gethostname(void)
+void	*ft_calloc(size_t size)
 {
-	int			fd;
-	char		*hostname;
+	void	*tmp;
 
-	hostname = NULL;
-	fd = open("/etc/hostname", O_RDONLY);
-	if (fd == -1)
-		exit_shell(EXIT_FAILURE, strerror(errno));
-	if (get_next_line(fd, &hostname) == -1)
-		exit_shell(EXIT_FAILURE, "get_next_line(): read error.");
-	close(fd);
-	return (hostname);
+	tmp = malloc(size);
+	if (tmp == NULL)
+		return (NULL);
+	ft_bzero(tmp, size);
+	return (tmp);
 }

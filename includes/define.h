@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/13 23:15:15 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/19 02:25:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,6 @@
 #  define OS 0
 
 # endif
-
-# define _DEFAULT_SOURCE 500
 
 # define SIGWINCH 28
 
@@ -54,6 +52,7 @@
 # define RESET_CAP "me"
 
 # define HISTORY_PATH ".minishell_history"
+# define HEREDOC_PATH "/tmp/.heredoc"
 
 # define EXIT_STOP 2
 

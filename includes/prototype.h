@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/13 23:15:15 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/16 03:31:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int				display_env(void);
 
 //	system
 enum e_os_name	getos(void);
+void			ft_dsleep(int time);
 void			set_timeout(t_term *term, int timeout);
 int				ft_fflush(int fd);
 pid_t			ft_getpid(void);
@@ -71,6 +72,7 @@ void			init_shell_env(t_env env);
 //		history
 t_history_data	*get_history(void);
 void			free_history(void);
+void			reset_history_data(void);
 t_history_data	*init_history(void);
 void			put_in_history(char *line);
 t_history		*create_history(char *line);

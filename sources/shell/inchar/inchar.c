@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/02 15:04:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/15 05:37:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,9 @@ void	free_inchars(t_inchar *inchars)
 /* Insert char in input line. */
 void	insert_inchar(t_cursor *cursor, int value)
 {
-	char			*goto_cap;
 	t_inchar		*new;
 	t_history_data	*history;
+	char			*goto_cap;
 
 	history = get_history();
 	new = create_inchar(value);

@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/15 19:13:05 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/20 23:14:57 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,9 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		redirection.c		input_redirection.c		output_redirection.c	\
 		remove_quotes.c		perform_expansions.c	expand_vars.c			\
 		heredoc.c			realloc_argv.c			export_display_env.c	\
-		expansions_utils.c	fill_new_arg.c			utils.c
+		expansions_utils.c	fill_new_arg.c			utils.c					\
+		set_timeout.c			ft_dsleep.c			init_history.c			\
+		exec_pipe.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
@@ -53,7 +55,7 @@ DEBUG = off
 
 CFLAGS = -MMD -Wall -Wextra -Werror $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
-	CXXFLAGS += -g3 -fsanitize=address
+	CXXFLAGS += -g3#-fsanitize=address
 endif
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/07 21:31:32 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/20 20:40:03 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,8 @@ void	exec_simple_cmd(t_simple_cmd command)
 	}
 	dup2(save_in, STDIN_FILENO);
 	dup2(save_out, STDOUT_FILENO);
+	close(save_in);
+	close(save_out);
+	close_redirections(command.input_redir);
+	close_redirections(command.output_redir);
 }
