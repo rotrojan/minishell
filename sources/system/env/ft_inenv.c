@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 16:04:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 21:56:09 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 22:13:21 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,10 @@ int	ft_inenv(const char *name)
 	while (tmp[i])
 	{
 		if (ft_strncmp(tmp[i], name, len) == 0)
-			return (i);
+		{
+			if (tmp[i][len] == '=' || tmp[i][len] == '\0')
+				return (i);
+		}
 		i++;
 	}
 	return (-1);

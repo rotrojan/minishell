@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/15 21:50:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/21 21:51:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,23 +71,23 @@ static int	catch_signals(void)
 	"cd" = clear screen from the cursor to the end	*/
 static void	update_screen(t_cursor *cursor)
 {
-	char		*goto_cap;
+	// char		*goto_cap;
 
 	cursor->pos = get_cursor_pos();
-	while (cursor->on_inchar->prev != NULL)
-	{
-		cursor_move_left(cursor);
-		cursor->on_inchar = cursor->on_inchar->prev;
-	}
-	goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
-	tputs(goto_cap, 1, ft_putchar_err);
-	tputs(tgetstr("cd", NULL), 1, ft_putchar_err);
-	print_inchars(cursor->on_inchar);
-	while (cursor->on_inchar->next != NULL)
-	{
-		cursor_move_right(cursor);
-		cursor->on_inchar = cursor->on_inchar->next;
-	}
+	// while (cursor->on_inchar->prev != NULL)
+	// {
+	// 	cursor_move_left(cursor);
+	// 	cursor->on_inchar = cursor->on_inchar->prev;
+	// }
+	// goto_cap = tgoto(tgetstr("cm", NULL), cursor->pos.y, cursor->pos.x);
+	// tputs(goto_cap, 1, ft_putchar_err);
+	// tputs(tgetstr("cd", NULL), 1, ft_putchar_err);
+	// print_inchars(cursor->on_inchar);
+	// while (cursor->on_inchar->next != NULL)
+	// {
+	// 	cursor_move_right(cursor);
+	// 	cursor->on_inchar = cursor->on_inchar->next;
+	// }
 }
 
 /* Read and return input line for shell. */

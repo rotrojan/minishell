@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 22:00:52 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/17 16:50:05 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/21 22:34:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,26 @@ int	env_len(t_env env)
 	return (i);
 }
 
+static void	init_env_var(char *shell_name)
+{
+	char	*shlvl;
+	char	*tmp_path;
+	char	*shell_path;
+
+	shlvl = ft_itoa(ft_atoi(ft_getenv("SHLVL")) + 1);
+	tmp_path = ft_strjoin("./", shell_name, "");
+	shell_path = get_real_filepath(tmp_path);
+	ft_setenv("SHLVL", shlvl, 1);
+	ft_setenv("SHELL", shell_path, 1);
+	gc_free((void **)&tmp_path);
+	gc_free((void **)&shell_path);
+	gc_free((void **)&shlvl);
+}
+
 /* Save environment in accessible memory */
-void	init_shell_env(t_env env)
+void	init_shell_env(char *shell_name, t_env env)
 {	
 	int		i;
-	char	*shlvl;
 	t_env	tmp;
 	t_env	*shell_env;
 
@@ -51,7 +66,5 @@ void	init_shell_env(t_env env)
 		tmp[i] = NULL;
 		*shell_env = tmp;
 	}
-	shlvl = ft_itoa(ft_atoi(ft_getenv("SHLVL")) + 1);
-	ft_setenv("SHLVL", shlvl, 1);
-	gc_free((void **)&shlvl);
+	init_env_var(shell_name);
 }
