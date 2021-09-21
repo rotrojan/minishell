@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/21 01:40:37 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 21:06:10 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,11 @@ char	*heredoc(const char *delimiter);
 void	exec_pipe(t_node *ast);
 
 /*
-** last_return.c
+** exit_value.c
 */
 
-int		*get_last_return(void);
-void	set_last_return(int return_value);
+int		*get_exit_value(void);
+void	set_exit_value(int exit_value);
+int		return_exit_value(int exit_value);
 
 #endif

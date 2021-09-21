@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/21 02:15:21 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 22:29:35 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ static void	child(t_simple_cmd command)
 {
 	if (run_binary(command.argv) == -1)
 	{
-		ft_dprintf(STDERR_FILENO, "minishell: command not found: %s\n",
+		ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
 			command.argv[0]);
-		exit(EXIT_FAILURE);
+		exit(EXIT_CMD_NOT_FOUND);
 	}
 	exit(EXIT_SUCCESS);
 }
@@ -32,10 +32,7 @@ static void	parent(void)
 	if (WIFSIGNALED(status) && WTERMSIG(status) == CTRL_C)
 		ft_putchar('\n');
 	if (WIFEXITED(status))
-	{
-		printf("value=%d\n", WEXITSTATUS(status));
-		set_last_return(WEXITSTATUS(status));
-	}
+		set_exit_value(WEXITSTATUS(status));
 }
 
 void	exec_simple_cmd(t_simple_cmd command)
@@ -48,7 +45,7 @@ void	exec_simple_cmd(t_simple_cmd command)
 	save_out = dup(STDOUT_FILENO);
 	if (redirection(command) == -1)
 		return ;
-	if (run_builtin(command.argc, command.argv) == -1)
+	if (run_builtin(command.argc, command.argv) == EXIT_CMD_NOT_FOUND)
 	{
 		pid = fork();
 		if (pid == ERR)
@@ -64,5 +61,4 @@ void	exec_simple_cmd(t_simple_cmd command)
 	close(save_out);
 	close_redirections(command.input_redir);
 	close_redirections(command.output_redir);
-	printf("$? = %d\n", *get_last_return());
 }
