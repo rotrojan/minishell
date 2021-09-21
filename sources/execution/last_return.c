@@ -1,20 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   last_return.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/29 15:44:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/21 02:11:20 by rotrojan         ###   ########.fr       */
+/*   Created: 2021/09/21 01:32:56 by rotrojan          #+#    #+#             */
+/*   Updated: 2021/09/21 02:01:22 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exit(int argc, char **argv)
+int	*get_last_return(void)
 {
-	(void)(argc && argv);
-	exit_shell(EXIT_SUCCESS, "exit\n");
-	return (0);
+	static int	last_return = 0;
+
+	return (&last_return);
+}
+
+void	set_last_return(int return_value)
+{
+	*get_last_return() = return_value;
 }

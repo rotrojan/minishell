@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/20 20:40:03 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 02:15:21 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ static void	parent(void)
 		ft_putchar('\n');
 	if (WIFEXITED(status))
 	{
-		if (WEXITSTATUS(status) == EXIT_STOP)
-			exit_shell(EXIT_SUCCESS, NULL);
+		printf("value=%d\n", WEXITSTATUS(status));
+		set_last_return(WEXITSTATUS(status));
 	}
 }
 
@@ -64,4 +64,5 @@ void	exec_simple_cmd(t_simple_cmd command)
 	close(save_out);
 	close_redirections(command.input_redir);
 	close_redirections(command.output_redir);
+	printf("$? = %d\n", *get_last_return());
 }
