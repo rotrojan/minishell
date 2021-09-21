@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 22:53:44 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/15 19:08:12 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 22:19:21 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,14 @@ int	get_len_var_name(char *arg)
 	return (len);
 }
 
-char	*get_var_name(char *arg, int i)
+char	*get_var_name(char *arg)
 {
+	int		i;
 	int		j;
 	char	*var_name;
 
 	j = 0;
-	++i;
+	i = 1;
 	var_name = gc_malloc(sizeof(*var_name) * (get_len_var_name(arg + i) + 1));
 	while (ft_isalnum(arg[i]) != 0 && arg[i] != '\0')
 	{

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 01:35:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/15 18:49:21 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 21:11:01 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	run_builtin(int argc, char **argv)
 	while (builtins[i].name != NULL && ft_strcmp(argv[0], builtins[i].name))
 		i++;
 	if (builtins[i].name == NULL)
-		return (-1);
-	return (builtins[i].function(argc, argv));
+		return (return_exit_value(EXIT_CMD_NOT_FOUND));
+	return (return_exit_value(builtins[i].function(argc, argv)));
 }

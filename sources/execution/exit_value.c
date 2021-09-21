@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   exit_value.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/29 15:44:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/21 02:11:20 by rotrojan         ###   ########.fr       */
+/*   Created: 2021/09/21 01:32:56 by rotrojan          #+#    #+#             */
+/*   Updated: 2021/09/21 21:15:21 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exit(int argc, char **argv)
+int	*get_exit_value(void)
 {
-	(void)(argc && argv);
-	exit_shell(EXIT_SUCCESS, "exit\n");
-	return (0);
+	static int	exit_value = 0;
+
+	return (&exit_value);
+}
+
+void	set_exit_value(int exit_value)
+{
+	*get_exit_value() = exit_value;
+}
+
+int	return_exit_value(int exit_value)
+{
+	set_exit_value(exit_value);
+	return (exit_value);
 }

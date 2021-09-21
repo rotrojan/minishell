@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:58:21 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/20 23:00:01 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 02:01:56 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ void	exec_pipe(t_node *ast)
 	int		save_in;
 	int		save_out;
 
+	/* if (ast->type == Simple_cmd) */
+		/* return (exec_simple_cmd(ast, true)); */
 	save_in = dup(STDIN_FILENO);
 	save_out = dup(STDOUT_FILENO);
 	if (pipe(fd) == -1)
