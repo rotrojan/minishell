@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/21 21:13:33 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/22 01:02:55 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		heredoc.c			realloc_argv.c			export_display_env.c	\
 		expansions_utils.c	fill_new_arg.c			utils.c					\
 		set_timeout.c		ft_dsleep.c				init_history.c			\
-		exec_pipe.c			exit_value.c
+		exec_pipe.c			exit_value.c			exec_compound_cmd.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)

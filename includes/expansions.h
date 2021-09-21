@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/21 22:22:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 01:13:02 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ void	free_array(char ***array);
 int		get_len_array(char	**array);
 bool	has_space(char *str);
 
-
 /*
 ** expand_vars.c
 */
@@ -78,6 +77,6 @@ bool	has_space(char *str);
 bool	expand_single_var_in_stream(char **arg, int *i, bool in_dquotes);
 bool	expand_vars_in_stream(char **arg);
 void	expand_single_var(
-		t_simple_cmd *cmd, int const i, int *j, bool in_dquotes);
+			t_simple_cmd *cmd, int const i, int *j, bool in_dquotes);
 void	expand_vars(t_simple_cmd *cmd, int const i);
 #endif
