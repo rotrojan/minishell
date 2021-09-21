@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:43:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/21 20:56:06 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 23:54:58 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,11 +33,10 @@ int	cd(int argc, char **argv)
 		ft_setenv("PWD", new, 1);
 		if (argv[1] != NULL)
 			ft_printf("%s\n", new);
+		return (EXIT_SUCCESS);
 	}
 	else
-	{
-		ft_printf("cd: no file or directory of type: %s\n", tmp);
-		return (EXIT_FAILURE);
-	}
-	return (EXIT_SUCCESS);
+		ft_dprintf(STDERR_FILENO,
+			"minishell: cd: %s: no such file or directory\n", tmp);
+	return (EXIT_FAILURE);
 }

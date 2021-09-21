@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:39:19 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/08/16 17:34:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/21 23:07:48 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,5 @@ int	pwd(int argc, char **argv)
 	getcwd(path, PATH_MAX);
 	ft_putstr(path);
 	ft_putchar('\n');
-	return (0);
+	return (EXIT_SUCCESS);
 }

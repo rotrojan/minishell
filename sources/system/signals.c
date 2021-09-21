@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 00:28:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/21 21:49:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/21 22:51:14 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	sigint_handler(int sig)
 
 	signal_on = get_signal_on();
 	*signal_on = sig;
+	set_exit_value(EXIT_CTRL_C_VALUE);
 }
 
 static void	sigwinch_handler(int sig)

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:29 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 22:09:37 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 23:03:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ int	ft_env(int argc, char **argv)
 		}
 		i++;
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }

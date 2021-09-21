@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/15 18:48:13 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 23:09:37 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	export_get_len_var_name(char *arg)
 	return (len);
 }
 
-static char	*export_get_var_name(char	*arg)
+static char	*export_get_var_name(char *arg)
 {
 	int		i;
 	int		j;

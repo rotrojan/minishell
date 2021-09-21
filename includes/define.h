@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/21 21:12:59 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/21 22:51:48 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # define RESET_CAP "me"
 
 # define HISTORY_PATH ".minishell_history"
+
 # define EXIT_CMD_NOT_FOUND 127
+# define EXIT_CTRL_C_VALUE 130
 
 #endif

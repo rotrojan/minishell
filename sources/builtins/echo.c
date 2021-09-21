@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:43:13 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/21 23:01:46 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,5 +31,5 @@ int	ft_echo(int argc, char **argv)
 	}
 	if (has_dash_n_flag == false)
 		ft_putchar('\n');
-	return (0);
+	return (EXIT_SUCCESS);
 }
