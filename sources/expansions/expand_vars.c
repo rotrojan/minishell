@@ -6,25 +6,23 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:32:03 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 18:18:17 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/23 21:09:42 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	get_var_name_and_value(char *arg, char **var_name, char **var_value,
-		bool *var_value_is_malloced)
+static void	get_var_name_and_value(char *arg, char **var_name, char **var_value)
 {
 	if (*(arg + 1) == '?')
 	{
 		*var_name = ft_strdup("?");
 		*var_value = ft_itoa(*get_exit_value());
-		*var_value_is_malloced = true;
 	}
 	else
 	{
 		*var_name = get_var_name(arg);
-		*var_value = ft_getenv(*var_name);
+		*var_value = reverse_quotes(ft_getenv(*var_name));
 		if (*var_value == NULL)
 			*var_value = "";
 	}
@@ -34,14 +32,8 @@ bool	expand_single_var_in_stream(char **arg, int *i, bool in_dquotes)
 {
 	char	*var_name;
 	char	*var_value;
-	bool	is_malloced;
 
-	is_malloced = false;
-	get_var_name_and_value(*arg + *i, &var_name, &var_value, &is_malloced);
-	var_name = get_var_name(*arg + *i);
-	var_value = ft_getenv(var_name);
-	if (var_value == NULL)
-		var_value = "";
+	get_var_name_and_value(*arg + *i, &var_name, &var_value);
 	if ((in_dquotes == false && var_value != NULL && *var_value != '\0'
 			&& has_space(var_value) == true) || *var_value == '\0')
 	{
@@ -54,8 +46,7 @@ bool	expand_single_var_in_stream(char **arg, int *i, bool in_dquotes)
 		*i += ft_strlen(var_value);
 	}
 	gc_free((void **)&var_name);
-	if (is_malloced == true)
-		gc_free((void **)&var_value);
+	gc_free((void **)&var_value);
 	return (true);
 }
 
@@ -92,11 +83,8 @@ void	expand_single_var(
 {
 	char	*var_name;
 	char	*var_value;
-	bool	var_value_is_malloced;
 
-	var_value_is_malloced = false;
-	get_var_name_and_value(&cmd->argv[i][*j], &var_name, &var_value,
-		&var_value_is_malloced);
+	get_var_name_and_value(&cmd->argv[i][*j], &var_name, &var_value);
 	if (in_dquotes == false && var_value != NULL && *var_value != '\0'
 		&& has_space(var_value) == true)
 		realloc_argv(cmd, i, j, var_value);
@@ -107,8 +95,7 @@ void	expand_single_var(
 		*j += ft_strlen(var_value) - 1;
 	}
 	gc_free((void **)&var_name);
-	if (var_value_is_malloced == true)
-		gc_free((void **)&var_value);
+	gc_free((void **)&var_value);
 }
 
 void	expand_vars(t_simple_cmd *cmd, int const i)

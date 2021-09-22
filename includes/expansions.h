@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 01:13:02 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/23 21:08:30 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ void	realloc_argv(t_simple_cmd *cmd, int const i, int *j, char *var_value);
 ** expansions_utils.c
 */
 
+char	*reverse_quotes(char *var_value);
 void	change_quote_state(char quote, bool *in_squotes, bool *in_dquotes);
 char	*get_after_var(char *str, int index_dollar);
 int		get_len_var_name(char *arg);

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 19:31:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/13 20:06:15 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/23 20:50:51 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,16 @@ static int	get_len_without_quotes(char *str)
 	return (len);
 }
 
+static void	restore_quotes(char *str)
+{
+	while (*str != '\0')
+	{
+		if (*str < 0)
+			*str *= -1;
+		++str;
+	}
+}
+
 char	*remove_quotes(char *str)
 {
 	bool	in_squotes;
@@ -58,6 +68,7 @@ char	*remove_quotes(char *str)
 			without_quotes[j++] = str[i];
 		++i;
 	}
+	restore_quotes(without_quotes);
 	return (without_quotes);
 }
 
