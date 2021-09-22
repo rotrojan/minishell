@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:06:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/16 03:33:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/22 03:55:16 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,17 @@ static t_history	*search_in_history(t_history_data *history, char *line)
 
 static void	add_in_history(t_history_data *history, char *line)
 {
-	int	fd;
+	int		fd;
+	char	*history_path;
 
-	fd = open(HISTORY_PATH, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	history_path = ft_strjoin(ft_getenv("HOME"), HISTORY_FILE, "/");
+	fd = open(history_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd <= 0)
-		exit_shell(EXIT_FAILURE, "open(): can't open .minish_history file.\n");
+		exit_shell(EXIT_FAILURE,
+			"open(): can't open .minishell_history file.\n");
 	ft_dprintf(fd, "%s\n", line);
 	push_front_history(&history->data, line);
+	gc_free((void **)&history_path);
 	close(fd);
 }
 
@@ -60,11 +64,14 @@ static void	re_add_in_history(t_history_data *history, t_history *element)
 {
 	int			fd;
 	t_history	*tmp;
+	char		*history_path;
 
 	move_elem_at_front(history, element);
-	fd = open(HISTORY_PATH, O_WRONLY);
+	history_path = ft_strjoin(ft_getenv("HOME"), HISTORY_FILE, "/");
+	fd = open(history_path, O_WRONLY);
 	if (fd <= 0)
-		exit_shell(EXIT_FAILURE, "open(): can't open .minish_history file.\n");
+		exit_shell(EXIT_FAILURE,
+			"open(): can't open .minishell_history file.\n");
 	tmp = history->data;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
@@ -73,6 +80,7 @@ static void	re_add_in_history(t_history_data *history, t_history *element)
 		ft_dprintf(fd, "%s\n", tmp->line);
 		tmp = tmp->prev;
 	}
+	gc_free((void **)&history_path);
 	close(fd);
 }
 
