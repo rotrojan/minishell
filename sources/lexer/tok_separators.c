@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:17:35 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 04:05:25 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:52:16 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_token	*tok_and(char *inchars, int *i)
 	else
 	{
 		ft_dprintf(STDERR_FILENO,
-				"minishell: the `&' operator is not handled by minishell");
+			"\nminishell: the `&' operator is not handled by minishell");
 		return (NULL);
 	}
 	return (create_token(data, type));

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/20 23:42:43 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:57:25 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,26 +50,30 @@ static void	add_to_lst(t_redirection *new_redirection, t_node *simple_cmd)
 
 static bool	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 {
-	t_redirection	*new_redirection;
+	t_redirection	*new_redir;
 
 	if ((*tok_lst)->next == NULL)
 	{
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error near unexpected token `newline'");
 		eat_token(tok_lst);
 		return (false);
 	}
-	new_redirection = NULL;
-	new_redirection = gc_malloc(sizeof(*new_redirection));
-	ft_bzero(new_redirection, sizeof(*new_redirection));
-	new_redirection->type
+	new_redir = gc_malloc(sizeof(*new_redir));
+	new_redir->type
 		= (enum e_redirection_type)(*tok_lst)->type - REDIR_TOK_TYPE_OFFSET;
 	eat_token(tok_lst);
 	if ((*tok_lst)->type != Word_tok)
+	{
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error near unexpected token `%s'",
+			(*tok_lst)->data);
 		return (false);
-	new_redirection->stream = ft_strdup((*tok_lst)->data);
-	new_redirection->isopen = false;
-	new_redirection->has_quotes
-		= (ft_strchr(new_redirection->stream, '"') != NULL);
-	add_to_lst(new_redirection, simple_cmd);
+	}
+	new_redir->stream = ft_strdup((*tok_lst)->data);
+	new_redir->isopen = false;
+	new_redir->has_quotes = (ft_strchr(new_redir->stream, '"') != NULL);
+	add_to_lst(new_redir, simple_cmd);
 	return (true);
 }
 

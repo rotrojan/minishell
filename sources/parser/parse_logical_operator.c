@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 18:39:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 03:24:04 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 17:46:54 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ bool	parse_logical_operator(t_token **tok_lst, t_node **ast)
 	{
 		if (separator_node->type == Semic_node)
 			return (true);
-		return (false);
+		else
+		{
+			ft_dprintf(STDERR_FILENO,
+				"\nminishell: syntax error: unexpected end of file");
+			return (false);
+		}
 	}
 	return (parse_pipeline(tok_lst, &(separator_node->content.child.right)));
 }
