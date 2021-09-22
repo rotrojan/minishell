@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:58:21 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/21 02:01:56 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 02:19:16 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static void	child(t_node *ast, int fd[2], int save_in, int save_out)
 	close(save_in);
 	close(save_out);
 	exec_ast(ast->content.child.left, true);
+	close(STDOUT_FILENO);
+	close(STDIN_FILENO);
+	close(STDERR_FILENO);
 	exit(EXIT_SUCCESS);
 }
 
@@ -30,6 +33,7 @@ static void	parent(t_node *ast, int fd[2], int save_in, int save_out)
 	dup2(fd[Output], STDIN_FILENO);
 	close(fd[Output]);
 	exec_simple_cmd(ast->content.child.right->content.simple_cmd);
+	close(STDIN_FILENO);
 	wait(NULL);
 	dup2(save_in, STDIN_FILENO);
 	dup2(save_out, STDOUT_FILENO);
@@ -44,8 +48,6 @@ void	exec_pipe(t_node *ast)
 	int		save_in;
 	int		save_out;
 
-	/* if (ast->type == Simple_cmd) */
-		/* return (exec_simple_cmd(ast, true)); */
 	save_in = dup(STDIN_FILENO);
 	save_out = dup(STDOUT_FILENO);
 	if (pipe(fd) == -1)
