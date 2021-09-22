@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 00:52:45 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 01:12:01 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 03:25:02 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 static void	exec_semic_node(t_node *ast)
 {
 	exec_ast(ast->content.child.left, true);
-	exec_ast(ast->content.child.right, true);
+	if (ast->content.child.right != NULL)
+		exec_ast(ast->content.child.right, true);
 }
 
 static void	exec_or_node(t_node *ast)

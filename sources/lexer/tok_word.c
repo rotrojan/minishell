@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/22 04:33:57 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static enum e_chr_rules	word_rules(enum e_chr_type chr_type)
 */
 
 static enum e_chr_rules	is_valid(
-	char c, bool *is_in_squotes, bool *is_in_dquotes, t_error *error)
+	char c, bool *is_in_squotes, bool *is_in_dquotes)
 {
 	enum e_chr_type	chr_type;
 
@@ -62,10 +62,7 @@ static enum e_chr_rules	is_valid(
 	else
 	{
 		if (chr_type == Null_chr)
-		{
-			*error = Unexpected_eof;
 			return (Not_accepted);
-		}
 		if (chr_type == Squote_chr && *is_in_squotes == true)
 			*is_in_squotes = false;
 		else if (chr_type == Dquote_chr && *is_in_dquotes == true)
@@ -85,23 +82,26 @@ static enum e_chr_rules	is_valid(
 ** is_valid() to an other.
 */
 
-t_token	*tok_word(char *inchars, int *i, t_error *error)
+t_token	*tok_word(char *inchars, int *i)
 {
-	char				*data;
-	int					j;
-	bool				is_in_squotes;
-	bool				is_in_dquotes;
+	char	*data;
+	int		j;
+	bool	is_in_squotes;
+	bool	is_in_dquotes;
 
 	j = 0;
 	is_in_squotes = false;
 	is_in_dquotes = false;
 	data = gc_malloc(sizeof(*data) * 1);
 	*data = '\0';
-	while (is_valid(inchars[*i + j], &is_in_squotes, &is_in_dquotes, error)
+	while (is_valid(inchars[*i + j], &is_in_squotes, &is_in_dquotes)
 		== Accepted)
 		++j;
-	if (*error != No_error)
+	if (inchars[*i + j] == '\0' &&
+		(is_in_squotes == true || is_in_dquotes == true))
 	{
+		ft_dprintf(STDERR_FILENO,
+				"\nminishell: syntax error: unexpected end of file");
 		gc_free((void **)&data);
 		return (NULL);
 	}

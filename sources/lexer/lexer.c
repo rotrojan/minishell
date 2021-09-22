@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:09:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/22 04:28:36 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
 ** (see lexer.h for further informations).
 */
 
-static t_token	*get_next_token(char *inchars, int *i, t_error *error)
+static t_token	*get_next_token(char *inchars, int *i)
 {
-	t_token	*(*tokenizer[NB_CHR_TYPE])(char*, int*, t_error*);
+	t_token	*(*tokenizer[NB_CHR_TYPE])(char*, int*);
 
 	tokenizer[Null_chr] = NULL;
 	tokenizer[Any_chr] = &tok_word;
@@ -34,7 +34,7 @@ static t_token	*get_next_token(char *inchars, int *i, t_error *error)
 	tokenizer[Pipe_chr] = &tok_pipe;
 	tokenizer[Oparenth_chr] = &tok_parenth;
 	tokenizer[Cparenth_chr] = &tok_parenth;
-	return (tokenizer[get_chr_type(inchars[*i])](inchars, i, error));
+	return (tokenizer[get_chr_type(inchars[*i])](inchars, i));
 }
 
 /*
@@ -49,7 +49,7 @@ static t_token	*get_next_token(char *inchars, int *i, t_error *error)
 ** the error variable is set accordingly by get_next_token().
 */
 
-bool	build_tok_lst(char *inchars, t_token **tok_lst, t_error *error)
+bool	build_tok_lst(char *inchars, t_token **tok_lst)
 {
 	int		i;
 	t_token	*new_tok;
@@ -59,8 +59,8 @@ bool	build_tok_lst(char *inchars, t_token **tok_lst, t_error *error)
 		++i;
 	while (inchars[i])
 	{
-		new_tok = get_next_token(inchars, &i, error);
-		if (*error != No_error)
+		new_tok = get_next_token(inchars, &i);
+		if (new_tok == NULL)
 			return (false);
 		add_token(new_tok, tok_lst);
 		while (ft_isspace(inchars[i]))

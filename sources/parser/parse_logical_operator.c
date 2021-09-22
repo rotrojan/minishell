@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 18:39:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/22 03:24:04 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,11 @@ bool	parse_logical_operator(t_token **tok_lst, t_node **ast)
 	separator_node->content.child.left = *ast;
 	*ast = separator_node;
 	eat_token(tok_lst);
+	if (*tok_lst == NULL)
+	{
+		if (separator_node->type == Semic_node)
+			return (true);
+		return (false);
+	}
 	return (parse_pipeline(tok_lst, &(separator_node->content.child.right)));
 }

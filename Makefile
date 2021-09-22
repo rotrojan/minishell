@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/22 01:02:55 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/22 05:13:12 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_unsetenv.c		ft_getenv.c				cd.c					\
 		env_utils.c			exit.c					pwd.c					\
 		lexer.c				tok_separators.c		tok_word.c				\
-		error_management.c	build_ast.c				tok_utils.c				\
+							build_ast.c				tok_utils.c				\
 		tok_redirections.c	free_ast.c				parse_simple_cmd.c		\
 		token_identifiers.c	parse_parenthesis.c		parse_logical_operator.c\
 		ft_fflush.c			parse_pipeline.c		exec_ast.c				\
@@ -75,7 +75,7 @@ $(NAME): $(OBJS) $(LIBS:%=lib%.a)
 	$(CC) $(CXXFLAGS) $^ -o $(NAME) $(LDFLAGS)
 
 -include $(DEPENDENCIES)
-$(OBJS_DIR)/%.o: %.c $(OBJS_DIR)/debug$(DEBUG) | $(OBJS_DIR) 
+$(OBJS_DIR)/%.o: %.c $(OBJS_DIR)/debug$(DEBUG) | $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 $(OBJS_DIR):

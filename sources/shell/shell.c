@@ -6,34 +6,42 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/20 22:20:23 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 05:04:15 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static	void display_parsing_error(t_token *tok_lst)
+{
+	if (tok_lst == NULL)
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error: unexpected end of file");
+	else if (tok_lst->type == Amp_tok)
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: the `&' operator is not handled by minishell");
+	else if (tok_lst == NULL)
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error near unexpected token `newline'");
+	else
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error near unexpected token `%s'",
+			tok_lst->data);
+}
+
 static t_node	*lexer_parser(char *line)
 {
 	t_token	*tok_lst;
 	t_node	*ast;
-	t_error	error;
 
 	ast = NULL;
 	tok_lst = NULL;
 	ast = NULL;
-	error = No_error;
-	if (build_tok_lst(line, &tok_lst, &error) == false)
-		display_error(error, &tok_lst);
-	else
+	if (build_tok_lst(line, &tok_lst) == true)
 	{
 		if (build_ast(&tok_lst, &ast) == false)
 		{
-			if (tok_lst == NULL)
-				display_error(Unexpected_eof, NULL);
-			else if (tok_lst->type == Amp_tok)
-				display_error(Amp_token, &tok_lst);
-			else
-				display_error(Unexpected_token, &tok_lst);
+			display_parsing_error(tok_lst);
 			clear_ast(&ast);
 		}
 	}

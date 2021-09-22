@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:11:30 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/08/09 20:04:01 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 03:38:31 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_token
 ** lexer.c
 */
 
-bool			build_tok_lst(char *inchars, t_token **tok_lst, t_error *error);
+bool			build_tok_lst(char *inchars, t_token **tok_lst);
 
 /*
 ** tok_utils.c
@@ -107,22 +107,22 @@ enum e_chr_type	get_chr_type(char c);
 ** tok_word.c
 */
 
-t_token			*tok_word(char *inchars, int *i, t_error *error);
+t_token			*tok_word(char *inchars, int *i);
 
 /*
 ** tok_separators.c
 */
 
-t_token			*tok_semic(char *inchars, int *i, t_error *error);
-t_token			*tok_and(char *inchars, int *i, t_error *error);
-t_token			*tok_pipe(char *inchars, int *i, t_error *error);
-t_token			*tok_parenth(char *inchars, int *i, t_error *error);
+t_token			*tok_semic(char *inchars, int *i);
+t_token			*tok_and(char *inchars, int *i);
+t_token			*tok_pipe(char *inchars, int *i);
+t_token			*tok_parenth(char *inchars, int *i);
 
 /*
 ** tok_redirections.c
 */
 
-t_token			*tok_lesser(char *inchars, int *i, t_error *error);
-t_token			*tok_greater(char *inchars, int *i, t_error *error);
+t_token			*tok_lesser(char *inchars, int *i);
+t_token			*tok_greater(char *inchars, int *i);
 
 #endif
