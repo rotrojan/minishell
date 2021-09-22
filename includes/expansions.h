@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 01:13:02 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 21:47:26 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,4 +79,12 @@ bool	expand_vars_in_stream(char **arg);
 void	expand_single_var(
 			t_simple_cmd *cmd, int const i, int *j, bool in_dquotes);
 void	expand_vars(t_simple_cmd *cmd, int const i);
+
+/*
+** escape_quotes.c
+*/
+
+void	escape_quotes(char **splitted_var);
+int		get_len_with_escaped_quotes(char *str);
+
 #endif
