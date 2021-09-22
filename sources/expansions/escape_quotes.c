@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 21:46:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 21:46:26 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/23 01:23:17 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	get_len_with_escaped_quotes(char *str)
 	return (i + nb_quotes);
 }
 
-void	fill_with_escaped_quotes(char *dest, char *src)
+static void	fill_with_escaped_quotes(char *dest, char *src)
 {
 	int	i;
 	int	j;
@@ -39,11 +39,10 @@ void	fill_with_escaped_quotes(char *dest, char *src)
 	{
 		if (src[j] == '\'' || src[j] == '"')
 			dest[i++] = '\\';
-		dest[i] = src[j];
-		++i;
-		++j;
+		dest[i++] = src[j++];
 	}
 	dest[i] = '\0';
+	printf("des = %s\n", dest);
 }
 
 void	escape_quotes(char **splitted_var)
@@ -67,4 +66,3 @@ void	escape_quotes(char **splitted_var)
 		++i;
 	}
 }
-

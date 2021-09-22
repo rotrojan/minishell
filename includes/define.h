@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/22 03:52:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/22 22:26:20 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,6 @@
 
 # define EXIT_CMD_NOT_FOUND 127
 # define EXIT_CTRL_C_VALUE 130
+# define EXIT_SYNTAX_ERROR 2
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 19:31:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 21:38:30 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/23 01:23:11 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ void	remove_quotes_from_arg(char **arg)
 {
 	char	*tmp;
 
+	/* printf("arg = %s\n", *arg); */
 	tmp = remove_quotes(*arg);
+	/* printf("tmp = %s\n", tmp); */
 	gc_free((void **)arg);
 	*arg = tmp;
 }

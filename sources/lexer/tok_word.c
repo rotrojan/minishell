@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 17:53:03 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/23 01:15:49 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,73 @@ static enum e_chr_rules	is_valid(
 ** in is_valid() because these states must be persistent from one call to
 ** is_valid() to an other.
 */
+static int	get_nb_escaped_quotes(char *str)
+{
+	int		nb_escaped_quotes;
+	bool	in_squotes;
+	bool	in_dquotes;
+
+	nb_escaped_quotes = 0;
+	in_squotes = false;
+	in_dquotes = false;
+	while (*str != '\0')
+	{
+		if (*str == '\'' && in_dquotes == false)
+			in_squotes = (in_squotes == false);
+		else if (*str == '"' && in_squotes == false)
+			in_dquotes = (in_dquotes == false);
+		else if ((in_dquotes == true && *str == '\'')
+			|| (in_squotes == true && *str == '"'))
+			++nb_escaped_quotes;
+		++str;
+	}
+	return (nb_escaped_quotes);
+}
+
+static void	fill_with_escaped_quotes(
+			char *str, char *tmp, bool *in_squotes, bool *in_dquotes)
+{
+	int		i;
+	int		j;
+
+	i = 0;
+	j = 0;
+	while (str[i] != '\0')
+	{
+		if (str[i] == '\'' && *in_dquotes == false)
+			*in_squotes = (*in_squotes == false);
+		else if (str[i] == '"' && *in_squotes == false)
+			*in_dquotes = (*in_dquotes == false);
+		else if ((*in_dquotes == true && str[i] == '\'')
+			|| (*in_squotes == true && str[i] == '"'))
+		{
+			tmp[j++] = '\\';
+			tmp[j++] = str[i];
+		}
+		else
+			tmp[j++] = str[i];
+		++i;
+	}
+}
+
+void	escape_quoted_quotes(char **str)
+{
+	int		len;
+	bool	in_squotes;
+	bool	in_dquotes;
+	char	*tmp;
+
+	if (ft_strchr(*str, '"') != NULL
+		|| ft_strchr(*str, '\'') != NULL)
+	{
+		len = get_len_with_escaped_quotes(*str);
+		tmp = gc_malloc(sizeof(*tmp)
+			* ((ft_strlen(*str) + get_nb_escaped_quotes(*str) + 1)));
+		fill_with_escaped_quotes(*str, tmp, &in_squotes, &in_dquotes);
+		gc_free((void **)str);
+		*str = tmp;
+	}
+}
 
 t_token	*tok_word(char *inchars, int *i)
 {
@@ -106,6 +173,7 @@ t_token	*tok_word(char *inchars, int *i)
 		return (NULL);
 	}
 	data = ft_strndup(inchars + *i, j);
+	escape_quoted_quotes(&data);
 	*i += j;
 	return (create_token(data, Word_tok));
 }

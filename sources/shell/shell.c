@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/22 17:56:24 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 22:27:33 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,15 @@ static t_node	*lexer_parser(char *line)
 	tok_lst = NULL;
 	ast = NULL;
 	if (build_tok_lst(line, &tok_lst) == true)
+	{
 		if (build_ast(&tok_lst, &ast) == false)
+		{
+			set_exit_value(EXIT_SYNTAX_ERROR);
 			clear_ast(&ast);
+		}
+	}
+		else
+			set_exit_value(EXIT_SYNTAX_ERROR);
 	clear_tokens(&tok_lst);
 	return (ast);
 }
