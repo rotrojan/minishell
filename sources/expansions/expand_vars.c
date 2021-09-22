@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:32:03 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/21 22:30:40 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 18:18:17 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ void	expand_single_var(
 	{
 		cmd->argv[i]
 			= fill_new_arg(&cmd->argv[i], ft_strlen(var_name), *j, var_value);
-		*j += ft_strlen(var_value);
+		*j += ft_strlen(var_value) - 1;
 	}
 	gc_free((void **)&var_name);
 	if (var_value_is_malloced == true)
