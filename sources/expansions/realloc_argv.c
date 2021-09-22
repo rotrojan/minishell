@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 15:36:37 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/21 21:50:13 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/22 21:45:04 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	realloc_argv(
 	char			**splitted_var;
 
 	splitted_var = ft_split(var_value, ' ');
+	escape_quotes(splitted_var);
 	init_expand_utils(cmd->argv, splitted_var, var_value, &utils);
 	utils.index_dollar = *j;
 	new_argv = gc_malloc(sizeof(*new_argv) * (utils.len_new_argv + 1));
