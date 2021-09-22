@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 02:19:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/21 14:03:09 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/22 22:26:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,6 @@ void	exit_shell(int status, char *message)
 
 	term = getterm();
 	tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+	set_exit_value(status);
 	gc_exit(status, message);
 }
