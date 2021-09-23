@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 19:22:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 21:48:51 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/23 22:12:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static char	*alloc_new_arg(char *arg, int len_var_name, char *var_value)
 	char	*new_arg;
 	int		len_var_value;
 
-	len_var_value = get_len_with_escaped_quotes(var_value);
+	len_var_value = ft_strlen(var_value);
 	new_arg = gc_malloc(sizeof(*new_arg)
 			* (ft_strlen(arg) - len_var_name + len_var_value));
 	return (new_arg);

@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/22 21:52:17 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/23 22:10:22 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ SRCS =	main.c 				shell.c 				prompt.c 				\
 		ft_unsetenv.c		ft_getenv.c				cd.c					\
 		env_utils.c			exit.c					pwd.c					\
 		lexer.c				tok_separators.c		tok_word.c				\
-		escape_quotes.c		build_ast.c				tok_utils.c				\
+		build_ast.c				tok_utils.c				\
 		tok_redirections.c	free_ast.c				parse_simple_cmd.c		\
 		token_identifiers.c	parse_parenthesis.c		parse_logical_operator.c\
 		ft_fflush.c			parse_pipeline.c		exec_ast.c				\

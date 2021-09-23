@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/22 22:27:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/23 22:29:19 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,21 +28,43 @@ static t_node	*lexer_parser(char *line)
 			clear_ast(&ast);
 		}
 	}
-		else
-			set_exit_value(EXIT_SYNTAX_ERROR);
+	else
+		set_exit_value(EXIT_SYNTAX_ERROR);
 	clear_tokens(&tok_lst);
 	return (ast);
+}
+
+static void	execution(char **line, bool inline_mode)
+{
+	t_node	*ast;
+
+	ast = NULL;
+	if ((*line)[0] != '\0')
+	{
+		put_in_history(*line);
+		ast = lexer_parser(*line);
+		if (ast != NULL)
+		{
+			exec_ast(ast, inline_mode);
+			clear_ast(&ast);
+		}
+		else
+			ft_dprintf(STDERR_FILENO, "\n\r");
+	}
+	else
+	{
+		ft_dprintf(STDERR_FILENO, "\n\r");
+		gc_free((void **)line);
+	}
 }
 
 /* Core of program */
 void	shell(bool inline_mode)
 {
 	char	*line;
-	t_node	*ast;
 	t_term	*term;
 
-	ast = NULL;
-	while (1)
+	while (true)
 	{
 		if (inline_mode == true)
 			get_next_line(STDIN_FILENO, &line);
@@ -53,24 +75,8 @@ void	shell(bool inline_mode)
 			line = input();
 			tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
 		}
-		if (line[0] != '\0')
-		{
-			put_in_history(line);
-			ast = lexer_parser(line);
-			if (ast != NULL)
-			{
-				exec_ast(ast, inline_mode);
-				clear_ast(&ast);
-			}
-			else
-				ft_dprintf(STDERR_FILENO, "\n\r");
-		}
-		else
-		{
-			ft_dprintf(STDERR_FILENO, "\n\r");
-			gc_free((void **)&line);
-		}
+		execution(&line, inline_mode);
 		if (inline_mode == true)
-			exit_shell(EXIT_SUCCESS, NULL);
+			exit_shell(*get_exit_value(), NULL);
 	}
 }

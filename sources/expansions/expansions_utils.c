@@ -6,11 +6,32 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 22:53:44 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/21 22:19:21 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/23 21:07:23 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+char	*reverse_quotes(char *var_value)
+{
+	char	*str;
+	int		i;
+
+	if (var_value == NULL)
+		return (NULL);
+	i = 0;
+	str = gc_malloc(sizeof(*str) * (ft_strlen(var_value) + 1));
+	while (var_value[i] != '\0')
+	{
+		if (var_value[i] == '\'' || var_value[i] == '"')
+			str[i] = -var_value[i];
+		else
+			str[i] = var_value[i];
+		++i;
+	}
+	str[i] = '\0';
+	return (str);
+}
 
 void	change_quote_state(char quote, bool *in_squotes, bool *in_dquotes)
 {
