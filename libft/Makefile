@@ -43,22 +43,29 @@ vpath %.c integer file string memory file system list string/format string/forma
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): display $(OBJS)
+	printf '\narchiving libft\n'
 	ar -rcs $(NAME) $(OBJS)
+	printf '\033[33m\033[1mlibft compiled\n\033[0m'
 
 -include $(DEPENDENCIES)
 $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
+	printf '\r\033[Kcompiling%s' '$@'
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
 	$(MKDIR) $(OBJS_DIR)
+
+display:
+	printf '\033[1mcompiling libft\033[0m'
 
 clean:
 	$(RM) -r $(OBJS_DIR)
 
 fclean: clean
 	$(RM) $(NAME)
+	printf 'libft removed\n'
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re display
