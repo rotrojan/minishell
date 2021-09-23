@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/22 21:19:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/24 01:01:24 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,6 @@ static int	catch_signals(void)
 	return (tmp);
 }
 
-/*	"cr" = put cursor at the beginning of the line
-	"cd" = clear screen from the cursor to the end	*/
-static void	update_screen(t_cursor *cursor)
-{
-	ft_dsleep(5);
-	cursor->pos = get_cursor_pos();
-}
-
 /* Read and return input line for shell. */
 char	*input(void)
 {
@@ -84,13 +76,14 @@ char	*input(void)
 
 	cursor.on_inchar = create_inchar(EOL);
 	cursor.pos = get_cursor_pos();
+	cursor.origin = cursor.pos;
 	while (1)
 	{
 		sig = catch_signals();
 		if (sig == SIGINT)
 			return (ft_strdup(""));
 		else if (sig == SIGWINCH)
-			update_screen(&cursor);
+			ctrl_l_key(&cursor);
 		c = ft_getch();
 		if (c != ERR)
 		{
