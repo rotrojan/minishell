@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 20:57:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 03:48:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/23 00:31:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ typedef struct s_history_data
 typedef struct s_cursor
 {
 	t_axe		pos;
+	t_axe		origin;
 	t_inchar	*on_inchar;
 }				t_cursor;
 

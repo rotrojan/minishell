@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/22 21:19:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/23 00:40:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ char	*input(void)
 
 	cursor.on_inchar = create_inchar(EOL);
 	cursor.pos = get_cursor_pos();
+	cursor.origin = cursor.pos;
 	while (1)
 	{
 		sig = catch_signals();
