@@ -6,38 +6,41 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/23 22:10:22 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/24 05:02:09 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS =	main.c 				shell.c 				prompt.c 				\
-		ft_gethostname.c	getbinpath.c 			signals.c				\
-		inchar.c			set_termios.c			input.c					\
-		exit_shell.c		getterm.c				init_term.c				\
-		pipe_exec.c			env.c					get_cursor_pos.c		\
-		ft_getch.c			arrow_keys.c			inchar_utils.c			\
-		put_in_history.c	get_history.c			cursor_utils.c			\
-		special_keys.c		history_utils.c			history_get_up.c		\
-		history_get_down.c	ft_inenv.c				ft_setenv.c				\
-		ft_unsetenv.c		ft_getenv.c				cd.c					\
-		env_utils.c			exit.c					pwd.c					\
-		lexer.c				tok_separators.c		tok_word.c				\
-		build_ast.c				tok_utils.c				\
-		tok_redirections.c	free_ast.c				parse_simple_cmd.c		\
-		token_identifiers.c	parse_parenthesis.c		parse_logical_operator.c\
-		ft_fflush.c			parse_pipeline.c		exec_ast.c				\
-		exec_simple_cmd.c	env.c					echo.c					\
-		unset.c				run_builtin.c			path.c					\
-		export.c			heredoc.c				run_binary.c			\
-		redirection.c		input_redirection.c		output_redirection.c	\
-		remove_quotes.c		perform_expansions.c	expand_vars.c			\
-		heredoc.c			realloc_argv.c			export_display_env.c	\
-		expansions_utils.c	fill_new_arg.c			utils.c					\
-		set_timeout.c		ft_dsleep.c				init_history.c			\
-		exec_pipe.c			exit_value.c			exec_compound_cmd.c		\
-		insert_inchar.c
+SRCS =						main.c											\
+	arrow_keys.c			cursor_utils.c		ft_getch.c					\
+	get_cursor_pos.c		getterm.c			init_term.c					\
+	set_termios.c			special_keys.c									\
+	exit_shell.c			ft_dsleep.c			ft_fflush.c					\
+	ft_gethostname.c		getbinpath.c 		path.c						\
+	set_timeout.c			signals.c										\
+	env_utils.c				ft_getenv.c			ft_inenv.c					\
+	ft_setenv.c				ft_unsetenv.c									\
+	input.c					prompt.c 			shell.c 					\
+	inchar.c				inchar_utils.c		insert_inchar.c				\
+	get_history.c			history_get_down.c	history_get_up.c			\
+	history_utils.c			init_history.c		put_in_history.c			\
+	lexer.c					tok_redirections.c	tok_separators.c			\
+	tok_utils.c				tok_word.c										\
+	build_ast.c				free_ast.c			parse_logical_operator.c	\
+	parse_parenthesis.c		parse_pipeline.c	parse_simple_cmd.c			\
+	token_identifiers.c														\
+	expand_vars.c			expansions_utils.c	fill_new_arg.c				\
+	perform_expansions.c	realloc_argv.c									\
+	remove_quotes.c			utils.c											\
+	exec_ast.c				exec_compound_cmd.c	exec_pipe.c					\
+	exec_simple_cmd.c		exit_value.c		run_binary.c				\
+	run_builtin.c															\
+	heredoc.c				input_redirection.c	output_redirection.c		\
+	redirection.c															\
+	cd.c					echo.c				env.c						\
+	exit.c					export.c			export_display_env.c		\
+	pwd.c					unset.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
@@ -56,7 +59,7 @@ DEBUG = off
 
 CFLAGS = -MMD -Wall -Wextra -Werror $(INCLUDES_DIR:%=-I %)
 ifeq ($(DEBUG), on)
-	CXXFLAGS += -g3#-fsanitize=address
+	CXXFLAGS += -g3 -fsanitize=address
 endif
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
@@ -67,20 +70,31 @@ vpath %.c	$(addprefix $(SRCS_DIR),						\
 				/. /terminal /lexer /parser /builtins /expansions)
 vpath %.a $(LIBS:%=lib%)
 
+.SILENT:
 all:
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)
 	$(MAKE) $(NAME)
 
-$(NAME): $(OBJS) $(LIBS:%=lib%.a)
+$(NAME): $(OBJS) $(LIBS:%=lib%.a) | display
+	printf '\nlinking object files\n'
 	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)
 	$(CC) $(CXXFLAGS) $^ -o $(NAME) $(LDFLAGS)
+	cat .ascii_art
 
 -include $(DEPENDENCIES)
 $(OBJS_DIR)/%.o: %.c $(OBJS_DIR)/debug$(DEBUG) | $(OBJS_DIR)
+	printf '\r\033[Kcompiling%s' '$@'
 	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
 	$(MKDIR) $@
+
+display:
+	printf '\n\033[1mcompiling minishell\033[0m'
+
+libs:
+	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)
+
 
 lib%.a:
 	$(MAKE) -C $(@:%.a=%)
@@ -95,7 +109,8 @@ clean:
 
 fclean: clean
 	$(RM) $(NAME) $(foreach LIB, $(LIBS), lib$(LIB)/lib$(LIB).a)
+	printf 'minishell removed\n'
 
 re: fclean all
 
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re display libs
