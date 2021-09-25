@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/24 05:02:09 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/25 23:51:47 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,12 +52,13 @@ INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
 LIBS = gc ft
 
 MAKE = make
+MAKEFLAGS += --no-print-directory
 CC = clang
 RM = rm -f
 MKDIR = mkdir -p
 DEBUG = off
 
-CFLAGS = -MMD -Wall -Wextra -Werror $(INCLUDES_DIR:%=-I %)
+CFLAGS = -MMD -MP -Wall -Wextra -Werror
 ifeq ($(DEBUG), on)
 	CXXFLAGS += -g3 -fsanitize=address
 endif
@@ -68,49 +69,40 @@ vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /shell, /. /history /inchar)	\
 				$(addprefix /execution, /. /redirection)	\
 				/. /terminal /lexer /parser /builtins /expansions)
-vpath %.a $(LIBS:%=lib%)
 
-.SILENT:
-all:
-	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)
-	$(MAKE) $(NAME)
+all: libs
+	@$(MAKE) $(NAME)
 
-$(NAME): $(OBJS) $(LIBS:%=lib%.a) | display
-	printf '\nlinking object files\n'
-	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)
-	$(CC) $(CXXFLAGS) $^ -o $(NAME) $(LDFLAGS)
-	cat .ascii_art
+$(NAME): $(OBJS) libft/libft.a libgc/libgc.a
+	@printf 'linking %s\n' '$@'
+	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) $(LDFLAGS)
+	@cat .ascii_art
 
 -include $(DEPENDENCIES)
 $(OBJS_DIR)/%.o: %.c $(OBJS_DIR)/debug$(DEBUG) | $(OBJS_DIR)
-	printf '\r\033[Kcompiling%s' '$@'
-	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
+	@printf '\r\033[K\033[33mcompiling minishell:\033[0m %s' '$@'
+	@$(CC) $(CFLAGS)  $(INCLUDES_DIR:%=-I %) -c $< -o $@
 
 $(OBJS_DIR):
-	$(MKDIR) $@
-
-display:
-	printf '\n\033[1mcompiling minishell\033[0m'
+	@$(MKDIR) $@
 
 libs:
-	$(foreach LIB, ${LIBS}, ${MAKE} -C lib${LIB} ;)
-
-
-lib%.a:
-	$(MAKE) -C $(@:%.a=%)
+	@$(MAKE) -C libft
+	@$(MAKE) -C libgc
 
 $(OBJS_DIR)/debug$(DEBUG): | $(OBJS_DIR)
-	$(RM) $(OBJS_DIR)/debug*
-	touch $@
+	@$(RM) $(OBJS_DIR)/debug*
+	@touch $@
 
 clean:
-	$(foreach LIB, $(LIBS), $(MAKE) $@ -C lib$(LIB);)
-	$(RM) -r $(OBJS_DIR)
+	@$(foreach LIB, $(LIBS), $(MAKE) $@ -C lib$(LIB);)
+	@$(RM) -r $(OBJS_DIR)
 
 fclean: clean
-	$(RM) $(NAME) $(foreach LIB, $(LIBS), lib$(LIB)/lib$(LIB).a)
-	printf 'minishell removed\n'
+	@$(foreach LIB, $(LIBS), $(MAKE) $@ -C lib$(LIB);)
+	@$(RM) $(NAME)
+	@printf 'minishell removed\n'
 
 re: fclean all
 
-.PHONY: all clean fclean re display libs
+.PHONY: all clean fclean re libs

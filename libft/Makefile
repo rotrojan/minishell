@@ -32,40 +32,39 @@ DEPENDENCIES= $(OBJS:%.o=%.d)
 INCLUDES_DIR = includes $(LIBS:%=lib%/includes)
 LIBS = gc
 
+MAKE = make
+MAKEFLAGS += --no-print-directory
 CC= clang
 MKDIR= mkdir -p
 RM= rm -f
 
-CFLAGS= -Wall -Wextra -Werror -MMD
+CFLAGS= -Wall -Wextra -Werror -MMD -MP
 CXXFLAGS= -I includes $(INCLUDES_DIR:%=-I ../%)
 
 vpath %.c integer file string memory file system list string/format string/format/convert_types
 
 all: $(NAME)
 
-$(NAME): display $(OBJS)
-	printf '\narchiving libft\n'
-	ar -rcs $(NAME) $(OBJS)
-	printf '\033[33m\033[1mlibft compiled\n\033[0m'
+$(NAME): $(OBJS)
+	@printf '\n\033[1Karchiving %s\n' '$@'
+	@ar -rcs $(NAME) $(OBJS)
+	@printf '\033[33m\033[1m%s done\n\033[0m' '$@'
 
 -include $(DEPENDENCIES)
 $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
-	printf '\r\033[Kcompiling%s' '$@'
-	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
+	@printf '\r\033[K\033[33mcompiling libft:\033[0m %s' '$@'
+	@$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
-	$(MKDIR) $(OBJS_DIR)
-
-display:
-	printf '\033[1mcompiling libft\033[0m'
+	@$(MKDIR) $(OBJS_DIR)
 
 clean:
-	$(RM) -r $(OBJS_DIR)
+	@$(RM) -r $(OBJS_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
-	printf 'libft removed\n'
+	@$(RM) $(NAME)
+	@printf 'libft removed\n'
 
 re: fclean all
 
-.PHONY: all clean fclean re display
+.PHONY: all clean fclean re

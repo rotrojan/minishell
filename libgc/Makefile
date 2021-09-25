@@ -9,41 +9,39 @@ OBJS= $(SRCS:%.c=$(OBJS_DIR)/%.o)
 OBJS_DIR= .objs
 DEPENDENCIES= $(OBJS:%.o=%.d)
 
+MAKE = make
+MAKEFLAGS += --no-print-directory
 CC= clang
 MKDIR= mkdir -p
 RM= rm -f
 
-CFLAGS= -Wall -Wextra -Werror -MMD
+CFLAGS= -Wall -Wextra -Werror -MMD -MP
 CXXFLAGS= -I includes
 
 vpath %.c sources 
 
-.SILENT:
 all: $(NAME)
 
-$(NAME): display $(OBJS)
-	printf '\narchiving libgc\n'
-	ar -rcs $(NAME) $(OBJS)
-	printf '\033[33m\033[1mlibgc compiled\n\033[0m'
+$(NAME): $(OBJS)
+	@printf '\narchiving %s\n' '$@'
+	@ar -rcs $(NAME) $(OBJS)
+	@printf '\033[33m\033[1m%s done\n\033[0m' '$@'
 
 -include $(DEPENDENCIES)
 $(OBJS_DIR)/%.o: %.c | $(OBJS_DIR)
-	printf '\r\033[Kcompiling%s' '$@'
-	$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
+	@printf '\r\033[K\033[33mcompiling libgc:\033[0m %s' '$@'
+	@$(CC) $(CFLAGS) $(CXXFLAGS) -c $< -o $@
 
 $(OBJS_DIR):
-	$(MKDIR) $(OBJS_DIR)
-
-display:
-	printf '\033[1mcompiling libgc\033[22m'
+	@$(MKDIR) $(OBJS_DIR)
 
 clean:
-	$(RM) -r $(OBJS_DIR)
+	@$(RM) -r $(OBJS_DIR)
 
 fclean: clean
-	$(RM) $(NAME)
-	printf 'libgc removed\n'
+	@$(RM) $(NAME)
+	@printf 'libgc removed\n'
 
 re: fclean all
 
-.PHONY: all clean fclean re display
+.PHONY: all clean fclean re
