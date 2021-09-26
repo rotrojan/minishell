@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/21 23:09:37 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/26 21:25:34 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ static char	*export_get_var_name(char *arg)
 
 	i = 0;
 	j = 0;
-	if (ft_isalpha(arg[i]) == 0)
+	if (ft_isalpha(arg[i]) == 0 && arg[i] != '_')
 		return (NULL);
 	var_name = gc_malloc(sizeof(*var_name) * (get_len_var_name(arg) + 1));
 	while (arg[i] != '+' && arg[i] != '=' && arg[i] != '\0')
 	{
-		if (ft_isalnum(arg[i]) == 0)
+		if (ft_isalnum(arg[i]) == 0 && arg[i] != '_')
 		{
 			gc_free((void **)&var_name);
 			return (NULL);
@@ -54,7 +54,7 @@ static char	*get_var_value(char *str, char *env_value)
 {
 	char	*var_value;
 
-	if (str[-2] == '+')
+	if (*(str - 2) == '+')
 		var_value = ft_strjoin(env_value, str, "");
 	else
 		var_value = ft_strdup(str);
@@ -79,9 +79,7 @@ static void	add_to_env(char *export, char *var_name)
 			overwrite = false;
 	}
 	else
-	{
 		var_value = get_var_value(ptr + 1, env_value);
-	}
 	if (overwrite == true)
 		ft_setenv(var_name, var_value, 1);
 	gc_free((void **)&var_value);

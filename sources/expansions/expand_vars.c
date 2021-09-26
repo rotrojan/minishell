@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:32:03 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/26 00:39:53 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/26 19:34:33 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,9 @@ void	expand_vars(t_simple_cmd *cmd, int const i)
 				expand_single_var(cmd, i, &j, in_dquotes);
 		}
 		else
+		{
 			change_quote_state(cmd->argv[i][j], &in_squotes, &in_dquotes);
-		++j;
+			++j;
+		}
 	}
 }
