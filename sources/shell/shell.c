@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/23 22:29:19 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/26 09:51:41 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void	execution(char **line, bool inline_mode)
 		ast = lexer_parser(*line);
 		if (ast != NULL)
 		{
+			set_exit_value(EXIT_SUCCESS);
 			exec_ast(ast, inline_mode);
 			clear_ast(&ast);
 		}
