@@ -75,3 +75,4 @@ minishell
 todo
 .nfs*
 test_functions.c
+test*
