@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 04:22:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/26 04:47:36 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,11 @@ static void	control_key(t_cursor *cursor, int c)
 		{.key = CTRL_L, .function = &ctrl_l_key},
 		{.key = KEY_UP, .function = &history_get_up},
 		{.key = KEY_DOWN, .function = &history_get_down},
+		{.key = CTRL_D, .function = &ctrl_d_key},
 		{.key = -1}
 	};
 
 	i = 0;
-	if (c == CTRL_D)
-		exit_shell(EXIT_SUCCESS, "\n");
 	while (keys[i].key > 0)
 	{
 		if (c == keys[i].key)

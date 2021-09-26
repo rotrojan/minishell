@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/26 00:35:39 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/26 04:39:51 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME = minishell
 SRCS =						main.c											\
 	arrow_keys.c			cursor_utils.c		ft_getch.c					\
 	get_cursor_pos.c		getterm.c			init_term.c					\
-	set_termios.c			special_keys.c									\
+	set_termios.c			special_keys.c		control_keys.c				\
 	exit_shell.c			ft_dsleep.c			ft_fflush.c					\
 	ft_gethostname.c		getbinpath.c 		path.c						\
 	set_timeout.c			signals.c										\

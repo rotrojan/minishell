@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 04:24:57 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/26 04:47:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ t_axe			get_cursor_pos(void);
 void			end_key(t_cursor *cursor);
 void			home_key(t_cursor *cursor);
 void			delete_key(t_cursor *cursor);
+void			ctrl_d_key(t_cursor *cursor);
 void			ctrl_l_key(t_cursor *cursor);
 void			backspace_key(t_cursor *cursor);
 void			left_arrow_key(t_cursor *cursor);
