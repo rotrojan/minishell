@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 19:22:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/23 22:12:18 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/26 15:58:21 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,7 @@ char	*fill_new_arg(char **arg, int len_var_name, int i, char *var_value)
 	}
 	k = 0;
 	while (var_value[k])
-	{
-		if (var_value[k] == '\'' || var_value[k] == '"')
-			new_arg[j++] = '\\';
 		new_arg[j++] = var_value[k++];
-	}
 	i = i + len_var_name + 1;
 	while ((*arg)[i] != '\0')
 		new_arg[j++] = (*arg)[i++];

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/30 19:31:24 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/23 22:09:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/26 16:01:54 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,7 @@ char	*remove_quotes(char *str)
 			* (get_len_without_quotes(str) + 1));
 	while (str[i] != '\0')
 	{
-		if (str[i] == '\\' && (str[i + 1] == '\'' || str[i + 1] == '"'))
-			without_quotes[j++] = str[++i];
-		else if ((str[i] == '\'' && in_dquotes == false)
+		if ((str[i] == '\'' && in_dquotes == false)
 			|| (str[i] == '"' && in_squotes == false))
 			change_quote_state(str[i], &in_squotes, &in_dquotes);
 		else
