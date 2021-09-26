@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:32:56 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 04:57:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/26 21:35:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ int				ft_fflush(int fd);
 pid_t			ft_getpid(void);
 void			handle_signals(void);
 int				*get_signal_on(void);
+void			set_signal_on(int sig);
 char			*ft_gethostname(void);
 char			*getbinpath(const char *bin);
 void			exit_shell(int status, char *message);
