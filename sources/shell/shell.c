@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 11:15:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/26 21:35:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void	shell(bool inline_mode)
 
 	while (true)
 	{
+		set_signal_on(0);
 		if (inline_mode == true)
 			get_next_line(STDIN_FILENO, &line);
 		else
