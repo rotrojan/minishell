@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:06:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/22 03:55:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/26 10:54:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	add_in_history(t_history_data *history, char *line)
 	fd = open(history_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd <= 0)
 		exit_shell(EXIT_FAILURE,
-			"open(): can't open .minishell_history file.\n");
+			"open(): can't open .minishell_history file.");
 	ft_dprintf(fd, "%s\n", line);
 	push_front_history(&history->data, line);
 	gc_free((void **)&history_path);
@@ -71,7 +71,7 @@ static void	re_add_in_history(t_history_data *history, t_history *element)
 	fd = open(history_path, O_WRONLY);
 	if (fd <= 0)
 		exit_shell(EXIT_FAILURE,
-			"open(): can't open .minishell_history file.\n");
+			"open(): can't open .minishell_history file.");
 	tmp = history->data;
 	while (tmp->next != NULL)
 		tmp = tmp->next;
