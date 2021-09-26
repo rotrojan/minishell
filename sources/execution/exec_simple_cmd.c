@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/26 10:19:03 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/26 10:38:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,17 @@ static void	child(t_simple_cmd command)
 
 static void	parent(void)
 {
+	int		*sig;
 	int		status;
 
+	sig = get_signal_on();
 	signal(SIGINT, SIG_IGN);
 	wait(&status);
 	if (WIFSIGNALED(status) && WTERMSIG(status) == CTRL_C)
+	{
+		*sig = SIGINT;
 		ft_putchar('\n');
+	}
 	if (WIFEXITED(status))
 		set_exit_value(WEXITSTATUS(status));
 }
