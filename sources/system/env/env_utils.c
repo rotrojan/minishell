@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 22:00:52 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/21 22:34:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/26 04:57:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,21 @@ static void	init_env_var(char *shell_name)
 }
 
 /* Save environment in accessible memory */
-void	init_shell_env(char *shell_name, t_env env)
+int	init_shell_env(char *shell_name, t_env env)
 {	
 	int		i;
+	int		len;
 	t_env	tmp;
 	t_env	*shell_env;
 
 	i = 0;
+	len = env_len(env);
+	if (len == 0)
+		return (-1);
 	shell_env = get_shell_env();
 	if (*shell_env == NULL)
 	{
-		tmp = gc_malloc(sizeof(char *) * (env_len(env) + 1));
+		tmp = gc_malloc(sizeof(char *) * (len + 1));
 		while (env[i])
 		{
 			tmp[i] = ft_strdup(env[i]);
@@ -67,4 +71,5 @@ void	init_shell_env(char *shell_name, t_env env)
 		*shell_env = tmp;
 	}
 	init_env_var(shell_name);
+	return (0);
 }
