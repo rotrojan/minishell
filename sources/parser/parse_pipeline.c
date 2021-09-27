@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:30:31 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/26 02:25:01 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/27 20:37:26 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ bool	parse_pipeline(t_token **tok_lst, t_node **ast)
 	t_node	*simple_cmd;
 
 	if (parse_simple_cmd(tok_lst, &simple_cmd) == false)
+	{
 		return (false);
+	}
 	*ast = simple_cmd;
 	while (*tok_lst != NULL && (*tok_lst)->type == Pipe_tok)
 	{
