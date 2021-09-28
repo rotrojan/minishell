@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/26 10:38:01 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/28 19:36:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ static void	parent(void)
 	{
 		*sig = SIGINT;
 		ft_putchar('\n');
+		set_exit_value(EXIT_CTRL_C_VALUE);
 	}
 	if (WIFEXITED(status))
 		set_exit_value(WEXITSTATUS(status));
