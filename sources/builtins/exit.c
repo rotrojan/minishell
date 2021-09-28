@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/24 20:58:48 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/28 19:51:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_exit(int argc, char **argv)
 {
-	int	status;
+	int		status;
 
 	status = *get_exit_value();
 	ft_putstr_fd("exit\n", STDERR_FILENO);
