@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:43:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/21 23:54:58 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/28 19:23:12 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ int	cd(int argc, char **argv)
 			exit_shell(EXIT_FAILURE, "getcwd(): failed to get pwd.");
 		ft_setenv("OLDPWD", old, 1);
 		ft_setenv("PWD", new, 1);
-		if (argv[1] != NULL)
-			ft_printf("%s\n", new);
 		return (EXIT_SUCCESS);
 	}
 	else
