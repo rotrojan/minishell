@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/08 20:38:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/28 23:04:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,9 @@ static t_prompt	get_prompt_infos(void)
 			prompt.hostname = NULL;
 		init = true;
 	}
-	getcwd(prompt.pwd, PATH_MAX);
+	prompt.pwd = ft_getenv("PWD");
+	if (prompt.pwd == NULL)
+		prompt.pwd = ".";
 	return (prompt);
 }
 
