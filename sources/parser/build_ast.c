@@ -6,11 +6,22 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/27 20:17:13 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/28 22:35:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	print_error_and_return(t_token *token)
+{
+	if (token == NULL)
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error: unexpected end of file");
+	else
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error near unexpected token `%s'", token->data);
+	return (false);
+}
 
 /*
 ** This function is used by all the parsers during the building of the AST: it
@@ -63,9 +74,7 @@ bool	build_ast(t_token **tok_lst, t_node **ast)
 			ret = parse_logical_operator(tok_lst, ast);
 		}
 		else
-		{
 			ret = parse_pipeline(tok_lst, ast);
-		}
 		if (ret == false)
 			return (false);
 	}
