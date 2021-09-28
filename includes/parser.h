@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/20 23:38:37 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/28 22:30:38 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,7 @@ typedef struct s_node
 ** build_ast.c
 */
 
+bool	print_error_and_return(t_token *token);
 bool	build_ast(t_token **tok_lst, t_node **ast);
 void	eat_token(t_token **tok_lst);
 

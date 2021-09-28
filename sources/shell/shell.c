@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 21:35:40 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/28 22:18:51 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,12 @@ static t_node	*lexer_parser(char *line)
 	ast = NULL;
 	if (build_tok_lst(line, &tok_lst) == true)
 	{
-		if (build_ast(&tok_lst, &ast) == false)
+		if (build_ast(&tok_lst, &ast) == false || tok_lst != NULL)
 		{
+			if (tok_lst != NULL)
+				ft_dprintf(STDERR_FILENO,
+					"\nminishell: syntax error near unexpected token `%s'",
+					tok_lst->data);
 			set_exit_value(EXIT_SYNTAX_ERROR);
 			clear_ast(&ast);
 		}
