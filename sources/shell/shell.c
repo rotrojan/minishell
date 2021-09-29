@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 04:54:58 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 08:16:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	execution(char **line, bool inline_mode)
 		{
 			exec_ast(ast, inline_mode);
 			clear_ast(&ast);
+			set_is_piped(false);
 		}
 		else
 			ft_dprintf(STDERR_FILENO, "\n\r");

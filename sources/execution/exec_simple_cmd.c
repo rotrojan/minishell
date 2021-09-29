@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/29 04:19:04 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/29 07:56:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,11 @@ static void	parent(void)
 
 void	exec_simple_cmd(t_simple_cmd command)
 {
-	pid_t	pid;
-	int		save_in;
-	int		save_out;
+	pid_t		pid;
+	t_IO_file	save;
 
-	save_in = dup(STDIN_FILENO);
-	save_out = dup(STDOUT_FILENO);
+	save.input = dup(STDIN_FILENO);
+	save.output = dup(STDOUT_FILENO);
 	if (redirection(command) == -1)
 		return ;
 	if (command.argv[0] != NULL && command.argv[0][0] != '\0'
@@ -65,10 +64,10 @@ void	exec_simple_cmd(t_simple_cmd command)
 		else
 			parent();
 	}
-	dup2(save_in, STDIN_FILENO);
-	dup2(save_out, STDOUT_FILENO);
-	close(save_in);
-	close(save_out);
+	dup2(save.input, STDIN_FILENO);
+	dup2(save.output, STDOUT_FILENO);
+	close(save.input);
+	close(save.output);
 	close_redirections(command.input_redir);
 	close_redirections(command.output_redir);
 }

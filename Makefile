@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/29 06:49:55 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/29 08:12:52 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,9 +96,10 @@ _EXPANSIONS =							\
 
 _EXECUTION =							\
 	exec_ast.c							\
-	exec_list_cmd.c						\
 	exec_pipe.c							\
+	is_piped.c							\
 	exec_simple_cmd.c					\
+	exec_compound_cmd.c					\
 	exit_value.c						\
 	run_binary.c						\
 	run_builtin.c						\
@@ -144,7 +145,7 @@ LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env)				\
 				$(addprefix /shell, /. /history /inchar)	\
-				$(addprefix /execution, /. /redirections)	\
+				$(addprefix /execution, /. /redirection)	\
 				/. /terminal /lexer /parser /builtins /expansions)
 
 all: libs
