@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/02/22 15:28:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/28 00:02:42 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 03:31:56 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,11 @@ int	get_next_line(int fd, char **line)
 	while (c != '\n' && ret != 0)
 	{
 		ret = read(fd, &c, 1);
-		if (ret == -1)
+		if (ret == -1 || c == '\0')
+		{
+			gc_free((void **)&str);
 			return (-1);
+		}
 		else if (c != '\n' && ret != 0)
 			str = ft_append_char(str, c);
 	}

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/28 22:18:51 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/29 03:32:30 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,11 @@ void	shell(bool inline_mode)
 	{
 		set_signal_on(0);
 		if (inline_mode == true)
-			get_next_line(STDIN_FILENO, &line);
+		{
+			if (get_next_line(STDIN_FILENO, &line) == -1
+				|| ft_striter(line, &ft_isprint) == 0)
+				return (gc_free((void **)&line));
+		}
 		else
 		{
 			term = set_termios();
