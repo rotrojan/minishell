@@ -6,41 +6,118 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/26 04:39:51 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/09/29 06:49:55 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS =						main.c											\
-	arrow_keys.c			cursor_utils.c		ft_getch.c					\
-	get_cursor_pos.c		getterm.c			init_term.c					\
-	set_termios.c			special_keys.c		control_keys.c				\
-	exit_shell.c			ft_dsleep.c			ft_fflush.c					\
-	ft_gethostname.c		getbinpath.c 		path.c						\
-	set_timeout.c			signals.c										\
-	env_utils.c				ft_getenv.c			ft_inenv.c					\
-	ft_setenv.c				ft_unsetenv.c									\
-	input.c					prompt.c 			shell.c 					\
-	inchar.c				inchar_utils.c		insert_inchar.c				\
-	get_history.c			history_get_down.c	history_get_up.c			\
-	history_utils.c			init_history.c		put_in_history.c			\
-	lexer.c					tok_redirections.c	tok_separators.c			\
-	tok_utils.c				tok_word.c										\
-	build_ast.c				free_ast.c			parse_logical_operator.c	\
-	parse_parenthesis.c		parse_pipeline.c	parse_simple_cmd.c			\
-	token_identifiers.c														\
-	expand_vars.c			expansions_utils.c	fill_new_arg.c				\
-	perform_expansions.c	realloc_argv.c									\
-	remove_quotes.c			utils.c											\
-	exec_ast.c				exec_compound_cmd.c	exec_pipe.c					\
-	exec_simple_cmd.c		exit_value.c		run_binary.c				\
-	run_builtin.c															\
-	heredoc.c				input_redirection.c	output_redirection.c		\
-	redirection.c															\
-	cd.c					echo.c				env.c						\
-	exit.c					export.c			export_display_env.c		\
-	pwd.c					unset.c
+SRCS =									\
+	main.c								\
+	$(_TERMINAL)						\
+	$(_SYSTEM)							\
+	$(_SHELL)							\
+	$(_LEXER)							\
+	$(_PARSER)							\
+	$(_EXPANSIONS)						\
+	$(_EXECUTION)						\
+	$(_BUILTINS)
+
+_TERMINAL =								\
+	arrow_keys.c						\
+	control_keys.c						\
+	cursor_utils.c						\
+	ft_getch.c							\
+	get_cursor_pos.c					\
+	getterm.c							\
+	init_term.c							\
+	set_termios.c						\
+	special_keys.c
+
+_SYSTEM =								\
+	exit_shell.c						\
+	ft_dsleep.c							\
+	ft_fflush.c							\
+	ft_gethostname.c					\
+	getbinpath.c						\
+	path.c								\
+	set_timeout.c						\
+	signals.c							\
+	$(_ENV)
+_ENV =									\
+	env_utils.c							\
+	ft_getenv.c							\
+	ft_inenv.c							\
+	ft_setenv.c							\
+	ft_unsetenv.c
+
+_SHELL =								\
+	input.c								\
+	prompt.c							\
+	shell.c								\
+	$(_INCHAR)							\
+	$(_HISTORY)
+_INCHAR =								\
+	inchar.c							\
+	inchar_utils.c						\
+	insert_inchar.c
+_HISTORY =								\
+	get_history.c						\
+	history_get_down.c					\
+	history_get_up.c					\
+	history_utils.c						\
+	init_history.c						\
+	put_in_history.c
+
+_LEXER =								\
+	lexer.c								\
+	tok_redirections.c					\
+	tok_separators.c					\
+	tok_utils.c							\
+	tok_word.c
+
+_PARSER =								\
+	build_ast.c							\
+	free_ast.c							\
+	parse_logical_operator.c			\
+	parse_parenthesis.c					\
+	parse_pipeline.c					\
+	parse_simple_cmd.c					\
+	token_identifiers.c
+
+_EXPANSIONS =							\
+	expand_vars.c						\
+	expansions_utils.c					\
+	fill_new_arg.c						\
+	perform_expansions.c				\
+	realloc_argv.c						\
+	remove_quotes.c						\
+	utils.c
+
+_EXECUTION =							\
+	exec_ast.c							\
+	exec_list_cmd.c						\
+	exec_pipe.c							\
+	exec_simple_cmd.c					\
+	exit_value.c						\
+	run_binary.c						\
+	run_builtin.c						\
+	$(_REDIRECTIONS)
+_REDIRECTIONS =							\
+	heredoc.c							\
+	input_redirection.c					\
+	output_redirection.c				\
+	redirection.c
+
+_BUILTINS =								\
+	cd.c								\
+	echo.c								\
+	env.c								\
+	exit.c								\
+	export.c							\
+	export_display_env.c				\
+	pwd.c								\
+	unset.c
 
 OBJS = $(SRCS:%.c=$(OBJS_DIR)/%.o)
 DEPENDENCIES = $(OBJS:%.o=%.d)
@@ -67,7 +144,7 @@ LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env)				\
 				$(addprefix /shell, /. /history /inchar)	\
-				$(addprefix /execution, /. /redirection)	\
+				$(addprefix /execution, /. /redirections)	\
 				/. /terminal /lexer /parser /builtins /expansions)
 
 all: libs
