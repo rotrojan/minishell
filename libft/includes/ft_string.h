@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:20:37 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/12 17:27:46 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 02:12:23 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int		ft_isdigit(int c);
 int		ft_isspace(int c);
 int		ft_isalnum(int c);
 int		ft_isalpha(int c);
+int		ft_isprint(int c);
 void	ft_strdel(char *s);
 int		ft_iscntrl(int c);
 int		ft_putxchar(int c, int x);
