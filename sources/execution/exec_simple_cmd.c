@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/29 07:56:04 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/30 00:59:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ static void	parent(void)
 		set_exit_value(WEXITSTATUS(status));
 }
 
+static void	close_IO(t_IO_file save,t_simple_cmd command)
+{
+	close(save.input);
+	close(save.output);
+	close_redirections(command.input_redir);
+	close_redirections(command.output_redir);
+}
+
 void	exec_simple_cmd(t_simple_cmd command)
 {
 	pid_t		pid;
@@ -52,7 +60,11 @@ void	exec_simple_cmd(t_simple_cmd command)
 	save.input = dup(STDIN_FILENO);
 	save.output = dup(STDOUT_FILENO);
 	if (redirection(command) == -1)
+	{
+		close_IO(save, command);
+		set_exit_value(EXIT_FAILURE);
 		return ;
+	}
 	if (command.argv[0] != NULL && command.argv[0][0] != '\0'
 		&& run_builtin(command.argc, command.argv) == EXIT_CMD_NOT_FOUND)
 	{
@@ -66,8 +78,5 @@ void	exec_simple_cmd(t_simple_cmd command)
 	}
 	dup2(save.input, STDIN_FILENO);
 	dup2(save.output, STDOUT_FILENO);
-	close(save.input);
-	close(save.output);
-	close_redirections(command.input_redir);
-	close_redirections(command.output_redir);
+	close_IO(save, command);
 }

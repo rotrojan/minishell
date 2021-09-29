@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/29 23:07:40 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/30 00:55:27 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -138,7 +138,7 @@ DEBUG = off
 
 CFLAGS = -MMD -Wall -Wextra -Werror
 ifeq ($(DEBUG), on)
-	CFLAGS += -g3 -fsanitize=address
+	CFLAGS += -g3#-fsanitize=address
 endif
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 

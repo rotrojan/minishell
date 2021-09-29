@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/20 23:13:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/30 01:19:58 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ static bool	handle_redirections(t_simple_cmd *cmd)
 	while (redir_lst != NULL)
 	{
 		if (expand_vars_in_stream(&redir_lst->stream) == false)
+		{
+			set_exit_value(EXIT_FAILURE);
 			return (false);
+		}
 		remove_quotes_from_arg(&redir_lst->stream);
 		redir_lst = redir_lst->next;
 	}
@@ -28,7 +31,10 @@ static bool	handle_redirections(t_simple_cmd *cmd)
 	while (redir_lst != NULL)
 	{
 		if (expand_vars_in_stream(&redir_lst->stream) == false)
+		{
+			set_exit_value(EXIT_FAILURE);
 			return (false);
+		}
 		remove_quotes_from_arg(&redir_lst->stream);
 		redir_lst = redir_lst->next;
 	}

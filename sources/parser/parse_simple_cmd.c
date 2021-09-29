@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/28 22:35:03 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/30 00:22:08 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,13 +159,7 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 	simple_cmd->content.simple_cmd.argc = get_argc(*tok_lst);
 	if (from_lst_to_array(tok_lst, simple_cmd) == false
 		|| (*tok_lst != NULL && (*tok_lst)->type == Oparenth_tok))
-	{
-		ft_dprintf(STDERR_FILENO,
-			"\nminishell: syntax error near unexpected token `%s'",
-			(*tok_lst)->data);
-		gc_free((void **)&simple_cmd);
 		return (false);
-	}
 	if ((*tok_lst) != NULL && (*tok_lst)->type == Oparenth_tok)
 		return (print_error_and_return(*tok_lst));
 	*ast = simple_cmd;
