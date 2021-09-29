@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 21:00:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/19 02:29:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*heredoc(const char *delimiter)
 		reset_history_data();
 		if (ft_strcmp(line, delimiter) == 0)
 			break ;
-		if (line != NULL)
+		if (*line != '\0')
 			append_input(&doc, line);
 		gc_free((void **)&line);
 		ft_putstr_fd("\r\n", STDERR_FILENO);

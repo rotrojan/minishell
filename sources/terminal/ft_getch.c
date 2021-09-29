@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 22:59:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 04:45:44 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 23:20:12 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,12 @@
 static int	get_special_key(int c)
 {
 	int					i;
-	t_special_key const	special_key[] = {{'A', KEY_UP}, {'B', KEY_DOWN},
-	{'C', KEY_RIGHT}, {'D', KEY_LEFT}, {'H', KEY_HOME}, {'F', KEY_END}};
+	t_special_key const	special_key[] = {
+		{.c = 'A', .key = KEY_UP}, {.c = 'B', .key = KEY_DOWN},
+		{.c = 'C', .key = KEY_RIGHT}, {.c = 'D', .key = KEY_LEFT},
+		{.c = 'H', .key = KEY_HOME}, {.c = 'F', .key = KEY_END},
+		{.c = -1, .key = -1}
+	};
 
 	i = 0;
 	if (c == '3')
@@ -25,13 +29,13 @@ static int	get_special_key(int c)
 			return (ERR);
 		return (DELETE);
 	}
-	while (i < NB_SPECIAL_KEY)
+	while (special_key[i].c != -1)
 	{
 		if (c == special_key[i].c)
 			break ;
 		i++;
 	}
-	if (i == NB_SPECIAL_KEY)
+	if (special_key[i].c == -1)
 		return (ERR);
 	return (special_key[i].key);
 }
