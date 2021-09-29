@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:25:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/06 17:08:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 03:54:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,10 @@ char	*extract_path(char const *pathfile)
 {
 	int	i;
 
+	if (pathfile == NULL)
+		return (NULL);
+	if (ft_strchr(pathfile, '/') == NULL)
+		return (ft_strdup("./"));
 	i = ft_strlen(pathfile);
 	while (i > 0 && pathfile[i] != '/')
 		i--;
@@ -29,6 +33,8 @@ char	*ft_realpath(char const *path)
 	char	*real_path;
 	char	pwd[PATH_MAX];
 
+	if (ft_strchr(path, '/') == NULL && chdir("./") == -1)
+		return (NULL);
 	if (chdir(path) == -1)
 		return (NULL);
 	real_path = getcwd(NULL, 0);

@@ -6,11 +6,22 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/26 02:35:32 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/28 22:35:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+bool	print_error_and_return(t_token *token)
+{
+	if (token == NULL)
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error: unexpected end of file");
+	else
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error near unexpected token `%s'", token->data);
+	return (false);
+}
 
 /*
 ** This function is used by all the parsers during the building of the AST: it
@@ -33,10 +44,10 @@ void	eat_token(t_token **tok_lst)
 
 /*
 ** Once the lexing phase is done, the token linked list is processed by the
-** build_ast() function to build the Abstract Syntax Tree that will be finally 
+** build_ast() function to build the Abstract Syntax Tree that will be finally
 ** executed in the shell loop.
 ** Depending on the token met in the tok_lst token linked list, the proper
-** parser is called untill the tok_lst token list is empty or until a closing 
+** parser is called untill the tok_lst token list is empty or until a closing
 ** parenthesis is encountered (this is because build_ast() is recursively called
 ** by the parse_parenthsis() function, see parse_parenthesis.c for further
 ** informations.
@@ -45,18 +56,21 @@ void	eat_token(t_token **tok_lst)
 
 bool	build_ast(t_token **tok_lst, t_node **ast)
 {
-	bool		ret;
+	bool	ret;
 
 	ret = true;
-	while (*tok_lst != NULL)
+	while (*tok_lst != NULL && (*tok_lst)->type != Cparenth_tok)
 	{
 		if (is_leaf((*tok_lst)->type) == false
-			&& is_parenthesis((*tok_lst)->type) == false)
+			&& (*tok_lst)->type != Oparenth_tok)
 		{
 			if (*ast == NULL)
+			{
 				ft_dprintf(STDERR_FILENO,
 					"\nminishell: syntax error near unexpected token `%s'",
 					(*tok_lst)->data);
+				return (false);
+			}
 			ret = parse_logical_operator(tok_lst, ast);
 		}
 		else

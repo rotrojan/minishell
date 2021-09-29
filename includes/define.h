@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/01 02:27:04 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/22 22:26:20 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/29 03:57:26 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@
 
 # define HISTORY_FILE ".minishell_history"
 
+# define EXIT_PERM_DENIED 126
 # define EXIT_CMD_NOT_FOUND 127
 # define EXIT_CTRL_C_VALUE 130
 # define EXIT_SYNTAX_ERROR 2

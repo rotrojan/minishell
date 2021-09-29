@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   exec_pipe.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:58:21 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 02:19:16 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/29 08:16:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	child(t_node *ast, int fd[2], int save_in, int save_out)
+static void	child(t_node *ast, int fd[2], t_IO_file save)
 {
 	close(fd[Output]);
 	dup2(fd[Input], STDOUT_FILENO);
 	close(fd[Input]);
-	close(save_in);
-	close(save_out);
+	close(save.input);
+	close(save.output);
 	exec_ast(ast->content.child.left, true);
 	close(STDOUT_FILENO);
 	close(STDIN_FILENO);
@@ -26,7 +26,7 @@ static void	child(t_node *ast, int fd[2], int save_in, int save_out)
 	exit(EXIT_SUCCESS);
 }
 
-static void	parent(t_node *ast, int fd[2], int save_in, int save_out)
+static void	parent(t_node *ast, int fd[2], t_IO_file save)
 {
 	signal(SIGINT, SIG_IGN);
 	close(fd[Input]);
@@ -35,28 +35,28 @@ static void	parent(t_node *ast, int fd[2], int save_in, int save_out)
 	exec_simple_cmd(ast->content.child.right->content.simple_cmd);
 	close(STDIN_FILENO);
 	wait(NULL);
-	dup2(save_in, STDIN_FILENO);
-	dup2(save_out, STDOUT_FILENO);
-	close(save_in);
-	close(save_out);
+	dup2(save.input, STDIN_FILENO);
+	dup2(save.output, STDOUT_FILENO);
+	close(save.input);
+	close(save.output);
 }
 
 void	exec_pipe(t_node *ast)
 {
-	int		fd[2];
-	pid_t	pid;
-	int		save_in;
-	int		save_out;
+	int			fd[2];
+	pid_t		pid;
+	t_IO_file	save;
 
-	save_in = dup(STDIN_FILENO);
-	save_out = dup(STDOUT_FILENO);
+	save.input = dup(STDIN_FILENO);
+	save.output = dup(STDOUT_FILENO);
+	set_is_piped(true);
 	if (pipe(fd) == -1)
 		exit_shell(EXIT_FAILURE, strerror(errno));
 	pid = fork();
 	if (pid == ERR)
 		exit_shell(EXIT_FAILURE, strerror(errno));
 	if (pid == 0)
-		child(ast, fd, save_in, save_out);
+		child(ast, fd, save);
 	else
-		parent(ast, fd, save_in, save_out);
+		parent(ast, fd, save);
 }

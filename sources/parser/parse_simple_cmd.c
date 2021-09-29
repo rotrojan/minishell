@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/26 18:41:57 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/28 22:35:03 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,15 +148,10 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 {
 	t_node	*simple_cmd;
 
-	if (is_parenthesis((*tok_lst)->type) == true)
+	if ((*tok_lst)->type == Oparenth_tok)
 		return (parse_parenthesis(tok_lst, ast));
 	if (is_leaf((*tok_lst)->type) == false)
-	{
-		ft_dprintf(STDERR_FILENO,
-			"\nminishell: syntax error near unexpected token `%s'",
-			(*tok_lst)->data);
-		return (false);
-	}
+		return (print_error_and_return(*tok_lst));
 	simple_cmd = NULL;
 	simple_cmd = gc_malloc(sizeof(*simple_cmd));
 	ft_bzero(simple_cmd, sizeof(*simple_cmd));
@@ -165,9 +160,14 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 	if (from_lst_to_array(tok_lst, simple_cmd) == false
 		|| (*tok_lst != NULL && (*tok_lst)->type == Oparenth_tok))
 	{
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error near unexpected token `%s'",
+			(*tok_lst)->data);
 		gc_free((void **)&simple_cmd);
 		return (false);
 	}
+	if ((*tok_lst) != NULL && (*tok_lst)->type == Oparenth_tok)
+		return (print_error_and_return(*tok_lst));
 	*ast = simple_cmd;
 	return (true);
 }

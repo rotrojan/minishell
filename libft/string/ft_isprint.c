@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isnumber.c                                      :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/03/07 17:48:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/28 19:51:25 by lucocozz         ###   ########.fr       */
+/*   Created: 2019/10/15 18:24:58 by rotrojan          #+#    #+#             */
+/*   Updated: 2021/06/20 16:11:45 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_isnumber(char *s)
+int	ft_isprint(int c)
 {
-	int	i;
-
-	i = 0;
-	if (s[i] == '+' || s[i] == '-')
-		i++;
-	while (s[i])
-	{
-		if (!(s[i] >= '0' && s[i] <= '9'))
-			return (0);
-		i++;
-	}
-	return (1);
+	if (c >= ' ' && c < 127)
+		return (1);
+	return (0);
 }
