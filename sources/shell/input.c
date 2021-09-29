@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 10:33:46 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 21:05:03 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,14 @@ static void	control_key(t_cursor *cursor, int c)
 
 static char	*get_line(t_cursor *cursor)
 {
-	char	*line;
+	char		*line;
+	t_inchar	*head;
 
-	line = inchars_to_line(inchars_head(cursor));
-	free_inchars(inchars_head(cursor));
-	if (ft_striter(line, &ft_isspace) == 1)
-	{
+	head = inchars_head(cursor);
+	line = inchars_to_line(head);
+	free_inchars(head);
+	if (line != NULL && ft_striter(line, &ft_isspace) == 1)
 		gc_free((void **)&line);
-		return (ft_strdup(""));
-	}
 	return (line);
 }
 
@@ -80,7 +79,7 @@ char	*input(void)
 	{
 		sig = catch_signals();
 		if (sig == SIGINT)
-			return (ft_strdup(""));
+			return (NULL);
 		else if (sig == SIGWINCH)
 			ctrl_l_key(&cursor);
 		c = ft_getch();

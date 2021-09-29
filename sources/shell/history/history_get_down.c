@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 03:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/07/18 19:19:52 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 21:11:51 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	history_get_down(t_cursor *cursor)
 	history = get_history();
 	if (history->data == NULL)
 		return ;
-	else if (history->input[0] == '\0')
+	else if (history->input == NULL)
 		go_prev(cursor, history);
 	else
 		search_prev(cursor, history);

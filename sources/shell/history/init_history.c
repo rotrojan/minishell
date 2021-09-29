@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 03:29:01 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/22 03:57:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 21:09:21 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	reset_history_data(void)
 	history = get_history();
 	history->tmp_nav = NULL;
 	gc_free((void **)&history->input);
-	history->input = ft_strdup("");
+	history->input = NULL;
 }
 
 /* Read HISTORY_FILE and save it in accessible memory. */
@@ -32,7 +32,7 @@ t_history_data	*init_history(void)
 
 	line = NULL;
 	history = get_history();
-	history->input = ft_strdup("");
+	history->input = NULL;
 	history_path = ft_strjoin(ft_getenv("HOME"), HISTORY_FILE, "/");
 	fd = open(history_path, O_RDONLY);
 	if (fd > 0)
