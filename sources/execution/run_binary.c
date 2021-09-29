@@ -6,15 +6,15 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 17:01:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 04:17:40 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/29 04:43:51 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	check_permission(char const *arg, char **bin_path)
+static bool	check_permission(char **bin_path)
 {
-	if (access(arg, X_OK) == -1)
+	if (access(*bin_path, X_OK) == -1)
 	{
 		gc_free((void **)bin_path);
 		return (false);
@@ -40,7 +40,7 @@ int	run_binary(char **argv)
 		bin_path = getbinpath(argv[0]);
 	if (bin_path == NULL)
 		return (EXIT_CMD_NOT_FOUND);
-	if (check_permission(argv[0], &bin_path) == false)
+	if (check_permission(&bin_path) == false)
 		return (EXIT_PERM_DENIED);
 	if (execve(bin_path, argv, *env) == -1)
 	{
