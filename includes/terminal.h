@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   terminal.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 06:57:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/29 23:10:22 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/30 01:43:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # define CTRL_L 12
 # define ESC 27
 # define BACKSPACE 127
+# define DEFAULT_TERM "xterm-256color"
 
 typedef struct s_term
 {
@@ -43,7 +44,7 @@ typedef struct s_prompt
 {
 	char	*home;
 	char	*user;
-	char	*pwd;
+	char	pwd[SIZE_8B];
 	char	*hostname;
 }	t_prompt;
 

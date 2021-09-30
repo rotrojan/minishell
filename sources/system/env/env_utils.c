@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 22:00:52 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 04:57:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/30 00:21:11 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,15 +35,19 @@ static void	init_env_var(char *shell_name)
 	char	*shlvl;
 	char	*tmp_path;
 	char	*shell_path;
+	char	*shlvl_value;
 
-	shlvl = ft_itoa(ft_atoi(ft_getenv("SHLVL")) + 1);
+	shlvl = ft_getenv("SHLVL");
+	if (shlvl == NULL)
+		shlvl = "0";
+	shlvl_value = ft_itoa(ft_atoi(shlvl) + 1);
 	tmp_path = ft_strjoin("./", shell_name, "");
 	shell_path = get_real_filepath(tmp_path);
-	ft_setenv("SHLVL", shlvl, 1);
+	ft_setenv("SHLVL", shlvl_value, 1);
 	ft_setenv("SHELL", shell_path, 1);
 	gc_free((void **)&tmp_path);
 	gc_free((void **)&shell_path);
-	gc_free((void **)&shlvl);
+	gc_free((void **)&shlvl_value);
 }
 
 /* Save environment in accessible memory */
@@ -56,8 +60,6 @@ int	init_shell_env(char *shell_name, t_env env)
 
 	i = 0;
 	len = env_len(env);
-	if (len == 0)
-		return (-1);
 	shell_env = get_shell_env();
 	if (*shell_env == NULL)
 	{
