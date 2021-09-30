@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:06:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 10:54:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/30 01:56:04 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,14 @@ static t_history	*search_in_history(t_history_data *history, char *line)
 static void	add_in_history(t_history_data *history, char *line)
 {
 	int		fd;
+	char	*home;
 	char	*history_path;
 
-	history_path = ft_strjoin(ft_getenv("HOME"), HISTORY_FILE, "/");
+	home = ft_getenv("HOME");
+	if (home != NULL)
+		history_path = ft_strjoin(home, HISTORY_FILE, "/");
+	else
+		history_path = ft_strdup(HISTORY_FILE);
 	fd = open(history_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd <= 0)
 		exit_shell(EXIT_FAILURE,
@@ -63,11 +68,16 @@ static void	move_elem_at_front(t_history_data *history, t_history *element)
 static void	re_add_in_history(t_history_data *history, t_history *element)
 {
 	int			fd;
+	char		*home;
 	t_history	*tmp;
 	char		*history_path;
 
 	move_elem_at_front(history, element);
-	history_path = ft_strjoin(ft_getenv("HOME"), HISTORY_FILE, "/");
+	home = ft_getenv("HOME");
+	if (home != NULL)
+		history_path = ft_strjoin(home, HISTORY_FILE, "/");
+	else
+		history_path = ft_strdup(HISTORY_FILE);
 	fd = open(history_path, O_WRONLY);
 	if (fd <= 0)
 		exit_shell(EXIT_FAILURE,
