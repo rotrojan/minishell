@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_compound_cmd.c                                :+:      :+:    :+:   */
+/*   exec_list_cmd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/22 00:52:45 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 03:25:02 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/29 06:33:21 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	exec_and_node(t_node *ast)
 		exec_ast(ast->content.child.right, true);
 }
 
-void	exec_compound_cmd(t_node *ast)
+void	exec_list_cmd(t_node *ast)
 {
 	if (ast->type == And_node)
 		exec_and_node(ast);

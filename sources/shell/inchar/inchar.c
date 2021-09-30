@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/22 07:45:09 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 21:12:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ char	*inchars_to_line(t_inchar *inchars)
 	i = 0;
 	tmp = inchars;
 	if (tmp->value == EOL)
-		return (ft_strdup(""));
+		return (NULL);
 	size = inchars_len(tmp);
 	line = gc_malloc(sizeof(char) * (size + 1));
 	while (tmp->next != NULL)
@@ -68,7 +68,7 @@ t_inchar	*line_to_inchars(char *line)
 
 	i = 0;
 	inchars = NULL;
-	if (line[0] == '\0')
+	if (line == NULL)
 		return (create_inchar(EOL));
 	push_back_inchars(&inchars, line[i++]);
 	while (line[i])

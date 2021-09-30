@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:54:35 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/29 07:56:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/29 22:23:51 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,5 @@ void	exec_ast(t_node *ast, bool inline_mode)
 	else if (ast->type == Pipe_node)
 		exec_pipe(ast);
 	else
-		exec_compound_cmd(ast);
+		exec_list_cmd(ast);
 }

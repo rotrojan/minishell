@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 01:35:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 07:55:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/30 01:29:13 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static int	parent(void)
 	int		status;
 
 	wait(&status);
-	return (WEXITSTATUS(status));
+	return (return_exit_value(WEXITSTATUS(status)));
 }
 
 int	run_builtin(int argc, char **argv)

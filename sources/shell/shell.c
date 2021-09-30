@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 08:16:02 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/30 02:55:02 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ static t_node	*lexer_parser(char *line)
 	return (ast);
 }
 
-static void	execution(char **line, bool inline_mode)
+static void	execution(char *line, bool inline_mode)
 {
 	t_node	*ast;
 
 	ast = NULL;
-	if ((*line)[0] != '\0')
+	if (line != NULL)
 	{
-		put_in_history(*line);
-		ast = lexer_parser(*line);
+		put_in_history(line);
+		ast = lexer_parser(line);
 		if (ast != NULL)
 		{
 			exec_ast(ast, inline_mode);
@@ -60,7 +60,7 @@ static void	execution(char **line, bool inline_mode)
 	{
 		if (*get_signal_on() != SIGINT)
 			ft_dprintf(STDERR_FILENO, "\n\r");
-		gc_free((void **)line);
+		gc_free((void **)&line);
 	}
 }
 
@@ -86,7 +86,7 @@ void	shell(bool inline_mode)
 			line = input();
 			tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
 		}
-		execution(&line, inline_mode);
+		execution(line, inline_mode);
 		if (inline_mode == true)
 			exit_shell(*get_exit_value(), NULL);
 	}
