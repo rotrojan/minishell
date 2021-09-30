@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   system.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 21:59:32 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/29 23:29:18 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/30 07:16:52 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ int		ft_fflush(int fd);
 char	*ft_gethostname(void);
 char	*getbinpath(const char *bin);
 char	*ft_realpath(char const *path);
+char	*extract_file(char *pathfile);
 char	*extract_path(char const *pathfile);
 char	*get_real_filepath(char const *filepath);
 void	set_timeout(t_term *term, int timeout);

@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/30 00:55:27 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/09/30 06:47:16 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,17 +39,22 @@ _SYSTEM =								\
 	ft_dsleep.c							\
 	ft_fflush.c							\
 	ft_gethostname.c					\
-	getbinpath.c						\
-	path.c								\
 	set_timeout.c						\
 	signals.c							\
-	$(_ENV)
+	$(_ENV)								\
+	$(_PATH)
 _ENV =									\
 	env_utils.c							\
 	ft_getenv.c							\
 	ft_inenv.c							\
 	ft_setenv.c							\
 	ft_unsetenv.c
+_PATH =									\
+	extract_file.c						\
+	extract_path.c						\
+	ft_realpath.c						\
+	get_real_filepath.c					\
+	getbinpath.c
 
 _SHELL =								\
 	input.c								\
@@ -92,7 +97,8 @@ _EXPANSIONS =							\
 	perform_expansions.c				\
 	realloc_argv.c						\
 	remove_quotes.c						\
-	utils.c
+	utils.c								\
+	wildcard.c
 
 _EXECUTION =							\
 	exec_ast.c							\
@@ -143,7 +149,7 @@ endif
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
 vpath %.c	$(addprefix $(SRCS_DIR),						\
-				$(addprefix /system, /. /env)				\
+				$(addprefix /system, /. /env /path)				\
 				$(addprefix /shell, /. /history /inchar)	\
 				$(addprefix /execution, /. /redirections)	\
 				/. /terminal /lexer /parser /builtins /expansions)

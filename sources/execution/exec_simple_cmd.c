@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/30 00:59:18 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/30 07:19:48 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ static void	parent(void)
 		set_exit_value(WEXITSTATUS(status));
 }
 
-static void	close_IO(t_IO_file save,t_simple_cmd command)
+static void	close_io(t_IO_file save, t_simple_cmd command)
 {
 	close(save.input);
 	close(save.output);
@@ -61,7 +61,7 @@ void	exec_simple_cmd(t_simple_cmd command)
 	save.output = dup(STDOUT_FILENO);
 	if (redirection(command) == -1)
 	{
-		close_IO(save, command);
+		close_io(save, command);
 		set_exit_value(EXIT_FAILURE);
 		return ;
 	}
@@ -78,5 +78,5 @@ void	exec_simple_cmd(t_simple_cmd command)
 	}
 	dup2(save.input, STDIN_FILENO);
 	dup2(save.output, STDOUT_FILENO);
-	close_IO(save, command);
+	close_io(save, command);
 }

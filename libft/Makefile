@@ -13,7 +13,7 @@ STR=	ft_strlen.c			ft_isnumber.c		ft_strcmp.c				\
 		ft_putxchar.c		ft_isalnum.c		ft_strlcpy.c			\
 		ft_strndup.c		ft_strnlen.c		ft_strstr.c				\
 		ft_strncpy.c		ft_isalpha.c		ft_striter.c			\
-		ft_isprint.c
+		ft_isprint.c		match.c
 FILE=	ft_putchar.c		ft_putstr.c			ft_putnbr.c				\
 		ft_printf.c			ft_dprintf.c		readfile.c				\
 		gnl.c				ft_putstr_fd.c		ft_putchar_fd.c			\

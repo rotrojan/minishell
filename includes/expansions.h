@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expansions.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/23 22:09:47 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/30 07:17:36 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,10 @@ void	expand_vars(t_simple_cmd *cmd, int const i);
 
 void	escape_quotes(char **splitted_var);
 int		get_len_with_escaped_quotes(char *str);
+
+/*
+** wildcard.c
+*/
+char	**wildcard(char *pathfile);
 
 #endif

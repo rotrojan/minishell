@@ -1,53 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   get_real_filepath.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/15 21:25:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 03:20:34 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/09/30 05:42:41 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/09/30 05:42:58 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*extract_path(char const *pathfile)
-{
-	int	i;
-
-	if (pathfile == NULL)
-		return (NULL);
-	if (ft_strchr(pathfile, '/') == NULL)
-		return (ft_strdup("./"));
-	i = ft_strlen(pathfile);
-	while (i > 0 && pathfile[i] != '/')
-		i--;
-	if (i == 0)
-		return (NULL);
-	return (ft_strndup(pathfile, i));
-}
-
-char	*ft_realpath(char const *path)
-{
-	char	*real_path;
-	char	pwd[SIZE_8B];
-
-	if (ft_strchr(path, '/') == NULL && chdir("./") == -1)
-		return (NULL);
-	if (chdir(path) == -1)
-		return (NULL);
-	real_path = getcwd(NULL, 0);
-	if (real_path == NULL)
-		exit_shell(EXIT_FAILURE, "getcwd(): failed to get pwd.");
-	getcwd(pwd, SIZE_8B);
-	if (chdir(pwd) == -1)
-	{
-		free(real_path);
-		exit_shell(EXIT_FAILURE, "chdir(): failed to reset pwd.");
-	}
-	return (real_path);
-}
 
 char	*get_real_filepath(char const *filepath)
 {

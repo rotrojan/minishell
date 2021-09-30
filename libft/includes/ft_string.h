@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/03/05 20:20:37 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 02:12:23 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/09/30 04:15:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,6 @@ int		ft_putxchar(int c, int x);
 char	*ft_strstr(const char *big, const char *little);
 char	*ft_strncpy(char *dest, char *src, int size);
 int		ft_striter(char *str, int (*function)(int));
+int		match(char *s1, char *s2);
 
 #endif
