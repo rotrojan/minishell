@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/30 07:17:36 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/01 00:48:28 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,8 +89,16 @@ void	escape_quotes(char **splitted_var);
 int		get_len_with_escaped_quotes(char *str);
 
 /*
-** wildcard.c
+** wildcards/wildcard.c
 */
+
 char	**wildcard(char *pathfile);
+
+/*
+** wildcards/expand_wildcard.c
+*/
+
+void	expand_wildcard(t_simple_cmd *cmd);
+bool	expand_wildcard_in_stream(char **arg);
 
 #endif

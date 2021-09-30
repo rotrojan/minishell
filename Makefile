@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/09/30 06:47:16 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/10/01 00:49:24 by rotrojan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -98,7 +98,10 @@ _EXPANSIONS =							\
 	realloc_argv.c						\
 	remove_quotes.c						\
 	utils.c								\
-	wildcard.c
+	$(_WILDCARDS)
+_WILDCARDS =							\
+	wildcard.c							\
+	expand_wildcard.c
 
 _EXECUTION =							\
 	exec_ast.c							\
@@ -144,7 +147,7 @@ DEBUG = off
 
 CFLAGS = -MMD -Wall -Wextra -Werror
 ifeq ($(DEBUG), on)
-	CFLAGS += -g3#-fsanitize=address
+	CFLAGS += -g3 -fsanitize=address
 endif
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
@@ -152,7 +155,8 @@ vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env /path)				\
 				$(addprefix /shell, /. /history /inchar)	\
 				$(addprefix /execution, /. /redirections)	\
-				/. /terminal /lexer /parser /builtins /expansions)
+				$(addprefix /expansions, /. /wildcards)	\
+				/. /terminal /lexer /parser /builtins)
 
 all: libs
 	@$(MAKE) $(NAME)

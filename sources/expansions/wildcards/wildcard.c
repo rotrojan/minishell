@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 05:41:16 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 07:17:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/01 00:47:54 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static char	**get_entry(DIR *directory, char **path, char *file)
 	t_list			*list;
 	struct dirent	*entry;
 
+	list = NULL;
 	while (true)
 	{
 		entry = readdir(directory);
@@ -41,9 +42,9 @@ static char	**get_entry(DIR *directory, char **path, char *file)
 
 char	**wildcard(char *pathfile)
 {
-	char			*file;
-	char			*path;
-	DIR				*directory;
+	char	*file;
+	char	*path;
+	DIR		*directory;
 
 	file = extract_file(pathfile);
 	path = extract_path(pathfile);
