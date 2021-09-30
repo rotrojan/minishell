@@ -6,13 +6,12 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 06:57:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/30 01:43:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/30 03:19:58 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TERMINAL_H
 # define TERMINAL_H
-# define _XOPEN_SOURCE 700
 # ifdef __linux__
 #  define OS 1
 # elif __APPLE__

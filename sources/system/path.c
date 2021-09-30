@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 21:25:45 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 03:54:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/30 03:20:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ char	*extract_path(char const *pathfile)
 char	*ft_realpath(char const *path)
 {
 	char	*real_path;
-	char	pwd[PATH_MAX];
+	char	pwd[SIZE_8B];
 
 	if (ft_strchr(path, '/') == NULL && chdir("./") == -1)
 		return (NULL);
@@ -40,7 +40,7 @@ char	*ft_realpath(char const *path)
 	real_path = getcwd(NULL, 0);
 	if (real_path == NULL)
 		exit_shell(EXIT_FAILURE, "getcwd(): failed to get pwd.");
-	getcwd(pwd, PATH_MAX);
+	getcwd(pwd, SIZE_8B);
 	if (chdir(pwd) == -1)
 	{
 		free(real_path);
