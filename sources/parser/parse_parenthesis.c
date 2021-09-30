@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:31:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/30 05:00:24 by bigo             ###   ########.fr       */
+/*   Updated: 2021/09/30 05:03:18 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool	parse_parenthesis(t_token **tok_lst, t_node **ast)
 		return (false);
 	eat_token(tok_lst);
 	if (*tok_lst != NULL
-			&& (is_leaf((*tok_lst)->type) == true
+		&& (is_leaf((*tok_lst)->type) == true
 			|| (*tok_lst)->type == Oparenth_tok))
 		return (false);
 	return (true);
