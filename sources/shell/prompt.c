@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:36:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 01:49:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/09/30 07:44:52 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	prompt(void)
 	t_prompt		prompt;
 
 	prompt = get_prompt_infos();
+	if (*get_exit_value() != 0)
+		ft_dprintf(STDERR_FILENO, "%s✘ %s", KRED, KNRM);
 	if (OS == Linux)
 		display_host(prompt);
 	display_pwd(prompt);
