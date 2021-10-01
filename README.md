@@ -17,10 +17,10 @@ This C project from the 42school is the implementation of a not-at-all Posix com
 - list of commands with `&&`, `||`, `;` and parenthesis `()`;
 - variables expansions within or without quotes, including `$?`;
 - quoting with simple or double quotes : `'` and `"`, including variables split;
-- `ctrl-L`, `ctrl-D` and `ctrl-C` signals handled;
+- `ctrl-L`, `ctrl-D` and `ctrl-C` control keys binded;
 - incremental history of commands;
-- line edition including backspace, delete, home, end and arrow keys;
-- custom prompt displaying host, user and working directory in colors;
+- line edition including `backspace`, `delete`, `home`, `end` and arrow keys;
+- custom prompt displaying user, host and working directory in colors;
 - wildcards `*` working in current directory.
 ### Implementation
 - input using termcaps;
