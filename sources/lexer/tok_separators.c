@@ -6,7 +6,7 @@
 /*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:17:35 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 17:52:16 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/01 21:45:17 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ t_token	*tok_semic(char *inchars, int *i)
 
 /*
 ** Tokenize the And_tok and the Amp_tok tokens. Since the Amp_tok token is not
-** handled by minishell, if this token is found, NULL is returned and the error
-** variable is set to Amp_token.
+** handled by minishell, if this token is found, NULL is returned and an error
+** message is displayed.
 */
 
 t_token	*tok_and(char *inchars, int *i)

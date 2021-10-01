@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/29 23:21:47 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/01 23:06:04 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # define EXIT_PERM_DENIED 126
 # define EXIT_CMD_NOT_FOUND 127
 # define EXIT_CTRL_C_VALUE 130
+# define EXIT_SEGFAULT 139
 # define EXIT_SYNTAX_ERROR 2
 
 typedef struct s_IO_file

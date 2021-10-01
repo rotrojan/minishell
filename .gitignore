@@ -76,3 +76,4 @@ todo
 .nfs*
 test_functions.c
 test*
+segfault.c
