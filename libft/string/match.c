@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 04:09:59 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 07:18:46 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/01 18:47:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	match(char *s1, char *s2)
 		return (-1);
 	while (s1[i] != '\0' && s2[j] != '\0')
 	{
-		if (match_wildcard(s1, s2, &i, &j) == 0)
-			return (0);
 		if (match_char(s1, s2, &i, &j) == 0)
+			return (0);
+		if (match_wildcard(s1, s2, &i, &j) == 0)
 			return (0);
 	}
 	if (s1[i] != s2[j])
