@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/01 23:28:43 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/02 01:44:07 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ static void	execution(char *line, bool inline_mode)
 			ft_dprintf(STDERR_FILENO, "\n\r");
 		gc_free((void **)&line);
 	}
+	reset_history_data();
 }
 
 /* 
@@ -79,7 +80,7 @@ static char	*get_line(bool inline_mode)
 	{
 		if (get_next_line(STDIN_FILENO, &line) == -1
 			|| ft_striter(line, &ft_isprint) == 0)
-				exit_shell(*get_exit_value(), NULL);
+			exit_shell(*get_exit_value(), NULL);
 	}
 	else
 	{

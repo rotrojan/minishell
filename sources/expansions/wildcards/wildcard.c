@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 05:41:16 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/01 18:23:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/02 01:41:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	add_entry(struct dirent *entry, t_list	**list, char *path,
 	char *file)
 {
 	if (match(entry->d_name, ".*") == 1 && file[0] != '.')
-			return ;
+		return ;
 	if (ft_strcmp(path, "./") == 0)
 		ft_list_push_back(list, ft_strdup(entry->d_name));
 	else
