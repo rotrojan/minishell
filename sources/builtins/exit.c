@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 07:59:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/01 19:03:03 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	ft_exit(int argc, char **argv)
 {
-	int		status;
+	int	status;
 
 	status = *get_exit_value();
 	if (*get_is_piped() == false)

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 04:38:24 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 02:38:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/01 19:03:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	ctrl_d_key(t_cursor *cursor)
 	if (inchars_len(inchars_head(cursor)) <= 1)
 	{
 		ft_putstr_fd("exit\n", STDERR_FILENO);
-		gc_exit(EXIT_SUCCESS, NULL);
+		gc_exit(*get_exit_value(), NULL);
 	}
 }
 
