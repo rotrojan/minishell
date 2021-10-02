@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 02:55:02 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/02 01:44:07 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,30 +62,45 @@ static void	execution(char *line, bool inline_mode)
 			ft_dprintf(STDERR_FILENO, "\n\r");
 		gc_free((void **)&line);
 	}
+	reset_history_data();
 }
 
-/* Core of program */
-void	shell(bool inline_mode)
+/* 
+** Return line and protect inline mode of /dev/random, /dev/zero and /dev/null.
+** inline_mode allows to handle the cases where minishell reads on stdin, such
+** such as pipes and input reditrection (exp: echo echo toto | ./minishell).
+*/
+static char	*get_line(bool inline_mode)
 {
 	char	*line;
 	t_term	*term;
 
+	line = NULL;
+	if (inline_mode == true)
+	{
+		if (get_next_line(STDIN_FILENO, &line) == -1
+			|| ft_striter(line, &ft_isprint) == 0)
+			exit_shell(*get_exit_value(), NULL);
+	}
+	else
+	{
+		term = set_termios();
+		prompt();
+		line = input();
+		tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+	}
+	return (line);
+}
+
+/* Core of program: get command line from input and execut it.*/
+void	shell(bool inline_mode)
+{
+	char	*line;
+
 	while (true)
 	{
 		set_signal_on(0);
-		if (inline_mode == true)
-		{
-			if (get_next_line(STDIN_FILENO, &line) == -1
-				|| ft_striter(line, &ft_isprint) == 0)
-				return (gc_free((void **)&line));
-		}
-		else
-		{
-			term = set_termios();
-			prompt();
-			line = input();
-			tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
-		}
+		line = get_line(inline_mode);
 		execution(line, inline_mode);
 		if (inline_mode == true)
 			exit_shell(*get_exit_value(), NULL);

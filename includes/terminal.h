@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 06:57:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/30 03:19:58 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/01 23:01:37 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define CTRL_D 4
 # define DELETE 8
 # define TAB 9
+# define SEGFAULT 11
 # define CTRL_L 12
 # define ESC 27
 # define BACKSPACE 127

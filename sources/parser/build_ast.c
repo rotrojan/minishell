@@ -6,11 +6,15 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/28 22:35:18 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/01 23:30:36 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Self explanatory.
+*/
 
 bool	print_error_and_return(t_token *token)
 {
@@ -51,7 +55,7 @@ void	eat_token(t_token **tok_lst)
 ** parenthesis is encountered (this is because build_ast() is recursively called
 ** by the parse_parenthsis() function, see parse_parenthesis.c for further
 ** informations.
-** On success, build_ast() return true, otherwise, false is returned.
+** On success, build_ast() return true, false otherwise.
 */
 
 bool	build_ast(t_token **tok_lst, t_node **ast)
@@ -65,12 +69,7 @@ bool	build_ast(t_token **tok_lst, t_node **ast)
 			&& (*tok_lst)->type != Oparenth_tok)
 		{
 			if (*ast == NULL)
-			{
-				ft_dprintf(STDERR_FILENO,
-					"\nminishell: syntax error near unexpected token `%s'",
-					(*tok_lst)->data);
 				return (false);
-			}
 			ret = parse_logical_operator(tok_lst, ast);
 		}
 		else

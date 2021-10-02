@@ -6,14 +6,17 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/30 05:41:16 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/01 00:47:54 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/02 01:41:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	add_entry(struct dirent *entry, t_list	**list, char *path)
+static void	add_entry(struct dirent *entry, t_list	**list, char *path,
+	char *file)
 {
+	if (match(entry->d_name, ".*") == 1 && file[0] != '.')
+		return ;
 	if (ft_strcmp(path, "./") == 0)
 		ft_list_push_back(list, ft_strdup(entry->d_name));
 	else
@@ -36,7 +39,7 @@ static char	**get_entry(DIR *directory, char **path, char *file)
 			return (ft_list_to_array(&list));
 		}
 		if (match(entry->d_name, file) == 1)
-			add_entry(entry, &list, *path);
+			add_entry(entry, &list, *path, file);
 	}
 }
 

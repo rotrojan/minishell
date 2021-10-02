@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:09:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 04:28:36 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/01 21:41:38 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,13 @@ static t_token	*get_next_token(char *inchars, int *i)
 
 /*
 ** Called from the shell loop, build_tok_lst() will build the tokens chained
-** linked list fron the inchars string returned by the input functions. First,
+** linked list from the inchars string returned by the input functions. First,
 ** all the white spaces are skipped. Then, until the inchars string is fully
 ** scanned, the following operations are performed in a loop:
 ** - get_next_token() returns the next token;
 ** - this token is added to the linked list by add_token();
 ** - the next white spaces are skipped.
-** The lexer() function returns true on succes. Otherwise, false is returned and
-** the error variable is set accordingly by get_next_token().
+** The lexer() function returns true on succes, false otherwise.
 */
 
 bool	build_tok_lst(char *inchars, t_token **tok_lst)

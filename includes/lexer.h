@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/18 12:11:30 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 03:38:31 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/01 21:44:16 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@
 ** All the possible char types. Those are useful at two different moments:
 ** - during the lexing phase, at the beginning of the creation of a token, the
 ** proper tokenizer will be called accordingly to the char type encountered (if
-** the fist character of a token is an alphabetic character, the token will have
+** the first character of a token is an alphabetic character the token will have
 ** to be a word, if it's a pipe symbol, it will have to be a pipe token or an OR
 ** token, and so on ... therefore, knowing the type of the token first character
 ** will allow to call the proper tokenizer in the get_next_token() function.
 ** - during the word tokenization, some characters can be accepted or no as part
 ** of a word token, depending on if they are in between quotes or not. See
-** tok_word.c for firther informations.
+** tok_word.c for further informations.
 */
 
 enum e_chr_type
@@ -69,6 +69,7 @@ enum e_tok_type
 /*
 ** Used during the word tokenization. See tok_word.c for further informations.
 */
+
 enum e_chr_rules
 {
 	Not_accepted,
@@ -76,9 +77,9 @@ enum e_chr_rules
 };
 
 /*
-** A token linked is composed of a data string containing the litteral value of
-** the token (the word identifier for example), the type of the token (all types
-** are listed above) and a pointer to the next tokeen of the list.
+** A token linked list is composed of a data string containing the litteral
+** value of the token (the word identifier for example), the type of the token
+** (all types are listed above) and a pointer to the next token in the list.
 */
 
 typedef struct s_token

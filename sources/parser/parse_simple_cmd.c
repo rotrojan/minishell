@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/30 00:22:08 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/01 23:32:36 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,7 @@ static bool	add_redirection(t_token **tok_lst, t_node *simple_cmd)
 		= (enum e_redirection_type)(*tok_lst)->type - REDIR_TOK_TYPE_OFFSET;
 	eat_token(tok_lst);
 	if ((*tok_lst)->type != Word_tok)
-	{
-		ft_dprintf(STDERR_FILENO,
-			"\nminishell: syntax error near unexpected token `%s'",
-			(*tok_lst)->data);
 		return (false);
-	}
 	new_redir->stream = ft_strdup((*tok_lst)->data);
 	new_redir->isopen = false;
 	new_redir->has_quotes = (ft_strchr(new_redir->stream, '"') != NULL);
@@ -151,7 +146,8 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 	if ((*tok_lst)->type == Oparenth_tok)
 		return (parse_parenthesis(tok_lst, ast));
 	if (is_leaf((*tok_lst)->type) == false)
-		return (print_error_and_return(*tok_lst));
+		return (false);
+		/* return (print_error_and_return(*tok_lst)); */
 	simple_cmd = NULL;
 	simple_cmd = gc_malloc(sizeof(*simple_cmd));
 	ft_bzero(simple_cmd, sizeof(*simple_cmd));

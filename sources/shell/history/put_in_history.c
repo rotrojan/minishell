@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:06:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 01:56:04 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/02 01:43:44 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,4 @@ void	put_in_history(char *line)
 	}
 	else
 		add_in_history(history, line);
-	reset_history_data();
 }
