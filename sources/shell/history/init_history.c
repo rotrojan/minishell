@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 03:29:01 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 21:09:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/02 02:32:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,8 @@
 
 void	reset_history_data(void)
 {
-	t_history_data	*history;
-
-	history = get_history();
-	history->tmp_nav = NULL;
-	gc_free((void **)&history->input);
-	history->input = NULL;
+	free_history();
+	init_history();
 }
 
 /* Read HISTORY_FILE and save it in accessible memory. */
