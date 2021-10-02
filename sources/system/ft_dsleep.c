@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/14 21:39:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 03:12:24 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/02 16:34:06 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	child(int time)
+void	ft_dsleep(int time)
 {
 	char			c;
 	t_term			*term;
@@ -23,24 +23,5 @@ void	child(int time)
 	set_timeout(term, time);
 	read(STDIN_FILENO, &c, 1);
 	tcsetattr(STDIN_FILENO, TCSANOW, &term->current);
-	exit(EXIT_SUCCESS);
-}
-
-void	parent(void)
-{
-	signal(SIGINT, SIG_IGN);
-	wait(NULL);
-}
-
-void	ft_dsleep(int time)
-{
-	int	pid;
-
-	pid = fork();
-	if (pid == ERR)
-		exit_shell(EXIT_FAILURE, strerror(errno));
-	if (pid == 0)
-		child(time);
-	else
-		parent();
+	handle_signals();
 }
