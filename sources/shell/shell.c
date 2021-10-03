@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/02 01:44:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/03 02:04:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,13 @@ static t_node	*lexer_parser(char *line)
 
 	ast = NULL;
 	tok_lst = NULL;
-	ast = NULL;
 	if (build_tok_lst(line, &tok_lst) == true)
 	{
 		if (build_ast(&tok_lst, &ast) == false || tok_lst != NULL)
 		{
 			if (tok_lst != NULL)
-				ft_dprintf(STDERR_FILENO,
-					"\nminishell: syntax error near unexpected token `%s'",
-					tok_lst->data);
+				ft_dprintf(STDERR_FILENO, "\nminishell: syntax error near \
+unexpected token `%s'\n", tok_lst->data);
 			set_exit_value(EXIT_SYNTAX_ERROR);
 			clear_ast(&ast);
 		}
@@ -51,17 +49,10 @@ static void	execution(char *line, bool inline_mode)
 		{
 			exec_ast(ast, inline_mode);
 			clear_ast(&ast);
-			set_is_piped(false);
 		}
-		else
-			ft_dprintf(STDERR_FILENO, "\n\r");
 	}
-	else
-	{
-		if (*get_signal_on() != SIGINT)
-			ft_dprintf(STDERR_FILENO, "\n\r");
-		gc_free((void **)&line);
-	}
+	else if (*get_signal_on() != SIGINT)
+		ft_putchar_fd('\n', STDERR_FILENO);
 	reset_history_data();
 }
 
@@ -73,22 +64,16 @@ static void	execution(char *line, bool inline_mode)
 static char	*get_line(bool inline_mode)
 {
 	char	*line;
-	t_term	*term;
 
 	line = NULL;
-	if (inline_mode == true)
+	if (inline_mode == false)
 	{
-		if (get_next_line(STDIN_FILENO, &line) == -1
-			|| ft_striter(line, &ft_isprint) == 0)
-			exit_shell(*get_exit_value(), NULL);
-	}
-	else
-	{
-		term = set_termios();
 		prompt();
-		line = input();
-		tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+		line = ft_readline();
 	}
+	else if (get_next_line(STDIN_FILENO, &line) == -1
+		|| ft_striter(line, &ft_isprint) == 0)
+		exit_shell(*get_exit_value(), NULL);
 	return (line);
 }
 

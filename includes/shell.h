@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 07:13:40 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/29 23:30:15 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/03 02:07:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct s_history_data
 
 void			shell(bool inline_mode);
 void			prompt(void);
-char			*input(void);
+char			*ft_readline(void);
 
 /*
 ** history

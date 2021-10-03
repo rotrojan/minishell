@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 02:42:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/03 02:05:46 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,20 +53,17 @@ static char	*get_line(t_cursor *cursor)
 
 static int	catch_signals(void)
 {
-	int	*sig;
-	int	tmp;
+	int	sig;
 
 	handle_signals();
-	sig = get_signal_on();
-	tmp = *sig;
-	*sig = 0;
-	if (tmp == SIGINT)
-		ft_putstr("^C");
-	return (tmp);
+	sig = *get_signal_on();
+	if (sig == SIGINT)
+		ft_putstr_fd("^C\n", STDERR_FILENO);
+	return (sig);
 }
 
 /* Read and return input line for shell. */
-char	*input(void)
+static char	*input(void)
 {
 	int				c;
 	int				sig;
@@ -87,10 +84,21 @@ char	*input(void)
 		{
 			if (c == '\n')
 				return (get_line(&cursor));
-			else if (!ft_iscntrl(c))
-				insert_inchar(&cursor, c);
-			else
+			else if (ft_iscntrl(c) == 1)
 				control_key(&cursor, c);
+			else
+				insert_inchar(&cursor, c);
 		}
 	}
+}
+
+char	*ft_readline(void)
+{
+	char	*line;
+	t_term	*term;
+
+	term = set_termios();
+	line = input();
+	tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+	return (line);
 }

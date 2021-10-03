@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 18:39:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/28 20:45:09 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/03 01:15:16 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ bool	parse_logical_operator(t_token **tok_lst, t_node **ast)
 		else
 		{
 			ft_dprintf(STDERR_FILENO,
-				"\nminishell: syntax error: unexpected end of file");
+				"\nminishell: syntax error: unexpected end of file\n");
 			return (false);
 		}
 	}

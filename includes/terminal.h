@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 06:57:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 23:01:37 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/02 23:21:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@
 # elif __APPLE__
 #  define OS 0
 # endif
-# define SIGWINCH 28
-# define CTRL_C 2
 # define CTRL_D 4
 # define DELETE 8
 # define TAB 9
-# define SEGFAULT 11
 # define CTRL_L 12
 # define ESC 27
+# define SIGWINCH 28
 # define BACKSPACE 127
 # define DEFAULT_TERM "xterm-256color"
 

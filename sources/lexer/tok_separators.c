@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tok_separators.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <rotrojan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:17:35 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 21:45:17 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/03 01:14:52 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_token	*tok_and(char *inchars, int *i)
 	else
 	{
 		ft_dprintf(STDERR_FILENO,
-			"\nminishell: the `&' operator is not handled by minishell");
+			"\nminishell: the `&' operator is not handled by minishell\n");
 		return (NULL);
 	}
 	return (create_token(data, type));

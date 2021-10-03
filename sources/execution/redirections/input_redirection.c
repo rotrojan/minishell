@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:29:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/02 21:09:41 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/03 00:51:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,8 @@ static void	heredoc_redirection(t_redirection *redirection)
 	int		fd[2];
 
 	doc = heredoc(redirection->stream);
-	if (redirection->has_quotes == false)
-		if (doc != NULL)
-			expand_vars_in_stream(&doc);
+	if (redirection->has_quotes == false && doc != NULL)
+		expand_vars_in_stream(&doc);
 	if (pipe(fd) == ERR)
 		exit_shell(EXIT_FAILURE, strerror(errno));
 	if (doc != NULL)

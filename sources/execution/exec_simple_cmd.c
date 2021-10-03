@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/02 20:26:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/03 02:02:32 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static void	parent(void)
 	wait(&status);
 	if (WIFSIGNALED(status))
 	{
-		if (WTERMSIG(status) == CTRL_C)
+		if (WTERMSIG(status) == SIGINT)
 		{
 			*sig = SIGINT;
-			ft_putchar('\n');
+			ft_putchar_fd('\n', STDERR_FILENO);
 			set_exit_value(EXIT_CTRL_C_VALUE);
 		}
-		else if (WTERMSIG(status) == SEGFAULT)
+		else if (WTERMSIG(status) == SIGSEGV)
 		{
 			ft_dprintf(STDERR_FILENO, "Segmentation fault (core dumped)\n");
 			set_exit_value(EXIT_SEGFAULT);
