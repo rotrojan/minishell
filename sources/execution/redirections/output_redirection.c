@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:19:26 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/03 01:18:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/03 04:11:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static int	open_file(t_redirection *redirection)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: %s: No such file or directory\n",
 			redirection->stream);
+		set_exit_value(EXIT_FAILURE);
 		return (-1);
 	}
 	redirection->isopen = true;

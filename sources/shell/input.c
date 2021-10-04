@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/03 02:05:46 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/04 08:07:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	control_key(t_cursor *cursor, int c)
 		{.key = CTRL_L, .function = &ctrl_l_key},
 		{.key = KEY_UP, .function = &history_get_up},
 		{.key = KEY_DOWN, .function = &history_get_down},
-		{.key = CTRL_D, .function = &ctrl_d_key},
 		{.key = -1}
 	};
 
@@ -38,16 +37,22 @@ static void	control_key(t_cursor *cursor, int c)
 	}
 }
 
-static char	*get_line(t_cursor *cursor)
+static char	*get_line(t_cursor *cursor, int c)
 {
 	char		*line;
-	t_inchar	*head;
 
-	head = inchars_head(cursor);
-	line = inchars_to_line(head);
-	free_inchars(head);
-	if (line != NULL && ft_striter(line, &ft_isspace) == 1)
-		gc_free((void **)&line);
+	if (c == CTRL_D)
+	{
+		line = gc_malloc(sizeof(char) * 1);
+		line[0] = EOF;
+	}
+	else
+	{
+		line = inchars_to_line(cursor);
+		if (line != NULL && ft_striter(line, &ft_isspace) == 1)
+			gc_free((void **)&line);
+		free_inchars(cursor);
+	}
 	return (line);
 }
 
@@ -82,8 +87,8 @@ static char	*input(void)
 		c = ft_getch();
 		if (c != ERR)
 		{
-			if (c == '\n')
-				return (get_line(&cursor));
+			if (c == '\n' || (c == CTRL_D && inchars_len(&cursor) == 1))
+				return (get_line(&cursor, c));
 			else if (ft_iscntrl(c) == 1)
 				control_key(&cursor, c);
 			else

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/03 02:04:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/04 08:05:33 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,8 @@ static char	*get_line(bool inline_mode)
 	{
 		prompt();
 		line = ft_readline();
+		if (line != NULL && line[0] == EOF)
+			ctrl_d_input();
 	}
 	else if (get_next_line(STDIN_FILENO, &line) == -1
 		|| ft_striter(line, &ft_isprint) == 0)

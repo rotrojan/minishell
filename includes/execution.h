@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 23:06:04 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/03 04:00:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ int		input_redirection(t_redirection *redirection);
 ** redirections/heredoc.c
 */
 
-char	*heredoc(const char *delimiter);
+char	*heredoc(char const *delimiter);
 
 /*
 ** exit_value.c

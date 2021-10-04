@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 06:57:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/02 23:21:08 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/03 04:01:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,11 @@ int		ft_getch(void);
 t_term	*getterm(void);
 t_term	*set_termios(void);
 t_axe	get_cursor_pos(void);
+void	ctrl_d_input(void);
+void	ctrl_d_heredoc(char const *delimiter, int pos);
 void	end_key(t_cursor *cursor);
 void	home_key(t_cursor *cursor);
 void	delete_key(t_cursor *cursor);
-void	ctrl_d_key(t_cursor *cursor);
 void	ctrl_l_key(t_cursor *cursor);
 void	backspace_key(t_cursor *cursor);
 void	left_arrow_key(t_cursor *cursor);

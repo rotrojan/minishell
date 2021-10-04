@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 17:53:21 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 21:12:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/03 03:41:30 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,12 @@ t_inchar	*create_inchar(int value)
 }
 
 /* Self explanatory. */
-void	free_inchars(t_inchar *inchars)
+void	free_inchars(t_cursor *cursor)
 {
 	t_inchar	*prev;
+	t_inchar	*inchars;
 
+	inchars = inchars_head(cursor);
 	while (inchars)
 	{
 		prev = inchars;
@@ -38,7 +40,7 @@ void	free_inchars(t_inchar *inchars)
 }
 
 /* Convert string to inchar list. */
-char	*inchars_to_line(t_inchar *inchars)
+char	*inchars_to_line(t_cursor *cursor)
 {
 	int			i;
 	int			size;
@@ -46,10 +48,10 @@ char	*inchars_to_line(t_inchar *inchars)
 	t_inchar	*tmp;
 
 	i = 0;
-	tmp = inchars;
+	tmp = inchars_head(cursor);
 	if (tmp->value == EOL)
 		return (NULL);
-	size = inchars_len(tmp);
+	size = inchars_len(cursor);
 	line = gc_malloc(sizeof(char) * (size + 1));
 	while (tmp->next != NULL)
 	{
