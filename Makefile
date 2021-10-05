@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/10/01 00:49:24 by rotrojan         ###   ########.fr        #
+#    Updated: 2021/10/05 14:44:14 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ _PATH =									\
 
 _SHELL =								\
 	input.c								\
+	line_count.c						\
 	prompt.c							\
 	shell.c								\
 	$(_INCHAR)							\

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 07:13:40 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/03 03:41:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:46:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ typedef struct s_history_data
 void			shell(bool inline_mode);
 void			prompt(void);
 char			*ft_readline(void);
+int				*get_line_count(void);
+int				increase_line_count(void);
 
 /*
 ** history

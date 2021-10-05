@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/04 08:05:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:48:31 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static char	*get_line(bool inline_mode)
 	char	*line;
 
 	line = NULL;
+	increase_line_count();
 	if (inline_mode == false)
 	{
 		prompt();

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/04 08:25:33 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:50:03 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,13 @@ static bool	catch_sigint(char *doc, char *line)
 	return (false);
 }
 
-static bool	heredoc_control(char const *delimiter, char *line, int pos)
+static bool	heredoc_control(char const *delimiter, char *line)
 {
 	if (line != NULL)
 	{
 		if (line[0] == EOF)
 		{
-			ctrl_d_heredoc(delimiter, pos);
+			ctrl_d_heredoc(delimiter);
 			return (true);
 		}
 		if (ft_strcmp(line, delimiter) == 0)
@@ -56,10 +56,8 @@ char	*heredoc(char const *delimiter)
 {
 	char	*line;
 	char	*doc;
-	t_axe	pos;
 
 	doc = NULL;
-	pos = get_cursor_pos();
 	reset_history_data();
 	while (true)
 	{
@@ -69,7 +67,7 @@ char	*heredoc(char const *delimiter)
 		if (catch_sigint(doc, line) == true)
 			return (NULL);
 		ft_putchar_fd('\n', STDERR_FILENO);
-		if (heredoc_control(delimiter, line, pos.x) == true)
+		if (heredoc_control(delimiter, line) == true)
 			break ;
 		append_input(&doc, line);
 	}
