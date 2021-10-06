@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/04 01:47:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/06 19:01:33 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,8 @@ void	exec_simple_cmd(t_simple_cmd command)
 	if (redirection(command) != -1)
 	{
 		if (command.argv[0] != NULL && command.argv[0][0] != '\0'
-			&& run_builtin(command.argc, command.argv) == EXIT_CMD_NOT_FOUND)
+			&& run_builtin(get_len_array(command.argv), command.argv)
+			== EXIT_CMD_NOT_FOUND)
 		{
 			pid = fork();
 			if (pid == ERR)

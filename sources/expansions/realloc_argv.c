@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 15:36:37 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/23 22:11:29 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:17:28 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,4 @@ void	realloc_argv(
 	free_array(&splitted_var);
 	gc_free((void **)&splitted_var);
 	cmd->argv = new_argv;
-	cmd->argc = utils.len_new_argv;
 }

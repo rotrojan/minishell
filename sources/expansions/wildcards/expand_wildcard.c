@@ -6,37 +6,17 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 00:45:51 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 00:46:06 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:26:37 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	check_for_unquoted_wildcard(char const *arg)
-{
-	bool	in_squotes;
-	bool	in_dquotes;
-
-	in_squotes = false;
-	in_dquotes = false;
-	while (*arg != '\0')
-	{
-		if (*arg == '\'' && in_dquotes == true)
-			in_squotes = (in_squotes == false);
-		else if (*arg == '"' && in_squotes == true)
-			in_dquotes = (in_dquotes == false);
-		else if (*arg == '*' && in_squotes == false && in_dquotes == false)
-			return (true);
-		++arg;
-	}
-	return (false);
-}
-
 bool	expand_wildcard_in_stream(char **arg)
 {
 	char	**wildcard_array;
 
-	if (check_for_unquoted_wildcard(*arg) == true)
+	if (check_for_unquoted_char('*', *arg) == true)
 	{
 		wildcard_array = wildcard(*arg);
 		if (wildcard_array != NULL)
@@ -90,7 +70,7 @@ void	expand_wildcard(t_simple_cmd *cmd)
 	i = 0;
 	while (cmd->argv[i] != NULL)
 	{
-		if (check_for_unquoted_wildcard(cmd->argv[i]) == true)
+		if (check_for_unquoted_char('*', cmd->argv[i]) == true)
 		{
 			wildcard_array = wildcard(cmd->argv[i]);
 			if (wildcard_array != NULL)

@@ -6,12 +6,12 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 00:41:59 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:16:51 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
+/*
 static bool	handle_redirection_list(t_redirection *redir_lst)
 {
 	while (redir_lst != NULL)
@@ -27,13 +27,14 @@ static bool	handle_redirection_list(t_redirection *redir_lst)
 	}
 	return (true);
 }
-
+*/
 static bool	handle_redirections(t_simple_cmd *cmd)
 {
-	if (handle_redirection_list(cmd->input_redir) == false)
-		return (false);
-	if (handle_redirection_list(cmd->output_redir) == false)
-		return (false);
+	(void)cmd;
+	/* if (handle_redirection_list(cmd->input_redir) == false) */
+		/* return (false); */
+	/* if (handle_redirection_list(cmd->output_redir) == false) */
+		/* return (false); */
 	return (true);
 }
 

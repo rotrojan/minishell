@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 00:48:28 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/06 18:10:53 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ char	*get_var_name(char *arg);
 void	free_array(char ***array);
 int		get_len_array(char	**array);
 bool	has_space(char *str);
+bool	check_for_unquoted_char(char c, char const *arg);
 
 /*
 ** expand_vars.c

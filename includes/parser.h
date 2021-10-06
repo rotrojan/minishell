@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/28 22:30:38 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/06 19:01:19 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,9 @@ typedef struct s_redirection
 
 typedef struct s_simple_cmd
 {
-	int				argc;
 	char			**argv;
+	int				fd_in;
+	int				fd_out;
 	t_redirection	*input_redir;
 	t_redirection	*output_redir;
 }	t_simple_cmd;
