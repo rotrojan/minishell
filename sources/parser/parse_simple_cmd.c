@@ -6,19 +6,15 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/06 18:04:08 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/08 00:43:02 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 /*
-** The get_argc() function returns the number of arguments of the simple command
-** by iterating on the tok_lst token linked list while the tokens are not
-** separators. Redirection tokens are not taken in the count.
-** On success, true is returned.
+** Self explanatory.
 */
-
 
 static unsigned int	get_nb_args(t_token *tok_lst)
 {
@@ -37,9 +33,7 @@ static unsigned int	get_nb_args(t_token *tok_lst)
 
 /*
 ** The from_lst_to_array() function will malloc and fill the argv array of
-** strings containing the arguments of the command. If a redirection is
-** encountered, it will be handled by the add_redirection() function. The tokens
-** of the tok_lst linked list are eaten progressivly along the process.
+** strings containing the arguments of the command.
 */
 
 static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
@@ -60,14 +54,12 @@ static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
 	return (true);
 }
 
-
 /*
 ** Parsing a simple command is done the following way:
 ** - if the token is not a leaf, it is a syntax error: false is returned;
 ** - the simple_command node is maloced;
 ** - the number of arguments of the command is obtained with get_argc();
-** - from_lst_to_array() fills the argv array and the redirection linked list of
-** the simple command leaf.
+** - from_lst_to_array() fills the argv array.
 */
 
 bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
@@ -82,6 +74,8 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 	simple_cmd = gc_malloc(sizeof(*simple_cmd));
 	ft_bzero(simple_cmd, sizeof(*simple_cmd));
 	simple_cmd->type = Simple_cmd;
+	simple_cmd->content.simple_cmd.fd_in = STDIN_FILENO;
+	simple_cmd->content.simple_cmd.fd_out = STDOUT_FILENO;
 	if (from_lst_to_array(tok_lst, simple_cmd) == false
 		|| (*tok_lst != NULL && (*tok_lst)->type == Oparenth_tok))
 		return (false);

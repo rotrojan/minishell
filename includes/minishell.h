@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:39:58 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 03:20:06 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/07 19:56:02 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,12 @@
 # include "includes.h"
 # include "terminal.h"
 # include "system.h"
-# include "shell.h"
 # include "lexer.h"
 # include "parser.h"
 # include "expansions.h"
+# include "redirections.h"
 # include "builtins.h"
 # include "execution.h"
+# include "shell.h"
 
 #endif
