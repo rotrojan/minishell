@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:30:31 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 23:27:04 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/03 01:15:22 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	parse_pipeline(t_token **tok_lst, t_node **ast)
 		if (*tok_lst == NULL)
 		{
 			ft_dprintf(STDERR_FILENO,
-				"\nminishell: syntax error: unexpected end of file");
+				"\nminishell: syntax error: unexpected end of file\n");
 			return (false);
 		}
 		pipe_node = NULL;

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 06:57:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 23:01:37 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:49:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,12 @@
 # elif __APPLE__
 #  define OS 0
 # endif
-# define SIGWINCH 28
-# define CTRL_C 2
 # define CTRL_D 4
 # define DELETE 8
 # define TAB 9
-# define SEGFAULT 11
 # define CTRL_L 12
 # define ESC 27
+# define SIGWINCH 28
 # define BACKSPACE 127
 # define DEFAULT_TERM "xterm-256color"
 
@@ -78,10 +76,11 @@ int		ft_getch(void);
 t_term	*getterm(void);
 t_term	*set_termios(void);
 t_axe	get_cursor_pos(void);
+void	ctrl_d_input(void);
+void	ctrl_d_heredoc(char const *delimiter);
 void	end_key(t_cursor *cursor);
 void	home_key(t_cursor *cursor);
 void	delete_key(t_cursor *cursor);
-void	ctrl_d_key(t_cursor *cursor);
 void	ctrl_l_key(t_cursor *cursor);
 void	backspace_key(t_cursor *cursor);
 void	left_arrow_key(t_cursor *cursor);

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 23:30:36 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/03 01:15:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,11 @@ bool	print_error_and_return(t_token *token)
 {
 	if (token == NULL)
 		ft_dprintf(STDERR_FILENO,
-			"\nminishell: syntax error: unexpected end of file");
+			"\nminishell: syntax error: unexpected end of file\n");
 	else
 		ft_dprintf(STDERR_FILENO,
-			"\nminishell: syntax error near unexpected token `%s'", token->data);
+			"\nminishell: syntax error near unexpected token `%s'\n",
+			token->data);
 	return (false);
 }
 

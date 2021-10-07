@@ -6,19 +6,22 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 04:38:24 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/01 19:03:42 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:48:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ctrl_d_key(t_cursor *cursor)
+void	ctrl_d_input(void)
 {
-	if (inchars_len(inchars_head(cursor)) <= 1)
-	{
-		ft_putstr_fd("exit\n", STDERR_FILENO);
-		gc_exit(*get_exit_value(), NULL);
-	}
+	ft_putstr_fd("exit\n", STDERR_FILENO);
+	gc_exit(*get_exit_value(), NULL);
+}
+
+void	ctrl_d_heredoc(char const *delimiter)
+{
+	ft_dprintf(STDERR_FILENO, "minishell: warning: here-document at line %d \
+delimited by end-of-file (wanted `%s')\n", *get_line_count(), delimiter);
 }
 
 /* Clear the screen. */

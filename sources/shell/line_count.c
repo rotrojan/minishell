@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putxchar.c                                      :+:      :+:    :+:   */
+/*   line_count.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/05/12 03:03:43 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/05/24 19:17:36 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/10/05 14:36:52 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/10/05 14:46:01 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "minishell.h"
 
-int	ft_putxchar(int c, int x)
+int	*get_line_count(void)
 {
-	int	i;
+	static int	line_cout = 0;
 
-	i = 0;
-	while (i < x)
-	{
-		ft_putchar_err(c);
-		i++;
-	}
-	return (i);
+	return (&line_cout);
+}
+
+int	increase_line_count(void)
+{
+	int	*line_cout;
+
+	line_cout = get_line_count();
+	*line_cout += 1;
+	return (*line_cout);
 }

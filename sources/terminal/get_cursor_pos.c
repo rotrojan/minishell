@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:53:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 04:23:49 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/04 08:24:54 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,18 +20,24 @@ static void	atoi_pos(t_axe *pos, int sep, int c)
 		pos->y = pos->y * 10 + (c - '0');
 }
 
-/* Return postion of cursor in terminal. 
-You must have set the terminal to non-canonical
-and without echo before. */
+static void	interupt_signals(void)
+{
+	signal(SIGINT, SIG_IGN);
+	signal(SIGWINCH, SIG_IGN);
+}
+
+/* Return postion of cursor in terminal. */
 t_axe	get_cursor_pos(void)
 {
 	char		c;
 	int			sep;
 	t_axe		pos;
+	t_term		*term;
 
 	c = 0;
 	sep = false;
-	ft_dsleep(1);
+	interupt_signals();
+	term = set_termios();
 	pos = (t_axe){.x = 0, .y = 0};
 	ft_putstr_fd("\033[6n", STDIN_FILENO);
 	while (read(STDIN_FILENO, &c, 1) > 0)
@@ -45,5 +51,7 @@ t_axe	get_cursor_pos(void)
 	}
 	pos.x--;
 	pos.y--;
+	handle_signals();
+	tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
 	return (pos);
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 18:12:05 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 04:45:57 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/03 03:39:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	backspace_key(t_cursor *cursor)
 		print_inchars(cursor->on_inchar);
 		tputs(goto_cap, 1, ft_putchar_err);
 		gc_free((void **)&history->input);
-		history->input = inchars_to_line(inchars_head(cursor));
+		history->input = inchars_to_line(cursor);
 	}
 }
 
@@ -59,7 +59,7 @@ void	delete_key(t_cursor *cursor)
 		print_inchars(cursor->on_inchar);
 		tputs(goto_cap, 1, ft_putchar_err);
 		gc_free((void **)&history->input);
-		history->input = inchars_to_line(inchars_head(cursor));
+		history->input = inchars_to_line(cursor);
 	}
 }
 

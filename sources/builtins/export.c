@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:08 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/26 21:25:34 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/03 01:18:28 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ int	export(int argc, char **argv)
 		var_name = export_get_var_name(argv[i]);
 		if (var_name == NULL)
 		{
-			ft_dprintf(STDOUT_FILENO,
+			ft_dprintf(STDERR_FILENO,
 				"minishell: export: `%s': not a valid identifier\n", argv[i]);
 			return (EXIT_FAILURE);
 		}

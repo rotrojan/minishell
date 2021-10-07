@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 02:42:39 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/04 08:07:47 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ static void	control_key(t_cursor *cursor, int c)
 		{.key = CTRL_L, .function = &ctrl_l_key},
 		{.key = KEY_UP, .function = &history_get_up},
 		{.key = KEY_DOWN, .function = &history_get_down},
-		{.key = CTRL_D, .function = &ctrl_d_key},
 		{.key = -1}
 	};
 
@@ -38,35 +37,38 @@ static void	control_key(t_cursor *cursor, int c)
 	}
 }
 
-static char	*get_line(t_cursor *cursor)
+static char	*get_line(t_cursor *cursor, int c)
 {
 	char		*line;
-	t_inchar	*head;
 
-	head = inchars_head(cursor);
-	line = inchars_to_line(head);
-	free_inchars(head);
-	if (line != NULL && ft_striter(line, &ft_isspace) == 1)
-		gc_free((void **)&line);
+	if (c == CTRL_D)
+	{
+		line = gc_malloc(sizeof(char) * 1);
+		line[0] = EOF;
+	}
+	else
+	{
+		line = inchars_to_line(cursor);
+		if (line != NULL && ft_striter(line, &ft_isspace) == 1)
+			gc_free((void **)&line);
+		free_inchars(cursor);
+	}
 	return (line);
 }
 
 static int	catch_signals(void)
 {
-	int	*sig;
-	int	tmp;
+	int	sig;
 
 	handle_signals();
-	sig = get_signal_on();
-	tmp = *sig;
-	*sig = 0;
-	if (tmp == SIGINT)
-		ft_putstr("^C");
-	return (tmp);
+	sig = *get_signal_on();
+	if (sig == SIGINT)
+		ft_putstr_fd("^C\n", STDERR_FILENO);
+	return (sig);
 }
 
 /* Read and return input line for shell. */
-char	*input(void)
+static char	*input(void)
 {
 	int				c;
 	int				sig;
@@ -85,12 +87,23 @@ char	*input(void)
 		c = ft_getch();
 		if (c != ERR)
 		{
-			if (c == '\n')
-				return (get_line(&cursor));
-			else if (!ft_iscntrl(c))
-				insert_inchar(&cursor, c);
-			else
+			if (c == '\n' || (c == CTRL_D && inchars_len(&cursor) == 1))
+				return (get_line(&cursor, c));
+			else if (ft_iscntrl(c) == 1)
 				control_key(&cursor, c);
+			else
+				insert_inchar(&cursor, c);
 		}
 	}
+}
+
+char	*ft_readline(void)
+{
+	char	*line;
+	t_term	*term;
+
+	term = set_termios();
+	line = input();
+	tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+	return (line);
 }

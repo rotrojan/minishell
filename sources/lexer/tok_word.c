@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/29 14:39:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/22 17:53:03 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/03 01:14:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ t_token	*tok_word(char *inchars, int *i)
 		&& (is_in_squotes == true || is_in_dquotes == true))
 	{
 		ft_dprintf(STDERR_FILENO,
-			"\nminishell: syntax error: unexpected end of file");
+			"\nminishell: syntax error: unexpected end of file\n");
 		gc_free((void **)&data);
 		return (NULL);
 	}

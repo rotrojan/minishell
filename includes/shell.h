@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   shell.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 07:13:40 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/29 23:30:15 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/05 14:46:13 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,9 @@ typedef struct s_history_data
 
 void			shell(bool inline_mode);
 void			prompt(void);
-char			*input(void);
+char			*ft_readline(void);
+int				*get_line_count(void);
+int				increase_line_count(void);
 
 /*
 ** history
@@ -64,12 +66,12 @@ void			push_front_history(t_history **history, char *line);
 
 t_inchar		*create_inchar(int value);
 t_inchar		*line_to_inchars(char *line);
-int				inchars_len(t_inchar *inchars);
+int				inchars_len(t_cursor *cursor);
 t_inchar		*inchars_head(t_cursor *cursor);
 t_inchar		*inchars_queue(t_cursor *cursor);
 void			print_inchars(t_inchar *inchars);
-void			free_inchars(t_inchar *inchars);
-char			*inchars_to_line(t_inchar *inchars);
+void			free_inchars(t_cursor *cursor);
+char			*inchars_to_line(t_cursor *cursor);
 void			insert_inchar(t_cursor *cursor, int value);
 void			push_back_inchars(t_inchar **inchars, int value);
 
