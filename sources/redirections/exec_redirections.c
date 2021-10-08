@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_redirections.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bigo <marvin@42.fr>                        +#+  +:+       +#+        */
+/*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:35:00 by bigo              #+#    #+#             */
-/*   Updated: 2021/10/08 00:38:02 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/08 17:32:45 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,19 +40,19 @@ static bool	redirections(char **args, int *fd_in, int *fd_out)
 	if (ft_strcmp("<", *args) == 0)
 	{
 		*fd_in = input_redirection(*(args + 1));
-		if (*fd_in == -1)
+		if (*fd_in == ERR)
 			return (false);
 	}
 	else if (ft_strcmp("<<", *args) == 0)
 	{
 		*fd_in = heredoc_redirection(*(args + 1));
-		if (*fd_in == -1)
+		if (*fd_in == ERR)
 			return (false);
 	}
 	else
 	{
 		*fd_out = output_redirection(args);
-		if (*fd_out == -1)
+		if (*fd_out == ERR)
 			return (false);
 	}
 	return (true);

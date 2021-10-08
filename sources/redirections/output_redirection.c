@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:19:26 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/07 20:42:00 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/08 17:13:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	output_redirection(char **args)
 	int	flag;
 	int	fd;
 
-	if (ft_strcmp("<", *args) == 0)
+	if (ft_strcmp(">", *args) == 0)
 		flag = O_TRUNC;
 	else
 		flag = O_APPEND;
@@ -27,7 +27,7 @@ int	output_redirection(char **args)
 	if (fd < 0)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: %s: No such file or directory\n",
-			args);
+			*args);
 		set_exit_value(EXIT_FAILURE);
 		return (-1);
 	}
