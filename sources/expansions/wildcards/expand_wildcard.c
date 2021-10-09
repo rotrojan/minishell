@@ -6,37 +6,37 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/01 00:45:51 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/06 18:26:37 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/09 17:50:03 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	expand_wildcard_in_stream(char **arg)
-{
-	char	**wildcard_array;
+/* bool	expand_wildcard_in_stream(char **arg) */
+/* { */
+	/* char	**wildcard_array; */
 
-	if (check_for_unquoted_char('*', *arg) == true)
-	{
-		wildcard_array = wildcard(*arg);
-		if (wildcard_array != NULL)
-		{
-			if (get_len_array(wildcard_array) != 1)
-			{
-				ft_dprintf(STDERR_FILENO,
-					"minishell: %s: ambiguous redirect\n", *arg);
-				return (false);
-			}
-			else
-			{
-				*arg = ft_strdup(*wildcard_array);
-				free_array(&wildcard_array);
-				gc_free((void **)&wildcard_array);
-			}
-		}
-	}
-	return (true);
-}
+	/* if (check_for_unquoted_char('*', *arg) == true) */
+	/* { */
+		/* wildcard_array = wildcard(*arg); */
+		/* if (wildcard_array != NULL) */
+		/* { */
+			/* if (get_len_array(wildcard_array) != 1) */
+			/* { */
+				/* ft_dprintf(STDERR_FILENO, */
+					/* "minishell: %s: ambiguous redirect\n", *arg); */
+				/* return (false); */
+			/* } */
+			/* else */
+			/* { */
+				/* *arg = ft_strdup(*wildcard_array); */
+				/* free_array(&wildcard_array); */
+				/* gc_free((void **)&wildcard_array); */
+			/* } */
+		/* } */
+	/* } */
+	/* return (true); */
+/* } */
 
 static char	**add_wildcard_to_argv(
 		char **argv, char **wildcard, int index_to_replace)
@@ -61,7 +61,7 @@ static char	**add_wildcard_to_argv(
 	return (new_argv);
 }
 
-void	expand_wildcard(t_simple_cmd *cmd)
+bool	expand_wildcard(t_simple_cmd *cmd)
 {
 	int		i;
 	char	**tmp;
@@ -73,6 +73,9 @@ void	expand_wildcard(t_simple_cmd *cmd)
 		if (check_for_unquoted_char('*', cmd->argv[i]) == true)
 		{
 			wildcard_array = wildcard(cmd->argv[i]);
+			if (check_if_expansion_is_valid(i, &wildcard_array, cmd->argv)
+				== false)
+				return (false);
 			if (wildcard_array != NULL)
 			{
 				tmp = add_wildcard_to_argv(cmd->argv, wildcard_array, i);
@@ -83,4 +86,5 @@ void	expand_wildcard(t_simple_cmd *cmd)
 		}
 		++i;
 	}
+	return (true);
 }

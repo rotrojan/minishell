@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:35:00 by bigo              #+#    #+#             */
-/*   Updated: 2021/10/08 17:41:27 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/09 18:09:14 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,14 @@ static void	remove_redirections_from_argv(char **args)
 	args[i - 2] = args[i];
 }
 
-static bool	arg_is_redirection(char *arg)
+bool	arg_is_redirection(char *arg)
 {
 	return (ft_strcmp(">", arg) == 0 || ft_strcmp(">>", arg) == 0
 		|| ft_strcmp("<", arg) == 0 || ft_strcmp("<<", arg) == 0);
 }
 
-static bool	redirections(char **args, int *fd_in, int *fd_out)
+static bool	redirections(
+	char **args, int *fd_in, int *fd_out, bool input_stream_has_quotes)
 {
 	if (ft_strcmp("<", *args) == 0)
 	{
@@ -45,7 +46,7 @@ static bool	redirections(char **args, int *fd_in, int *fd_out)
 	{
 		if (*fd_out != STDOUT_FILENO)
 			close(*fd_out);
-		*fd_in = heredoc_redirection(*(args + 1));
+		*fd_in = heredoc_redirection(*(args + 1), input_stream_has_quotes);
 		if (*fd_in == ERR)
 			return (false);
 	}
@@ -58,7 +59,8 @@ static bool	redirections(char **args, int *fd_in, int *fd_out)
 	return (true);
 }
 
-static bool	open_redirections(char **argv, int *fd_in, int *fd_out)
+static bool	open_redirections(
+	char **argv, int *fd_in, int *fd_out, bool input_stream_has_quotes)
 {
 	int	i;
 
@@ -67,7 +69,8 @@ static bool	open_redirections(char **argv, int *fd_in, int *fd_out)
 	{
 		if (arg_is_redirection(argv[i]) == true)
 		{
-			if (redirections(&argv[i], fd_in, fd_out) == false)
+			if (redirections(&argv[i], fd_in, fd_out, input_stream_has_quotes)
+				== false)
 				return (false);
 			remove_redirections_from_argv(&argv[i]);
 		}
@@ -83,7 +86,8 @@ bool	exec_redirections(t_node *ast)
 	{
 		return (open_redirections(ast->content.simple_cmd.argv,
 				&ast->content.simple_cmd.fd_in,
-				&ast->content.simple_cmd.fd_out));
+				&ast->content.simple_cmd.fd_out,
+				ast->content.simple_cmd.input_stream_has_quotes));
 	}
 	else
 	{

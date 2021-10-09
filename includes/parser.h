@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/06 19:01:19 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/09 17:59:41 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,21 +41,6 @@ enum e_redirection_type
 };
 
 /*
-** A redirection is composed of a redirection type, a stream to redirect the
-** input from / output to, and a pointer to the next redirection.
-*/
-
-typedef struct s_redirection
-{
-	char						*stream;
-	enum e_redirection_type		type;
-	int							fd;
-	bool						isopen;
-	bool						has_quotes;
-	struct s_redirection		*next;
-}	t_redirection;
-
-/*
 ** A simple command (aka, the leaves of the tree) is composed of an number of
 ** arguments argc, an array of strings of arguments argv and a linked list of
 ** redirections.
@@ -63,11 +48,10 @@ typedef struct s_redirection
 
 typedef struct s_simple_cmd
 {
-	char			**argv;
-	int				fd_in;
-	int				fd_out;
-	t_redirection	*input_redir;
-	t_redirection	*output_redir;
+	char	**argv;
+	int		fd_in;
+	int		fd_out;
+	bool	input_stream_has_quotes;
 }	t_simple_cmd;
 
 /*

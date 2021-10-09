@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/07 20:58:18 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/09 16:44:47 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,15 @@ static void	execution(char *line, bool inline_mode)
 		ast = lexer_parser(line);
 		if (ast != NULL)
 		{
-			if (exec_redirections(ast) == true)
-				exec_ast(ast, inline_mode);
+			if (perform_expansions(&ast->content.simple_cmd) == true)
+			{
+				if (exec_redirections(ast) == true)
+					exec_ast(ast, inline_mode);
+				else
+					set_exit_value(EXIT_FAILURE);
+			}
+			else
+				set_exit_value(EXIT_FAILURE);
 			clear_ast(&ast);
 		}
 	}
