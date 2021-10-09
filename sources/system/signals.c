@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/03 00:28:39 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/02 22:55:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/09 16:14:34 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,11 @@ static void	sigwinch_handler(int sig)
 /* Self explanatory. */
 void	handle_signals(void)
 {
+	signal(SIGTRAP, SIG_DFL);
+	signal(SIGTERM, SIG_DFL);
+	signal(SIGSEGV, SIG_DFL);
+	signal(SIGBUS, SIG_DFL);
+	signal(SIGABRT, SIG_DFL);
 	signal(SIGINT, &sigint_handler);
-	signal(SIGQUIT, SIG_IGN);
 	signal(SIGWINCH, &sigwinch_handler);
 }

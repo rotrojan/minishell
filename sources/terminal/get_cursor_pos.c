@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/06 02:53:50 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/04 08:24:54 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/09 14:44:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ static void	atoi_pos(t_axe *pos, int sep, int c)
 		pos->y = pos->y * 10 + (c - '0');
 }
 
-static void	interupt_signals(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGWINCH, SIG_IGN);
-}
-
 /* Return postion of cursor in terminal. */
 t_axe	get_cursor_pos(void)
 {
@@ -36,7 +30,7 @@ t_axe	get_cursor_pos(void)
 
 	c = 0;
 	sep = false;
-	interupt_signals();
+	ignore_signals();
 	term = set_termios();
 	pos = (t_axe){.x = 0, .y = 0};
 	ft_putstr_fd("\033[6n", STDIN_FILENO);
