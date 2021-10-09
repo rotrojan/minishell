@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:35:00 by bigo              #+#    #+#             */
-/*   Updated: 2021/10/08 17:32:45 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/08 17:41:27 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,18 +33,18 @@ static bool	arg_is_redirection(char *arg)
 
 static bool	redirections(char **args, int *fd_in, int *fd_out)
 {
-	if (*fd_in != STDIN_FILENO)
-		close(*fd_in);
-	if (*fd_out != STDOUT_FILENO)
-		close(*fd_out);
 	if (ft_strcmp("<", *args) == 0)
 	{
+		if (*fd_in != STDIN_FILENO)
+			close(*fd_in);
 		*fd_in = input_redirection(*(args + 1));
 		if (*fd_in == ERR)
 			return (false);
 	}
 	else if (ft_strcmp("<<", *args) == 0)
 	{
+		if (*fd_out != STDOUT_FILENO)
+			close(*fd_out);
 		*fd_in = heredoc_redirection(*(args + 1));
 		if (*fd_in == ERR)
 			return (false);
