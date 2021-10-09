@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 16:15:57 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/09 16:42:07 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ static void	catch_signals(int sig)
 		[SIGABRT] = "Aborted",
 		[SIGQUIT] = "^\\Quit",
 		[SIGTERM] = "Terminated",
-		[SIGTRAP] = "Trace/breakpoint trap"
+		[SIGTRAP] = "Trace/breakpoint trap",
+		[SIGPIPE] = ""
 	};
 
 	sig_on = get_signal_on();
