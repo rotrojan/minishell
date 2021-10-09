@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/04 08:07:47 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/09 15:41:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,10 @@ char	*ft_readline(void)
 	char	*line;
 	t_term	*term;
 
+	signal(SIGQUIT, SIG_IGN);
 	term = set_termios();
 	line = input();
 	tcsetattr(STDIN_FILENO, TCSANOW, &term->saved);
+	signal(SIGQUIT, SIG_DFL);
 	return (line);
 }

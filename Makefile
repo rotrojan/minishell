@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/10/05 14:44:14 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/10/09 12:47:45 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,6 +40,7 @@ _SYSTEM =								\
 	ft_fflush.c							\
 	ft_gethostname.c					\
 	set_timeout.c						\
+	ignore_signals.c					\
 	signals.c							\
 	$(_ENV)								\
 	$(_PATH)

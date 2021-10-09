@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/04 01:47:28 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/09 16:15:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,28 +26,35 @@ static void	child(t_simple_cmd command)
 	exit(ret);
 }
 
+static void	catch_signals(int sig)
+{
+	int			*sig_on;
+	const char	*sig_list[32] = {
+		[SIGINT] = "^C",
+		[SIGSEGV] = "Segmentation fault",
+		[SIGBUS] = "Bus error",
+		[SIGABRT] = "Aborted",
+		[SIGQUIT] = "^\\Quit",
+		[SIGTERM] = "Terminated",
+		[SIGTRAP] = "Trace/breakpoint trap"
+	};
+
+	sig_on = get_signal_on();
+	if (sig == SIGINT)
+		*sig_on = SIGINT;
+	ft_dprintf(STDERR_FILENO, "%s\n", sig_list[sig]);
+	set_exit_value(sig + 128);
+}
+
 static void	parent(void)
 {
-	int		*sig;
 	int		status;
 
-	sig = get_signal_on();
-	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
+	ignore_signals();
 	wait(&status);
 	if (WIFSIGNALED(status))
-	{
-		if (WTERMSIG(status) == SIGINT)
-		{
-			*sig = SIGINT;
-			ft_putchar_fd('\n', STDERR_FILENO);
-			set_exit_value(EXIT_CTRL_C_VALUE);
-		}
-		else if (WTERMSIG(status) == SIGSEGV)
-		{
-			ft_dprintf(STDERR_FILENO, "Segmentation fault (core dumped)\n");
-			set_exit_value(EXIT_SEGFAULT);
-		}
-	}
+		catch_signals(WTERMSIG(status));
 	if (WIFEXITED(status))
 		set_exit_value(WEXITSTATUS(status));
 }

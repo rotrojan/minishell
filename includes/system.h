@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 21:59:32 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/30 07:16:52 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/09 12:46:42 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ char	*extract_path(char const *pathfile);
 char	*get_real_filepath(char const *filepath);
 void	set_timeout(t_term *term, int timeout);
 bool	init_term(void);
+void	ignore_signals(void);
 void	handle_signals(void);
 int		*get_signal_on(void);
 void	set_signal_on(int sig);
