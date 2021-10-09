@@ -6,49 +6,30 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:19:26 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/03 04:11:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/08 17:13:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	open_file(t_redirection *redirection)
+int	output_redirection(char **args)
 {
 	int	flag;
+	int	fd;
 
-	if (redirection->type == Output_redir)
+	if (ft_strcmp(">", *args) == 0)
 		flag = O_TRUNC;
 	else
 		flag = O_APPEND;
-	redirection->fd = open(redirection->stream, O_WRONLY | O_CREAT | flag,
+	++args;
+	fd = open(*args, O_WRONLY | O_CREAT | flag,
 			S_IRUSR | S_IWUSR | S_IRGRP | S_IROTH);
-	if (redirection->fd < 0)
+	if (fd < 0)
 	{
 		ft_dprintf(STDERR_FILENO, "minishell: %s: No such file or directory\n",
-			redirection->stream);
+			*args);
 		set_exit_value(EXIT_FAILURE);
 		return (-1);
 	}
-	redirection->isopen = true;
-	return (0);
-}
-
-int	output_redirection(t_redirection *redirection)
-{
-	if (open_file(redirection) == -1)
-		return (-1);
-	dup2(redirection->fd, STDOUT_FILENO);
-	redirection = redirection->next;
-	while (redirection != NULL)
-	{
-		if (redirection->type == Output_redir)
-		{
-			if (open_file(redirection) == -1)
-				return (-1);
-			close(redirection->fd);
-			redirection->isopen = false;
-		}
-		redirection = redirection->next;
-	}
-	return (0);
+	return (fd);
 }

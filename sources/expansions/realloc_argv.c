@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 15:36:37 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/23 22:11:29 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/09 17:50:17 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,20 @@ static void	handle_last_join(
 		new_argv[utils->i_new++] = ft_strdup(after_var);
 }
 
-void	realloc_argv(
+bool	check_if_expansion_is_valid(int i, char ***splitted_var, char **argv)
+{
+	if (i > 0 && get_len_array(*splitted_var) > 1
+		&& arg_is_redirection(argv[i - 1]) == true)
+	{
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: %s: ambiguous redirect\n", argv[i]);
+		gc_free((void **)splitted_var);
+		return (false);
+	}
+	return (true);
+}
+
+bool	realloc_argv(
 		t_simple_cmd *cmd, int const i, int *j, char *var_value)
 {
 	t_expand_utils	utils;
@@ -76,6 +89,8 @@ void	realloc_argv(
 	char			**splitted_var;
 
 	splitted_var = ft_split(var_value, ' ');
+	if (check_if_expansion_is_valid(i, &splitted_var, cmd->argv) == false)
+		return (false);
 	init_expand_utils(cmd->argv, splitted_var, var_value, &utils);
 	utils.index_dollar = *j;
 	new_argv = gc_malloc(sizeof(*new_argv) * (utils.len_new_argv + 1));
@@ -93,5 +108,5 @@ void	realloc_argv(
 	free_array(&splitted_var);
 	gc_free((void **)&splitted_var);
 	cmd->argv = new_argv;
-	cmd->argc = utils.len_new_argv;
+	return (true);
 }

@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/10/09 12:47:45 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/10/09 18:38:30 by bigo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ SRCS =									\
 	$(_LEXER)							\
 	$(_PARSER)							\
 	$(_EXPANSIONS)						\
+	$(_REDIRECTIONS)					\
 	$(_EXECUTION)						\
 	$(_BUILTINS)
 
@@ -113,13 +114,13 @@ _EXECUTION =							\
 	exec_list_cmd.c						\
 	exit_value.c						\
 	run_binary.c						\
-	run_builtin.c						\
-	$(_REDIRECTIONS)
+	run_builtin.c
+
 _REDIRECTIONS =							\
+	exec_redirections.c					\
 	heredoc.c							\
 	input_redirection.c					\
-	output_redirection.c				\
-	redirection.c
+	output_redirection.c
 
 _BUILTINS =								\
 	cd.c								\
@@ -149,16 +150,15 @@ DEBUG = off
 
 CFLAGS = -MMD -Wall -Wextra -Werror
 ifeq ($(DEBUG), on)
-	CFLAGS += -g3 -fsanitize=address
+	CFLAGS += -g3#-fsanitize=address
 endif
 LDFLAGS = $(LIBS:%=-L lib%) $(LIBS:%=-l%) -lncurses
 
 vpath %.c	$(addprefix $(SRCS_DIR),						\
 				$(addprefix /system, /. /env /path)				\
 				$(addprefix /shell, /. /history /inchar)	\
-				$(addprefix /execution, /. /redirections)	\
 				$(addprefix /expansions, /. /wildcards)	\
-				/. /terminal /lexer /parser /builtins)
+				/. /terminal /lexer /parser /execution /redirections /builtins)
 
 all: libs
 	@$(MAKE) $(NAME)

@@ -6,36 +6,11 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 00:41:59 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/09 18:33:44 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static bool	handle_redirection_list(t_redirection *redir_lst)
-{
-	while (redir_lst != NULL)
-	{
-		if (expand_vars_in_stream(&redir_lst->stream) == false
-			|| expand_wildcard_in_stream(&redir_lst->stream) == false)
-		{
-			set_exit_value(EXIT_FAILURE);
-			return (false);
-		}
-		remove_quotes_from_arg(&redir_lst->stream);
-		redir_lst = redir_lst->next;
-	}
-	return (true);
-}
-
-static bool	handle_redirections(t_simple_cmd *cmd)
-{
-	if (handle_redirection_list(cmd->input_redir) == false)
-		return (false);
-	if (handle_redirection_list(cmd->output_redir) == false)
-		return (false);
-	return (true);
-}
 
 bool	perform_expansions(t_simple_cmd *cmd)
 {
@@ -45,10 +20,21 @@ bool	perform_expansions(t_simple_cmd *cmd)
 	while (cmd->argv[i] != NULL)
 	{
 		if (ft_strchr(cmd->argv[i], '$') != NULL)
-			expand_vars(cmd, i);
-		expand_wildcard(cmd);
+			if (expand_vars(cmd, i) == false)
+				return (false);
+		++i;
+	}
+	if (expand_wildcard(cmd) == false)
+		return (false);
+	i = 0;
+	while (cmd->argv[i] != NULL)
+	{
+		if (ft_strcmp(cmd->argv[i], "<<") == 0)
+			cmd->input_stream_has_quotes
+				= (ft_strchr(cmd->argv[i + 1], '\'') != NULL
+					|| ft_strchr(cmd->argv[i + 1], '"') != NULL);
 		remove_quotes_from_arg(&cmd->argv[i]);
 		++i;
 	}
-	return (handle_redirections(cmd));
+	return (true);
 }

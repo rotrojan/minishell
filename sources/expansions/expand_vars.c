@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:32:03 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/26 19:34:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/09 16:59:43 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ bool	expand_vars_in_stream(char **arg)
 	return (true);
 }
 
-void	expand_single_var(
+bool	expand_single_var(
 		t_simple_cmd *cmd, int const i, int *j, bool in_dquotes)
 {
 	char	*var_name;
@@ -87,7 +87,15 @@ void	expand_single_var(
 	get_var_name_and_value(&cmd->argv[i][*j], &var_name, &var_value);
 	if (in_dquotes == false && var_value != NULL && *var_value != '\0'
 		&& has_space(var_value) == true)
-		realloc_argv(cmd, i, j, var_value);
+	{
+		if (realloc_argv(cmd, i, j, var_value) == false)
+		{
+			gc_free((void **)&var_name);
+			if (*var_value != '\0')
+				gc_free((void **)&var_value);
+			return (false);
+		}
+	}
 	else
 	{
 		cmd->argv[i]
@@ -97,9 +105,10 @@ void	expand_single_var(
 	gc_free((void **)&var_name);
 	if (*var_value != '\0')
 		gc_free((void **)&var_value);
+	return (true);
 }
 
-void	expand_vars(t_simple_cmd *cmd, int const i)
+bool	expand_vars(t_simple_cmd *cmd, int const i)
 {
 	int		j;
 	bool	in_squotes;
@@ -112,12 +121,12 @@ void	expand_vars(t_simple_cmd *cmd, int const i)
 	{
 		if (cmd->argv[i][j] == '$' && in_squotes == false)
 		{
-			if (cmd->argv[i][j + 1] == '\0'
-					|| (ft_isalnum(cmd->argv[i][j + 1]) == 0
-					&& cmd->argv[i][j + 1] != '?'))
+			if (cmd->argv[i][j + 1] == '\0' || (ft_isalnum(cmd->argv[i][j + 1])
+					== 0 && cmd->argv[i][j + 1] != '?'))
 				cmd->argv[i] = fill_new_arg(&cmd->argv[i], 0, j++, "$");
 			else
-				expand_single_var(cmd, i, &j, in_dquotes);
+				if (expand_single_var(cmd, i, &j, in_dquotes) == false)
+					return (false);
 		}
 		else
 		{
@@ -125,4 +134,5 @@ void	expand_vars(t_simple_cmd *cmd, int const i)
 			++j;
 		}
 	}
+	return (true);
 }

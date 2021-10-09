@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/03 04:00:55 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/08 00:40:45 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,31 +66,6 @@ void	exec_simple_cmd(t_simple_cmd simple_cmd);
 */
 
 int		run_binary(char **argv);
-
-/*
-** redirections/redirection.c
-*/
-
-int		redirection(t_simple_cmd command);
-void	close_redirections(t_redirection *redirection);
-
-/*
-** redirections/output_redirection.c
-*/
-
-int		output_redirection(t_redirection *redirection);
-
-/*
-** redirections/input_redirection.c
-*/
-
-int		input_redirection(t_redirection *redirection);
-
-/*
-** redirections/heredoc.c
-*/
-
-char	*heredoc(char const *delimiter);
 
 /*
 ** exit_value.c

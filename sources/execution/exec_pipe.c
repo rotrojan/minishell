@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/20 17:58:21 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/03 01:07:21 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/07 20:56:43 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	exec_pipe(t_node *ast)
 
 	save.input = dup(STDIN_FILENO);
 	save.output = dup(STDOUT_FILENO);
-	if (pipe(fd) == -1)
+	if (pipe(fd) == ERR)
 		exit_shell(EXIT_FAILURE, strerror(errno));
 	pid = fork();
 	if (pid == ERR)

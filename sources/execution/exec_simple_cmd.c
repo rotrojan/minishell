@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 16:42:07 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/09 18:39:15 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ static void	close_io(t_IO_file save, t_simple_cmd command)
 	dup2(save.output, STDOUT_FILENO);
 	close(save.input);
 	close(save.output);
-	close_redirections(command.input_redir);
-	close_redirections(command.output_redir);
+	if (command.fd_in != STDIN_FILENO)
+		close(command.fd_in);
+	if (command.fd_out != STDOUT_FILENO)
+		close(command.fd_out);
 }
 
 void	exec_simple_cmd(t_simple_cmd command)
@@ -77,19 +79,19 @@ void	exec_simple_cmd(t_simple_cmd command)
 
 	save.input = dup(STDIN_FILENO);
 	save.output = dup(STDOUT_FILENO);
-	if (redirection(command) != -1)
+	dup2(command.fd_in, STDIN_FILENO);
+	dup2(command.fd_out, STDOUT_FILENO);
+	if (command.argv[0] != NULL && command.argv[0][0] != '\0'
+		&& run_builtin(get_len_array(command.argv), command.argv)
+		== EXIT_CMD_NOT_FOUND)
 	{
-		if (command.argv[0] != NULL && command.argv[0][0] != '\0'
-			&& run_builtin(command.argc, command.argv) == EXIT_CMD_NOT_FOUND)
-		{
-			pid = fork();
-			if (pid == ERR)
-				exit_shell(EXIT_FAILURE, strerror(errno));
-			else if (pid == 0)
-				child(command);
-			else
-				parent();
-		}
+		pid = fork();
+		if (pid == ERR)
+			exit_shell(EXIT_FAILURE, strerror(errno));
+		else if (pid == 0)
+			child(command);
+		else
+			parent();
 	}
 	close_io(save, command);
 }

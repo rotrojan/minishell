@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/01 00:48:28 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/09 17:48:42 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,8 @@ void	remove_quotes_from_arg(char **arg);
 ** realloc_argv.c
 */
 
-void	realloc_argv(t_simple_cmd *cmd, int const i, int *j, char *var_value);
+bool	check_if_expansion_is_valid(int i, char ***splitted_var, char **argv);
+bool	realloc_argv(t_simple_cmd *cmd, int const i, int *j, char *var_value);
 
 /*
 ** expansions_utils.c
@@ -70,6 +71,7 @@ char	*get_var_name(char *arg);
 void	free_array(char ***array);
 int		get_len_array(char	**array);
 bool	has_space(char *str);
+bool	check_for_unquoted_char(char c, char const *arg);
 
 /*
 ** expand_vars.c
@@ -77,9 +79,9 @@ bool	has_space(char *str);
 
 bool	expand_single_var_in_stream(char **arg, int *i, bool in_dquotes);
 bool	expand_vars_in_stream(char **arg);
-void	expand_single_var(
+bool	expand_single_var(
 			t_simple_cmd *cmd, int const i, int *j, bool in_dquotes);
-void	expand_vars(t_simple_cmd *cmd, int const i);
+bool	expand_vars(t_simple_cmd *cmd, int const i);
 
 /*
 ** escape_quotes.c
@@ -98,7 +100,6 @@ char	**wildcard(char *pathfile);
 ** wildcards/expand_wildcard.c
 */
 
-void	expand_wildcard(t_simple_cmd *cmd);
-bool	expand_wildcard_in_stream(char **arg);
+bool	expand_wildcard(t_simple_cmd *cmd);
 
 #endif
