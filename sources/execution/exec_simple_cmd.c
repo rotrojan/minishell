@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 21:27:14 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/10 16:46:00 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	child(t_simple_cmd command)
 	int	ret;
 
 	ret = run_binary(command.argv);
-	if (ret == EXIT_PERM_DENIED)
+	if (ret == EXIT_EXEC_ERROR)
 		ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n",
 			command.argv[0], strerror(errno));
 	else if (ret == EXIT_CMD_NOT_FOUND)

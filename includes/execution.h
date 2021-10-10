@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/08 00:40:45 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/10 16:44:35 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef EXECUTION_H
 # define EXECUTION_H
-# define EXIT_PERM_DENIED 126
+# define EXIT_EXEC_ERROR 126
 # define EXIT_CMD_NOT_FOUND 127
 # define EXIT_CTRL_C_VALUE 130
 # define EXIT_SEGFAULT 139
