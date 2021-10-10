@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/08 00:43:02 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/10 12:18:23 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,16 @@ static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
 		sizeof(simple_cmd->content.simple_cmd.argv));
 	while (*tok_lst != NULL && is_leaf((*tok_lst)->type) == true)
 	{
+		if (is_redirection((*tok_lst)->type) == true
+			&& ((*tok_lst)->next == NULL || (*tok_lst)->next->type != Word_tok))
+		{
+			eat_token(tok_lst);
+			if (*tok_lst == NULL)
+				ft_dprintf(STDERR_FILENO,
+					"\nminishell: syntax error near unexpected token \
+`newline'\n");
+			return (false);
+		}
 		simple_cmd->content.simple_cmd.argv[i++] = ft_strdup((*tok_lst)->data);
 		eat_token(tok_lst);
 	}
