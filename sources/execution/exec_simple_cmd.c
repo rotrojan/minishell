@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 18:39:15 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/09 21:27:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ static void	catch_signals(int sig)
 	sig_on = get_signal_on();
 	if (sig == SIGINT)
 		*sig_on = SIGINT;
-	ft_dprintf(STDERR_FILENO, "%s\n", sig_list[sig]);
+	if (sig_list[sig] != NULL)
+		ft_dprintf(STDERR_FILENO, "%s\n", sig_list[sig]);
 	set_exit_value(sig + 128);
 }
 
