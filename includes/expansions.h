@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 17:48:42 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/10 12:40:45 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct expand_utils
 ** perform_expansions.c
 */
 
-bool	perform_expansions(t_simple_cmd *cmd);
+bool	perform_expansions(t_node *ast);
 
 /*
 ** fill_new_arg.c

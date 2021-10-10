@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 18:33:44 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/10 12:53:48 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-bool	perform_expansions(t_simple_cmd *cmd)
+static bool	expanser(t_simple_cmd *cmd)
 {
 	int	i;
 
@@ -37,4 +37,16 @@ bool	perform_expansions(t_simple_cmd *cmd)
 		++i;
 	}
 	return (true);
+}
+
+bool	perform_expansions(t_node *ast)
+{
+	if (ast->type == Simple_cmd)
+		return (expanser(&ast->content.simple_cmd));
+	else
+	{
+		if (perform_expansions(ast->content.child.left) == false)
+			return (false);
+		return (perform_expansions(ast->content.child.right));
+	}
 }
