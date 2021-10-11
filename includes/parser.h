@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 17:59:41 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/10 16:12:13 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,5 +131,6 @@ bool	parse_pipeline(t_token **tok_lst, t_node **ast);
 bool	is_leaf(enum e_tok_type type);
 bool	is_redirection(enum e_tok_type type);
 bool	is_parenthesis(enum e_tok_type type);
+bool	is_logical_operator(enum e_tok_type type);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/10 12:18:23 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/10 17:58:24 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,9 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 {
 	t_node	*simple_cmd;
 
-	if ((*tok_lst)->type == Oparenth_tok)
+	if ((*tok_lst)->type == Cparenth_tok)
+		return (false);
+	else if ((*tok_lst)->type == Oparenth_tok)
 		return (parse_parenthesis(tok_lst, ast));
 	if (is_leaf((*tok_lst)->type) == false)
 		return (false);
@@ -86,11 +88,8 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 	simple_cmd->type = Simple_cmd;
 	simple_cmd->content.simple_cmd.fd_in = STDIN_FILENO;
 	simple_cmd->content.simple_cmd.fd_out = STDOUT_FILENO;
-	if (from_lst_to_array(tok_lst, simple_cmd) == false
-		|| (*tok_lst != NULL && (*tok_lst)->type == Oparenth_tok))
+	if (from_lst_to_array(tok_lst, simple_cmd) == false)
 		return (false);
-	if ((*tok_lst) != NULL && (*tok_lst)->type == Oparenth_tok)
-		return (print_error_and_return(*tok_lst));
 	*ast = simple_cmd;
 	return (true);
 }

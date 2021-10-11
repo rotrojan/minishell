@@ -6,35 +6,84 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:31:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/30 05:03:18 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/11 20:02:03 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-/*
-** Called from the beginning of a simple command, the parse_parenthesis() will
-** recursively call build_ast() and will check after it's execution if the 
-** next encountered token is a closing parenthesis (that is why build_ast loops
-** untill the end of the token linked list or untill a Cparenth_tok token is
-** met.
-*/
+static t_token	*get_before_matching_parenth(t_token *tok_lst)
+{
+	int		parenth_count;
+	t_token	*previous;
+
+	parenth_count = 1;
+	previous = tok_lst;
+	tok_lst = tok_lst->next;
+	while (tok_lst != NULL)
+	{
+		if (tok_lst->type == Oparenth_tok)
+			++parenth_count;
+		else if (tok_lst->type == Cparenth_tok)
+		{
+			--parenth_count;
+			if (parenth_count == 0)
+				return (previous);
+		}
+		previous = tok_lst;
+		tok_lst = tok_lst->next;
+	}
+	return (NULL);
+}
+
+static t_token	*get_last_token(t_token *tok_lst)
+{
+	while (tok_lst->next != NULL)
+		tok_lst = tok_lst->next;
+	return (tok_lst);
+}
+
+static bool	check_errors_and_build_sub_tree(
+		t_token **tok_lst, t_token **sub_tok_lst, t_node **sub_tree)
+{
+	if (*tok_lst != NULL && (is_leaf((*tok_lst)->type) == true
+			|| (*tok_lst)->type == Oparenth_tok))
+	{
+		clear_tokens(sub_tok_lst);
+		return (false);
+	}
+	if (build_ast(sub_tok_lst, sub_tree) == false)
+	{
+		get_last_token(*sub_tok_lst)->next = *tok_lst;
+		*tok_lst = *sub_tok_lst;
+		return (false);
+	}
+	return (true);
+}
 
 bool	parse_parenthesis(t_token **tok_lst, t_node **ast)
 {
+	t_token	*before_matching_parenth;
+	t_node	*sub_tree;
+	t_token	*sub_tok_lst;
+
+	if ((*tok_lst)->next != NULL && (*tok_lst)->next->type == Cparenth_tok)
+		return (false);
+	before_matching_parenth = get_before_matching_parenth(*tok_lst);
 	eat_token(tok_lst);
-	if (*tok_lst == NULL)
+	if (before_matching_parenth == NULL)
+	{
+		clear_tokens(tok_lst);
 		return (print_error_and_return(*tok_lst));
-	if ((*tok_lst)->type == Cparenth_tok)
+	}
+	sub_tok_lst = *tok_lst;
+	*tok_lst = before_matching_parenth->next->next;
+	gc_free((void **)&before_matching_parenth->next->data);
+	gc_free((void **)&before_matching_parenth->next);
+	if (check_errors_and_build_sub_tree(tok_lst, &sub_tok_lst, &sub_tree)
+		== false)
 		return (false);
-	if (build_ast(tok_lst, ast) == false)
-		return (false);
-	if (*tok_lst == NULL || (*tok_lst)->type != Cparenth_tok)
-		return (false);
-	eat_token(tok_lst);
-	if (*tok_lst != NULL
-		&& (is_leaf((*tok_lst)->type) == true
-			|| (*tok_lst)->type == Oparenth_tok))
-		return (false);
+	clear_tokens(&sub_tok_lst);
+	*ast = sub_tree;
 	return (true);
 }
