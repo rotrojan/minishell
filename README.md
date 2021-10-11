@@ -14,7 +14,7 @@ This C project from the 42school is the implementation of a not-at-all Posix com
 - execution of simple commands (with absolute or relative path);
 - builtins: `cd`, `echo [-n]`, `pwd`, `export`, `unset`,  `env` and `exit`;
 - pipelines `|`, output redirections `>` `>>`, input redirection `<` and  heredocument `<<`;
-- list of commands with `&&`, `||`, `;` and parenthesis `()`;
+- list of commands with `&&`, `||`, `;` and parentheses `()` for priorities (no redirections, pipes or subshells involved);
 - variables expansions within or without quotes, including `$?`;
 - quoting with simple or double quotes : `'` and `"`, including variables split;
 - `ctrl-L`, `ctrl-D` and `ctrl-C` control keys binded;
