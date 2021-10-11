@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:35:00 by bigo              #+#    #+#             */
-/*   Updated: 2021/10/11 20:33:47 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/11 21:52:04 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,10 +93,12 @@ bool	exec_redirections(t_node *ast)
 	}
 	else
 	{
-		if (exec_redirections(ast->content.child.left) == false)
-			return (false);
-		if (exec_redirections(ast->content.child.right) == false)
-			return (false);
+		if (ast->content.child.left != NULL)
+			if (exec_redirections(ast->content.child.left) == false)
+				return (false);
+		if (ast->content.child.right != NULL)
+			if (exec_redirections(ast->content.child.right) == false)
+				return (false);
 		return (true);
 	}
 }
