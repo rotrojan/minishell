@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 15:56:04 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/06 18:01:55 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/11 20:46:43 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 
 static void	free_simple_cmd(t_node **simple_cmd)
 {
-	int		i;
+	int	i;
+	int	fd;
 
 	i = 0;
 	if (*simple_cmd != NULL)
@@ -29,6 +30,12 @@ static void	free_simple_cmd(t_node **simple_cmd)
 			gc_free((void **)&(*simple_cmd)->content.simple_cmd.argv[i]);
 			++i;
 		}
+		fd = (*simple_cmd)->content.simple_cmd.fd_in;
+		if (fd > 0 && fd != STDIN_FILENO)
+			close(fd);
+		fd = (*simple_cmd)->content.simple_cmd.fd_out;
+		if (fd > 0 && fd != STDOUT_FILENO)
+			close(fd);
 		gc_free((void **)&(*simple_cmd)->content.simple_cmd.argv);
 		gc_free((void **)&*simple_cmd);
 	}

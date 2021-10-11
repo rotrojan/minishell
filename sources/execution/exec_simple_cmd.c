@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/10 16:46:00 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/11 20:57:02 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static void	child(t_simple_cmd command)
+static void	child(t_simple_cmd command, t_IO_file save)
 {
 	int	ret;
 
@@ -23,6 +23,8 @@ static void	child(t_simple_cmd command)
 	else if (ret == EXIT_CMD_NOT_FOUND)
 		ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
 			command.argv[0]);
+	close(save.input);
+	close(save.output);
 	exit(ret);
 }
 
@@ -61,16 +63,12 @@ static void	parent(void)
 		set_exit_value(WEXITSTATUS(status));
 }
 
-static void	close_io(t_IO_file save, t_simple_cmd command)
+static void	close_io(t_IO_file save)
 {
 	dup2(save.input, STDIN_FILENO);
 	dup2(save.output, STDOUT_FILENO);
 	close(save.input);
 	close(save.output);
-	if (command.fd_in != STDIN_FILENO)
-		close(command.fd_in);
-	if (command.fd_out != STDOUT_FILENO)
-		close(command.fd_out);
 }
 
 void	exec_simple_cmd(t_simple_cmd command)
@@ -90,9 +88,9 @@ void	exec_simple_cmd(t_simple_cmd command)
 		if (pid == ERR)
 			exit_shell(EXIT_FAILURE, strerror(errno));
 		else if (pid == 0)
-			child(command);
+			child(command, save);
 		else
 			parent();
 	}
-	close_io(save, command);
+	close_io(save);
 }

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:35:00 by bigo              #+#    #+#             */
-/*   Updated: 2021/10/09 18:09:14 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/11 20:33:47 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,16 @@ static bool	redirections(
 	}
 	else if (ft_strcmp("<<", *args) == 0)
 	{
-		if (*fd_out != STDOUT_FILENO)
-			close(*fd_out);
+		if (*fd_in != STDIN_FILENO)
+			close(*fd_in);
 		*fd_in = heredoc_redirection(*(args + 1), input_stream_has_quotes);
 		if (*fd_in == ERR)
 			return (false);
 	}
 	else
 	{
+		if (*fd_out != STDOUT_FILENO)
+			close(*fd_out);
 		*fd_out = output_redirection(args);
 		if (*fd_out == ERR)
 			return (false);
