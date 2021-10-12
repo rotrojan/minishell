@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/08 16:26:26 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/10 12:40:45 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/12 16:41:10 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,7 @@ bool	check_for_unquoted_char(char c, char const *arg);
 ** expand_vars.c
 */
 
-bool	expand_single_var_in_stream(char **arg, int *i, bool in_dquotes);
-bool	expand_vars_in_stream(char **arg);
+void	expand_vars_in_stream(char **arg);
 bool	expand_single_var(
 			t_simple_cmd *cmd, int const i, int *j, bool in_dquotes);
 bool	expand_vars(t_simple_cmd *cmd, int const i);

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/08 17:23:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/12 17:10:41 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static bool	heredoc_control(char const *delimiter, char *line)
 	}
 	return (false);
 }
-
 char	*heredoc(char const *delimiter)
 {
 	char	*line;
@@ -61,11 +60,12 @@ char	*heredoc(char const *delimiter)
 	reset_history_data();
 	while (true)
 	{
-		ft_putstr_fd("\n> ", STDERR_FILENO);
+		ft_putstr_fd("> ", STDERR_FILENO);
 		line = ft_readline();
 		reset_history_data();
 		if (catch_sigint(doc, line) == true)
 			return (NULL);
+		ft_putchar_fd('\n', STDERR_FILENO);
 		if (heredoc_control(delimiter, line) == true)
 			break ;
 		append_input(&doc, line);

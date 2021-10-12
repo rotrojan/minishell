@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:32:03 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 16:59:43 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/12 16:41:00 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,54 +28,31 @@ static void	get_var_name_and_value(char *arg, char **var_name, char **var_value)
 	}
 }
 
-bool	expand_single_var_in_stream(char **arg, int *i, bool in_dquotes)
+void	expand_vars_in_stream(char **arg)
 {
+	int		i;
 	char	*var_name;
 	char	*var_value;
 
-	get_var_name_and_value(*arg + *i, &var_name, &var_value);
-	if ((in_dquotes == false && var_value != NULL && *var_value != '\0'
-			&& has_space(var_value) == true) || *var_value == '\0')
-	{
-		ft_dprintf(STDERR_FILENO, "minishell: %s: ambiguous redirect\n", *arg);
-		return (false);
-	}
-	else
-	{
-		*arg = fill_new_arg(arg, ft_strlen(var_name), *i, var_value);
-		*i += ft_strlen(var_value);
-	}
-	gc_free((void **)&var_name);
-	gc_free((void **)&var_value);
-	return (true);
-}
-
-bool	expand_vars_in_stream(char **arg)
-{
-	int		i;
-	bool	in_squotes;
-	bool	in_dquotes;
-
 	i = 0;
-	in_squotes = false;
-	in_dquotes = false;
 	while ((*arg)[i] != '\0')
 	{
-		if ((*arg)[i] == '$' && in_squotes == false)
+		if ((*arg)[i] == '$')
 		{
 			if ((*arg)[i] == '\0' || ft_isalnum((*arg)[i + 1]) == 0)
 				*arg = fill_new_arg(arg, 0, i++, "$");
 			else
-				if (expand_single_var_in_stream(arg, &i, in_dquotes) == false)
-					return (false);
+			{
+				get_var_name_and_value(*arg + i, &var_name, &var_value);
+				*arg = fill_new_arg(arg, ft_strlen(var_name), i, var_value);
+				i += ft_strlen(var_value);
+				gc_free((void **)&var_name);
+				gc_free((void **)&var_value);
+			}
 		}
 		else
-		{
-			change_quote_state((*arg)[i], &in_squotes, &in_dquotes);
 			++i;
-		}
 	}
-	return (true);
 }
 
 bool	expand_single_var(

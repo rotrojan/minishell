@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/11 15:36:37 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 17:50:17 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/12 16:28:20 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ bool	check_if_expansion_is_valid(int i, char ***splitted_var, char **argv)
 		&& arg_is_redirection(argv[i - 1]) == true)
 	{
 		ft_dprintf(STDERR_FILENO,
-			"\nminishell: %s: ambiguous redirect\n", argv[i]);
+			"minishell: %s: ambiguous redirect\n", argv[i]);
 		gc_free((void **)splitted_var);
 		return (false);
 	}
