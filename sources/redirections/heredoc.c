@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/12 17:10:41 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/12 17:34:37 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static bool	heredoc_control(char const *delimiter, char *line)
 	}
 	return (false);
 }
+
 char	*heredoc(char const *delimiter)
 {
 	char	*line;
