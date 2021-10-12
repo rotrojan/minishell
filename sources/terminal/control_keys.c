@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/26 04:38:24 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/11 20:28:22 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/13 01:28:31 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	ctrl_d_input(void)
 
 void	ctrl_d_heredoc(char const *delimiter)
 {
-	ft_dprintf(STDERR_FILENO, "\nminishell: warning: here-document at line %d \
-delimited by end-of-file (wanted `%s')", *get_line_count(), delimiter);
+	ft_dprintf(STDERR_FILENO, "minishell: warning: here-document at line %d \
+delimited by end-of-file (wanted `%s')\n", *get_line_count(), delimiter);
 }
 
 /* Clear the screen. */
