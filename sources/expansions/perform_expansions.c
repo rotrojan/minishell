@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/09 21:57:54 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/11 21:50:47 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/13 12:20:20 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static bool	expanser(t_simple_cmd *cmd)
 	i = 0;
 	while (cmd->argv[i] != NULL)
 	{
-		if (ft_strchr(cmd->argv[i], '$') != NULL)
+		if (ft_strchr(cmd->argv[i], '$') != NULL
+				&& !(i > 0 && ft_strcmp(cmd->argv[i - 1], "<<") == 0))
 			if (expand_vars(cmd, i) == false)
 				return (false);
 		++i;
