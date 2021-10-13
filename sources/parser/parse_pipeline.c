@@ -6,11 +6,24 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:30:31 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/03 01:15:22 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/13 21:50:18 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static bool	check_errors(t_token *tok_lst)
+{
+	if (tok_lst == NULL)
+	{
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error: unexpected end of file\n");
+		return (false);
+	}
+	if (tok_lst->type == Oparenth_tok)
+		return (false);
+	return (true);
+}
 
 /*
 ** A pipeline is made of at least one simple command. If a pipe token is found
@@ -35,12 +48,8 @@ bool	parse_pipeline(t_token **tok_lst, t_node **ast)
 	while (*tok_lst != NULL && (*tok_lst)->type == Pipe_tok)
 	{
 		eat_token(tok_lst);
-		if (*tok_lst == NULL)
-		{
-			ft_dprintf(STDERR_FILENO,
-				"\nminishell: syntax error: unexpected end of file\n");
+		if (check_errors(*tok_lst) == false)
 			return (false);
-		}
 		pipe_node = NULL;
 		pipe_node = gc_malloc(sizeof(*pipe_node));
 		ft_bzero(pipe_node, sizeof(*pipe_node));

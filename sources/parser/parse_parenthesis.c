@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:31:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/11 20:02:03 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/13 21:55:27 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,5 +85,7 @@ bool	parse_parenthesis(t_token **tok_lst, t_node **ast)
 		return (false);
 	clear_tokens(&sub_tok_lst);
 	*ast = sub_tree;
+	if (*tok_lst != NULL && (*tok_lst)->type == Pipe_tok)
+		return (false);
 	return (true);
 }
