@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/07 17:35:00 by bigo              #+#    #+#             */
-/*   Updated: 2021/10/11 21:52:04 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/13 02:04:55 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,12 @@ static bool	open_redirections(
 	{
 		if (arg_is_redirection(argv[i]) == true)
 		{
+			if (ft_strlen(argv[i + 1]) > 255)
+			{
+				ft_dprintf(STDERR_FILENO, "minishell: %s: File name too long\n",
+					argv[i + 1]);
+				return (false);
+			}
 			if (redirections(&argv[i], fd_in, fd_out, input_stream_has_quotes)
 				== false)
 				return (false);
