@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:31:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/13 21:55:27 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/13 21:59:56 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,12 @@ static bool	check_errors_and_build_sub_tree(
 	return (true);
 }
 
+static bool	eat_token_and_return_false(t_token **tok_lst)
+{
+	eat_token(tok_lst);
+	return (false);
+}
+
 bool	parse_parenthesis(t_token **tok_lst, t_node **ast)
 {
 	t_token	*before_matching_parenth;
@@ -68,7 +74,7 @@ bool	parse_parenthesis(t_token **tok_lst, t_node **ast)
 	t_token	*sub_tok_lst;
 
 	if ((*tok_lst)->next != NULL && (*tok_lst)->next->type == Cparenth_tok)
-		return (false);
+		return (eat_token_and_return_false(tok_lst));
 	before_matching_parenth = get_before_matching_parenth(*tok_lst);
 	eat_token(tok_lst);
 	if (before_matching_parenth == NULL)
