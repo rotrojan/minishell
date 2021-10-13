@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/16 15:56:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/16 03:29:30 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/13 10:52:58 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ void	display_history(t_cursor *cursor, char *line)
 	tputs(tgetstr("cd", NULL), 1, ft_putchar_err);
 	tputs(goto_cap, 1, ft_putchar_err);
 	cursor->on_inchar = line_to_inchars(line);
-	print_inchars(cursor->on_inchar);
 	while (cursor->on_inchar->next != NULL)
 	{
+		ft_putchar_err(cursor->on_inchar->value);
 		cursor->on_inchar = cursor->on_inchar->next;
 		cursor_move_right(cursor);
 	}

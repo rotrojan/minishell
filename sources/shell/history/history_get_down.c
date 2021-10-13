@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/20 03:31:17 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/29 21:11:51 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/13 11:14:08 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	search_prev(t_cursor *cursor, t_history_data *history)
 	tmp = NULL;
 	len = ft_strlen(history->input);
 	if (history->tmp_nav == NULL)
-		tmp = history->data;
+		tmp = NULL;
 	else if (history->tmp_nav->prev != NULL)
 		tmp = history->tmp_nav->prev;
 	while (tmp != NULL && ft_strncmp(tmp->line, history->input, len) != 0)
@@ -49,7 +49,10 @@ static void	search_prev(t_cursor *cursor, t_history_data *history)
 		display_history(cursor, history->tmp_nav->line);
 	}
 	else
+	{
+		history->tmp_nav = NULL;
 		display_history(cursor, history->input);
+	}
 }
 
 /* Get previous line in history. */
