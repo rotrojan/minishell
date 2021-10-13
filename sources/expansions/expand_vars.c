@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:32:03 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/12 16:41:00 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/13 12:29:57 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ void	expand_vars_in_stream(char **arg)
 				*arg = fill_new_arg(arg, ft_strlen(var_name), i, var_value);
 				i += ft_strlen(var_value);
 				gc_free((void **)&var_name);
-				gc_free((void **)&var_value);
+				if (*var_value != '\0')
+					gc_free((void **)&var_value);
 			}
 		}
 		else
