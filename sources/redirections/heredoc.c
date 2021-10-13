@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/12 17:34:37 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/13 14:10:53 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,9 @@ static bool	catch_sigint(char *doc, char *line)
 
 static bool	heredoc_control(char const *delimiter, char *line)
 {
-	if (line != NULL)
+	if (line == NULL && ft_strcmp(delimiter, "") == 0)
+		return (true);
+	else
 	{
 		if (line[0] == EOF)
 		{
