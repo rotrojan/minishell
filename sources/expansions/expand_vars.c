@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:32:03 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/13 12:29:57 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/14 21:10:31 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ void	expand_vars_in_stream(char **arg)
 	{
 		if ((*arg)[i] == '$')
 		{
-			if ((*arg)[i] == '\0' || ft_isalnum((*arg)[i + 1]) == 0)
+			if ((*arg)[i] == '\0' ||
+					(ft_isalnum((*arg)[i + 1]) == 0 && (*arg)[i + 1] != '_'))
 				*arg = fill_new_arg(arg, 0, i++, "$");
 			else
 			{
@@ -86,6 +87,11 @@ bool	expand_single_var(
 	return (true);
 }
 
+static bool	check_next_char(char c)
+{
+	return (c == '\0' || ((ft_isalnum(c) == 0 && c != '_') && c != '?'));
+}
+
 bool	expand_vars(t_simple_cmd *cmd, int const i)
 {
 	int		j;
@@ -99,8 +105,7 @@ bool	expand_vars(t_simple_cmd *cmd, int const i)
 	{
 		if (cmd->argv[i][j] == '$' && in_squotes == false)
 		{
-			if (cmd->argv[i][j + 1] == '\0' || (ft_isalnum(cmd->argv[i][j + 1])
-					== 0 && cmd->argv[i][j + 1] != '?'))
+			if (check_next_char(cmd->argv[i][j + 1]) == true)
 				cmd->argv[i] = fill_new_arg(&cmd->argv[i], 0, j++, "$");
 			else
 				if (expand_single_var(cmd, i, &j, in_dquotes) == false)

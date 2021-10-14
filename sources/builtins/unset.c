@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/21 02:31:27 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/21 23:53:34 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/14 20:49:49 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	check_identifier(char *arg)
 	int	i;
 
 	i = 0;
-	if (ft_isalpha(arg[i]) == 0)
+	if (ft_isalpha(arg[i]) == 0 && arg[i] != '_')
 	{
 		ft_dprintf(STDERR_FILENO,
 			"minishell: unset: `%s': not a valid identifier\n", arg);
@@ -25,7 +25,7 @@ static int	check_identifier(char *arg)
 	}
 	while (arg[i] != '\0')
 	{
-		if (ft_isalnum(arg[i]) == 0)
+		if (ft_isalnum(arg[i]) == 0 && arg[i] != '_')
 		{
 			ft_dprintf(STDERR_FILENO,
 				"minishell: unset: `%s': not a valid identifier\n", arg);
