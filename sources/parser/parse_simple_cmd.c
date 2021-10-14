@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/14 19:36:49 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/14 22:30:56 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,8 @@ static bool	from_lst_to_array(
 			eat_token(tok_lst);
 			if (*tok_lst == NULL)
 				return (print_error_and_return_false(is_subshell));
+			if ((*tok_lst)->type != Word_tok)
+				return (false);
 		}
 		simple_cmd->content.simple_cmd.argv[i++] = ft_strdup((*tok_lst)->data);
 		eat_token(tok_lst);
