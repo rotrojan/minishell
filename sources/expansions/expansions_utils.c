@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/12 22:53:44 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/09/23 21:07:23 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/14 20:49:11 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*get_after_var(char *str, int index_dollar)
 	char	*ptr;
 
 	ptr = str + index_dollar + 1;
-	while (ft_isalnum(*ptr) == 1)
+	while (ft_isalnum(*ptr) == 1 || *ptr == '_')
 		++ptr;
 	return (ptr);
 }
@@ -56,7 +56,7 @@ int	get_len_var_name(char *arg)
 	int	len;
 
 	len = 0;
-	while (ft_isalnum(arg[len]) != 0 && arg[len] != '\0')
+	while ((ft_isalnum(arg[len]) != 0 || arg[len] == '_') && arg[len] != '\0')
 		++len;
 	return (len);
 }
@@ -70,7 +70,7 @@ char	*get_var_name(char *arg)
 	j = 0;
 	i = 1;
 	var_name = gc_malloc(sizeof(*var_name) * (get_len_var_name(arg + i) + 1));
-	while (ft_isalnum(arg[i]) != 0 && arg[i] != '\0')
+	while ((ft_isalnum(arg[i]) != 0 || arg[i] == '_') && arg[i] != '\0')
 	{
 		var_name[j] = arg[i];
 		++i;
