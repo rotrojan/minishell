@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 22:00:52 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 00:21:11 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/14 22:56:57 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ int	env_len(t_env env)
 static void	init_env_var(char *shell_name)
 {
 	char	*shlvl;
+	char	pwd[SIZE_10B];
 	char	*tmp_path;
 	char	*shell_path;
 	char	*shlvl_value;
@@ -45,6 +46,13 @@ static void	init_env_var(char *shell_name)
 	shell_path = get_real_filepath(tmp_path);
 	ft_setenv("SHLVL", shlvl_value, 1);
 	ft_setenv("SHELL", shell_path, 1);
+	if (ft_getenv("PATH") == NULL)
+		ft_setenv("PATH", DEFAULT_PATH, 1);
+	if (ft_getenv("PWD") == NULL)
+	{
+		getcwd(pwd, SIZE_10B);
+		ft_setenv("PWD", pwd, 1);
+	}
 	gc_free((void **)&tmp_path);
 	gc_free((void **)&shell_path);
 	gc_free((void **)&shlvl_value);

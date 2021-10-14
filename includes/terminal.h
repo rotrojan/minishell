@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 06:57:28 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/05 14:49:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/14 22:49:10 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define SIGWINCH 28
 # define BACKSPACE 127
 # define DEFAULT_TERM "xterm-256color"
+# define DEFAULT_PATH "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:\
+/bin"
 
 typedef struct s_term
 {
