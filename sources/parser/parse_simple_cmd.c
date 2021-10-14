@@ -6,11 +6,26 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/18 20:07:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/10 17:58:24 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/14 19:36:49 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+/*
+** Self explanatory.
+*/
+
+static bool	print_error_and_return_false(bool is_subshell)
+{
+	if (is_subshell == false)
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error near unexpected token `newline'\n");
+	else
+		ft_dprintf(STDERR_FILENO,
+			"\nminishell: syntax error near unexpected token `)'\n");
+	return (false);
+}
 
 /*
 ** Self explanatory.
@@ -36,7 +51,8 @@ static unsigned int	get_nb_args(t_token *tok_lst)
 ** strings containing the arguments of the command.
 */
 
-static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
+static bool	from_lst_to_array(
+			t_token **tok_lst, t_node *simple_cmd, bool is_subshell)
 {
 	int	i;
 
@@ -52,10 +68,7 @@ static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
 		{
 			eat_token(tok_lst);
 			if (*tok_lst == NULL)
-				ft_dprintf(STDERR_FILENO,
-					"\nminishell: syntax error near unexpected token \
-`newline'\n");
-			return (false);
+				return (print_error_and_return_false(is_subshell));
 		}
 		simple_cmd->content.simple_cmd.argv[i++] = ft_strdup((*tok_lst)->data);
 		eat_token(tok_lst);
@@ -72,7 +85,7 @@ static bool	from_lst_to_array(t_token **tok_lst, t_node *simple_cmd)
 ** - from_lst_to_array() fills the argv array.
 */
 
-bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
+bool	parse_simple_cmd(t_token **tok_lst, t_node **ast, bool is_subshell)
 {
 	t_node	*simple_cmd;
 
@@ -88,7 +101,7 @@ bool	parse_simple_cmd(t_token **tok_lst, t_node **ast)
 	simple_cmd->type = Simple_cmd;
 	simple_cmd->content.simple_cmd.fd_in = STDIN_FILENO;
 	simple_cmd->content.simple_cmd.fd_out = STDOUT_FILENO;
-	if (from_lst_to_array(tok_lst, simple_cmd) == false)
+	if (from_lst_to_array(tok_lst, simple_cmd, is_subshell) == false)
 		return (false);
 	*ast = simple_cmd;
 	return (true);

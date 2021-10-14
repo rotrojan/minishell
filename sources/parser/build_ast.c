@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 13:59:25 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/10 16:16:39 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/14 19:02:32 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ void	eat_token(t_token **tok_lst)
 ** On success, build_ast() return true, false otherwise.
 */
 
-bool	build_ast(t_token **tok_lst, t_node **ast)
+bool	build_ast(t_token **tok_lst, t_node **ast, bool is_subshell)
 {
 	bool	ret;
 
@@ -70,10 +70,10 @@ bool	build_ast(t_token **tok_lst, t_node **ast)
 		{
 			if (*ast == NULL)
 				return (false);
-			ret = parse_logical_operator(tok_lst, ast);
+			ret = parse_logical_operator(tok_lst, ast, is_subshell);
 		}
 		else
-			ret = parse_pipeline(tok_lst, ast);
+			ret = parse_pipeline(tok_lst, ast, is_subshell);
 		if (ret == false)
 			return (false);
 	}

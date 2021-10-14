@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:00:41 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/10 16:12:13 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/14 19:35:04 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ typedef struct s_node
 */
 
 bool	print_error_and_return(t_token *token);
-bool	build_ast(t_token **tok_lst, t_node **ast);
+bool	build_ast(t_token **tok_lst, t_node **ast, bool is_subshell);
 void	eat_token(t_token **tok_lst);
 
 /*
@@ -104,13 +104,14 @@ void	clear_ast(t_node **ast);
 ** parse_simple_cmd.c
 */
 
-bool	parse_simple_cmd(t_token **tok_lst, t_node **ast);
+bool	parse_simple_cmd(t_token **tok_lst, t_node **ast, bool is_subshell);
 
 /*
 ** parse_logical_operator.c
 */
 
-bool	parse_logical_operator(t_token **tok_lst, t_node **ast);
+bool	parse_logical_operator(
+			t_token **tok_lst, t_node **ast, bool is_subshell);
 
 /*
 ** parse_parenthesis.c
@@ -122,7 +123,7 @@ bool	parse_parenthesis(t_token **tok_lst, t_node **ast);
 ** parse_pipeline.c
 */
 
-bool	parse_pipeline(t_token **tok_lst, t_node **ast);
+bool	parse_pipeline(t_token **tok_lst, t_node **ast, bool is_subshell);
 
 /*
 ** token_identifiers.c

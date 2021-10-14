@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/12 16:14:54 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/14 19:05:38 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static t_node	*lexer_parser(char *line)
 	tok_lst = NULL;
 	if (build_tok_lst(line, &tok_lst) == true)
 	{
-		if (build_ast(&tok_lst, &ast) == false || tok_lst != NULL)
+		if (build_ast(&tok_lst, &ast, false) == false || tok_lst != NULL)
 		{
 			if (tok_lst != NULL)
 				ft_dprintf(STDERR_FILENO, "\nminishell: syntax error near \

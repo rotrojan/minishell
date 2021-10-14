@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:30:31 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/13 21:50:18 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:37:07 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,12 @@ static bool	check_errors(t_token *tok_lst)
 ** On success, true is returned.
 */
 
-bool	parse_pipeline(t_token **tok_lst, t_node **ast)
+bool	parse_pipeline(t_token **tok_lst, t_node **ast, bool is_subshell)
 {
 	t_node	*pipe_node;
 	t_node	*simple_cmd;
 
-	if (parse_simple_cmd(tok_lst, &simple_cmd) == false)
+	if (parse_simple_cmd(tok_lst, &simple_cmd, is_subshell) == false)
 		return (false);
 	*ast = simple_cmd;
 	while (*tok_lst != NULL && (*tok_lst)->type == Pipe_tok)
@@ -56,7 +56,8 @@ bool	parse_pipeline(t_token **tok_lst, t_node **ast)
 		pipe_node->type = Pipe_node;
 		pipe_node->content.child.left = *ast;
 		*ast = pipe_node;
-		if (parse_simple_cmd(tok_lst, &((*ast)->content.child.right)) == false)
+		if (parse_simple_cmd(
+				tok_lst, &((*ast)->content.child.right), is_subshell) == false)
 			return (false);
 	}
 	return (true);

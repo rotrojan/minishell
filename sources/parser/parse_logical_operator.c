@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 18:39:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/03 01:15:16 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:44:55 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 ** AST is the set ot point to the node.
 */
 
-bool	parse_logical_operator(t_token **tok_lst, t_node **ast)
+bool	parse_logical_operator(
+		t_token **tok_lst, t_node **ast, bool is_subshell)
 {
 	t_node	*separator_node;
 
@@ -43,5 +44,6 @@ bool	parse_logical_operator(t_token **tok_lst, t_node **ast)
 			return (false);
 		}
 	}
-	return (parse_pipeline(tok_lst, &(separator_node->content.child.right)));
+	return (parse_pipeline(
+			tok_lst, &(separator_node->content.child.right), is_subshell));
 }

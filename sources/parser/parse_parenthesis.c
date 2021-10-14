@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/09 00:31:23 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/13 21:59:56 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:43:50 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,26 +36,15 @@ static t_token	*get_before_matching_parenth(t_token *tok_lst)
 	return (NULL);
 }
 
-static t_token	*get_last_token(t_token *tok_lst)
-{
-	while (tok_lst->next != NULL)
-		tok_lst = tok_lst->next;
-	return (tok_lst);
-}
-
 static bool	check_errors_and_build_sub_tree(
 		t_token **tok_lst, t_token **sub_tok_lst, t_node **sub_tree)
 {
-	if (*tok_lst != NULL && (is_leaf((*tok_lst)->type) == true
-			|| (*tok_lst)->type == Oparenth_tok))
+	if ((*tok_lst != NULL
+			&& (is_leaf((*tok_lst)->type) == true
+				|| (*tok_lst)->type == Oparenth_tok))
+		|| build_ast(sub_tok_lst, sub_tree, true) == false)
 	{
 		clear_tokens(sub_tok_lst);
-		return (false);
-	}
-	if (build_ast(sub_tok_lst, sub_tree) == false)
-	{
-		get_last_token(*sub_tok_lst)->next = *tok_lst;
-		*tok_lst = *sub_tok_lst;
 		return (false);
 	}
 	return (true);
