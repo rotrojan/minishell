@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/14 13:01:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/14 21:30:43 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static void	catch_signals(int sig)
 {
 	int			*sig_on;
 	const char	*sig_list[32] = {
-		[SIGINT] = "^C\n",
+		[SIGINT] = "\n",
 		[SIGSEGV] = "Segmentation fault\n",
 		[SIGBUS] = "Bus error\n",
 		[SIGABRT] = "Aborted\n",
