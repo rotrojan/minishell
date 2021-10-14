@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/11 20:57:02 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/14 13:01:27 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,13 @@ static void	catch_signals(int sig)
 {
 	int			*sig_on;
 	const char	*sig_list[32] = {
-		[SIGINT] = "^C",
-		[SIGSEGV] = "Segmentation fault",
-		[SIGBUS] = "Bus error",
-		[SIGABRT] = "Aborted",
-		[SIGQUIT] = "^\\Quit",
-		[SIGTERM] = "Terminated",
-		[SIGTRAP] = "Trace/breakpoint trap",
+		[SIGINT] = "^C\n",
+		[SIGSEGV] = "Segmentation fault\n",
+		[SIGBUS] = "Bus error\n",
+		[SIGABRT] = "Aborted\n",
+		[SIGQUIT] = "^\\Quit\n",
+		[SIGTERM] = "Terminated\n",
+		[SIGTRAP] = "Trace/breakpoint trap\n",
 		[SIGPIPE] = ""
 	};
 
@@ -46,7 +46,7 @@ static void	catch_signals(int sig)
 	if (sig == SIGINT)
 		*sig_on = SIGINT;
 	if (sig_list[sig] != NULL)
-		ft_dprintf(STDERR_FILENO, "%s\n", sig_list[sig]);
+		ft_dprintf(STDERR_FILENO, "%s", sig_list[sig]);
 	set_exit_value(sig + 128);
 }
 
