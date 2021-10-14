@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/14 21:30:43 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/14 23:10:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,14 @@ static void	child(t_simple_cmd command, t_IO_file save)
 		ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n",
 			command.argv[0], strerror(errno));
 	else if (ret == EXIT_CMD_NOT_FOUND)
-		ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
-			command.argv[0]);
+	{
+		if (ft_getenv("PATH") == NULL)
+			ft_dprintf(STDERR_FILENO, "minishell: %s: No such file or \
+directory\n", command.argv[0]);
+		else
+			ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
+				command.argv[0]);
+	}
 	close(save.input);
 	close(save.output);
 	exit(ret);
