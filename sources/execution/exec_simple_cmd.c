@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/15 16:01:56 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/15 19:08:06 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,13 +60,13 @@ static void	catch_signals(int sig)
 	set_exit_value(sig + 128);
 }
 
-static void	parent(void)
+static void	parent(int pid)
 {
 	int		status;
 
 	signal(SIGQUIT, SIG_IGN);
 	ignore_signals();
-	wait(&status);
+	waitpid(pid, &status, WUNTRACED | WCONTINUED);
 	if (WIFSIGNALED(status))
 		catch_signals(WTERMSIG(status));
 	if (WIFEXITED(status))
@@ -98,7 +98,7 @@ void	exec_simple_cmd(t_simple_cmd command)
 		else if (pid == 0)
 			child(command, save);
 		else
-			parent();
+			parent(pid);
 	}
 	close_io(save);
 }
