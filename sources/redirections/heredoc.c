@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 15:32:38 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/14 21:15:11 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/15 14:34:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	append_input(char **doc, char *line)
 
 static bool	catch_sigint(char *doc, char *line)
 {
-	if (*get_signal_on() == SIGINT)
+	if (*get_signum() == SIGINT)
 	{
 		gc_free((void **)&line);
 		gc_free((void **)&doc);

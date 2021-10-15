@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/30 21:38:02 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/14 19:05:38 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/15 14:34:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	execution(char *line, bool inline_mode)
 			clear_ast(&ast);
 		}
 	}
-	else if (*get_signal_on() != SIGINT)
+	else if (*get_signum() != SIGINT)
 		ft_putchar_fd('\n', STDERR_FILENO);
 	reset_history_data();
 }
@@ -87,7 +87,7 @@ void	shell(bool inline_mode)
 
 	while (true)
 	{
-		set_signal_on(0);
+		set_signum(0);
 		line = get_line(inline_mode);
 		execution(line, inline_mode);
 		if (inline_mode == true)

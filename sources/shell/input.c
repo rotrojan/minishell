@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/09 15:41:27 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/15 14:34:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	catch_signals(void)
 	int	sig;
 
 	handle_signals();
-	sig = *get_signal_on();
+	sig = *get_signum();
 	if (sig == SIGINT)
 		ft_putstr_fd("^C\n", STDERR_FILENO);
 	return (sig);

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/14 23:10:23 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/15 16:01:56 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,22 @@ static void	child(t_simple_cmd command, t_IO_file save)
 {
 	int	ret;
 
-	ret = run_binary(command.argv);
-	if (ret == EXIT_EXEC_ERROR)
-		ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n",
-			command.argv[0], strerror(errno));
-	else if (ret == EXIT_CMD_NOT_FOUND)
+	ret = run_builtin(get_len_array(command.argv), command.argv);
+	if (ret == EXIT_CMD_NOT_FOUND)
 	{
-		if (ft_getenv("PATH") == NULL)
-			ft_dprintf(STDERR_FILENO, "minishell: %s: No such file or \
+		ret = run_binary(command.argv);
+		if (ret == EXIT_EXEC_ERROR)
+			ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n",
+				command.argv[0], strerror(errno));
+		else if (ret == EXIT_CMD_NOT_FOUND)
+		{
+			if (ft_getenv("PATH") == NULL)
+				ft_dprintf(STDERR_FILENO, "minishell: %s: No such file or \
 directory\n", command.argv[0]);
-		else
-			ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
-				command.argv[0]);
+			else
+				ft_dprintf(STDERR_FILENO, "minishell: %s: command not found\n",
+					command.argv[0]);
+		}
 	}
 	close(save.input);
 	close(save.output);
@@ -36,7 +40,7 @@ directory\n", command.argv[0]);
 
 static void	catch_signals(int sig)
 {
-	int			*sig_on;
+	int			*signum;
 	const char	*sig_list[32] = {
 		[SIGINT] = "\n",
 		[SIGSEGV] = "Segmentation fault\n",
@@ -48,9 +52,9 @@ static void	catch_signals(int sig)
 		[SIGPIPE] = ""
 	};
 
-	sig_on = get_signal_on();
+	signum = get_signum();
 	if (sig == SIGINT)
-		*sig_on = SIGINT;
+		*signum = SIGINT;
 	if (sig_list[sig] != NULL)
 		ft_dprintf(STDERR_FILENO, "%s", sig_list[sig]);
 	set_exit_value(sig + 128);
@@ -86,9 +90,7 @@ void	exec_simple_cmd(t_simple_cmd command)
 	save.output = dup(STDOUT_FILENO);
 	dup2(command.fd_in, STDIN_FILENO);
 	dup2(command.fd_out, STDOUT_FILENO);
-	if (command.argv[0] != NULL && command.argv[0][0] != '\0'
-		&& run_builtin(get_len_array(command.argv), command.argv)
-		== EXIT_CMD_NOT_FOUND)
+	if (command.argv[0] != NULL && command.argv[0][0] != '\0')
 	{
 		pid = fork();
 		if (pid == ERR)

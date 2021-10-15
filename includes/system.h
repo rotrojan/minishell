@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 21:59:32 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/09 12:46:42 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/15 14:34:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ void	set_timeout(t_term *term, int timeout);
 bool	init_term(void);
 void	ignore_signals(void);
 void	handle_signals(void);
-int		*get_signal_on(void);
-void	set_signal_on(int sig);
+int		*get_signum(void);
+void	set_signum(int sig);
 
 /*
 ** env

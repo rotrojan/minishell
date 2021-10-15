@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:54:35 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/14 23:21:33 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/15 14:34:25 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	expand_and_redir_and_exec(t_node *ast, bool is_piped)
 		{
 			if (is_piped == false)
 			{
-				if (*get_signal_on() != SIGINT)
+				if (*get_signum() != SIGINT)
 				{
 					if (get_len_array(ast->content.simple_cmd.argv) == 1
 						&& ast->content.simple_cmd.argv[0][0] == '\0')
