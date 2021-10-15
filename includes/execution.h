@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/10 16:44:35 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/15 19:16:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,49 +30,14 @@ enum e_pipe
 	Input
 };
 
-/*
-** is_piped.c
-*/
-
 bool	*get_is_piped(void);
 void	set_is_piped(bool value);
-
-/*
-** exec_ast.c
-*/
-
 void	exec_ast(t_node *ast, bool inline_mode);
-
-/*
-** exec_list_cmd.c
-*/
-
 void	exec_list_cmd(t_node *ast);
-
-/*
-** exec_pipe.c
-*/
-
 void	exec_pipe(t_node *ast);
-
-/*
-** exec_simple_cmd.c
-*/
-
 void	exec_simple_cmd(t_simple_cmd simple_cmd);
-
-/*
-** run_binary.c
-*/
-
 int		run_binary(char **argv);
-
-/*
-** exit_value.c
-*/
-
 int		*get_exit_value(void);
 void	set_exit_value(int exit_value);
-int		return_exit_value(int exit_value);
 
 #endif
