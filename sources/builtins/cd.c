@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:43:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/09/30 02:15:57 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/15 13:38:40 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,26 @@ static char	*get_path(char **argv)
 		return (argv[1]);
 }
 
+static void	update_pwd(char **argv)
+{
+	char		new[SIZE_8B];
+	char		*pwd;
+
+	if (getcwd(new, SIZE_8B) == NULL)
+	{
+		ft_dprintf(STDERR_FILENO, "pwd: error retrieving current directory: \
+getcwd: cannot access parent directories: %s\n", strerror(errno));
+		pwd = ft_strjoin(ft_getenv("PWD"), argv[1], "");
+		ft_setenv("PWD", pwd, 1);
+		gc_free((void **)&pwd);
+	}
+	else
+		ft_setenv("PWD", new, 1);
+}
+
 int	cd(int argc, char **argv)
 {
 	char		*path;
-	char		new[SIZE_8B];
 	char		old[SIZE_8B];
 
 	(void)argc;
@@ -49,7 +65,6 @@ int	cd(int argc, char **argv)
 			path);
 		return (EXIT_FAILURE);
 	}
-	getcwd(new, SIZE_8B);
-	ft_setenv("PWD", new, 1);
+	update_pwd(argv);
 	return (EXIT_SUCCESS);
 }
