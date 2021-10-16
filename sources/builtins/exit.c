@@ -6,19 +6,17 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:44:53 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/02 13:50:42 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/16 17:39:21 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_exit(int argc, char **argv)
+static int	get_status(int argc, char **argv)
 {
 	int	status;
 
 	status = *get_exit_value();
-	if (*get_is_piped() == false)
-		ft_putstr_fd("exit\n", STDERR_FILENO);
 	if (argc >= 2)
 	{
 		if (ft_isnumber(argv[1]) == 0)
@@ -35,6 +33,19 @@ int	ft_exit(int argc, char **argv)
 		else
 			status = ft_atoi(argv[1]);
 	}
-	exit_shell(status, NULL);
-	return (EXIT_FAILURE);
+	return (status);
+}
+
+int	ft_exit(int argc, char **argv)
+{
+	int		status;
+	bool	piped;
+
+	piped = *get_is_piped();
+	if (piped == false)
+		ft_putstr_fd("exit\n", STDERR_FILENO);
+	status = get_status(argc, argv);
+	if (piped == false)
+		exit_shell(status, NULL);
+	return (status);
 }
