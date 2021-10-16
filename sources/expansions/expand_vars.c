@@ -6,7 +6,7 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/15 18:32:03 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/14 21:10:31 by rotrojan         ###   ########.fr       */
+/*   Updated: 2021/10/16 19:17:36 by bigo             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ bool	expand_single_var(
 	{
 		cmd->argv[i]
 			= fill_new_arg(&cmd->argv[i], ft_strlen(var_name), *j, var_value);
-		*j += ft_strlen(var_value) - 1;
+		*j += ft_strlen(var_value);
 	}
 	gc_free((void **)&var_name);
 	if (*var_value != '\0')
