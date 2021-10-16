@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 22:00:52 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/14 22:56:57 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/16 23:18:15 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	init_env_var(char *shell_name)
 	if (shlvl == NULL)
 		shlvl = "0";
 	shlvl_value = ft_itoa(ft_atoi(shlvl) + 1);
-	tmp_path = ft_strjoin("./", shell_name, "");
+	tmp_path = ft_strjoin("./", extract_file(shell_name), "");
 	shell_path = get_real_filepath(tmp_path);
 	ft_setenv("SHLVL", shlvl_value, 1);
 	ft_setenv("SHELL", shell_path, 1);
