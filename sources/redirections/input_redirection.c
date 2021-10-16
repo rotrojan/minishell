@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/07 21:29:12 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/11 20:36:57 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/16 17:52:19 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	input_redirection(char const *stream)
 	fd = open(stream, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_dprintf(STDERR_FILENO, "\nminishell: %s: No such file or directory\n",
+		ft_dprintf(STDERR_FILENO, "minishell: %s: No such file or directory\n",
 			stream);
 		set_exit_value(EXIT_FAILURE);
 		return (-1);
