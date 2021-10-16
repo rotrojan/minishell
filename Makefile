@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/10/09 18:38:30 by bigo             ###   ########.fr        #
+#    Updated: 2021/10/17 01:07:58 by bigo             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -128,7 +128,7 @@ _BUILTINS =								\
 	env.c								\
 	exit.c								\
 	export.c							\
-	export_display_env.c				\
+	export_utils.c						\
 	pwd.c								\
 	unset.c
 
