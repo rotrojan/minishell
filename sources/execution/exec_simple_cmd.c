@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/16 17:32:58 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/16 19:08:44 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	catch_signals(int sig)
 		[SIGSEGV] = "Segmentation fault\n",
 		[SIGBUS] = "Bus error\n",
 		[SIGABRT] = "Aborted\n",
-		[SIGQUIT] = "^\\Quit\n",
+		[SIGQUIT] = "Quit\n",
 		[SIGTERM] = "Terminated\n",
 		[SIGTRAP] = "Trace/breakpoint trap\n",
 		[SIGPIPE] = ""
