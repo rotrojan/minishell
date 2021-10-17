@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 17:01:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/17 18:12:59 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/17 19:23:14 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	manage_execution(char *bin_path, char *command)
 				EXIT_EXEC_ERROR));
 	else if (ret == -1)
 		return (manage_error(bin_path, command, strerror(errno),
-				EXIT_EXEC_ERROR));
+				EXIT_CMD_NOT_FOUND));
 	if (is_executable(bin_path) == false)
 		return (manage_error(bin_path, command, strerror(errno),
 				EXIT_EXEC_ERROR));
