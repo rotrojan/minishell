@@ -6,23 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/06 17:01:28 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/15 15:27:19 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/17 18:12:59 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static bool	check_access(char **bin_path)
-{
-	if (access(*bin_path, X_OK) == -1)
-	{
-		gc_free((void **)bin_path);
-		return (false);
-	}
-	return (true);
-}
-
-static char	*get_binpath(char **argv)
+static char	*found_binpath(char **argv)
 {
 	if (ft_strstr(argv[0], "./") != NULL)
 		return (get_real_filepath(argv[0]));
@@ -32,40 +22,54 @@ static char	*get_binpath(char **argv)
 		return (getbinpath(argv[0]));
 }
 
-static bool	is_directory(char **bin_path)
+static int	manage_error(char *bin_path, char *command, char *error,
+	int exit_value)
 {
-	struct stat	data;
+	gc_free((void **)&bin_path);
+	ft_dprintf(STDERR_FILENO, "minishell: %s: %s\n", command, error);
+	return (exit_value);
+}
 
-	stat(*bin_path, &data);
-	if (S_ISDIR(data.st_mode) == 1)
+static int	manage_execution(char *bin_path, char *command)
+{
+	int	ret;
+
+	if (bin_path == NULL)
 	{
-		gc_free((void **)bin_path);
-		return (true);
+		if (ft_getenv("PATH") == NULL)
+			return (manage_error(NULL, command, "No such file or directory",
+					EXIT_CMD_NOT_FOUND));
+		else
+			return (manage_error(NULL, command, "command not found",
+					EXIT_CMD_NOT_FOUND));
 	}
-	return (false);
+	ret = is_directory(bin_path);
+	if (ret == 1)
+		return (manage_error(bin_path, command, "Is a directory",
+				EXIT_EXEC_ERROR));
+	else if (ret == -1)
+		return (manage_error(bin_path, command, strerror(errno),
+				EXIT_EXEC_ERROR));
+	if (is_executable(bin_path) == false)
+		return (manage_error(bin_path, command, strerror(errno),
+				EXIT_EXEC_ERROR));
+	return (EXIT_SUCCESS);
 }
 
 int	run_binary(char **argv)
 {
+	int		ret;
 	char	*bin_path;
 	t_env	*env;
 
 	env = get_shell_env();
-	bin_path = get_binpath(argv);
-	if (bin_path == NULL)
-		return (EXIT_CMD_NOT_FOUND);
-	if (is_directory(&bin_path) == true)
-	{
-		errno = EISDIR;
-		return (EXIT_EXEC_ERROR);
-	}
-	if (check_access(&bin_path) == false)
-		return (EXIT_EXEC_ERROR);
+	bin_path = found_binpath(argv);
+	ret = manage_execution(bin_path, argv[0]);
+	if (ret != EXIT_SUCCESS)
+		return (ret);
 	if (execve(bin_path, argv, *env) == -1)
-	{
-		gc_free((void **)&bin_path);
-		return (EXIT_CMD_NOT_FOUND);
-	}
+		return (manage_error(bin_path, argv[0], strerror(errno),
+				EXIT_EXEC_ERROR));
 	gc_free((void **)&bin_path);
 	return (EXIT_SUCCESS);
 }

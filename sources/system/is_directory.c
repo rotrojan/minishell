@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   is_directory.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/29 15:39:19 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/17 00:35:21 by lucocozz         ###   ########.fr       */
+/*   Created: 2021/10/17 13:39:02 by lucocozz          #+#    #+#             */
+/*   Updated: 2021/10/17 17:53:23 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	pwd(int argc, char **argv)
+int	is_directory(char *bin_path)
 {
-	char	path[SIZE_8B];
+	struct stat	data;
 
-	(void)(argc && argv);
-	if (getcwd(path, SIZE_8B) == NULL)
-		ft_dprintf(STDERR_FILENO, "pwd: error retrieving current directory: \
-getcwd: cannot access parent directories: %s", strerror(errno));
-	else
-		ft_putstr(path);
-	ft_putchar('\n');
-	return (EXIT_SUCCESS);
+	if (stat(bin_path, &data) == -1)
+		return (-1);
+	if (S_ISDIR(data.st_mode) == 1)
+		return (1);
+	return (0);
 }
