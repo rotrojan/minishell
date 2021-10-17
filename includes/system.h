@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 21:59:32 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/15 14:34:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/17 14:25:09 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	ignore_signals(void);
 void	handle_signals(void);
 int		*get_signum(void);
 void	set_signum(int sig);
+int		is_directory(char *bin_path);
+bool	is_executable(char *bin_path);
 
 /*
 ** env
