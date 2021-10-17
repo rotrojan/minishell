@@ -6,15 +6,42 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 15:43:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/15 13:38:40 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/17 18:28:10 by rotrojan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+static char	*get_cdpath(const char *dir)
+{
+	int			i;
+	char		**paths;
+	char		*cd_path;
+	struct stat	buf;
+
+	i = 0;
+	paths = ft_split(ft_getenv("CDPATH"), ':');
+	if (paths == NULL)
+		return (NULL);
+	while (paths[i])
+	{
+		cd_path = ft_strjoin(paths[i], dir, "/");
+		if (lstat(cd_path, &buf) == 0)
+		{
+			ft_free_arrays(paths);
+			return (cd_path);
+		}
+		gc_free((void **)&cd_path);
+		i++;
+	}
+	ft_free_arrays(paths);
+	return (NULL);
+}
+
 static char	*get_path(char **argv)
 {
 	char	*home;
+	char	*cd_path;
 
 	if (argv[1] == NULL)
 	{
@@ -27,7 +54,13 @@ static char	*get_path(char **argv)
 		return (home);
 	}
 	else
-		return (argv[1]);
+	{
+		cd_path = get_cdpath(argv[1]);
+		if (cd_path == NULL)
+			return (argv[1]);
+		else
+			return (cd_path);
+	}
 }
 
 static void	update_pwd(char **argv)
@@ -52,7 +85,11 @@ int	cd(int argc, char **argv)
 	char		*path;
 	char		old[SIZE_8B];
 
-	(void)argc;
+	if (argc > 2)
+	{
+		ft_dprintf(STDERR_FILENO, "minishell: cd: too many arguments");
+		return (EXIT_FAILURE);
+	}
 	path = get_path(argv);
 	if (path == NULL)
 		return (EXIT_FAILURE);
