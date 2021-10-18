@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/10/18 17:36:13 by user42           ###   ########.fr        #
+#    Updated: 2021/10/18 23:09:26 by lucocozz         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,7 +53,8 @@ _ENV =									\
 	ft_getenv.c							\
 	ft_inenv.c							\
 	ft_setenv.c							\
-	ft_unsetenv.c
+	ft_unsetenv.c						\
+	init_env.c
 _PATH =									\
 	extract_file.c						\
 	extract_path.c						\

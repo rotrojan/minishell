@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:20:20 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/18 17:09:35 by user42           ###   ########.fr       */
+/*   Updated: 2021/10/18 22:41:20 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	main(int argc, char **argv, char **env)
 	bool	inline_mode;
 
 	(void)argc;
-	init_shell_env(argv[0], env);
+	init_shell_env(extract_file(argv[0]), env);
 	inline_mode = init_term();
 	init_history();
 	shell(inline_mode);
