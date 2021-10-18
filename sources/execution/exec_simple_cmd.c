@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 02:27:14 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/17 17:38:31 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/18 17:35:47 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,21 @@
 
 static void	child(t_simple_cmd command, t_IO_file save)
 {
-	int	ret;
+	int			ret;
+	t_IO_file	*save_pipe;
 
 	ret = run_binary(command.argv);
+	save_pipe = get_io();
+	if (save_pipe->input != -1)
+	{
+		close(save_pipe->input);
+		save_pipe->input = -1;
+	}
+	if (save_pipe->output != -1)
+	{
+		close(save_pipe->output);
+		save_pipe->output = -1;
+	}
 	close(save.input);
 	close(save.output);
 	exit(ret);
@@ -57,14 +69,6 @@ static void	parent(int pid)
 		set_exit_value(WEXITSTATUS(status));
 }
 
-static void	close_io(t_IO_file save)
-{
-	dup2(save.input, STDIN_FILENO);
-	dup2(save.output, STDOUT_FILENO);
-	close(save.input);
-	close(save.output);
-}
-
 void	exec_simple_cmd(t_simple_cmd command)
 {
 	pid_t		pid;
@@ -75,7 +79,7 @@ void	exec_simple_cmd(t_simple_cmd command)
 	dup2(command.fd_in, STDIN_FILENO);
 	dup2(command.fd_out, STDOUT_FILENO);
 	if (command.argv[0] != NULL && command.argv[0][0] != '\0'
-		&& run_builtin(get_len_array(command.argv), command.argv)
+		&& run_builtin(get_len_array(command.argv), command.argv, save)
 			== EXIT_CMD_NOT_FOUND)
 	{
 		pid = fork();

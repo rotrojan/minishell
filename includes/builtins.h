@@ -6,12 +6,19 @@
 /*   By: rotrojan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/29 07:05:03 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/17 01:10:40 by bigo             ###   ########.fr       */
+/*   Updated: 2021/10/18 15:59:31 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTINS_H
 # define BUILTINS_H
+# include "minishell.h"
+
+typedef struct s_IO_file
+{
+	int	input;
+	int	output;
+}	t_IO_file;
 
 typedef struct s_builtins
 {
@@ -19,7 +26,8 @@ typedef struct s_builtins
 	int		(*function)(int, char **);
 }			t_builtins;
 
-int		run_builtin(int argc, char **argv);
+int		run_builtin(int argc, char **argv, t_IO_file save);
+void	close_io(t_IO_file save);
 int		ft_env(int argc, char **argv);
 int		ft_echo(int argc, char **argv);
 int		pwd(int argc, char **argv);

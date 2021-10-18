@@ -6,7 +6,7 @@
 #    By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/18 14:51:42 by rotrojan          #+#    #+#              #
-#    Updated: 2021/10/17 18:16:56 by lucocozz         ###   ########.fr        #
+#    Updated: 2021/10/18 17:36:13 by user42           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -116,6 +116,7 @@ _EXECUTION =							\
 	exec_simple_cmd.c					\
 	exec_list_cmd.c						\
 	exit_value.c						\
+	close_io.c							\
 	run_binary.c						\
 	run_builtin.c
 

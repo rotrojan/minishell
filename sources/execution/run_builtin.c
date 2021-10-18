@@ -6,13 +6,13 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/06 01:35:57 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/16 17:47:37 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/18 16:00:51 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	run_builtin(int argc, char **argv)
+int	run_builtin(int argc, char **argv, t_IO_file save)
 {
 	int					i;
 	t_builtins const	builtins[] = {
@@ -27,6 +27,8 @@ int	run_builtin(int argc, char **argv)
 	};
 
 	i = 0;
+	if (ft_strcmp(argv[0], "exit") == 0)
+		close_io(save);
 	while (builtins[i].name != NULL && ft_strcmp(argv[0], builtins[i].name))
 		i++;
 	if (builtins[i].name == NULL)

@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/05 01:57:42 by rotrojan          #+#    #+#             */
-/*   Updated: 2021/10/15 19:16:20 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/18 17:21:39 by user42           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,21 @@
 # define EXIT_SEGFAULT 139
 # define EXIT_SYNTAX_ERROR 2
 
-typedef struct s_IO_file
-{
-	int	input;
-	int	output;
-}	t_IO_file;
-
 enum e_pipe
 {
 	Output,
 	Input
 };
 
-bool	*get_is_piped(void);
-void	set_is_piped(bool value);
-void	exec_ast(t_node *ast, bool inline_mode);
-void	exec_list_cmd(t_node *ast);
-void	exec_pipe(t_node *ast);
-void	exec_simple_cmd(t_simple_cmd simple_cmd);
-int		run_binary(char **argv);
-int		*get_exit_value(void);
-void	set_exit_value(int exit_value);
+t_IO_file	*get_io(void);
+bool		*get_is_piped(void);
+void		set_is_piped(bool value);
+void		exec_ast(t_node *ast, bool inline_mode);
+void		exec_list_cmd(t_node *ast);
+void		exec_pipe(t_node *ast);
+void		exec_simple_cmd(t_simple_cmd simple_cmd);
+int			run_binary(char **argv);
+int			*get_exit_value(void);
+void		set_exit_value(int exit_value);
 
 #endif
