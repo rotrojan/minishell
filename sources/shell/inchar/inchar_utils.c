@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/13 04:54:43 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/03 03:36:12 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/18 22:09:05 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,16 @@ void	print_inchars(t_inchar *inchars)
 }
 
 /* Return size of input line. */
-int	inchars_len(t_cursor *cursor)
+int	inchars_len(t_cursor *cursor, bool go_head)
 {
 	int			size;
 	t_inchar	*tmp;
 
 	size = 0;
-	tmp = inchars_head(cursor);
+	if (go_head == true)
+		tmp = inchars_head(cursor);
+	else
+		tmp = cursor->on_inchar;
 	while (tmp != NULL)
 	{
 		tmp = tmp->next;

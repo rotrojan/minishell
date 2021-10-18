@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 01:50:00 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/15 14:34:25 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/18 22:10:29 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static char	*input(void)
 		c = ft_getch();
 		if (c != ERR)
 		{
-			if (c == '\n' || (c == CTRL_D && inchars_len(&cursor) == 1))
+			if (c == '\n' || (c == CTRL_D && inchars_len(&cursor, true) == 1))
 				return (get_line(&cursor, c));
 			else if (ft_iscntrl(c) == 1)
 				control_key(&cursor, c);
