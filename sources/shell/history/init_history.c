@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/16 03:29:01 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/02 02:32:46 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:36:55 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,17 @@ void	reset_history_data(void)
 {
 	free_history();
 	init_history();
+}
+
+static char	*get_history_path(void)
+{
+	char	*home;
+
+	home = ft_getenv("HOME");
+	if (home == NULL)
+		return (ft_strjoin("/tmp/", HISTORY_FILE, ""));
+	else
+		return (ft_strjoin(home, HISTORY_FILE, "/"));
 }
 
 /* Read HISTORY_FILE and save it in accessible memory. */
@@ -29,7 +40,7 @@ t_history_data	*init_history(void)
 	line = NULL;
 	history = get_history();
 	history->input = NULL;
-	history_path = ft_strjoin(ft_getenv("HOME"), HISTORY_FILE, "/");
+	history_path = get_history_path();
 	fd = open(history_path, O_RDONLY);
 	if (fd > 0)
 	{

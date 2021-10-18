@@ -6,7 +6,7 @@
 /*   By: lucocozz <lucocozz@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/14 15:06:34 by lucocozz          #+#    #+#             */
-/*   Updated: 2021/10/03 01:16:34 by lucocozz         ###   ########.fr       */
+/*   Updated: 2021/10/18 23:35:50 by lucocozz         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static void	add_in_history(t_history_data *history, char *line)
 	if (home != NULL)
 		history_path = ft_strjoin(home, HISTORY_FILE, "/");
 	else
-		history_path = ft_strdup(HISTORY_FILE);
+		history_path = ft_strjoin("/tmp/", HISTORY_FILE, "");
 	fd = open(history_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd <= 0)
 		exit_shell(EXIT_FAILURE,
